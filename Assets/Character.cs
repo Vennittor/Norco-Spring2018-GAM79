@@ -6,5 +6,4 @@ public class Character : MonoBehaviour {
 
     public new string name;
     public int speed;
-    public int lastTurn;
 }

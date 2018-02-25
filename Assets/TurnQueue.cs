@@ -8,12 +8,9 @@ public class TurnQueue : MonoBehaviour {
 
 	void Start ()
     {
-        foreach (Character character in characters)
-        {
-            character.lastTurn = 0;
-        }
         QueueStart();
-	}
+        Debug.Log(characters[0] + "'s turn.");
+    }
 
 	void Update ()
     {
@@ -25,8 +22,8 @@ public class TurnQueue : MonoBehaviour {
 
     private int SortBySpeed(Character c1, Character c2)
     {
-        int char1 = c1.speed + c1.lastTurn;
-        int char2 = c2.speed + c2.lastTurn;
+        int char1 = c1.speed;
+        int char2 = c2.speed;
         if (char1 == char2)
         {
             if (c1 is PlayerCharacter && c2 is EnemyCharacter)
@@ -52,17 +49,10 @@ public class TurnQueue : MonoBehaviour {
 
     public void NextTurn()
     {
-        characters[0].lastTurn = 0;
-        characters.Sort(SortBySpeed);
-        foreach (Character character in characters)
-        {
-            character.lastTurn += 1;
-        }
+        Character current = characters[0];
+        characters.RemoveAt(0);
+        characters.Insert(characters.Count, current);
         Debug.Log(characters[0] + "'s turn.");
-        for (int i = 0; i < characters.Count; i++)
-        {
-            Debug.Log(characters[i] + "Combined: " + (characters[i].speed + characters[i].lastTurn) + ", Speed = " + characters[i].speed + ", lastTurn = " + characters[i].lastTurn);
-        }
     }
 
 }
