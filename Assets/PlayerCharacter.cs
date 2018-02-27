@@ -4,29 +4,46 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
-    public float PlayerHealth;
-
-	// Use this for initialization
+    
 	void Start ()
     {
         
 	}
 	
-	// Update is called once per frame
 	void Update ()
     {
-		if (Input.GetKeyDown("1"))
+		//if its my turn, call BeginPlayerTurn;
+    }
+
+    public void BeginPlayerTurn()
+    {
+        if (Input.GetKeyDown("1")) //and check for if its your turn
         {
-            Debug.Log("Player used 1-key attack");
+            Attack1();
         }
         else if (Input.GetKeyDown("2"))
         {
-            Debug.Log("Player used 2-key attack");
+            Attack2();
         }
         if (Input.GetKeyDown("3"))
         {
-            Debug.Log("Player used 3-key attack");
+            Attack3();
         }
     }
-    
+
+    void Attack1()
+    {
+        Debug.Log("player used 1-key attack");
+        //end turn
+    }
+    void Attack2()
+    {
+        Debug.Log("player used 2-key attack");
+        //end turn
+    }
+    void Attack3()
+    {
+        Debug.Log("player used 3-key attack");
+        //end turn
+    }
 }
