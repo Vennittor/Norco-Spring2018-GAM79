@@ -6,12 +6,15 @@ using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
+    #region Variables
     public AudioMixer audioMixer;
 
     public Dropdown resolutionDropdown;
 
     Resolution[] resolutions;
+    #endregion
 
+    #region Functions
     void Start()
     {
         resolutions = Screen.resolutions;
@@ -57,5 +60,5 @@ public class SettingsManager : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
-
+    #endregion
 }

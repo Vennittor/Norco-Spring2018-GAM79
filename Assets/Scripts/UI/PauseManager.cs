@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
+    #region Variables
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+    #endregion
 
+    #region Functions
     void Update ()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -43,4 +46,5 @@ public class PauseManager : MonoBehaviour
     {
         Application.Quit();
     }
+    #endregion
 }
