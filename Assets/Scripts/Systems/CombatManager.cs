@@ -30,12 +30,16 @@ public class CombatManager : MonoBehaviour {
 
     void Start ()
     {
-        QueueStart();
+		if (characters.Count != 0) 
+		{
+			QueueStart ();
+		}
     }
    
 	void Update ()
     {
-		if (Input.GetButtonDown("Fire1"))
+		//TEST
+		if (Input.GetKeyDown(KeyCode.Space))
         {
             NextTurn();
         }
