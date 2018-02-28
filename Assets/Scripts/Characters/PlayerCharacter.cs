@@ -31,17 +31,17 @@ public class PlayerCharacter : Character
         }
     }
 
-    void Attack1()
+    public void Attack1()
     {
         Debug.Log("player used 1-key attack");
         //end turn
     }
-    void Attack2()
+    public void Attack2()
     {
         Debug.Log("player used 2-key attack");
         //end turn
     }
-    void Attack3()
+    public void Attack3()
     {
         Debug.Log("player used 3-key attack");
         //end turn
