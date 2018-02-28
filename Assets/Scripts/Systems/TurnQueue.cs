@@ -46,7 +46,7 @@ public class TurnQueue : MonoBehaviour {
     {
         if (activeCharacter is EnemyCharacter)
         {
-            Debug.Log(activeCharacter + " used random skill");
+            (activeCharacter as EnemyCharacter).BeginEnemyTurn();
             NextTurn();
         }
     }
@@ -56,7 +56,7 @@ public class TurnQueue : MonoBehaviour {
         characters.Sort(SortBySpeed);
         activeCharacter = characters[0];
         Debug.Log(activeCharacter + "'s turn.");
-        //EnemyCheck();
+        EnemyCheck();
     }
 
     public void NextTurn()
@@ -66,7 +66,7 @@ public class TurnQueue : MonoBehaviour {
         characters.Insert(characters.Count, current);
         activeCharacter = characters[0];
         Debug.Log(activeCharacter + "'s turn.");
-        //EnemyCheck();
+        EnemyCheck();
     }
 
 }
