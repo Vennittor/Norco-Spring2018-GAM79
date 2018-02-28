@@ -158,12 +158,12 @@ Prefab:
     - target: {fileID: 224537562881372240, guid: bfabb4c0143fd934bbb3485f3208ba74,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 64
+      value: 41.3
       objectReference: {fileID: 0}
     - target: {fileID: 224537562881372240, guid: bfabb4c0143fd934bbb3485f3208ba74,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 74
+      value: 78
       objectReference: {fileID: 0}
     - target: {fileID: 224537562881372240, guid: bfabb4c0143fd934bbb3485f3208ba74,
         type: 2}
@@ -919,6 +919,7 @@ GameObject:
   - component: {fileID: 330486042}
   - component: {fileID: 330486041}
   - component: {fileID: 330486040}
+  - component: {fileID: 330486044}
   m_Layer: 0
   m_Name: Character B
   m_TagString: Untagged
@@ -991,6 +992,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &330486044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 330486039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  speed: 4
+  maxhealth: 10
+  currentHealth: 10
 --- !u!1 &337600345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,6 +1690,7 @@ GameObject:
   - component: {fileID: 476853289}
   - component: {fileID: 476853288}
   - component: {fileID: 476853287}
+  - component: {fileID: 476853291}
   m_Layer: 0
   m_Name: Character A
   m_TagString: Untagged
@@ -1746,6 +1763,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &476853291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 476853286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  speed: 5
+  maxhealth: 10
+  currentHealth: 10
 --- !u!1 &490582049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,7 +1814,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 210.1, y: 155.5}
+  m_AnchoredPosition: {x: 0.5, y: 3.7}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &490582051
@@ -1884,6 +1916,7 @@ GameObject:
   - component: {fileID: 513945188}
   - component: {fileID: 513945187}
   - component: {fileID: 513945186}
+  - component: {fileID: 513945190}
   m_Layer: 0
   m_Name: Enemy b
   m_TagString: Untagged
@@ -1955,6 +1988,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &513945190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 513945185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  speed: 3
+  maxhealth: 5
+  currentHealth: 5
 --- !u!1 &534159594
 GameObject:
   m_ObjectHideFlags: 0
@@ -3613,6 +3661,7 @@ GameObject:
   - component: {fileID: 899112351}
   - component: {fileID: 899112350}
   - component: {fileID: 899112349}
+  - component: {fileID: 899112353}
   m_Layer: 0
   m_Name: Character C
   m_TagString: Untagged
@@ -3685,6 +3734,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &899112353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 899112348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  speed: 3
+  maxhealth: 0
+  currentHealth: 0
 --- !u!1 &936543505
 GameObject:
   m_ObjectHideFlags: 0
@@ -4644,6 +4708,7 @@ GameObject:
   - component: {fileID: 1389271459}
   - component: {fileID: 1389271458}
   - component: {fileID: 1389271457}
+  - component: {fileID: 1389271461}
   m_Layer: 0
   m_Name: Enemy c
   m_TagString: Untagged
@@ -4715,6 +4780,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1389271461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1389271456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  speed: 2
+  maxhealth: 5
+  currentHealth: 5
 --- !u!1 &1395253248
 GameObject:
   m_ObjectHideFlags: 0
@@ -6284,6 +6364,7 @@ GameObject:
   - component: {fileID: 1954916235}
   - component: {fileID: 1954916234}
   - component: {fileID: 1954916233}
+  - component: {fileID: 1954916237}
   m_Layer: 0
   m_Name: Enemy a
   m_TagString: Untagged
@@ -6355,6 +6436,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1954916237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1954916232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  speed: 4
+  maxhealth: 5
+  currentHealth: 5
 --- !u!1 &1966823659
 GameObject:
   m_ObjectHideFlags: 0
@@ -6596,9 +6692,9 @@ RectTransform:
   m_Father: {fileID: 1565748490}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 544, y: 73}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -208, y: 76}
   m_SizeDelta: {x: 599, y: 374}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2037995226
