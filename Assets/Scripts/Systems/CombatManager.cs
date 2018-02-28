@@ -2,12 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurnQueue : MonoBehaviour {
+public class CombatManager : MonoBehaviour {
 
     public List<Character> characters;
     public Character activeCharacter;
 
-	void Start ()
+    public static CombatManager combatInstance;
+    public static CombatManager Instance
+    {
+        get
+        {
+            return combatInstance;
+        }
+    }
+
+    void Awake()
+    {
+        if (combatInstance != null && combatInstance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        combatInstance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start ()
     {
         QueueStart();
     }

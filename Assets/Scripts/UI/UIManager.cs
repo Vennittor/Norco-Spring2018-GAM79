@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     #region Variables
-    public TurnQueue turnQueue;
+    public CombatManager combatManager;
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
     #endregion   
@@ -14,28 +14,28 @@ public class UIManager : MonoBehaviour
     #region Functions
     void Start ()
     {
-        turnQueue = FindObjectOfType<TurnQueue>();
+        combatManager = CombatManager.Instance;
     }
 	
     public void OutputAttack_01()
     {      
             //playerCharacter.Attack1();  PlayerCharacter.cs needs Attack funtioncs set to public
             print("Ability 1 Used");
-            //turnQueue.NextTurn();      TurnQueue.cs inherits from Monobehaviour and thus needs to exist on a GameObject(perhaps a GameManager)
+            //combatManager.NextTurn();      CombatManager.cs inherits from Monobehaviour and thus needs to exist on a GameObject(perhaps a GameManager (it is now))
     }
 
     public void OutputAttack_02()
     {        
             //playerCharacter.Attack2();  
             print("Ability 2 Used");
-            //turnQueue.NextTurn();        
+            //combatManager.NextTurn();        
     }
 
     public void OutputAttack_03()
     {       
             //playerCharacter.Attack3();  
             print("Ability 3 Used");
-            //turnQueue.NextTurn();       
+            //combatManager.NextTurn();       
     }
     #endregion
 }
