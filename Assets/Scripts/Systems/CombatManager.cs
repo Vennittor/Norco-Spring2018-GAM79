@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour {
 
+    public enum ActiveState
+    {
+        ACTIVE, INACTIVE
+    }
+
     public List<Character> characters;
     public Character activeCharacter;
 
