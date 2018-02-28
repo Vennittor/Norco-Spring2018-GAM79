@@ -9,7 +9,10 @@ public class TurnQueue : MonoBehaviour {
 
 	void Start ()
     {
-        QueueStart();
+		if (characters.Count != 0) 
+		{
+			QueueStart ();
+		}
     }
    
 	void Update ()
