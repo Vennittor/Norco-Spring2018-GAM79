@@ -14,7 +14,8 @@ public class TurnQueue : MonoBehaviour {
    
 	void Update ()
     {
-		if (Input.GetButtonDown("Fire1"))
+		//TEST
+		if (Input.GetKeyDown(KeyCode.Space))
         {
             NextTurn();
         }
