@@ -5,11 +5,11 @@ using UnityEngine;
 public class TurnQueue : MonoBehaviour {
 
     public List<Character> characters;
+    public Character activeCharacter;
 
 	void Start ()
     {
         QueueStart();
-        Debug.Log(characters[0] + "'s turn.");
     }
    
 	void Update ()
@@ -42,17 +42,31 @@ public class TurnQueue : MonoBehaviour {
         return -char1.CompareTo(char2);
     }
 
+    public void EnemyCheck()
+    {
+        if (activeCharacter is EnemyCharacter)
+        {
+            Debug.Log(activeCharacter + " used random skill");
+            NextTurn();
+        }
+    }
+
     public void QueueStart()
     {
         characters.Sort(SortBySpeed);
+        activeCharacter = characters[0];
+        Debug.Log(activeCharacter + "'s turn.");
+        //EnemyCheck();
     }
 
     public void NextTurn()
     {
-        Character current = characters[0];
+        Character current = activeCharacter;
         characters.RemoveAt(0);
         characters.Insert(characters.Count, current);
-        Debug.Log(characters[0] + "'s turn.");
+        activeCharacter = characters[0];
+        Debug.Log(activeCharacter + "'s turn.");
+        //EnemyCheck();
     }
 
 }
