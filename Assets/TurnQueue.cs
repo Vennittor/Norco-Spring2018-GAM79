@@ -11,7 +11,7 @@ public class TurnQueue : MonoBehaviour {
         QueueStart();
         Debug.Log(characters[0] + "'s turn.");
     }
-
+   
 	void Update ()
     {
 		if (Input.GetButtonDown("Fire1"))

@@ -5,30 +5,37 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    #region Functions
-	void Start ()
-    {
-		
-	}
-	
-	void Update ()
-    {
-		
-	}
+    #region Variables
+    public TurnQueue turnQueue;
+    public PlayerCharacter playerCharacter;
+    public EnemyCharacter enemyCharacter;
+    #endregion   
 
-    public void OutputAttack_01()
+    #region Functions
+    void Start ()
     {
-        print("Ability 1 Used");
+        turnQueue = FindObjectOfType<TurnQueue>();
+    }
+	
+    public void OutputAttack_01()
+    {      
+            //playerCharacter.Attack1();  PlayerCharacter.cs needs Attack funtioncs set to public
+            print("Ability 1 Used");
+            //turnQueue.NextTurn();      TurnQueue.cs inherits from Monobehaviour and thus needs to exist on a GameObject(perhaps a GameManager)
     }
 
     public void OutputAttack_02()
-    {
-        print("Ability 2 Used");
+    {        
+            //playerCharacter.Attack2();  
+            print("Ability 2 Used");
+            //turnQueue.NextTurn();        
     }
 
     public void OutputAttack_03()
-    {
-        print("Ability 3 Used");
+    {       
+            //playerCharacter.Attack3();  
+            print("Ability 3 Used");
+            //turnQueue.NextTurn();       
     }
     #endregion
 }
