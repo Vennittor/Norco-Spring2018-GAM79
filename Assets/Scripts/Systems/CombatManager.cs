@@ -5,6 +5,7 @@ using UnityEngine;
 public class CombatManager : MonoBehaviour {
 
     public static CombatManager combatInstance;
+    private static Announcer announcer;
 
     public enum ActiveState
     {
@@ -38,6 +39,9 @@ public class CombatManager : MonoBehaviour {
         combatInstance = this;
         Debug.Log("Awake: CombatManager created!");
         DontDestroyOnLoad(gameObject);
+
+        //announcer = new Announcer();
+        Announcer.AnnounceSelf();
     }
 
     void Start ()
