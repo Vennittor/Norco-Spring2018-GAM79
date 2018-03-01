@@ -9,8 +9,8 @@ public class PlayerCharacter : Character
     {
         base.Start();
     }
-	
-	void Update ()
+
+    void Update()
     {
 
     }
@@ -31,23 +31,6 @@ public class PlayerCharacter : Character
         }
     }
 
-    void Attack1()
-    {
-        Debug.Log("player used 1-key attack");
-        //end turn
-    }
-    void Attack2()
-    {
-        Debug.Log("player used 2-key attack");
-        //end turn
-    }
-    void Attack3()
-    {
-        Debug.Log("player used 3-key attack");
-        //end turn
-    }
-}
-
     public void Attack1()
     {
         Debug.Log("player used 1-key attack");
@@ -63,3 +46,4 @@ public class PlayerCharacter : Character
         Debug.Log("player used 3-key attack");
         combatManager.NextTurn();
     }
+}
