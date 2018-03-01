@@ -7,10 +7,11 @@ public class EnemyCharacter : Character
     //public float[] attacks;
     private float min = 0;
     private float max = 3;
-	
-	void Start () {
-		
-	}
+
+    private new void Start()
+    {
+        base.Start();
+    }
 	
 	void Update ()
     {

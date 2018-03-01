@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour {
 
+    public static CombatManager combatInstance;
+
     public enum ActiveState
     {
         ACTIVE, INACTIVE
@@ -12,11 +14,15 @@ public class CombatManager : MonoBehaviour {
     public List<Character> characters;
     public Character activeCharacter;
 
-    public static CombatManager combatInstance;
+
     public static CombatManager Instance
     {
         get
         {
+            if (combatInstance == null)
+            {
+                combatInstance = new CombatManager();
+            }
             return combatInstance;
         }
     }
@@ -30,18 +36,29 @@ public class CombatManager : MonoBehaviour {
         }
 
         combatInstance = this;
+        Debug.Log("Awake: CombatManager created!");
         DontDestroyOnLoad(gameObject);
     }
 
     void Start ()
     {
-		if (characters.Count != 0) 
+        characters = new List<Character>();
+        //TEST
+        if (characters.Count == 0) 
 		{
-            //TEST
-            //find all Characters and add them into characters.
-            print("it's anme is " + FindObjectOfType<Character>().name);
-			QueueSort();
+            Debug.LogWarning("characters List is empty, finding all Characters in scene");
+            characters.AddRange(FindObjectsOfType<Character>());
 		}
+
+        if (characters.Count != 0)
+        {
+            QueueSort();
+        }
+        else
+        {
+            Debug.LogWarning("There are no Characters in the scene");
+        }
+  
     }
    
 	void Update ()
