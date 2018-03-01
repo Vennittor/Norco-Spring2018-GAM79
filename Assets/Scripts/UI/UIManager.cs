@@ -18,24 +18,24 @@ public class UIManager : MonoBehaviour
     }
 	
     public void OutputAttack_01()
-    {      
-            //playerCharacter.Attack1();  PlayerCharacter.cs needs Attack funtioncs set to public
-            print("Ability 1 Used");
-            //combatManager.NextTurn();      CombatManager.cs inherits from Monobehaviour and thus needs to exist on a GameObject(perhaps a GameManager (it is now))
+    {
+        (combatManager.activeCharacter as PlayerCharacter).Attack1();
+        print("Ability 1 Used");
+        combatManager.NextTurn();
     }
 
     public void OutputAttack_02()
-    {        
-            //playerCharacter.Attack2();  
-            print("Ability 2 Used");
-            //combatManager.NextTurn();        
+    {
+        (combatManager.activeCharacter as PlayerCharacter).Attack2();  
+        print("Ability 2 Used");
+        combatManager.NextTurn();        
     }
 
     public void OutputAttack_03()
-    {       
-            //playerCharacter.Attack3();  
-            print("Ability 3 Used");
-            //combatManager.NextTurn();       
+    {
+        (combatManager.activeCharacter as PlayerCharacter).Attack3();  
+        print("Ability 3 Used");
+        combatManager.NextTurn();       
     }
     #endregion
 }

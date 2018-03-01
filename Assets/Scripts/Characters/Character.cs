@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    protected CombatManager combatManager = CombatManager.Instance;
+
     public new string name;
     public int speed;
 

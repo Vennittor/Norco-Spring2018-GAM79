@@ -14,9 +14,6 @@ public class EnemyCharacter : Character
 	
 	void Update ()
     {
-        //attacks = new float[2];
-        
-        //if its my turn, then call BeginEnemyTurn
         
 	}
 
@@ -40,16 +37,16 @@ public class EnemyCharacter : Character
     void Attack1()
     {
         Debug.Log("enemy used 1-key attack");
-        //end turn
+        combatManager.NextTurn();
     }
     void Attack2()
     {
         Debug.Log("enemy used 2-key attack");
-        //end turn
+        combatManager.NextTurn();
     }
     void Attack3()
     {
         Debug.Log("enemy used 3-key attack");
-        //end turn
+        combatManager.NextTurn();
     }
 }

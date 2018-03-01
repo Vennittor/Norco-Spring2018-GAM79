@@ -37,14 +37,17 @@ public class CombatManager : MonoBehaviour {
     {
 		if (characters.Count != 0) 
 		{
-			QueueStart ();
+            //TEST
+            //find all Characters and add them into characters.
+            print("it's anme is " + FindObjectOfType<Character>().name);
+			QueueSort();
 		}
     }
    
 	void Update ()
     {
 		//TEST
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetButtonDown("Jump"))
         {
             NextTurn();
         }
@@ -77,11 +80,10 @@ public class CombatManager : MonoBehaviour {
         if (activeCharacter is EnemyCharacter)
         {
             (activeCharacter as EnemyCharacter).BeginEnemyTurn();
-            NextTurn();
         }
     }
 
-    public void QueueStart()
+    public void QueueSort()
     {
         characters.Sort(SortBySpeed);
         activeCharacter = characters[0];

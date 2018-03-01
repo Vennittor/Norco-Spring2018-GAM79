@@ -12,7 +12,7 @@ public class PlayerCharacter : Character
 	
 	void Update ()
     {
-		//if its my turn, call BeginPlayerTurn;
+
     }
 
     public void BeginPlayerTurn()
@@ -34,16 +34,16 @@ public class PlayerCharacter : Character
     public void Attack1()
     {
         Debug.Log("player used 1-key attack");
-        //end turn
+        combatManager.NextTurn();
     }
     public void Attack2()
     {
         Debug.Log("player used 2-key attack");
-        //end turn
+        combatManager.NextTurn();
     }
     public void Attack3()
     {
         Debug.Log("player used 3-key attack");
-        //end turn
+        combatManager.NextTurn();
     }
 }
