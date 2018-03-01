@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
-    
-	void Start ()
+
+    private new void Start()
     {
-        
-	}
+        base.Start();
+    }
 	
 	void Update ()
     {
-		//if its my turn, call BeginPlayerTurn;
+
     }
 
     public void BeginPlayerTurn()
@@ -47,3 +47,19 @@ public class PlayerCharacter : Character
         //end turn
     }
 }
+
+    public void Attack1()
+    {
+        Debug.Log("player used 1-key attack");
+        combatManager.NextTurn();
+    }
+    public void Attack2()
+    {
+        Debug.Log("player used 2-key attack");
+        combatManager.NextTurn();
+    }
+    public void Attack3()
+    {
+        Debug.Log("player used 3-key attack");
+        combatManager.NextTurn();
+    }
