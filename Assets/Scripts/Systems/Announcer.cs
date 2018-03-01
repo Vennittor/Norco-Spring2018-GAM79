@@ -16,15 +16,15 @@ public abstract class Announcer {
     public static void BeginTurn(Character character) {
         Debug.Log("It's " + character.name + "'s turn!");
     }
-
-    // Attack
-    public static void Attack(Character attacker, Character defender) {
-        Debug.Log(attacker.name + " attacks " + defender.name + "!");
+    /*
+    // Basic Attack
+    public static void BasicAttack(Character attacker, Character target) {
+        Debug.Log(attacker.name + " attacks " + target.name + "!");
     }
-
+    */
     // Use Skill
-    public static void UseSkill(Character character, int skill) {
-        Debug.Log(character.name + " used Skill #" + skill + "!");
+    public static void UseSkill(Character attacker, Character target, int skillNumber, string attackText) {
+        Debug.Log(attacker.name + " used Skill #" + skillNumber + " on " + target.name + "!");
     }
 
     // Use Item
@@ -33,8 +33,8 @@ public abstract class Announcer {
     }
 
     // Take Damage
-    public static void TakeDamage(Character defender, float damage) {
-        Debug.Log(defender.name + " takes " + damage + " damage!");
+    public static void TakeDamage(Character target, float damage) {
+        Debug.Log(target.name + " takes " + damage + " damage!");
     }
 
     // End Turn

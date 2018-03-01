@@ -19,31 +19,42 @@ public class PlayerCharacter : Character
     {
         if (Input.GetKeyDown("1")) //and check for if its your turn
         {
-            Attack1();
+            Skill1();
         }
         else if (Input.GetKeyDown("2"))
         {
-            Attack2();
+            Skill2();
         }
         if (Input.GetKeyDown("3"))
         {
-            Attack3();
+            Skill3();
         }
     }
 
-    public void Attack1()
+    public void Skill1()
     {
-        Debug.Log("player used 1-key attack");
+        Announcer.UseSkill(this, RandEnemy(), 1, "Placeholder Attack message 1.");
         combatManager.NextTurn();
     }
-    public void Attack2()
+    public void Skill2()
     {
-        Debug.Log("player used 2-key attack");
+        Announcer.UseSkill(this, RandEnemy(), 2, "Placeholder Attack message 2.");
         combatManager.NextTurn();
     }
-    public void Attack3()
+    public void Skill3()
     {
-        Debug.Log("player used 3-key attack");
+        Announcer.UseSkill(this, RandEnemy(), 3, "Placeholder Attack message 3.");
         combatManager.NextTurn();
+    }
+
+    private EnemyCharacter RandEnemy()
+    {
+        List<EnemyCharacter> enemies = new List<EnemyCharacter>();
+        foreach(EnemyCharacter enemy in combatManager.characters)
+        {
+            enemies.Add(enemy);
+        }
+        EnemyCharacter enemyCharacter = enemies[Random.Range(0, enemies.Count)];
+        return enemyCharacter;
     }
 }
