@@ -20,21 +20,22 @@ public class PlayerCharacter : Character
 
 	}
 
-    public void Skill1()
-    {
-        Announcer.UseSkill(this, RandEnemyTarget(), 1, "Placeholder Attack message 1.");
-        combatManager.NextTurn();
-    }
-    public void Skill2()
-    {
-		Announcer.UseSkill(this, RandEnemyTarget(), 2, "Placeholder Attack message 2.");
-        combatManager.NextTurn();
-    }
-    public void Skill3()
-    {
-		Announcer.UseSkill(this, RandEnemyTarget(), 3, "Placeholder Attack message 3.");
-        combatManager.NextTurn();
-    }
+	public void Skill1()
+	{
+		//Announcer.UseSkill(this, RandEnemy(), 1, "Placeholder Attack message 1.");
+		combatManager.NextTurn();
+		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
+	}
+	public void Skill2()
+	{
+		combatManager.NextTurn();
+		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
+	}
+	public void Skill3()
+	{
+		combatManager.NextTurn();
+		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
+	}
 
 	private EnemyCharacter RandEnemyTarget()
     {
