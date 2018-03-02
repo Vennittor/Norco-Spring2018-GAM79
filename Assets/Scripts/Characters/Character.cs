@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    public enum CombatState
+    {
+        ACTIVE, INACTIVE
+    }
+    public CombatState combatState;
     protected CombatManager combatManager;
 
     public new string name;
@@ -15,6 +20,7 @@ public class Character : MonoBehaviour
     protected void Start()
     {
         combatManager = CombatManager.Instance;
+        combatState = CombatState.ACTIVE;
     }
 
 	public virtual void BeginTurn()

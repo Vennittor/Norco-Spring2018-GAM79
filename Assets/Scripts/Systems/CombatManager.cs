@@ -12,9 +12,9 @@ public class CombatManager : MonoBehaviour
 
     public List<Character> characters;
     public Character activeCharacter;
+    public List<Character> currentRound;
 
     public int turnCounter;
-    public Character firstCharacter;
 
 
     public static CombatManager Instance
@@ -48,6 +48,7 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         characters = new List<Character>();
+        currentRound = new List<Character>();
         //TEST
         if (characters.Count == 0)
         {
@@ -87,7 +88,7 @@ public class CombatManager : MonoBehaviour
             }
             if (c1 is EnemyCharacter && c2 is PlayerCharacter)
             {
-                return 1; // prioritize player
+                return 1; // prioritizes player
             }
             else
             {
@@ -107,28 +108,34 @@ public class CombatManager : MonoBehaviour
 
     public void QueueSort()
     {
-        characters.Sort(SortBySpeed);
-        activeCharacter = characters[0];
-        Debug.Log(activeCharacter + "'s turn.");
-        if (firstCharacter == null)
+        foreach (Character character in characters)
         {
-            firstCharacter = activeCharacter;
+            if (character.combatState == Character.CombatState.ACTIVE)
+            {
+                currentRound.Add(character);
+            }
         }
+        currentRound.Sort(SortBySpeed);
+        activeCharacter = currentRound[0];
+        
+        Debug.Log(activeCharacter + "'s turn.");
         EnemyCheck();
     }
 
-    public void NextTurn()
+    public void NextTurn() // active player finishing their turn calls this
     {
-        Character current = activeCharacter;
-        characters.RemoveAt(0);
-        characters.Insert(characters.Count, current);
-        activeCharacter = characters[0];
-        Debug.Log(activeCharacter + "'s turn.");
-        if (firstCharacter == activeCharacter)
+        currentRound.RemoveAt(0); // remove themself from the current round
+        if (currentRound.Count == 0) // if they were the last one to leave
         {
             turnCounter++;
+            QueueSort(); // sort again with new speeds in case of change
         }
-        EnemyCheck();
+        else
+        {
+            activeCharacter = currentRound[0];
+            Debug.Log(activeCharacter + "'s turn.");
+            EnemyCheck();
+        }
     }
 
 }
