@@ -9,41 +9,44 @@ public class PlayerCharacter : Character
     {
         base.Start();
     }
-	
-	void Update ()
+
+    void Update()
     {
 
     }
 
-    public void BeginPlayerTurn()
+	public override void BeginTurn()
+	{
+
+	}
+
+    public void Skill1()
     {
-        if (Input.GetKeyDown("1")) //and check for if its your turn
-        {
-            Attack1();
-        }
-        else if (Input.GetKeyDown("2"))
-        {
-            Attack2();
-        }
-        if (Input.GetKeyDown("3"))
-        {
-            Attack3();
-        }
+        Announcer.UseSkill(this, RandEnemyTarget(), 1, "Placeholder Attack message 1.");
+        combatManager.NextTurn();
+    }
+    public void Skill2()
+    {
+		Announcer.UseSkill(this, RandEnemyTarget(), 2, "Placeholder Attack message 2.");
+        combatManager.NextTurn();
+    }
+    public void Skill3()
+    {
+		Announcer.UseSkill(this, RandEnemyTarget(), 3, "Placeholder Attack message 3.");
+        combatManager.NextTurn();
     }
 
-    public void Attack1()
+	private EnemyCharacter RandEnemyTarget()
     {
-        Debug.Log("player used 1-key attack");
-        combatManager.NextTurn();
-    }
-    public void Attack2()
-    {
-        Debug.Log("player used 2-key attack");
-        combatManager.NextTurn();
-    }
-    public void Attack3()
-    {
-        Debug.Log("player used 3-key attack");
-        combatManager.NextTurn();
+        List<EnemyCharacter> enemies = new List<EnemyCharacter>();
+		foreach(Character character in combatManager.characters)
+        {
+			if (character is EnemyCharacter) 
+			{
+				enemies.Add (character as EnemyCharacter);
+			}
+        }
+        EnemyCharacter enemyCharacter = enemies[Random.Range(0, enemies.Count)];
+        return enemyCharacter;
     }
 }

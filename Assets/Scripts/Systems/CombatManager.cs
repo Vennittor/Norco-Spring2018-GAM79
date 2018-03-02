@@ -5,11 +5,9 @@ using UnityEngine;
 public class CombatManager : MonoBehaviour {
 
     public static CombatManager combatInstance;
+    private static Announcer announcer;
 
-    public enum ActiveState
-    {
-        ACTIVE, INACTIVE
-    }
+    public enum ActiveState { ACTIVE, INACTIVE }
 
     public List<Character> characters;
     public Character activeCharacter;
@@ -38,6 +36,9 @@ public class CombatManager : MonoBehaviour {
         combatInstance = this;
         Debug.Log("Awake: CombatManager created!");
         DontDestroyOnLoad(gameObject);
+
+        //announcer = new Announcer();
+        Announcer.AnnounceSelf();
     }
 
     void Start ()
@@ -96,7 +97,7 @@ public class CombatManager : MonoBehaviour {
     {
         if (activeCharacter is EnemyCharacter)
         {
-            (activeCharacter as EnemyCharacter).BeginEnemyTurn();
+            (activeCharacter as EnemyCharacter).BeginTurn();
         }
     }
 
