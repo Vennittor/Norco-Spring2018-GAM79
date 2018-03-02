@@ -7,10 +7,7 @@ public class CombatManager : MonoBehaviour {
     public static CombatManager combatInstance;
     private static Announcer announcer;
 
-    public enum ActiveState
-    {
-        ACTIVE, INACTIVE
-    }
+    public enum ActiveState { ACTIVE, INACTIVE }
 
     public List<Character> characters;
     public Character activeCharacter;
@@ -100,7 +97,7 @@ public class CombatManager : MonoBehaviour {
     {
         if (activeCharacter is EnemyCharacter)
         {
-            (activeCharacter as EnemyCharacter).BeginEnemyTurn();
+            (activeCharacter as EnemyCharacter).BeginTurn();
         }
     }
 

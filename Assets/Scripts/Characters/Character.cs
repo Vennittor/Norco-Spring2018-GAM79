@@ -17,6 +17,11 @@ public class Character : MonoBehaviour
         combatManager = CombatManager.Instance;
     }
 
+	public virtual void BeginTurn()
+	{
+
+	}
+
     public void TakeDamage()
     {
 

@@ -18,7 +18,7 @@ public class EnemyCharacter : Character
         
 	}
 
-    public void BeginEnemyTurn()
+	public override void BeginTurn()
     {
         float selection = Random.Range(min, max);
         if (selection <= 1)

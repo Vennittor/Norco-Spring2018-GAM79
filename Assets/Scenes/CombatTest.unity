@@ -1096,7 +1096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: CharacterB
   speed: 4
   maxhealth: 10
   currentHealth: 10
@@ -1538,7 +1538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceda88abad68a1c4dab201721b038e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnQueue: {fileID: 0}
+  combatManager: {fileID: 0}
   playerCharacter: {fileID: 0}
   enemyCharacter: {fileID: 0}
 --- !u!114 &435705479
@@ -1867,7 +1867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: CharacterA
   speed: 5
   maxhealth: 10
   currentHealth: 10
@@ -2092,7 +2092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: enemy b
   speed: 3
   maxhealth: 5
   currentHealth: 5
@@ -3714,7 +3714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: CharacterC
   speed: 3
   maxhealth: 0
   currentHealth: 0
@@ -4967,7 +4967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: enemy c
   speed: 2
   maxhealth: 5
   currentHealth: 5
@@ -6623,7 +6623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: enemy a
   speed: 4
   maxhealth: 5
   currentHealth: 5
