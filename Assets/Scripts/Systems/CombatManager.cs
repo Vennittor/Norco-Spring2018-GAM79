@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatManager : MonoBehaviour {
+public class CombatManager : MonoBehaviour
+{
 
     public static CombatManager combatInstance;
     private static Announcer announcer;
@@ -11,6 +12,9 @@ public class CombatManager : MonoBehaviour {
 
     public List<Character> characters;
     public Character activeCharacter;
+
+    public int turnCounter;
+    public Character firstCharacter;
 
 
     public static CombatManager Instance
@@ -41,15 +45,15 @@ public class CombatManager : MonoBehaviour {
         Announcer.AnnounceSelf();
     }
 
-    void Start ()
+    void Start()
     {
         characters = new List<Character>();
         //TEST
-        if (characters.Count == 0) 
-		{
+        if (characters.Count == 0)
+        {
             Debug.LogWarning("characters List is empty, finding all Characters in scene");
             characters.AddRange(FindObjectsOfType<Character>());
-		}
+        }
 
         if (characters.Count != 0)
         {
@@ -59,17 +63,17 @@ public class CombatManager : MonoBehaviour {
         {
             Debug.LogWarning("There are no Characters in the scene");
         }
-  
+        turnCounter = 1;
     }
-   
-	void Update ()
+
+    void Update()
     {
-		//TEST
-		if (Input.GetButtonDown("Jump"))
+        //TEST
+        if (Input.GetButtonDown("Jump"))
         {
             NextTurn();
         }
-	}
+    }
 
     private int SortBySpeed(Character c1, Character c2)
     {
@@ -79,11 +83,11 @@ public class CombatManager : MonoBehaviour {
         {
             if (c1 is PlayerCharacter && c2 is EnemyCharacter)
             {
-                return 1;
+                return -1; // prioritizes player
             }
             if (c1 is EnemyCharacter && c2 is PlayerCharacter)
             {
-                return -1;
+                return 1; // prioritize player
             }
             else
             {
@@ -106,6 +110,10 @@ public class CombatManager : MonoBehaviour {
         characters.Sort(SortBySpeed);
         activeCharacter = characters[0];
         Debug.Log(activeCharacter + "'s turn.");
+        if (firstCharacter == null)
+        {
+            firstCharacter = activeCharacter;
+        }
         EnemyCheck();
     }
 
@@ -116,6 +124,10 @@ public class CombatManager : MonoBehaviour {
         characters.Insert(characters.Count, current);
         activeCharacter = characters[0];
         Debug.Log(activeCharacter + "'s turn.");
+        if (firstCharacter == activeCharacter)
+        {
+            turnCounter++;
+        }
         EnemyCheck();
     }
 
