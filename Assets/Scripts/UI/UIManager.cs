@@ -47,6 +47,5 @@ public class UIManager : MonoBehaviour
     {
 		(combatManager.activeCharacter as PlayerCharacter).Skill3(); 
     }
-		
     #endregion
 }
