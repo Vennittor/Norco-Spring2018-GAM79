@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
+    // TODO ability variables
 
     private new void Start()
     {
         base.Start();
+        // TODO set up ability attachments
     }
 
     void Update()
@@ -22,7 +24,10 @@ public class PlayerCharacter : Character
 
 	public void Skill1()
 	{
-		//Announcer.UseSkill(this, RandEnemy(), 1, "Placeholder Attack message 1.");
+        combatState = CombatState.ABILITYUSE;
+
+        //TODO wait for call from announcer before going to next turn
+
 		combatManager.NextTurn();
 		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
 	}
