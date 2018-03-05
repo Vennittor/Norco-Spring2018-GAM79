@@ -55,5 +55,9 @@ public class Character : MonoBehaviour
         Debug.Log(name + " died");
         combatState = CombatState.DEAD;
         combatManager.Disable(this);
+        if (combatManager.activeCharacter == this)
+        {
+            combatManager.NextTurn();
+        }
     }
 }
