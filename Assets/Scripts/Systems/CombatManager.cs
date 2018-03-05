@@ -117,20 +117,28 @@ public class CombatManager : MonoBehaviour
     public void QueueSort() // clears round/active characters, repopulates round from actives, sorts round
     {
         activePlayers.Clear();
-        foreach (PlayerCharacter character in characters)
+        foreach (Character character in characters)
         {
-            if (character.combatState == Character.CombatState.ACTIVE) // finds only active players
+            if (character is PlayerCharacter)
             {
-                activePlayers.Add(character);
+                if (character.combatState == Character.CombatState.ACTIVE) // finds only active players
+                {
+                    activePlayers.Add(character as PlayerCharacter);
+                }
             }
+            
         }
         activeEnemies.Clear();
-        foreach (EnemyCharacter character in characters)
+        foreach (Character character in characters)
         {
-            if (character.combatState == Character.CombatState.ACTIVE) // finds only active enemies
+            if (character is EnemyCharacter)
             {
-                activeEnemies.Add(character);
+                if (character.combatState == Character.CombatState.ACTIVE) // finds only active enemies
+                {
+                    activeEnemies.Add(character as EnemyCharacter);
+                }
             }
+            
         }
         currentRound.Clear();
         foreach (Character character in activePlayers) // adds both previous lists to the round
