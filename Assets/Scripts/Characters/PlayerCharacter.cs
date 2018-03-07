@@ -31,7 +31,7 @@ public class PlayerCharacter : Character
 		}
 	}
 
-	public void Skill1()
+	public void SkillOne()
 	{
 		combatState = CombatState.USEABILITY;
 
@@ -39,7 +39,7 @@ public class PlayerCharacter : Character
 		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
 	}
-	public void Skill2()
+	public void SkillTwo()
 	{
 		combatState = CombatState.USEABILITY;
 
@@ -47,7 +47,7 @@ public class PlayerCharacter : Character
 		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
 	}
-	public void Skill3()
+	public void SkillThree()
 	{
 		combatState = CombatState.USEABILITY;
 

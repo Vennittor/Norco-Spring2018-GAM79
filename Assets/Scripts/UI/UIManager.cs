@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
 
     public void OutputAttack_02()
     {
-        (combatManager.activeCharacter as PlayerCharacter).SkillTwo();  
+		(combatManager.activeCharacter as PlayerCharacter).SkillTwo();  
     }
 
     public void OutputAttack_03()
