@@ -121,25 +121,27 @@ public class CombatManager : MonoBehaviour
         {
             if (character is PlayerCharacter)
             {
-                if (character.combatState == Character.CombatState.ACTIVE) // finds only active players
+				if (character.combatState == Character.CombatState.ABLE) // finds only active players
                 {
                     activePlayers.Add(character as PlayerCharacter);
                 }
             }
             
         }
+
         activeEnemies.Clear();
         foreach (Character character in characters)
         {
             if (character is EnemyCharacter)
             {
-                if (character.combatState == Character.CombatState.ACTIVE) // finds only active enemies
+				if (character.combatState == Character.CombatState.ABLE) // finds only active enemies
                 {
                     activeEnemies.Add(character as EnemyCharacter);
                 }
             }
             
         }
+
         currentRound.Clear();
         foreach (Character character in activePlayers) // adds both previous lists to the round
         {
@@ -149,7 +151,7 @@ public class CombatManager : MonoBehaviour
         {
             currentRound.Add(character);
         }
-        
+        //Sort the currentRounds characters by speed hi/lo
         currentRound.Sort(SortBySpeed);
         activeCharacter = currentRound[0];
         

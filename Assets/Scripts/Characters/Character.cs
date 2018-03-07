@@ -6,7 +6,7 @@ public class Character : MonoBehaviour
 {
     public enum CombatState
     {
-        ACTIVE, INACTIVE, ABILITYUSE, DEAD
+        ABLE, DISABLED, USEABILITY, DEAD
     }
     public CombatState combatState;
     protected CombatManager combatManager;
@@ -25,17 +25,17 @@ public class Character : MonoBehaviour
     protected void Start()
     {
         combatManager = CombatManager.Instance;
-        combatState = CombatState.ACTIVE;
+		combatState = CombatState.ABLE;
     }
 
     public void SetState(CombatState state)
     {
         combatState = state;
-        if (combatState == CombatState.ACTIVE)
+		if (combatState == CombatState.ABLE)
         {
 
         }
-        else if (combatState == CombatState.INACTIVE)
+		else if (combatState == CombatState.DISABLED)
         {
             combatManager.Disable(this);
         }

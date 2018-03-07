@@ -21,6 +21,8 @@ public class EnemyCharacter : Character
 
 	public override void BeginTurn()
     {
+		Debug.Log ("Enemy " + this.name + " begins thier turn.");
+
         float selection = Random.Range(min, max);
         if (selection <= 1)
         {
