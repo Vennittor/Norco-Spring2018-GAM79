@@ -40,17 +40,17 @@ public class EnemyCharacter : Character
 
     void AttackOne()
     {
-        Debug.Log("enemy used 1-key attack");
+		Debug.Log(this.name + " used AttackOne");
         combatManager.NextTurn();
     }
     void AttackTwo()
     {
-        Debug.Log("enemy used 2-key attack");
+		Debug.Log(this.name + " used AttackTwo");
         combatManager.NextTurn();
     }
     void AttackThree()
     {
-        Debug.Log("enemy used 3-key attack");
+		Debug.Log(this.name + " used AttackThree");
         combatManager.NextTurn();
     }
 }
