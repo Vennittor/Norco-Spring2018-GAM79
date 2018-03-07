@@ -194,7 +194,10 @@ public class CombatManager : MonoBehaviour
     {
         if (currentRound.Contains(disabled))
         {
-            currentRound.Remove(disabled);
+            if (disabled != activeCharacter)
+            {
+                currentRound.Remove(disabled);
+            }
             if (disabled is PlayerCharacter)
             {
                 inactivePlayers.Add(disabled as PlayerCharacter);
@@ -206,27 +209,14 @@ public class CombatManager : MonoBehaviour
                 activeEnemies.Remove(disabled as EnemyCharacter);
             }
 
-            bool partyWipe = false; // check if last of either side is inactive to end combat
             if (activePlayers.Count == 0)
-            {
-                partyWipe = true;
-            }
-            if (partyWipe == true)
             {
                 EndCombat(false);
             }
 
-            if (partyWipe == false)
+            else if (activeEnemies.Count == 0)
             {
-                bool enemyWipe = true;
-                if (activeEnemies.Count == 0)
-                {
-                    enemyWipe = false;
-                }
-                if (enemyWipe == true)
-                {
-                    EndCombat(true);
-                }
+                EndCombat(true);
             }
         }
     }
