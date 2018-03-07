@@ -1096,10 +1096,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatState: 0
   name: CharacterB
   speed: 4
-  maxhealth: 10
-  currentHealth: 10
+  maxhealth: 5
+  currentHealth: 5
 --- !u!1 &337600345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,10 +1868,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatState: 0
   name: CharacterA
   speed: 5
-  maxhealth: 10
-  currentHealth: 10
+  maxhealth: 5
+  currentHealth: 5
 --- !u!1 &490582049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2092,6 +2094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatState: 0
   name: enemy b
   speed: 3
   maxhealth: 5
@@ -3714,10 +3717,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatState: 0
   name: CharacterC
   speed: 3
-  maxhealth: 0
-  currentHealth: 0
+  maxhealth: 5
+  currentHealth: 5
 --- !u!1 &936543505
 GameObject:
   m_ObjectHideFlags: 0
@@ -4521,6 +4525,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters: []
   activeCharacter: {fileID: 0}
+  currentRound: []
+  activePlayers: []
+  inactivePlayers: []
+  activeEnemies: []
+  inactiveEnemies: []
+  turnCounter: 0
 --- !u!4 &1166834118
 Transform:
   m_ObjectHideFlags: 0
@@ -4967,6 +4977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatState: 0
   name: enemy c
   speed: 2
   maxhealth: 5
@@ -6623,6 +6634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatState: 0
   name: enemy a
   speed: 4
   maxhealth: 5
