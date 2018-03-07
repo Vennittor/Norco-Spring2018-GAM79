@@ -46,6 +46,14 @@ public class Character : MonoBehaviour
 
 	}
 
+	public void EndTurn()
+	{
+		if (combatManager.activeCharacter == this)
+		{
+			combatManager.NextTurn();
+		}
+	}
+
     public void TakeDamage(uint damage = 0)
     {
         currentHealth -= (uint)Mathf.Clamp(damage, 0, currentHealth);
@@ -65,12 +73,9 @@ public class Character : MonoBehaviour
 
     public void Death()
     {
-        Debug.Log(name + " died");
+        Debug.Log(name + " died!");
         combatState = CombatState.DEAD;
         combatManager.Disable(this);
-        if (combatManager.activeCharacter == this)
-        {
-            combatManager.NextTurn();
-        }
+		EndTurn();
     }
 }
