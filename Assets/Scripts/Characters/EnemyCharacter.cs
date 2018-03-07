@@ -26,29 +26,29 @@ public class EnemyCharacter : Character
         float selection = Random.Range(min, max);
         if (selection <= 1)
         {
-            Attack1();
+            AttackOne();
         }
         else if (selection > 1 && selection < 2)
         {
-            Attack2();
+            AttackTwo();
         }
         else if (selection >= 2)
         {
-            Attack3();
+            AttackThree();
         }
     }
 
-    void Attack1()
+    void AttackOne()
     {
         Debug.Log("enemy used 1-key attack");
         combatManager.NextTurn();
     }
-    void Attack2()
+    void AttackTwo()
     {
         Debug.Log("enemy used 2-key attack");
         combatManager.NextTurn();
     }
-    void Attack3()
+    void AttackThree()
     {
         Debug.Log("enemy used 3-key attack");
         combatManager.NextTurn();
