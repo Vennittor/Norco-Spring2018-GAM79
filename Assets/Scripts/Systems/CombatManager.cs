@@ -13,9 +13,9 @@ public class CombatManager : MonoBehaviour
     public Character activeCharacter;
     public List<Character> currentRound;
     public List<PlayerCharacter> activePlayers;
-    public List<PlayerCharacter> inactivePlayers;
+    //public List<PlayerCharacter> inactivePlayers;
     public List<EnemyCharacter> activeEnemies;
-    public List<EnemyCharacter> inactiveEnemies;
+    //public List<EnemyCharacter> inactiveEnemies;
 
     public uint turnCounter;
 
@@ -121,25 +121,27 @@ public class CombatManager : MonoBehaviour
         {
             if (character is PlayerCharacter)
             {
-                if (character.combatState == Character.CombatState.ACTIVE) // finds only active players
+				if (character.combatState == Character.CombatState.ABLE) // finds only active players
                 {
                     activePlayers.Add(character as PlayerCharacter);
                 }
             }
             
         }
+
         activeEnemies.Clear();
         foreach (Character character in characters)
         {
             if (character is EnemyCharacter)
             {
-                if (character.combatState == Character.CombatState.ACTIVE) // finds only active enemies
+				if (character.combatState == Character.CombatState.ABLE) // finds only active enemies
                 {
                     activeEnemies.Add(character as EnemyCharacter);
                 }
             }
             
         }
+
         currentRound.Clear();
         foreach (Character character in activePlayers) // adds both previous lists to the round
         {
@@ -149,7 +151,7 @@ public class CombatManager : MonoBehaviour
         {
             currentRound.Add(character);
         }
-        
+        //Sort the currentRounds characters by speed hi/lo
         currentRound.Sort(SortBySpeed);
         activeCharacter = currentRound[0];
         
@@ -175,61 +177,60 @@ public class CombatManager : MonoBehaviour
 
     public void Enable(Character enabled)
     {
-        if (!currentRound.Contains(enabled))
-        {
-            if (enabled is PlayerCharacter)
-            {
-                activePlayers.Add(enabled as PlayerCharacter);
-                inactivePlayers.Remove(enabled as PlayerCharacter);
-            }
-            else if (enabled is EnemyCharacter)
-            {
-                activeEnemies.Add(enabled as EnemyCharacter);
-                inactiveEnemies.Remove(enabled as EnemyCharacter);
-            }
-        }
+//        if (!currentRound.Contains(enabled))
+//        {
+//            if (enabled is PlayerCharacter)
+//            {
+//                activePlayers.Add(enabled as PlayerCharacter);
+////                inactivePlayers.Remove(enabled as PlayerCharacter);
+//            }
+//            else if (enabled is EnemyCharacter)
+//            {
+//                activeEnemies.Add(enabled as EnemyCharacter);
+////                inactiveEnemies.Remove(enabled as EnemyCharacter);
+//            }
+//        }
     }
 
     public void Disable(Character disabled) // remove character from active list, add to inactive
     {
-        if (currentRound.Contains(disabled))
-        {
-            if (disabled != activeCharacter)
-            {
-                currentRound.Remove(disabled);
-            }
-            if (disabled is PlayerCharacter)
-            {
-                inactivePlayers.Add(disabled as PlayerCharacter);
-                activePlayers.Remove(disabled as PlayerCharacter);
-            }
-            else if (disabled is EnemyCharacter)
-            {
-                inactiveEnemies.Add(disabled as EnemyCharacter);
-                activeEnemies.Remove(disabled as EnemyCharacter);
-            }
+//        if (currentRound.Contains(disabled))
+//        {
+//            if (disabled != activeCharacter)
+//            {
+//                currentRound.Remove(disabled);
+//            }
+//            if (disabled is PlayerCharacter)
+//            {
+////                inactivePlayers.Add(disabled as PlayerCharacter);
+//                activePlayers.Remove(disabled as PlayerCharacter);
+//            }
+//            else if (disabled is EnemyCharacter)
+//            {
+////                inactiveEnemies.Add(disabled as EnemyCharacter);
+//                activeEnemies.Remove(disabled as EnemyCharacter);
+//            }
 
             if (activePlayers.Count == 0)
             {
                 EndCombat(false);
             }
-
             else if (activeEnemies.Count == 0)
             {
                 EndCombat(true);
             }
-        }
+//        }
     }
 
     public void EndCombat(bool playerVictory)
     {
         if (playerVictory == true) // party wins
         {
-
+			Debug.Log ("Party Wins");
         }
         else if (playerVictory == false) // party loses
         {
-
+			Debug.Log ("Party Loses");
         }
     }
 

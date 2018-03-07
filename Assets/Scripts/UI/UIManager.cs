@@ -35,17 +35,17 @@ public class UIManager : MonoBehaviour
 	
     public void OutputAttack_01()
     {
-		(combatManager.activeCharacter as PlayerCharacter).Skill1();
+		(combatManager.activeCharacter as PlayerCharacter).SkillOne();
     }
 
     public void OutputAttack_02()
     {
-        (combatManager.activeCharacter as PlayerCharacter).Skill2();  
+		(combatManager.activeCharacter as PlayerCharacter).SkillTwo();  
     }
 
     public void OutputAttack_03()
     {
-		(combatManager.activeCharacter as PlayerCharacter).Skill3(); 
+		(combatManager.activeCharacter as PlayerCharacter).SkillThree(); 
     }
 		
     #endregion
