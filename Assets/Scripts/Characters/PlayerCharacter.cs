@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
+    // TODO ability variables
+    public HeatZone heatState;
+    public int heatRate;
+    
 
     private new void Start()
     {
         base.Start();
+        //heatState = HeatZone.OutofHeat;
+        // TODO set up ability attachments
     }
 
     void Update()
@@ -22,7 +28,10 @@ public class PlayerCharacter : Character
 
 	public void Skill1()
 	{
-		//Announcer.UseSkill(this, RandEnemy(), 1, "Placeholder Attack message 1.");
+        combatState = CombatState.ABILITYUSE;
+
+        //TODO wait for call from announcer before going to next turn
+
 		combatManager.NextTurn();
 		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
 	}
@@ -49,5 +58,26 @@ public class PlayerCharacter : Character
         }
         EnemyCharacter enemyCharacter = enemies[Random.Range(0, enemies.Count)];
         return enemyCharacter;
+    }
+    
+    /*public void EnterHeat()
+    {
+        heatState = HeatZone.InHeat;
+    }
+
+    public void ExitHeat()
+    {
+        heatState = HeatZone.OutofHeat;
+    }
+
+    public enum HeatZone
+    {
+        OutofHeat,
+        InHeat
+    }*/
+
+    public void SetHeatRate(int heat)
+    {
+        heatRate += heat;        
     }
 }

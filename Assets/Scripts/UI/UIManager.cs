@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
 	{
 		if (Input.GetKeyDown (KeyCode.Alpha1))
 		{
-			OutputAttack_01 ();
+			OutputAttack_01 (); //Scott, James thinks this can be done in a different way 
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha2))
 		{
@@ -47,5 +47,6 @@ public class UIManager : MonoBehaviour
     {
 		(combatManager.activeCharacter as PlayerCharacter).Skill3(); 
     }
+		
     #endregion
 }

@@ -7,6 +7,7 @@ public class EnemyCharacter : Character
     //public float[] attacks;
     private float min = 0;
     private float max = 3;
+    
 
     private new void Start()
     {
