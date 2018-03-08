@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
-
     public static CombatManager combatInstance;
     private static Announcer announcer;
 
@@ -12,9 +11,13 @@ public class CombatManager : MonoBehaviour
 
     public List<Character> characters;
     public Character activeCharacter;
+    public List<Character> currentRound;
+    public List<PlayerCharacter> activePlayers;
+    public List<PlayerCharacter> inactivePlayers;
+    public List<EnemyCharacter> activeEnemies;
+    public List<EnemyCharacter> inactiveEnemies;
 
-    public int turnCounter;
-    public Character firstCharacter;
+    public uint turnCounter;
 
 
     public static CombatManager Instance
@@ -40,14 +43,16 @@ public class CombatManager : MonoBehaviour
         combatInstance = this;
         Debug.Log("Awake: CombatManager created!");
         DontDestroyOnLoad(gameObject);
-
-        //announcer = new Announcer();
+        
         Announcer.AnnounceSelf();
     }
 
     void Start()
     {
         characters = new List<Character>();
+        currentRound = new List<Character>();
+        activePlayers = new List<PlayerCharacter>();
+        activeEnemies = new List<EnemyCharacter>();
         //TEST
         if (characters.Count == 0)
         {
@@ -73,9 +78,65 @@ public class CombatManager : MonoBehaviour
         {
             NextTurn();
         }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            activeCharacter.TakeDamage(4);
+        }
     }
 
-    private int SortBySpeed(Character c1, Character c2)
+    public void EnemyCheck()
+    {
+        if (activeCharacter is EnemyCharacter)
+        {
+            (activeCharacter as EnemyCharacter).BeginTurn();
+        }
+    }
+
+    public void QueueSort() // clears round/active characters, repopulates round from actives, sorts round
+    {
+        activePlayers.Clear();
+        foreach (Character character in characters)
+        {
+            if (character is PlayerCharacter)
+            {
+				if (character.combatState == Character.CombatState.ABLE) // finds only active players
+                {
+                    activePlayers.Add(character as PlayerCharacter);
+                }
+            }
+            
+        }
+
+        activeEnemies.Clear();
+        foreach (Character character in characters)
+        {
+            if (character is EnemyCharacter)
+            {
+				if (character.combatState == Character.CombatState.ABLE) // finds only active enemies
+                {
+                    activeEnemies.Add(character as EnemyCharacter);
+                }
+            }
+            
+        }
+
+        currentRound.Clear();
+        foreach (Character character in activePlayers) // adds both previous lists to the round
+        {
+            currentRound.Add(character);
+        }
+        foreach (Character character in activeEnemies) // ^
+        {
+            currentRound.Add(character);
+        }
+        //Sort the currentRounds characters by speed hi/lo
+        currentRound.Sort(SortBySpeed);
+        activeCharacter = currentRound[0];
+        
+        Debug.Log(activeCharacter + "'s turn.");
+        EnemyCheck();
+    }
+    private int SortBySpeed(Character c1, Character c2) // sorts by highest speed, player first
     {
         int char1 = c1.speed;
         int char2 = c2.speed;
@@ -87,7 +148,7 @@ public class CombatManager : MonoBehaviour
             }
             if (c1 is EnemyCharacter && c2 is PlayerCharacter)
             {
-                return 1; // prioritize player
+                return 1; // prioritizes player
             }
             else
             {
@@ -97,38 +158,98 @@ public class CombatManager : MonoBehaviour
         return -char1.CompareTo(char2);
     }
 
-    public void EnemyCheck()
+    public void NextTurn() // active player finishing their turn calls this
     {
-        if (activeCharacter is EnemyCharacter)
-        {
-            (activeCharacter as EnemyCharacter).BeginTurn();
-        }
+        StartCoroutine("NextWait");
+        //currentRound.RemoveAt(0); // remove themself from the current round
+        //if (currentRound.Count == 0) // if they were the last one to leave
+        //{
+        //    turnCounter++;
+        //    QueueSort(); // sort again with new speeds in case of change
+        //}
+        //else
+        //{
+        //    activeCharacter = currentRound[0];
+        //    Debug.Log(activeCharacter + "'s turn.");
+        //    EnemyCheck();
+        //}
     }
 
-    public void QueueSort()
+    public IEnumerator NextWait()
     {
-        characters.Sort(SortBySpeed);
-        activeCharacter = characters[0];
-        Debug.Log(activeCharacter + "'s turn.");
-        if (firstCharacter == null)
-        {
-            firstCharacter = activeCharacter;
-        }
-        EnemyCheck();
-    }
-
-    public void NextTurn()
-    {
-        Character current = activeCharacter;
-        characters.RemoveAt(0);
-        characters.Insert(characters.Count, current);
-        activeCharacter = characters[0];
-        Debug.Log(activeCharacter + "'s turn.");
-        if (firstCharacter == activeCharacter)
+        Debug.Log("Entering coroutine");
+        yield return new WaitForSeconds(1);
+        currentRound.Remove(activeCharacter); // remove themself from the current round
+        if (currentRound.Count == 0) // if they were the last one to leave
         {
             turnCounter++;
+            QueueSort(); // sort again with new speeds in case of change
         }
-        EnemyCheck();
+        else
+        {
+            activeCharacter = currentRound[0];
+            Debug.Log(activeCharacter + "'s turn.");
+            EnemyCheck();
+        }
+    }
+
+    public void Enable(Character enabled)
+    {
+        if (!currentRound.Contains(enabled))
+        {
+            if (enabled is PlayerCharacter)
+            {
+                activePlayers.Add(enabled as PlayerCharacter);
+                inactivePlayers.Remove(enabled as PlayerCharacter);
+            }
+            else if (enabled is EnemyCharacter)
+            {
+                activeEnemies.Add(enabled as EnemyCharacter);
+                inactiveEnemies.Remove(enabled as EnemyCharacter);
+            }
+        }
+    }
+
+    public void Disable(Character disabled) // remove character from active list, add to inactive
+    {
+        if (currentRound.Contains(disabled))
+        {
+            if (disabled != activeCharacter)
+            {
+                currentRound.Remove(disabled);
+            }
+            if (disabled is PlayerCharacter)
+            {
+                inactivePlayers.Add(disabled as PlayerCharacter);
+                activePlayers.Remove(disabled as PlayerCharacter);
+            }
+            else if (disabled is EnemyCharacter)
+            {
+                inactiveEnemies.Add(disabled as EnemyCharacter);
+                activeEnemies.Remove(disabled as EnemyCharacter);
+            }
+
+            if (activePlayers.Count == 0)
+            {
+                EndCombat(false);
+            }
+            else if (activeEnemies.Count == 0)
+            {
+                EndCombat(true);
+            }
+        }
+    }
+
+    public void EndCombat(bool playerVictory)
+    {
+        if (playerVictory == true) // party wins
+        {
+			Debug.Log ("Party Wins");
+        }
+        else if (playerVictory == false) // party loses
+        {
+			Debug.Log ("Party Loses");
+        }
     }
 
 }

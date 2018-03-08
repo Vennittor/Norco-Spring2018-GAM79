@@ -21,31 +21,31 @@ public class UIManager : MonoBehaviour
 	{
 		if (Input.GetKeyDown (KeyCode.Alpha1))
 		{
-			OutputAttack_01 (); //Scott, James thinks this can be done in a different way 
+			OutputAttackOne (); 
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha2))
 		{
-			OutputAttack_02 ();
+			OutputAttackTwo ();
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha3))
 		{
-			OutputAttack_03 ();
+			OutputAttackThree ();
 		}
 	}
 	
-    public void OutputAttack_01()
+	public void OutputAttackOne()
     {
-		(combatManager.activeCharacter as PlayerCharacter).Skill1();
+		(combatManager.activeCharacter as PlayerCharacter).SkillOne();
     }
 
-    public void OutputAttack_02()
+	public void OutputAttackTwo()
     {
-        (combatManager.activeCharacter as PlayerCharacter).Skill2();  
+		(combatManager.activeCharacter as PlayerCharacter).SkillTwo();  
     }
 
-    public void OutputAttack_03()
+	public void OutputAttackThree()
     {
-		(combatManager.activeCharacter as PlayerCharacter).Skill3(); 
+		(combatManager.activeCharacter as PlayerCharacter).SkillThree(); 
     }
     #endregion
 }

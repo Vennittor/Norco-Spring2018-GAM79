@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Announcer {
-	/*
-    public Announcer() {
-        Debug.Log("I hereby Announce that I have been created!");
-    }
-    */
+	
 	public static void AnnounceSelf() {
 		Debug.Log("I hereby Announce that I have been statically compiled! \nI exist purely as an abstract utility class with no instance, only static functions.");
 	}
