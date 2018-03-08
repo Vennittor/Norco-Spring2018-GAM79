@@ -23,10 +23,10 @@ public class PlayerCharacter : Character
 
 	public override void BeginTurn()
 	{
-		Debug.Log ("Player " + this.name + " begins thier turn.");
+		Debug.Log ("Player " + name + " begins thier turn.");
 		if (combatState == CombatState.DISABLED || combatState == CombatState.DEAD) 
 		{
-			Debug.Log("Player " + this.name + " cannont act this turn");
+			Debug.Log("Player " + name + " cannont act this turn");
 			combatManager.NextTurn ();
 		}
 	}
@@ -35,7 +35,7 @@ public class PlayerCharacter : Character
 	{
 		combatState = CombatState.USEABILITY;
 
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
+		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
 		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
 	}
@@ -43,7 +43,7 @@ public class PlayerCharacter : Character
 	{
 		combatState = CombatState.USEABILITY;
 
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
+		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
 		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
 	}
@@ -51,7 +51,7 @@ public class PlayerCharacter : Character
 	{
 		combatState = CombatState.USEABILITY;
 
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
+		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
 		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
 	}
