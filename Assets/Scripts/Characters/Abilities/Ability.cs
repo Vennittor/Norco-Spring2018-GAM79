@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class Ability : MonoBehaviour {
-    // PERIPHERAL DATA
+[CreateAssetMenu(fileName = "New Ability", menuName = "Ability")]
+public class Ability : ScriptableObject {
+    
+	// DESCRIPTIVE DATA
     public string abilityName;
-    public string attackerName;
-    public string targetName;
-    public string output;
-
     public string description;
     //public Sprite image;
 
     // FUNCTIONAL DATA
-    public float cooldown;
-    public int minValue;
-    public int maxValue;
-    
+	[SerializeField] private Vector2 damageRange = Vector2.zero;
+	[SerializeField] private int cooldown;
+
+	//PERIPHIAL DATA
+	public string attackerName;
+	public string targetName;
+	public string output;
+		
     /*
     // This function is called when the scriptable object goes out of scope.
     // https://docs.unity3d.com/ScriptReference/ScriptableObject.html
