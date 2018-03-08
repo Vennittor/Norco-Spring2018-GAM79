@@ -360,6 +360,41 @@ Prefab:
       propertyPath: m_Colors.m_PressedColor.b
       value: 0.12941177
       objectReference: {fileID: 0}
+    - target: {fileID: 224573173010666982, guid: bfabb4c0143fd934bbb3485f3208ba74,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 224647783281826836, guid: bfabb4c0143fd934bbb3485f3208ba74,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 224830747486652198, guid: bfabb4c0143fd934bbb3485f3208ba74,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 224587535410604870, guid: bfabb4c0143fd934bbb3485f3208ba74,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 114547709845586166, guid: bfabb4c0143fd934bbb3485f3208ba74,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OutputAttackOne
+      objectReference: {fileID: 0}
+    - target: {fileID: 114059242419063530, guid: bfabb4c0143fd934bbb3485f3208ba74,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OutputAttackThree
+      objectReference: {fileID: 0}
+    - target: {fileID: 114014108555382824, guid: bfabb4c0143fd934bbb3485f3208ba74,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OutputAttackTwo
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bfabb4c0143fd934bbb3485f3208ba74, type: 2}
   m_IsPrefabParent: 0
@@ -1101,6 +1136,12 @@ MonoBehaviour:
   speed: 4
   maxhealth: 5
   currentHealth: 5
+  currentHeat: 0
+  maxHeat: 0
+  accuracy: 84.5
+  evade: 10
+  heatState: {fileID: 0}
+  heatRate: 0
 --- !u!1 &337600345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,6 +1914,12 @@ MonoBehaviour:
   speed: 5
   maxhealth: 5
   currentHealth: 5
+  currentHeat: 0
+  maxHeat: 0
+  accuracy: 84.5
+  evade: 10
+  heatState: {fileID: 0}
+  heatRate: 0
 --- !u!1 &490582049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,6 +2146,10 @@ MonoBehaviour:
   speed: 3
   maxhealth: 5
   currentHealth: 5
+  currentHeat: 0
+  maxHeat: 0
+  accuracy: 84.5
+  evade: 10
 --- !u!1 &534159594
 GameObject:
   m_ObjectHideFlags: 0
@@ -3155,7 +3206,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1529117094}
-  m_RootOrder: 11
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3722,6 +3773,12 @@ MonoBehaviour:
   speed: 3
   maxhealth: 5
   currentHealth: 5
+  currentHeat: 0
+  maxHeat: 0
+  accuracy: 84.5
+  evade: 10
+  heatState: {fileID: 0}
+  heatRate: 0
 --- !u!1 &936543505
 GameObject:
   m_ObjectHideFlags: 0
@@ -4982,6 +5039,10 @@ MonoBehaviour:
   speed: 2
   maxhealth: 5
   currentHealth: 5
+  currentHeat: 0
+  maxHeat: 0
+  accuracy: 84.5
+  evade: 10
 --- !u!1 &1395253248
 GameObject:
   m_ObjectHideFlags: 0
@@ -6639,6 +6700,10 @@ MonoBehaviour:
   speed: 4
   maxhealth: 5
   currentHealth: 5
+  currentHeat: 0
+  maxHeat: 0
+  accuracy: 84.5
+  evade: 10
 --- !u!1 &1972679016
 GameObject:
   m_ObjectHideFlags: 0
