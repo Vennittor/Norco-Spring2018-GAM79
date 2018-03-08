@@ -160,26 +160,7 @@ public class CombatManager : MonoBehaviour
 
     public void NextTurn() // active player finishing their turn calls this
     {
-        StartCoroutine("NextWait");
-        //currentRound.RemoveAt(0); // remove themself from the current round
-        //if (currentRound.Count == 0) // if they were the last one to leave
-        //{
-        //    turnCounter++;
-        //    QueueSort(); // sort again with new speeds in case of change
-        //}
-        //else
-        //{
-        //    activeCharacter = currentRound[0];
-        //    Debug.Log(activeCharacter + "'s turn.");
-        //    EnemyCheck();
-        //}
-    }
-
-    public IEnumerator NextWait()
-    {
-        Debug.Log("Entering coroutine");
-        yield return new WaitForSeconds(1);
-        currentRound.Remove(activeCharacter); // remove themself from the current round
+        currentRound.RemoveAt(0); // remove themself from the current round
         if (currentRound.Count == 0) // if they were the last one to leave
         {
             turnCounter++;
@@ -191,6 +172,12 @@ public class CombatManager : MonoBehaviour
             Debug.Log(activeCharacter + "'s turn.");
             EnemyCheck();
         }
+		StartCoroutine("WaitForNextTurn");
+    }
+
+	public IEnumerator WaitForNextTurn()	//TEST  This is here to create a visible delay between turns.  It also prevents a lock when only enemies are acting in a round
+    {
+        yield return new WaitForSeconds(0.5f);
     }
 
     public void Enable(Character enabled)
@@ -212,22 +199,22 @@ public class CombatManager : MonoBehaviour
 
     public void Disable(Character disabled) // remove character from active list, add to inactive
     {
-        if (currentRound.Contains(disabled))
-        {
-            if (disabled != activeCharacter)
-            {
-                currentRound.Remove(disabled);
-            }
-            if (disabled is PlayerCharacter)
-            {
-                inactivePlayers.Add(disabled as PlayerCharacter);
-                activePlayers.Remove(disabled as PlayerCharacter);
-            }
-            else if (disabled is EnemyCharacter)
-            {
-                inactiveEnemies.Add(disabled as EnemyCharacter);
-                activeEnemies.Remove(disabled as EnemyCharacter);
-            }
+//        if (currentRound.Contains(disabled))
+//        {
+//            if (disabled != activeCharacter)
+//            {
+//                currentRound.Remove(disabled);
+//            }
+//            if (disabled is PlayerCharacter)
+//            {
+//                inactivePlayers.Add(disabled as PlayerCharacter);
+//                activePlayers.Remove(disabled as PlayerCharacter);
+//            }
+//            else if (disabled is EnemyCharacter)
+//            {
+//                inactiveEnemies.Add(disabled as EnemyCharacter);
+//                activeEnemies.Remove(disabled as EnemyCharacter);
+//            }
 
             if (activePlayers.Count == 0)
             {
@@ -237,7 +224,7 @@ public class CombatManager : MonoBehaviour
             {
                 EndCombat(true);
             }
-        }
+//        }
     }
 
     public void EndCombat(bool playerVictory)
