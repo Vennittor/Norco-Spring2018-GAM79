@@ -11,13 +11,13 @@ public class CombatManager : MonoBehaviour
 
     public List<Character> characters;
     public Character activeCharacter;
-    public List<Character> currentRound;
+    public List<Character> currentRoundCharacters;
     public List<PlayerCharacter> activePlayers;
-    public List<PlayerCharacter> inactivePlayers;
+    //public List<PlayerCharacter> inactivePlayers;
     public List<EnemyCharacter> activeEnemies;
-    public List<EnemyCharacter> inactiveEnemies;
+    //public List<EnemyCharacter> inactiveEnemies;
 
-    public uint turnCounter;
+    public uint roundCounter;
 
 
     public static CombatManager Instance
@@ -50,7 +50,7 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         characters = new List<Character>();
-        currentRound = new List<Character>();
+        currentRoundCharacters = new List<Character>();
         activePlayers = new List<PlayerCharacter>();
         activeEnemies = new List<EnemyCharacter>();
         //TEST
@@ -59,16 +59,8 @@ public class CombatManager : MonoBehaviour
             Debug.LogWarning("characters List is empty, finding all Characters in scene");
             characters.AddRange(FindObjectsOfType<Character>());
         }
-
-        if (characters.Count != 0)
-        {
-            QueueSort();
-        }
-        else
-        {
-            Debug.LogWarning("There are no Characters in the scene");
-        }
-        turnCounter = 1;
+		//TEST StartCombat() should be called by either the GameManger, an Event, or encountering an enemy.
+		StartCombat();
     }
 
     void Update()
@@ -84,6 +76,50 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+	//
+	public void StartCombat()
+	{
+		roundCounter = 0;
+		if (characters.Count != 0)
+		{
+			StartRound ();
+		}
+		else
+		{
+			Debug.LogError("There are no Characters in the scene");
+		}
+	}
+
+	//Anything that needs to be handled at the start of the round should be placed in this function.
+	void StartRound()
+	{	Debug.Log ("New Round!");
+		roundCounter++;
+		//Check time left on status effects
+		//Check cooldowns on Abilities
+		SortRoundQueue();
+	}
+	//Anything that needs to be handled at the end of the round, should be placed in this function.
+	void EndRound()
+	{
+		//TEST to keep things going until proper EndCombat checks are in place.
+		StartRound();
+	}
+
+	//This ends combat, cleanup, return level/field movement, and handling player victory/defeat should be performed or started here
+	public void EndCombat(bool playerVictory)
+	{
+		if (playerVictory == true) // party wins
+		{
+			Debug.Log ("Party Wins");
+			//Return to Field/Level GameState
+		}
+		else if (playerVictory == false) // party loses
+		{
+			Debug.Log ("Party Loses");
+			//Goto Defeat or Gameover GameState
+		}
+	}
+
     public void EnemyCheck()
     {
         if (activeCharacter is EnemyCharacter)
@@ -92,7 +128,7 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void QueueSort() // clears round/active characters, repopulates round from actives, sorts round
+    public void SortRoundQueue() // clears round/active characters, repopulates round from actives, sorts round
     {
         activePlayers.Clear();
         foreach (Character character in characters)
@@ -120,20 +156,19 @@ public class CombatManager : MonoBehaviour
             
         }
 
-        currentRound.Clear();
+        currentRoundCharacters.Clear();
         foreach (Character character in activePlayers) // adds both previous lists to the round
         {
-            currentRound.Add(character);
+            currentRoundCharacters.Add(character);
         }
         foreach (Character character in activeEnemies) // ^
         {
-            currentRound.Add(character);
+            currentRoundCharacters.Add(character);
         }
-        //Sort the currentRounds characters by speed hi/lo
-        currentRound.Sort(SortBySpeed);
-        activeCharacter = currentRound[0];
-        
-        Debug.Log(activeCharacter + "'s turn.");
+        //Sort the currentRoundCharacterss characters by speed hi/lo
+        currentRoundCharacters.Sort(SortBySpeed);
+        activeCharacter = currentRoundCharacters[0];
+
         EnemyCheck();
     }
     private int SortBySpeed(Character c1, Character c2) // sorts by highest speed, player first
@@ -160,50 +195,50 @@ public class CombatManager : MonoBehaviour
 
     public void NextTurn() // active player finishing their turn calls this
     {
-        currentRound.RemoveAt(0); // remove themself from the current round
-        if (currentRound.Count == 0) // if they were the last one to leave
+		currentRoundCharacters.Remove(activeCharacter); // The activeCharacter removes themself from the current round
+        if (currentRoundCharacters.Count == 0) // if they were the last one to leave
         {
-            turnCounter++;
-            QueueSort(); // sort again with new speeds in case of change
+			EndRound ();
         }
         else
-        {
-            activeCharacter = currentRound[0];
-            Debug.Log(activeCharacter + "'s turn.");
-            EnemyCheck();
+        {	//The contents of this Coroutine should be moved back into this Function once it is no longer needed.
+			StartCoroutine ("WaitForNextTurn");
         }
-		StartCoroutine("WaitForNextTurn");
     }
 
 	public IEnumerator WaitForNextTurn()	//TEST  This is here to create a visible delay between turns.  It also prevents a lock when only enemies are acting in a round
-    {
-        yield return new WaitForSeconds(0.5f);
-    }
+	{
+		yield return new WaitForSeconds(0.5f);
+
+		activeCharacter = currentRoundCharacters[0];
+		Debug.Log(activeCharacter + "'s turn.");
+		EnemyCheck();
+	}
 
     public void Enable(Character enabled)
     {
-        if (!currentRound.Contains(enabled))
+        if (!currentRoundCharacters.Contains(enabled))
         {
             if (enabled is PlayerCharacter)
             {
                 activePlayers.Add(enabled as PlayerCharacter);
-                inactivePlayers.Remove(enabled as PlayerCharacter);
+//                inactivePlayers.Remove(enabled as PlayerCharacter);
             }
             else if (enabled is EnemyCharacter)
             {
                 activeEnemies.Add(enabled as EnemyCharacter);
-                inactiveEnemies.Remove(enabled as EnemyCharacter);
+//                inactiveEnemies.Remove(enabled as EnemyCharacter);
             }
         }
     }
 
     public void Disable(Character disabled) // remove character from active list, add to inactive
     {
-//        if (currentRound.Contains(disabled))
+//        if (currentRoundCharacters.Contains(disabled))
 //        {
 //            if (disabled != activeCharacter)
 //            {
-//                currentRound.Remove(disabled);
+//                currentRoundCharacters.Remove(disabled);
 //            }
 //            if (disabled is PlayerCharacter)
 //            {
@@ -215,28 +250,9 @@ public class CombatManager : MonoBehaviour
 //                inactiveEnemies.Add(disabled as EnemyCharacter);
 //                activeEnemies.Remove(disabled as EnemyCharacter);
 //            }
-
-            if (activePlayers.Count == 0)
-            {
-                EndCombat(false);
-            }
-            else if (activeEnemies.Count == 0)
-            {
-                EndCombat(true);
-            }
 //        }
     }
 
-    public void EndCombat(bool playerVictory)
-    {
-        if (playerVictory == true) // party wins
-        {
-			Debug.Log ("Party Wins");
-        }
-        else if (playerVictory == false) // party loses
-        {
-			Debug.Log ("Party Loses");
-        }
-    }
+
 
 }
