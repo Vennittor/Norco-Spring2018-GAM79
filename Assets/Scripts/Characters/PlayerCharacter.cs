@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
+    // TODO ability variables
+    public HeatZone heatState;
+    public int heatRate;
+    
 
     private new void Start()
     {
         base.Start();
+        //heatState = HeatZone.OutofHeat;
+        // TODO set up ability attachments
     }
 
     void Update()
@@ -17,24 +23,37 @@ public class PlayerCharacter : Character
 
 	public override void BeginTurn()
 	{
-
+		Debug.Log ("Player " + name + " begins thier turn.");
+		if (combatState == CombatState.DISABLED || combatState == CombatState.DEAD) 
+		{
+			Debug.Log("Player " + name + " cannont act this turn");
+			combatManager.NextTurn ();
+		}
 	}
 
-	public void Skill1()
+	public void SkillOne()
 	{
-		//Announcer.UseSkill(this, RandEnemy(), 1, "Placeholder Attack message 1.");
+		combatState = CombatState.USEABILITY;
+
+		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
+		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
 	}
-	public void Skill2()
+	public void SkillTwo()
 	{
+		combatState = CombatState.USEABILITY;
+
+		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
+		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
 	}
-	public void Skill3()
+	public void SkillThree()
 	{
+		combatState = CombatState.USEABILITY;
+
+		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
+		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
 	}
 
 	private EnemyCharacter RandEnemyTarget()
@@ -49,5 +68,26 @@ public class PlayerCharacter : Character
         }
         EnemyCharacter enemyCharacter = enemies[Random.Range(0, enemies.Count)];
         return enemyCharacter;
+    }
+    
+    /*public void EnterHeat()
+    {
+        heatState = HeatZone.InHeat;
+    }
+
+    public void ExitHeat()
+    {
+        heatState = HeatZone.OutofHeat;
+    }
+
+    public enum HeatZone
+    {
+        OutofHeat,
+        InHeat
+    }*/
+
+    public void SetHeatRate(int heat)
+    {
+        heatRate += heat;        
     }
 }

@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Announcer {
-	/*
-    public Announcer() {
-        Debug.Log("I hereby Announce that I have been created!");
-    }
-    */
+	
 	public static void AnnounceSelf() {
 		Debug.Log("I hereby Announce that I have been statically compiled! \nI exist purely as an abstract utility class with no instance, only static functions.");
 	}
@@ -20,7 +16,7 @@ public abstract class Announcer {
 	// Use Skill
 	public static void UseSkill(string attackerName, string targetName, string skillName, string attackText) {
 		Debug.Log(attackerName + " used " + skillName + " on " + targetName + "!");
-		Debug.Log(attackText);
+		Debug.Log("Skill Text: " + attackText);
 	}
 
 	// Use Item

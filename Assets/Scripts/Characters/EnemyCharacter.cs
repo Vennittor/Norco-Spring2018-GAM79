@@ -7,6 +7,7 @@ public class EnemyCharacter : Character
     //public float[] attacks;
     private float min = 0;
     private float max = 3;
+    
 
     private new void Start()
     {
@@ -20,34 +21,36 @@ public class EnemyCharacter : Character
 
 	public override void BeginTurn()
     {
+		Debug.Log ("Enemy " + this.name + " begins thier turn.");
+
         float selection = Random.Range(min, max);
         if (selection <= 1)
         {
-            Attack1();
+            AttackOne();
         }
         else if (selection > 1 && selection < 2)
         {
-            Attack2();
+            AttackTwo();
         }
         else if (selection >= 2)
         {
-            Attack3();
+            AttackThree();
         }
     }
 
-    void Attack1()
+    void AttackOne()
     {
-        Debug.Log("enemy used 1-key attack");
+		Debug.Log(this.name + " used AttackOne");
         combatManager.NextTurn();
     }
-    void Attack2()
+    void AttackTwo()
     {
-        Debug.Log("enemy used 2-key attack");
+		Debug.Log(this.name + " used AttackTwo");
         combatManager.NextTurn();
     }
-    void Attack3()
+    void AttackThree()
     {
-        Debug.Log("enemy used 3-key attack");
+		Debug.Log(this.name + " used AttackThree");
         combatManager.NextTurn();
     }
 }
