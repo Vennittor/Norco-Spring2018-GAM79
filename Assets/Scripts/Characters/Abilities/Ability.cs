@@ -8,30 +8,46 @@ public class Ability : ScriptableObject {
 	// DESCRIPTIVE DATA
     public string abilityName;
     public string description;
-    //public Sprite image;
+    //public Sprite image; for effects
 
     // FUNCTIONAL DATA
-	[SerializeField] private Vector2 damageRange = Vector2.zero;
-	[SerializeField] private int cooldown = 0;
-    [SerializeField] private int cooldownTime;
+    [SerializeField] private List<Vector2> damageRanges = new List<Vector2>();
+    //[SerializeField] private List<Status> statuses;
+	[SerializeField] private int cooldown;
+    [SerializeField] private int cooldownTimer = 0;
+    [SerializeField] private List<Character> targets = new List<Character>();
 
 	//PERIPHIAL DATA
 	public string attackerName;
 	public string targetName;
 	public string output;
 
-    public void SetCooldown()
+    // List types of effects (statuses)
+    // damage types? Incorporate this into a damage type Class
+    // targets (single, multiple, ally)
+
+    public void ReadyAbility()
     {
-        if (cooldown == 0)
+
+    }
+
+    public void UseAbility()
+    {
+
+    }
+
+    public void StartCooldown()
+    {
+        if (cooldownTimer == 0)
         {
-            cooldown = cooldownTime;
+            cooldownTimer = cooldown;
         }
     }
-    public void Cooldown()
+    public void ProgressCooldown()
     {
-        if (cooldown != 0)
+        if (cooldownTimer != 0)
         {
-            cooldown--;
+            cooldownTimer--;
         }
     }
 
