@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     public CombatManager combatManager;
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
-    #endregion   
+    #endregion
 
     #region Functions
     void Start ()
@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
         combatManager = CombatManager.Instance;
     }
 
-	void Update()
+    void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.Alpha1))
 		{
@@ -32,8 +32,8 @@ public class UIManager : MonoBehaviour
 			OutputAttackThree ();
 		}
 	}
-	
-	public void OutputAttackOne()
+
+    public void OutputAttackOne()
     {
 		(combatManager.activeCharacter as PlayerCharacter).SkillOne();
     }
