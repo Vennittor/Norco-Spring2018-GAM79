@@ -1,44 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EventSystemManager : MonoBehaviour
+public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 	#region Variables
 	public EventSystem eventSystem;
 
-	public BaseRaycaster graphicRaycaster;
+    public GameObject target; //tie in to combat system
 
-	public PointerEventData data;
-	#endregion
+    #endregion
 
-	#region Functions
-	void Update()
-	{
-		if (Input.GetKey(KeyCode.Mouse0))
-		{
-			OnRaycastHit ();
-		}
-	}
+    #region Functions
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        target.GetComponent<Renderer>().material.color = Color.red;
+        print("hit");
 
-	void OnRaycastHit ()
-	{
-		data = new PointerEventData(eventSystem);
+    }
 
-		data.position = Input.mousePosition;
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        target.GetComponent<Renderer>().material.color = Color.white;
+        print("no hit");
+    }
 
-		List<RaycastResult> results = new List<RaycastResult>();
-
-		graphicRaycaster.Raycast(data, results);
-
-		//display rimlight?
-
-		foreach (RaycastResult result in results)
-		{
-			print("Hit " + result.gameObject.name);
-		}
-	}
-	#endregion
+    #endregion
 
 }
