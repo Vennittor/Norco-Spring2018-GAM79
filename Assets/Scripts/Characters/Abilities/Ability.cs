@@ -26,9 +26,25 @@ public class Ability : ScriptableObject {
     // damage types? Incorporate this into a damage type Class
     // targets (single, multiple, ally)
 
-    public void ReadyAbility()
+    public void AnnounceAbility()
     {
+        // Tandy: This just announces that it occurs (how much damage, and who it targets)
+        /*
+        When Character calls Ability to start, it enters USEABILITY State, and calls ReadyAbility() to initialize the Ability.
+        Example of this in Character:
+        if(state != USEABILITY) {
+            character.state = USEABILITY; // now, state is set to USEABILITY, so that initialization only happens once
+            ability.StartCooldown();
+        }
+       
+        once Ability starts:
+            ability.UseAbility();
 
+        *later when Ability is done, Character state goes back to ABLE default state
+        
+        combatmanager does this:
+            ProgressCooldown();
+        */
     }
 
     public void UseAbility()
@@ -45,7 +61,7 @@ public class Ability : ScriptableObject {
     }
     public void ProgressCooldown()
     {
-        if (cooldownTimer != 0)
+        if (cooldownTimer > 0) // Tandy: changed from cooldownTimer == 0 just in case of error, if cooldownTimer is negative
         {
             cooldownTimer--;
         }
