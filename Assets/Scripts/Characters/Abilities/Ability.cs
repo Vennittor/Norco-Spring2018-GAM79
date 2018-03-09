@@ -12,13 +12,29 @@ public class Ability : ScriptableObject {
 
     // FUNCTIONAL DATA
 	[SerializeField] private Vector2 damageRange = Vector2.zero;
-	[SerializeField] private int cooldown;
+	[SerializeField] private int cooldown = 0;
+    [SerializeField] private int cooldownTime;
 
 	//PERIPHIAL DATA
 	public string attackerName;
 	public string targetName;
 	public string output;
-		
+
+    public void SetCooldown()
+    {
+        if (cooldown == 0)
+        {
+            cooldown = cooldownTime;
+        }
+    }
+    public void Cooldown()
+    {
+        if (cooldown != 0)
+        {
+            cooldown--;
+        }
+    }
+
     /*
     // This function is called when the scriptable object goes out of scope.
     // https://docs.unity3d.com/ScriptReference/ScriptableObject.html
