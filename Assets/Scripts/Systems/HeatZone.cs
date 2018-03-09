@@ -5,20 +5,24 @@ using UnityEngine;
 public class HeatZone : MonoBehaviour
 {
     public PlayerCharacter _char;
-    public int myHeatRate;
+    public int myHeatIntensity;
 
 	public void OnTriggerEnter(Collider other)
     {
         Debug.Log("yo i gotS it");
         _char = other.gameObject.GetComponent<PlayerCharacter>();
-        //_char.heatState = PlayerCharacter.HeatZone.InHeat;
-        _char.SetHeatRate(myHeatRate);
+        _char.heatState = PlayerCharacter.HeatZone.InHeat;
+        _char.SetHeatRate(myHeatIntensity);
     }
 
     public void OnTriggerExit(Collider other)
     {
         Debug.Log("yo i dont not gots it");
         _char = other.gameObject.GetComponent<PlayerCharacter>();
-        _char.SetHeatRate(-myHeatRate);
+        _char.SetHeatRate(-myHeatIntensity);
+        if (_char.heatIntensity == 0)
+        {
+            _char.heatState = PlayerCharacter.HeatZone.OutofHeat;
+        }
     }
 }
