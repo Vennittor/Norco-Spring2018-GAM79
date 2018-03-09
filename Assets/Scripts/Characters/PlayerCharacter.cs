@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCharacter : Character
 {
     // TODO ability variables
-    public HeatZone heatState;
+    //public HeatZone heatState;
     public int heatRate;
     
 
