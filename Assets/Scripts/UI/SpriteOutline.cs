@@ -15,7 +15,7 @@ public class SpriteOutline : MonoBehaviour
     void Start ()
     {
         material = GetComponent<Renderer>().material;
-        rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
+        //rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
     }
 
     void OnMouseOver()
@@ -25,18 +25,8 @@ public class SpriteOutline : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             clicked = true;
-
-            if (!clicked)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    material.color = Color.white;
-                }
-
-            }
-
         }
-            
+             
     }
 
     void OnMouseExit()
@@ -45,7 +35,7 @@ public class SpriteOutline : MonoBehaviour
         {
             material.color = Color.red;
         }
-
+ 
         else
         {
             material.color = Color.white;

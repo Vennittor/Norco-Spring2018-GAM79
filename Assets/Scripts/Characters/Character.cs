@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+//    public List<StatusEffect> statusEffects = new List<StatusEffect>();
+
     public enum CombatState
     {
-        ABLE, DISABLED, USEABILITY, DEAD
+        ABLE, DISABLED, USEABILITY, EXHAUSTED
     }
     public CombatState combatState;
     protected CombatManager combatManager;
@@ -19,6 +21,7 @@ public class Character : MonoBehaviour
 
     public uint currentHeat;
     public uint maxHeat;
+    public uint defence;
     public float accuracy = 84.5f;
     public float evade = 10;
 
@@ -56,10 +59,14 @@ public class Character : MonoBehaviour
 
     public void TakeDamage(uint damage = 0)
     {
-        currentHealth -= (uint)Mathf.Clamp(damage, 0, currentHealth);
-        if (currentHealth == 0)
+        damage -= defence;
+        if (damage >= 1)
         {
-            Death();
+            currentHealth -= (uint)Mathf.Clamp(damage, 0, currentHealth);
+            if (currentHealth == 0)
+            {
+                Faint();
+            }
         }
     }
     public void TakeHeatDamage(uint heatDamage = 0)
@@ -67,14 +74,15 @@ public class Character : MonoBehaviour
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));
         if (currentHeat == maxHeat)
         {
-            Death();
+            //lose a turn;
+            //heat -100;
         }
     }
 
-    public void Death()
+    public void Faint()
     {
         Debug.Log(name + " died!");
-        combatState = CombatState.DEAD;
+        combatState = CombatState.EXHAUSTED;
         combatManager.Disable(this);
 		EndTurn();
     }

@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerCharacter : Character
 {
     // TODO ability variables
-    //public HeatZone heatState;
-    public int heatRate;
-    
+    public HeatZone heatState;
+    public int heatIntensity;
 
     private new void Start()
     {
@@ -24,7 +23,7 @@ public class PlayerCharacter : Character
 	public override void BeginTurn()
 	{
 		Debug.Log ("Player " + name + " begins thier turn.");
-		if (combatState == CombatState.DISABLED || combatState == CombatState.DEAD) 
+		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED) 
 		{
 			Debug.Log("Player " + name + " cannont act this turn");
 			combatManager.NextTurn ();
@@ -69,7 +68,7 @@ public class PlayerCharacter : Character
         EnemyCharacter enemyCharacter = enemies[Random.Range(0, enemies.Count)];
         return enemyCharacter;
     }
-    
+
     /*public void EnterHeat()
     {
         heatState = HeatZone.InHeat;
@@ -78,16 +77,16 @@ public class PlayerCharacter : Character
     public void ExitHeat()
     {
         heatState = HeatZone.OutofHeat;
-    }
+    }*/
 
     public enum HeatZone
     {
         OutofHeat,
         InHeat
-    }*/
+    }
 
     public void SetHeatRate(int heat)
     {
-        heatRate += heat;        
+        heatIntensity += heat;        
     }
 }
