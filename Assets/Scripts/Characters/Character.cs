@@ -64,8 +64,8 @@ public class Character : MonoBehaviour
     }
     public void TakeHeatDamage(uint heatDamage = 0)
     {
-        currentHeat -= (uint)Mathf.Clamp(heatDamage, 0, currentHeat);
-        if (currentHeat >= maxHeat)
+        currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));
+        if (currentHeat == maxHeat)
         {
             Death();
         }
