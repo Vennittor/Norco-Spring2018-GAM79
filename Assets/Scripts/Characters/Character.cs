@@ -5,6 +5,12 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
 //    public List<StatusEffect> statusEffects = new List<StatusEffect>();
+    
+    [SerializeField] protected List<Ability> abilities = new List<Ability>(); 
+    // Tandy: maybe abilites[0] is basic attack? then abilities[1] is SkillOne, etc.
+
+    [SerializeField] protected List<Status> statuses = new List<Status>();
+    // Tandy: List of Status to show what Character is affected by
 
     public enum CombatState
     {
@@ -21,7 +27,7 @@ public class Character : MonoBehaviour
 
     public uint currentHeat;
     public uint maxHeat;
-    public uint defence;
+    public uint defense;
     public float accuracy = 84.5f;
     public float evade = 10;
 
@@ -59,7 +65,7 @@ public class Character : MonoBehaviour
 
     public void TakeDamage(uint damage = 0)
     {
-        damage -= defence;
+        damage -= defense;
         if (damage >= 1)
         {
             currentHealth -= (uint)Mathf.Clamp(damage, 0, currentHealth);
@@ -76,6 +82,12 @@ public class Character : MonoBehaviour
         {
             //lose a turn;
             //heat -100;
+        }
+    }
+
+    public void ApplyStatus(Status status) { // Tandy: added this to work with Ability
+        if(statuses.Contains(status) == false) { // if not already affected by Status
+            statuses.Add(status); // add Status to List to show it affects Character
         }
     }
 
