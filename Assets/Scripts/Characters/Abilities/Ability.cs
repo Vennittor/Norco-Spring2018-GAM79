@@ -21,7 +21,7 @@ public class Ability : ScriptableObject {
             else if(targets.Count > 1) {
                 string targetString = targets[0].name + ", "; // first target name
                 for(int i = 1; i < targets.Count - 1; i++) {
-                    targetString += targets[i].name; // every target name between first and last
+                    targetString += targets[i].name + ", "; // every target name between first and last
                 }
                 targetString += ", and " + targets[targets.Count]; // last target name
                 return targetString; // Example: "EnemyA, EnemyB, and EnemyC"
