@@ -8,6 +8,8 @@ public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerE
 {
 	#region Variables
 	public EventSystem eventSystem;
+    public CombatManager combatManager;
+    public UIManager uIManager;
 
     public GameObject target; //tie in to combat system
 
