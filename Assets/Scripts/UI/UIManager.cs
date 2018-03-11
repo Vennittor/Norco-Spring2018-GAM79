@@ -11,20 +11,23 @@ public class UIManager : MonoBehaviour
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
 
+    public delegate void MyDelegate();
+    MyDelegate myDelegate;
+
     public float infoDelayTime = 0.5f;
 
-    public enum ActiveState { ACTIVE, INACTIVE }//active = targeting
+    public enum ActiveState { NORMAL, TARGETING }
     public ActiveState state;
     #endregion
 
 
     #region Functions
-    void Start ()
+    public void Start ()
     {
         combatManager = CombatManager.Instance;
     }
 
-    void Update()
+    public void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.Alpha1))
 		{
@@ -42,45 +45,45 @@ public class UIManager : MonoBehaviour
 
     public void OutputAttackOne()
     {
-        if(state == ActiveState.ACTIVE)
+        if(state == ActiveState.NORMAL)
         {
             (combatManager.activeCharacter as PlayerCharacter).SkillOne();
-            SetInActive();
+            SetMode_Targeting();
         }
     }
 
 	public void OutputAttackTwo()
     {
-        if (state == ActiveState.ACTIVE)
+        if (state == ActiveState.NORMAL)
         {
             (combatManager.activeCharacter as PlayerCharacter).SkillTwo();
-            SetInActive();
+            SetMode_Targeting();
         }
     }
 
 	public void OutputAttackThree()
     {
-        if (state == ActiveState.ACTIVE)
+        if (state == ActiveState.NORMAL)
         {
             (combatManager.activeCharacter as PlayerCharacter).SkillThree();
-            SetInActive();
+            SetMode_Targeting();
         }
     }
 
-    public void SetActive() 
+    public void SetMode_Normal() 
     {
-        StartCoroutine(InfoDelay());
-        state = ActiveState.ACTIVE; 
+        state = ActiveState.NORMAL; 
     }
 
-    public void SetInActive()
+    public void SetMode_Targeting()
     {
-        state = ActiveState.INACTIVE;
+        state = ActiveState.TARGETING;
     }
 
-    public IEnumerator InfoDelay()
+    public void CallBack()
     {
-        yield return new WaitForSeconds(infoDelayTime);
+        //remains to be determined
     }
+
     #endregion
 }
