@@ -18,17 +18,26 @@ public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerE
     #region Functions
     public void OnPointerEnter(PointerEventData eventData)
     {
-        target.GetComponent<Renderer>().material.color = Color.red;
+        TurnRed();
         print("hit");
 
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        target.GetComponent<Renderer>().material.color = Color.white;
+        TurnWhite();
         print("no hit");
     }
 
+    public void TurnRed()
+    {
+        target.GetComponent<Renderer>().material.color = Color.red;
+    }
+
+    public void TurnWhite()
+    {
+        target.GetComponent<Renderer>().material.color = Color.white;
+    }
     #endregion
 
 }
