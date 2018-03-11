@@ -7,9 +7,16 @@ public class UIManager : MonoBehaviour
 {
     #region Variables
     public CombatManager combatManager;
+    public EventSystemManager eventSystemManager;
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
+
+    public float infoDelayTime = 0.5f;
+
+    public enum ActiveState { ACTIVE, INACTIVE }//active = targeting
+    public ActiveState state;
     #endregion
+
 
     #region Functions
     void Start ()
@@ -35,17 +42,45 @@ public class UIManager : MonoBehaviour
 
     public void OutputAttackOne()
     {
-		(combatManager.activeCharacter as PlayerCharacter).SkillOne();
+        if(state == ActiveState.ACTIVE)
+        {
+            (combatManager.activeCharacter as PlayerCharacter).SkillOne();
+            SetInActive();
+        }
     }
 
 	public void OutputAttackTwo()
     {
-		(combatManager.activeCharacter as PlayerCharacter).SkillTwo();  
+        if (state == ActiveState.ACTIVE)
+        {
+            (combatManager.activeCharacter as PlayerCharacter).SkillTwo();
+            SetInActive();
+        }
     }
 
 	public void OutputAttackThree()
     {
-		(combatManager.activeCharacter as PlayerCharacter).SkillThree(); 
+        if (state == ActiveState.ACTIVE)
+        {
+            (combatManager.activeCharacter as PlayerCharacter).SkillThree();
+            SetInActive();
+        }
+    }
+
+    public void SetActive() 
+    {
+        StartCoroutine(InfoDelay());
+        state = ActiveState.ACTIVE; 
+    }
+
+    public void SetInActive()
+    {
+        state = ActiveState.INACTIVE;
+    }
+
+    public IEnumerator InfoDelay()
+    {
+        yield return new WaitForSeconds(infoDelayTime);
     }
     #endregion
 }
