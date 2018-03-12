@@ -85,5 +85,10 @@ public class UIManager : MonoBehaviour
         //remains to be determined
     }
 
+    public void AssignTarget()
+    {
+        //eventSystemManager.target = 
+    }
+
     #endregion
 }
