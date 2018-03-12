@@ -23,27 +23,37 @@ public class PlayerCharacter : Character
 
 	public override void BeginTurn()
 	{
-
+		Debug.Log ("Player " + name + " begins thier turn.");
+		if (combatState == CombatState.DISABLED || combatState == CombatState.DEAD) 
+		{
+			Debug.Log("Player " + name + " cannont act this turn");
+			combatManager.NextTurn ();
+		}
 	}
 
-	public void Skill1()
+	public void SkillOne()
 	{
-        combatState = CombatState.ABILITYUSE;
+		combatState = CombatState.USEABILITY;
 
-        //TODO wait for call from announcer before going to next turn
+		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
+		combatState = CombatState.ABLE;
+		combatManager.NextTurn();
+	}
+	public void SkillTwo()
+	{
+		combatState = CombatState.USEABILITY;
 
+		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
+		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
 	}
-	public void Skill2()
+	public void SkillThree()
 	{
+		combatState = CombatState.USEABILITY;
+
+		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
+		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
-	}
-	public void Skill3()
-	{
-		combatManager.NextTurn();
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
 	}
 
 	private EnemyCharacter RandEnemyTarget()

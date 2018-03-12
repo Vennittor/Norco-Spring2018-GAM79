@@ -16,7 +16,7 @@ public abstract class Announcer {
 	// Use Skill
 	public static void UseSkill(string attackerName, string targetName, string skillName, string attackText) {
 		Debug.Log(attackerName + " used " + skillName + " on " + targetName + "!");
-		Debug.Log(attackText);
+		Debug.Log("Skill Text: " + attackText);
 	}
 
 	// Use Item

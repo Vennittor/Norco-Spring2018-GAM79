@@ -7,46 +7,83 @@ public class UIManager : MonoBehaviour
 {
     #region Variables
     public CombatManager combatManager;
+    public EventSystemManager eventSystemManager;
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
-    #endregion   
+
+    public delegate void MyDelegate();
+    MyDelegate myDelegate;
+
+    public float infoDelayTime = 0.5f;
+
+    public enum ActiveState { NORMAL, TARGETING }
+    public ActiveState state;
+    #endregion
+
 
     #region Functions
-    void Start ()
+    public void Start ()
     {
         combatManager = CombatManager.Instance;
     }
 
-	void Update()
+    public void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.Alpha1))
 		{
-			OutputAttack_01 (); //Scott, James thinks this can be done in a different way 
+			OutputAttackOne (); 
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha2))
 		{
-			OutputAttack_02 ();
+			OutputAttackTwo ();
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha3))
 		{
-			OutputAttack_03 ();
+			OutputAttackThree ();
 		}
 	}
-	
-    public void OutputAttack_01()
+
+    public void OutputAttackOne()
     {
-		(combatManager.activeCharacter as PlayerCharacter).Skill1();
+        if(state == ActiveState.NORMAL)
+        {
+            (combatManager.activeCharacter as PlayerCharacter).SkillOne();
+            SetMode_Targeting();
+        }
     }
 
-    public void OutputAttack_02()
+	public void OutputAttackTwo()
     {
-        (combatManager.activeCharacter as PlayerCharacter).Skill2();  
+        if (state == ActiveState.NORMAL)
+        {
+            (combatManager.activeCharacter as PlayerCharacter).SkillTwo();
+            SetMode_Targeting();
+        }
     }
 
-    public void OutputAttack_03()
+	public void OutputAttackThree()
     {
-		(combatManager.activeCharacter as PlayerCharacter).Skill3(); 
+        if (state == ActiveState.NORMAL)
+        {
+            (combatManager.activeCharacter as PlayerCharacter).SkillThree();
+            SetMode_Targeting();
+        }
     }
-		
+
+    public void SetMode_Normal() 
+    {
+        state = ActiveState.NORMAL; 
+    }
+
+    public void SetMode_Targeting()
+    {
+        state = ActiveState.TARGETING;
+    }
+
+    public void CallBack()
+    {
+        //remains to be determined
+    }
+
     #endregion
 }
