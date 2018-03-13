@@ -7,17 +7,27 @@ public class UIManager : MonoBehaviour
 {
     #region Variables
     public CombatManager combatManager;
+    public EventSystemManager eventSystemManager;
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
-    #endregion   
+
+    public delegate void MyDelegate();
+    MyDelegate myDelegate;
+
+    public float infoDelayTime = 0.5f;
+
+    public enum ActiveState { NORMAL, TARGETING }
+    public ActiveState state;
+    #endregion
+
 
     #region Functions
-    void Start ()
+    public void Start ()
     {
         combatManager = CombatManager.Instance;
     }
 
-	void Update()
+    public void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.Alpha1))
 		{
@@ -32,20 +42,53 @@ public class UIManager : MonoBehaviour
 			OutputAttackThree ();
 		}
 	}
-	
-	public void OutputAttackOne()
+
+    public void OutputAttackOne()
     {
-		(combatManager.activeCharacter as PlayerCharacter).SkillOne();
+        if(state == ActiveState.NORMAL)
+        {
+            (combatManager.activeCharacter as PlayerCharacter).SkillOne();
+            SetMode_Targeting();
+        }
     }
 
 	public void OutputAttackTwo()
     {
-		(combatManager.activeCharacter as PlayerCharacter).SkillTwo();  
+        if (state == ActiveState.NORMAL)
+        {
+            (combatManager.activeCharacter as PlayerCharacter).SkillTwo();
+            SetMode_Targeting();
+        }
     }
 
 	public void OutputAttackThree()
     {
-		(combatManager.activeCharacter as PlayerCharacter).SkillThree(); 
+        if (state == ActiveState.NORMAL)
+        {
+            (combatManager.activeCharacter as PlayerCharacter).SkillThree();
+            SetMode_Targeting();
+        }
     }
+
+    public void SetMode_Normal() 
+    {
+        state = ActiveState.NORMAL; 
+    }
+
+    public void SetMode_Targeting()
+    {
+        state = ActiveState.TARGETING;
+    }
+
+    public void CallBack()
+    {
+        //remains to be determined
+    }
+
+    public void AssignTarget()
+    {
+        //eventSystemManager.target = 
+    }
+
     #endregion
 }
