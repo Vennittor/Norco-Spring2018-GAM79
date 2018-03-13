@@ -101,10 +101,19 @@ public class CombatManager : MonoBehaviour
 	//Anything that needs to be handled at the end of the round, should be placed in this function.
 	void EndRound()
 	{
+        //Checks and adjustments to heat should be in seperate function (called here)
         //increase heat by set amount to characters (if combat is in a heat zone)
-        
-		//TEST to keep things going until proper EndCombat checks are in place.
-		StartRound();
+        //check if group is in a heat zone before entering combat (passed to here from game manager, not implemented yet)
+        if (activeCharacter.GetComponent<PlayerCharacter>().heatState == PlayerCharacter.HeatZone.InHeat)
+        {
+            foreach (Character player in activePlayers)
+            {
+                player.currentHeat += 10; //or whatever value gets settled on, just picked 10 for easy math //use heat level of current heat zone
+                Debug.Log(player.currentHeat + " < this is the current heat");
+            }
+        }
+        //TEST to keep things going until proper EndCombat checks are in place.
+        StartRound();
 	}
 
 	//This ends combat, cleanup, return level/field movement, and handling player victory/defeat should be performed or started here

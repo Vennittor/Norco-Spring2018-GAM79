@@ -91,6 +91,6 @@ public class PlayerCharacter : Character
 
     public void SetHeatRate(int heat)
     {
-        heatIntensity += heat;        
+        heatIntensity += heat;
     }
 }
