@@ -12,6 +12,7 @@ public class Ability : ScriptableObject {
     //public Sprite image; // for effects
 
     // COMBATANT DATA
+    public string targetable;
 	public string attackerName;
 	public string targetName {
         get {
@@ -54,6 +55,11 @@ public class Ability : ScriptableObject {
             }
         return false;
         }
+    }
+
+    public List<Character> GetTargets()
+    {
+        return targets;
     }
 
     public void ReadyAbility(string attackerName) {

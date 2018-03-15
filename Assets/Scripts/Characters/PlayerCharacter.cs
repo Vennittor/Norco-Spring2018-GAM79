@@ -6,10 +6,12 @@ public class PlayerCharacter : Character
 {
     public HeatZone heatState;
     public int heatIntensity;
+    private EventSystemManager eventManager;
 
     private new void Start()
     {
         base.Start();
+        eventManager = EventSystemManager.eventInstance;
         //heatState = HeatZone.OutofHeat;
         // TODO set up ability attachments
     }
@@ -21,7 +23,7 @@ public class PlayerCharacter : Character
 
 	public override void BeginTurn()
 	{
-		Debug.Log ("Player " + name + " begins thier turn.");
+		Debug.Log ("Player " + name + " begins their turn.");
 		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED) 
 		{
 			Debug.Log("Player " + name + " cannont act this turn");
@@ -31,17 +33,21 @@ public class PlayerCharacter : Character
 
 	public void SkillOne()
 	{
-		combatState = CombatState.USEABILITY;
-
 		//Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
-        if(abilities[1].Usable) { // if cooldown can start, do rest  of Ability
-            abilities[1].ReadyAbility(name); // pass in Character name, gets target(s)
-            abilities[1].UseAbility(); // uses ability on target(s)
+
+        if(abilities[1].Usable) {           // if cooldown can start, do rest  of Ability
+            combatState = CombatState.USEABILITY;
+            List<Character> targets = abilities[1].GetTargets();
+            eventManager.AcceptTargets(targets);     // feed targetting info to ESM
+
+            //          abilities[1].ReadyAbility(name); // pass in Character name, gets target(s)
+            //          abilities[1].UseAbility(); // uses ability on target(s)
+            combatState = CombatState.ABLE;
         }
 
-		combatState = CombatState.ABLE;
-		combatManager.NextTurn();
-	}
+        
+        //combatManager.NextTurn();
+    }
 	public void SkillTwo()
 	{
 		combatState = CombatState.USEABILITY;
