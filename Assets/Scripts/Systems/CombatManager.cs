@@ -101,6 +101,8 @@ public class CombatManager : MonoBehaviour
 	//Anything that needs to be handled at the end of the round, should be placed in this function.
 	void EndRound()
 	{
+        //increase heat by set amount to characters (if combat is in a heat zone)
+        
 		//TEST to keep things going until proper EndCombat checks are in place.
 		StartRound();
 	}
