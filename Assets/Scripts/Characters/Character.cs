@@ -80,8 +80,8 @@ public class Character : MonoBehaviour
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));
         if (currentHeat == maxHeat)
         {
-            //lose a turn;
-            //heat -100;
+            EndTurn();
+            currentHeat = maxHeat - 100; //or whatever we settle on the value for 1 bar is
         }
     }
 

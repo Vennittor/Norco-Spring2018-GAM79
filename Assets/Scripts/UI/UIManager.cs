@@ -41,7 +41,12 @@ public class UIManager : MonoBehaviour
 		{
 			OutputAttackThree ();
 		}
-	}
+        //Water use(Robert)
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            OutputWaterUse();
+        }
+    }
 
     public void OutputAttackOne()
     {
@@ -69,6 +74,16 @@ public class UIManager : MonoBehaviour
             SetMode_Targeting();
         }
     }
+
+    //water use (Robert)
+    public void OutputWaterUse()
+    {
+        if (state == ActiveState.NORMAL)
+        {
+            (combatManager.activeCharacter as PlayerCharacter).SkillWater();
+        }
+    }
+
 
     public void SetMode_Normal() 
     {

@@ -58,6 +58,15 @@ public class PlayerCharacter : Character
 		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
 	}
+    //Use water (Robert)
+    public void SkillWater()
+    {
+        combatState = CombatState.USEABILITY;
+        Announcer.UseAbility(name, name, "water", "gotta hydrate my dude");
+        
+        combatState = CombatState.ABLE;
+        combatManager.NextTurn();
+    }
 
 	private EnemyCharacter RandEnemyTarget()
     {
@@ -91,6 +100,6 @@ public class PlayerCharacter : Character
 
     public void SetHeatRate(int heat)
     {
-        heatIntensity += heat;        
+        heatIntensity += heat;
     }
 }
