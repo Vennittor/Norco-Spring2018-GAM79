@@ -57,6 +57,7 @@ public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         foreach (Character character in targets)
         {
+            // check if "sometargetvariable" == "one" or "all"
             character.GetComponent<Renderer>().material.color = Color.red;
         }
         

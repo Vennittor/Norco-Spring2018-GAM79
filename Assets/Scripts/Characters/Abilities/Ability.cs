@@ -6,28 +6,33 @@ using UnityEngine;
 public class Ability : ScriptableObject {
     
 	// DESCRIPTIVE DATA
-    public string abilityName;
-    public string attackText;
-    public string description;
+    [SerializeField] private string abilityName;
+    [SerializeField] private string description;
+    [SerializeField] private string attackText;
+    public Target target;
     //public Sprite image; // for effects
 
     // COMBATANT DATA
-    public string targetable;
-	public string attackerName;
+    [SerializeField] private string attackerName;
 	public string targetName {
-        get {
-            if(targets.Count == 1) {
+        get
+        {
+            if (targets.Count == 1)
+            {
                 return targets[0].name;
             }
-            else if(targets.Count > 1) {
+            else if (targets.Count > 1)
+            {
                 string targetString = targets[0].name + ", "; // first target name
-                for(int i = 1; i < targets.Count - 1; i++) {
+                for (int i = 1; i < targets.Count - 1; i++)
+                {
                     targetString += targets[i].name + ", "; // every target name between first and last
                 }
                 targetString += ", and " + targets[targets.Count]; // last target name
                 return targetString; // Example: "EnemyA, EnemyB, and EnemyC"
             }
-            else {
+            else
+            {
                 return "Error: 0 targets!";
             }
         }
@@ -63,7 +68,8 @@ public class Ability : ScriptableObject {
     }
 
     public void ReadyAbility(string attackerName) {
-        if(Usable) {
+        if (Usable)
+        {
             this.attackerName = attackerName;
 
             // get all target(s) info - transfer control to UI:
@@ -74,12 +80,16 @@ public class Ability : ScriptableObject {
         }
     }
 
-    public void UseAbility() {
-        foreach(Character target in targets) { // Target all applicable targets
-            foreach(DamageType damage in damageTypes) { // Deal all types of Damage in List
+    public void UseAbility()
+    {
+        foreach (Character target in targets)  // Target all applicable targets
+        { 
+            foreach (DamageType damage in damageTypes)  // Deal all types of Damage in List
+            { 
                 // target.TakeDamage() -- with damage
             } 
-            foreach(Status status in statuses) { // Apply all Status affects
+            foreach (Status status in statuses)  // Apply all Status affects
+            { 
                 target.ApplyStatus(status); // pass all Status effects to target Character
             } 
         }
