@@ -9,7 +9,7 @@ public class CombatManager : MonoBehaviour
 
     public enum ActiveState { ACTIVE, INACTIVE }
 
-    public List<Character> characters;
+	[SerializeField] private List<Character> characters;
     public Character activeCharacter;
     public List<Character> currentRoundCharacters;
     public List<PlayerCharacter> activePlayers;
@@ -17,7 +17,7 @@ public class CombatManager : MonoBehaviour
     public List<EnemyCharacter> activeEnemies;
     //public List<EnemyCharacter> inactiveEnemies;
 
-    public uint roundCounter;
+	public uint roundCounter = 0;
 
 
     public static CombatManager Instance
@@ -31,6 +31,22 @@ public class CombatManager : MonoBehaviour
             return combatInstance;
         }
     }
+
+	public List<Character> charactersInCombat 
+	{
+		get{ return characters; }
+
+		set
+		{
+			characters.Clear ();
+			characters.AddRange (value); 
+		}
+	}
+
+	public void AddCharactersToCombat(List<Character> charactersToAdd)
+	{
+		characters.AddRange (charactersToAdd);
+	}
 
     void Awake()
     {
@@ -66,10 +82,6 @@ public class CombatManager : MonoBehaviour
     void Update()
     {
         //TEST
-        if (Input.GetButtonDown("Jump"))
-        {
-            NextTurn();
-        }
         if (Input.GetKeyDown(KeyCode.S))
         {
             activeCharacter.TakeDamage(4);
@@ -90,16 +102,17 @@ public class CombatManager : MonoBehaviour
 		}
 	}
 
-	//Anything that needs to be handled at the start of the round should be placed in this function.
-	void StartRound()
+
+	void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
 	{	Debug.Log ("New Round!");
 		roundCounter++;
 		//Check time left on status effects
 		//Check cooldowns on Abilities
 		SortRoundQueue();
 	}
-	//Anything that needs to be handled at the end of the round, should be placed in this function.
-	void EndRound()
+
+	void EndRound()								//Anything that needs to be handled at the end of the round, should be placed in this function.
+
 	{
         //Checks and adjustments to heat should be in seperate function (called here)
         //increase heat by set amount to characters (if combat is in a heat zone)

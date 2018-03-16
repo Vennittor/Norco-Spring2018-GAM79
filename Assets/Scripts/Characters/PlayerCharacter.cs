@@ -79,7 +79,7 @@ public class PlayerCharacter : Character
 	private EnemyCharacter RandEnemyTarget()
     {
         List<EnemyCharacter> enemies = new List<EnemyCharacter>();
-		foreach(Character character in combatManager.characters)
+		foreach(Character character in combatManager.charactersInCombat)
         {
 			if (character is EnemyCharacter) 
 			{
