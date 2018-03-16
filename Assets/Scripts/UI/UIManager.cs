@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
     public List<Character> targets;
+    [SerializeField] private Ability ability;
 
     public delegate void MyDelegate();
     MyDelegate myDelegate;
@@ -51,44 +52,63 @@ public class UIManager : MonoBehaviour
     public void Start ()
     {
         combatManager = CombatManager.Instance;
+        eventSystemManager = EventSystemManager.Instance;
     }
 
     public void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.Alpha1))
-		{
-			OutputAttackOne (); 
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha2))
-		{
-			OutputAttackTwo ();
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha3))
-		{
-			OutputAttackThree ();
-		}
-        //Water use(Robert)
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetMouseButtonDown(0))
         {
-            OutputWaterUse();
+            if(state == ActiveState.TARGETING)
+            {
+                if(targets.Count > 0)
+                {
+                    ability.SetTargets(targets);
+                    ability.UseAbility();
+                    state = ActiveState.NORMAL;
+                    TurnWhite();
+                }
+            }
         }
     }
 
-    public void OutputAttackOne()
+    public void OutputAttackOne() // Ability1 , Basic Attack
     {
         if(state == ActiveState.NORMAL)
         {
-            (combatManager.activeCharacter as PlayerCharacter).SkillOne();
-            SetMode_Targeting();
+            ability = (combatManager.activeCharacter as PlayerCharacter).SkillOne();
+            if(ability == null)
+            {
+                Debug.Log("UIManager: OutputAttackOne(): ERROR");
+            }
+            else // working
+            {
+                if (ability.Usable)
+                {
+                    SetMode_Targeting();
+                    eventSystemManager.AcceptTargetType(ability.targetType);
+                }
+            }
         }
     }
 
-	public void OutputAttackTwo()
+	public void OutputAttackTwo() // Ability2, Skill1
     {
         if (state == ActiveState.NORMAL)
         {
-            (combatManager.activeCharacter as PlayerCharacter).SkillTwo();
-            SetMode_Targeting();
+            ability = (combatManager.activeCharacter as PlayerCharacter).SkillTwo();
+            if (ability == null)
+            {
+                Debug.Log("UIManager: OutputAttackOne(): ERROR");
+            }
+            else // working
+            {
+                if (ability.Usable)
+                {
+                    SetMode_Targeting();
+                    eventSystemManager.AcceptTargetType(ability.targetType);
+                }
+            }
         }
     }
 
@@ -96,8 +116,19 @@ public class UIManager : MonoBehaviour
     {
         if (state == ActiveState.NORMAL)
         {
-            (combatManager.activeCharacter as PlayerCharacter).SkillThree();
-            SetMode_Targeting();
+            ability = (combatManager.activeCharacter as PlayerCharacter).SkillThree();
+            if (ability == null)
+            {
+                Debug.Log("UIManager: OutputAttackOne(): ERROR");
+            }
+            else // working
+            {
+                if (ability.Usable)
+                {
+                    SetMode_Targeting();
+                    eventSystemManager.AcceptTargetType(ability.targetType);
+                }
+            }
         }
     }
 
@@ -131,20 +162,25 @@ public class UIManager : MonoBehaviour
         //eventSystemManager.target = 
     }
 
-    public void TurnRed()
+    public void TurnRed(List<Character> targets) // highlight in Red on Mouse-over
     {
-        foreach (Character character in targets)
+        foreach(Character target in targets)
         {
-            // check if "sometargetvariable" == "one" or "all"
-            character.transform.GetComponent<Renderer>().material.color = Color.red;
+            target.transform.GetComponentInChildren<SpriteRenderer>().material.color = Color.red;
+            if (!this.targets.Contains(target))
+            {
+                this.targets.Add(target);
+            }
         }
+
     }
 
-    public void TurnWhite()
+    public void TurnWhite() // de-highlight red, return to white after not moused-over
     {
-        foreach (Character character in targets)
+        foreach (Character character in combatManager.characters)
         {
-            character.transform.GetComponent<Renderer>().material.color = Color.white;
+            character.transform.GetComponentInChildren<SpriteRenderer>().material.color = Color.white;
+            targets.Clear();
         }
     }
 

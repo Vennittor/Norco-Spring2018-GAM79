@@ -16,6 +16,10 @@ public class PlayerCharacter : Character
         uIManager = UIManager.Instance;
         //heatState = HeatZone.OutofHeat;
         // TODO set up ability attachments
+        foreach(Ability ability in abilities)
+        {
+            ability.EquipAbility(this);
+        }
     }
 
     void Update()
@@ -33,39 +37,45 @@ public class PlayerCharacter : Character
 		}
 	}
 
-	public void SkillOne()
-	{
-		//Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
-
-        if(abilities[1].Usable) {           // if cooldown can start, do rest  of Ability
-            combatState = CombatState.USEABILITY;
-			activeAbility = abilities [1];
-            //set target state to targetting
-
-            //          abilities[1].ReadyAbility(name); // pass in Character name, gets target(s)
-            //          abilities[1].UseAbility(); // uses ability on target(s)
-            //combatState = CombatState.ABLE;
-        }
-
-        
-        //combatManager.NextTurn();
+    public void AbilityComplete()
+    {
+        combatState = CombatState.ABLE;
+        EndTurn();
     }
-	public void SkillTwo()
-	{
-		combatState = CombatState.USEABILITY;
 
-		Announcer.UseAbility(name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
-		combatState = CombatState.ABLE;
-		combatManager.NextTurn();
-	}
-	public void SkillThree()
-	{
-		combatState = CombatState.USEABILITY;
+    public Ability SkillOne() // Basic Attack
+    {
+        if (abilities[0].Usable)
+        {           // if cooldown can start, do rest  of Ability
+            combatState = CombatState.USEABILITY;
 
-		Announcer.UseAbility(name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
-		combatState = CombatState.ABLE;
-		combatManager.NextTurn();
-	}
+            // In Ability
+            return abilities[0];
+        }
+        return null;
+    }
+	public Ability SkillTwo()
+	{
+        if (abilities[1].Usable)
+        {           // if cooldown can start, do rest  of Ability
+            combatState = CombatState.USEABILITY;
+
+            // In Ability
+            return abilities[1];
+        }
+        return null;
+    }
+	public Ability SkillThree()
+	{
+        if (abilities[2].Usable)
+        {           // if cooldown can start, do rest  of Ability
+            combatState = CombatState.USEABILITY;
+
+            // In Ability
+            return abilities[2];
+        }
+        return null;
+    }
     //Use water (Robert)
     public void SkillWater()
     {
