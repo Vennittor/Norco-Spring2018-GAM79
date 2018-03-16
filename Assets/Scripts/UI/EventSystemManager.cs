@@ -9,7 +9,7 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
 	#region Variables
 	public EventSystem eventSystem;
     //public CombatManager combatManager;
-    //private static EventSystemManager eventInstance;
+    private static EventSystemManager eventInstance;
     public UIManager uIManager;
     public CombatManager combatManager;
 
@@ -17,34 +17,36 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
 
     public TargetType targetType;
 
+    private Character history;
+
     //public List<Character> targets; //tie in to combat system
 
     #endregion
 
     #region Functions
-    //public static EventSystemManager Instance
-    //{
-    //    get
-    //    {
-    //        if (eventInstance == null)
-    //        {
-    //            eventInstance = new EventSystemManager();
-    //        }
-    //        return eventInstance;
-    //    }
-    //}
+    public static EventSystemManager Instance
+    {
+        get
+        {
+            if (eventInstance == null)
+            {
+                eventInstance = new EventSystemManager();
+            }
+            return eventInstance;
+        }
+    }
 
-    //void Awake()
-    //{
-    //    if (eventInstance != null && eventInstance != this)
-    //    {
-    //        Destroy(gameObject);
-    //        return;
-    //    }
+    void Awake()
+    {
+        if (eventInstance != null && eventInstance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-    //    eventInstance = this;
-    //    DontDestroyOnLoad(gameObject);
-    //}
+        eventInstance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void Start()
     {
@@ -67,10 +69,15 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
             if (Physics.Raycast(ray, out hitInfo))
             {
                 Character input = hitInfo.transform.gameObject.GetComponent<Character>();
+                if (input != history)
+                {
+                    uIManager.TurnWhite();
+                }
+                history = hitInfo.transform.gameObject.GetComponent<Character>();
                 List<Character> outputs = new List<Character>();
                 Debug.Log(hitInfo.transform.gameObject.name);
-                Debug.Log("TargetType:" + TargetType.Who.SELF);
-                if (input is PlayerCharacter && targetType.who == TargetType.Who.SELF) // if targeting SELF
+                Debug.Log("TargetType:" + targetType.who);
+                if (input == combatManager.activeCharacter && targetType.who == TargetType.Who.SELF) // if targeting SELF
                 {
                     outputs.Add(input);
                     uIManager.TurnRed(outputs); //target type, how many

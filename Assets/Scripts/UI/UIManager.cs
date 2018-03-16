@@ -52,6 +52,7 @@ public class UIManager : MonoBehaviour
     public void Start ()
     {
         combatManager = CombatManager.Instance;
+        eventSystemManager = EventSystemManager.Instance;
         targetable = new List<Character>();
     }
 
@@ -136,7 +137,7 @@ public class UIManager : MonoBehaviour
 
     public void TurnWhite()
     {
-        foreach (Character character in targets)
+        foreach (Character character in combatManager.characters)
         {
             character.transform.GetComponentInChildren<SpriteRenderer>().material.color = Color.white;
         }

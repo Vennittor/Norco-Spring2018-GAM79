@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4555918166417948}
-  - component: {fileID: 114261232101448830}
   - component: {fileID: 65577312748828854}
+  - component: {fileID: 114708998290825076}
   m_Layer: 0
   m_Name: Scorpion
   m_TagString: Untagged
@@ -83,7 +83,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.19, y: 7.71, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114261232101448830
+--- !u!114 &114708998290825076
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1080691790273724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
+  m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   abilities: []
@@ -106,8 +106,6 @@ MonoBehaviour:
   defense: 0
   accuracy: 84.5
   evade: 10
-  heatState: 0
-  heatIntensity: 0
 --- !u!212 &212925360986431464
 SpriteRenderer:
   m_ObjectHideFlags: 1
