@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
 
     public CombatManager combatManager;
 
+    public GameObject playerParty;
+
     public static LevelManager Instance
     {
         get
@@ -51,10 +53,24 @@ public class LevelManager : MonoBehaviour
             combatManager.AddCharactersToCombat(enemy.partyMembers);
 
             combatManager.StartCombat();
+
+            //remove control from LevelManagement and Player.
+            //TODO this is blunt force, change later to proper disable of control
+            playerParty.gameObject.GetComponent<KeysToMove>().enabled = false;
+            playerParty.gameObject.GetComponent<Collider>().enabled = false;
         }
         else
         {
             Debug.LogError("CombatManger is currently running combat, collision and Initiate Combat calls should no longer be called.");
         }
+    }
+
+    public void ReturnFromCombat()
+    {
+        //return control to Level and Player Party
+        //TODO dirty blutn force change to better
+        playerParty.gameObject.GetComponent<KeysToMove>().enabled = true;
+        playerParty.gameObject.GetComponent<Collider>().enabled = true;
+
     }
 }

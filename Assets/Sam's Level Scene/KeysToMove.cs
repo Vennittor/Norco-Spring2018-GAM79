@@ -18,6 +18,10 @@ public class KeysToMove : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         //This causes the agent to not rotate whatsoever when moving
         agent.angularSpeed = 0;
+
+        //TEST
+        LevelManager levMan = LevelManager.Instance;
+        levMan.playerParty = this.gameObject;
     }
 
     void Update ()
