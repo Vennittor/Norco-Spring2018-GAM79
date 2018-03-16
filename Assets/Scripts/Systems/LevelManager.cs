@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    private static LevelManager _instance;
+    public static LevelManager _instance;
 
     public CombatManager combatManager;
 
@@ -20,7 +20,18 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void Start ()
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this;
+    }
+
+    void Start()
     {
         combatManager = CombatManager.Instance;
 	}

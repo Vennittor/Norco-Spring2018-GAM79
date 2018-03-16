@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
-    private static CombatManager combatInstance;
+    public static CombatManager combatInstance;
     private static Announcer announcer;
 
 	public bool inCombat = false;
