@@ -136,7 +136,7 @@ public class UIManager : MonoBehaviour
         foreach (Character character in targets)
         {
             // check if "sometargetvariable" == "one" or "all"
-            character.transform.GetComponentInChildren<Renderer>().material.color = Color.red;
+            character.GetComponent<Renderer>().material.color = Color.red;
         }
     }
 
@@ -144,7 +144,7 @@ public class UIManager : MonoBehaviour
     {
         foreach (Character character in targets)
         {
-            character.transform.GetComponentInChildren<Renderer>().material.color = Color.white;
+            character.GetComponent<Renderer>().material.color = Color.white;
         }
     }
 
