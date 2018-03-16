@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     public EventSystemManager eventSystemManager;
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
+    public List<Character> targetable;
     public List<Character> targets;
 
     public delegate void MyDelegate();
@@ -51,39 +52,32 @@ public class UIManager : MonoBehaviour
     public void Start ()
     {
         combatManager = CombatManager.Instance;
+        targetable = new List<Character>();
     }
 
     public void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.Alpha1))
-		{
-			OutputAttackOne (); 
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha2))
-		{
-			OutputAttackTwo ();
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha3))
-		{
-			OutputAttackThree ();
-		}
-        //Water use(Robert)
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            OutputWaterUse();
-        }
+		
     }
 
-    public void OutputAttackOne()
+    public void OutputAttackOne() // Ability1 , Basic Attack
     {
         if(state == ActiveState.NORMAL)
         {
-            (combatManager.activeCharacter as PlayerCharacter).SkillOne();
-            SetMode_Targeting();
+            TargetType targetType = (combatManager.activeCharacter as PlayerCharacter).SkillOne();
+            if(targetType == null)
+            {
+                Debug.Log("UIManager: OutputAttackOne(): ERROR");
+            }
+            else // working
+            {
+                SetMode_Targeting();
+                eventSystemManager.AcceptTargetType(targetType);
+            }
         }
     }
 
-	public void OutputAttackTwo()
+	public void OutputAttackTwo() // Ability2, Skill1
     {
         if (state == ActiveState.NORMAL)
         {
@@ -131,13 +125,13 @@ public class UIManager : MonoBehaviour
         //eventSystemManager.target = 
     }
 
-    public void TurnRed()
+    public void TurnRed(List<Character> targets) // TurnRed(targets)
     {
-        foreach (Character character in targets)
+        foreach(Character target in targets)
         {
-            // check if "sometargetvariable" == "one" or "all"
-            character.transform.GetComponentInChildren<SpriteRenderer>().material.color = Color.red;
+            target.transform.GetComponentInChildren<SpriteRenderer>().material.color = Color.red;
         }
+
     }
 
     public void TurnWhite()

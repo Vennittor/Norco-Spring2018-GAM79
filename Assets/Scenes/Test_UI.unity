@@ -1007,8 +1007,8 @@ MonoBehaviour:
   eventSystemManager: {fileID: 0}
   playerCharacter: {fileID: 0}
   enemyCharacter: {fileID: 0}
-  targets:
-  - {fileID: 1427955939}
+  targetable: []
+  targets: []
   infoDelayTime: 0.5
   state: 0
 --- !u!114 &435705479
@@ -3798,12 +3798,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
---- !u!114 &1427955939 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114261232101448830, guid: 4f44c5bed3c02204ea339c1990b54d2b,
-    type: 2}
-  m_PrefabInternal: {fileID: 1217999421}
-  m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
 --- !u!1 &1446316038
 GameObject:
   m_ObjectHideFlags: 0
@@ -5026,6 +5020,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4385083063734628, guid: ba7c84a3507490c4aa014e4d63def311, type: 2}
       propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114067328271822216, guid: ba7c84a3507490c4aa014e4d63def311,
+        type: 2}
+      propertyPath: abilities.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 00ed88802774a2d49a63ea322162b7bb,
+        type: 2}
+    - target: {fileID: 114067328271822216, guid: ba7c84a3507490c4aa014e4d63def311,
+        type: 2}
+      propertyPath: speed
       value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []

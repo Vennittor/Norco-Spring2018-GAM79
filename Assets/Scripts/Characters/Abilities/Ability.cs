@@ -22,11 +22,12 @@ public class Ability : ScriptableObject
 	[SerializeField] private uint cooldownTimer = 0;
 
 	public Character characterUser;
-	[SerializeField] private List<Character> targets = new List<Character>();
 
-	// EFFECTS DATA
-	//public Sprite image; // for effects
-	//Animators & Parameters
+    [SerializeField] private List<Character> targets = new List<Character>();
+
+    // EFFECTS DATA
+    //public Sprite image; // for effects
+    //Animators & Parameters
 
     //Water Related(Robert)
     [SerializeField] private int waterUses = 3;
