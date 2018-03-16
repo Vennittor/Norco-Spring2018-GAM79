@@ -12,6 +12,8 @@ public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerE
     //private static EventSystemManager eventInstance;
     public UIManager uIManager;
 
+    public Camera main;
+
     //public List<Character> targets; //tie in to combat system
 
     #endregion
@@ -55,16 +57,31 @@ public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     void FixedUpdate()
     {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        Vector3 rayVector = ray.direction - ray.origin;
+
+        Color debugColor = Color.blue;
+
         if (uIManager.state == UIManager.ActiveState.TARGETING)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            debugColor = Color.green;
+
             if (Physics.Raycast(ray))
             {
                 uIManager.TurnRed();
+                
+                print("hit");
+            }
 
+            else
+            {
+                uIManager.TurnWhite();
             }
 
         }
+
+        Debug.DrawRay(ray.origin, ray.direction, debugColor);
 
     }
 

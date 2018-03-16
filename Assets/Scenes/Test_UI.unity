@@ -1008,7 +1008,7 @@ MonoBehaviour:
   playerCharacter: {fileID: 0}
   enemyCharacter: {fileID: 0}
   targets:
-  - {fileID: 0}
+  - {fileID: 1427955939}
   infoDelayTime: 0.5
   state: 0
 --- !u!114 &435705479
@@ -2632,6 +2632,11 @@ Prefab:
       propertyPath: uIManager
       value: 
       objectReference: {fileID: 435705478}
+    - target: {fileID: 114438369798567288, guid: bb650d242390811419f90d03056379f9,
+        type: 2}
+      propertyPath: main
+      value: 
+      objectReference: {fileID: 1676338926}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb650d242390811419f90d03056379f9, type: 2}
   m_IsPrefabParent: 0
@@ -3793,6 +3798,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
+--- !u!114 &1427955939 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114261232101448830, guid: 4f44c5bed3c02204ea339c1990b54d2b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1217999421}
+  m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
 --- !u!1 &1446316038
 GameObject:
   m_ObjectHideFlags: 0
@@ -4639,6 +4650,7 @@ GameObject:
   - component: {fileID: 1676338924}
   - component: {fileID: 1676338923}
   - component: {fileID: 1676338928}
+  - component: {fileID: 1676338929}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4725,6 +4737,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1690312454, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1676338929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1676338922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -768656878, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_EventMask:
@@ -4965,9 +4991,14 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114067328271822216, guid: ba7c84a3507490c4aa014e4d63def311,
+        type: 2}
+      propertyPath: abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4385083063734628, guid: ba7c84a3507490c4aa014e4d63def311, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.5480881
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 4385083063734628, guid: ba7c84a3507490c4aa014e4d63def311, type: 2}
       propertyPath: m_LocalPosition.y
