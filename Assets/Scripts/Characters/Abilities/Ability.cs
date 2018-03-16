@@ -25,7 +25,7 @@ public class Ability : ScriptableObject {
     // targets (single, multiple, ally)
     [SerializeField] private List<Character> targets = new List<Character>();
 
-	[SerializeField] private List<Damage> damageRanges = new List<Vector2>();
+	[SerializeField] private List<Damage> damageRanges = new List<Damage>();
 
     // damage types? Incorporate this into a damage type Class
     [SerializeField] private List<Damage> damageTypes;
