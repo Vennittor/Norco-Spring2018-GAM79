@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
+    public HeatZone heatState;
+    public int heatIntensity;
+    private UIManager uIManager;
 
     private new void Start()
     {
         base.Start();
+        uIManager = UIManager.Instance;
+        //heatState = HeatZone.OutofHeat;
+        // TODO set up ability attachments
     }
 
     void Update()
@@ -17,25 +23,56 @@ public class PlayerCharacter : Character
 
 	public override void BeginTurn()
 	{
-
+		Debug.Log ("Player " + name + " begins their turn.");
+		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED) 
+		{
+			Debug.Log("Player " + name + " cannont act this turn");
+			combatManager.NextTurn ();
+		}
 	}
 
-	public void Skill1()
+	public void SkillOne()
 	{
-		//Announcer.UseSkill(this, RandEnemy(), 1, "Placeholder Attack message 1.");
-		combatManager.NextTurn();
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
-	}
-	public void Skill2()
+		//Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
+
+        if(abilities[1].Usable) {           // if cooldown can start, do rest  of Ability
+            combatState = CombatState.USEABILITY;
+
+            //set target state to targetting
+
+            //          abilities[1].ReadyAbility(name); // pass in Character name, gets target(s)
+            //          abilities[1].UseAbility(); // uses ability on target(s)
+            //combatState = CombatState.ABLE;
+        }
+
+        
+        //combatManager.NextTurn();
+    }
+	public void SkillTwo()
 	{
+		combatState = CombatState.USEABILITY;
+
+		Announcer.UseAbility(name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
+		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
 	}
-	public void Skill3()
+	public void SkillThree()
 	{
+		combatState = CombatState.USEABILITY;
+
+		Announcer.UseAbility(name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
+		combatState = CombatState.ABLE;
 		combatManager.NextTurn();
-		Announcer.UseSkill(this.name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
 	}
+    //Use water (Robert)
+    public void SkillWater()
+    {
+        combatState = CombatState.USEABILITY;
+        Announcer.UseAbility(name, name, "water", "gotta hydrate my dude");
+        
+        combatState = CombatState.ABLE;
+        combatManager.NextTurn();
+    }
 
 	private EnemyCharacter RandEnemyTarget()
     {
@@ -49,5 +86,26 @@ public class PlayerCharacter : Character
         }
         EnemyCharacter enemyCharacter = enemies[Random.Range(0, enemies.Count)];
         return enemyCharacter;
+    }
+
+    /*public void EnterHeat()
+    {
+        heatState = HeatZone.InHeat;
+    }
+
+    public void ExitHeat()
+    {
+        heatState = HeatZone.OutofHeat;
+    }*/
+
+    public enum HeatZone
+    {
+        OutofHeat,
+        InHeat
+    }
+
+    public void SetHeatRate(int heat)
+    {
+        heatIntensity += heat;
     }
 }
