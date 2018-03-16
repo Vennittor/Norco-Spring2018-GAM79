@@ -1007,8 +1007,8 @@ MonoBehaviour:
   eventSystemManager: {fileID: 0}
   playerCharacter: {fileID: 0}
   enemyCharacter: {fileID: 0}
-  targetable: []
   targets: []
+  ability: {fileID: 0}
   infoDelayTime: 0.5
   state: 0
 --- !u!114 &435705479
@@ -3288,7 +3288,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4555918166417948, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 9.37
+      value: 4.7
       objectReference: {fileID: 0}
     - target: {fileID: 4555918166417948, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3562,6 +3562,67 @@ Prefab:
       objectReference: {fileID: 435705478}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bfabb4c0143fd934bbb3485f3208ba74, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1350537078
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4555918166417948, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 13.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555918166417948, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555918166417948, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 16.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555918166417948, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555918166417948, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555918166417948, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555918166417948, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555918166417948, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080691790273724, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
+      propertyPath: m_Name
+      value: Scorpion (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114708998290825076, guid: 4f44c5bed3c02204ea339c1990b54d2b,
+        type: 2}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114708998290825076, guid: 4f44c5bed3c02204ea339c1990b54d2b,
+        type: 2}
+      propertyPath: maxhealth
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 114708998290825076, guid: 4f44c5bed3c02204ea339c1990b54d2b,
+        type: 2}
+      propertyPath: currentHealth
+      value: 40
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4f44c5bed3c02204ea339c1990b54d2b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1372714461
 GameObject:
@@ -4985,14 +5046,9 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114067328271822216, guid: ba7c84a3507490c4aa014e4d63def311,
-        type: 2}
-      propertyPath: abilities.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4385083063734628, guid: ba7c84a3507490c4aa014e4d63def311, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.9
+      value: -10.6
       objectReference: {fileID: 0}
     - target: {fileID: 4385083063734628, guid: ba7c84a3507490c4aa014e4d63def311, type: 2}
       propertyPath: m_LocalPosition.y
@@ -5020,17 +5076,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4385083063734628, guid: ba7c84a3507490c4aa014e4d63def311, type: 2}
       propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114067328271822216, guid: ba7c84a3507490c4aa014e4d63def311,
-        type: 2}
-      propertyPath: abilities.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 00ed88802774a2d49a63ea322162b7bb,
-        type: 2}
-    - target: {fileID: 114067328271822216, guid: ba7c84a3507490c4aa014e4d63def311,
-        type: 2}
-      propertyPath: speed
       value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []

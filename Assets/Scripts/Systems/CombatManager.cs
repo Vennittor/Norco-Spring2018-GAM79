@@ -104,12 +104,15 @@ public class CombatManager : MonoBehaviour
         //Checks and adjustments to heat should be in seperate function (called here)
         //increase heat by set amount to characters (if combat is in a heat zone)
         //check if group is in a heat zone before entering combat (passed to here from game manager, not implemented yet)
-        if (activeCharacter.GetComponent<PlayerCharacter>().heatState == PlayerCharacter.HeatZone.InHeat)
+        if (activeCharacter is PlayerCharacter)
         {
-            foreach (Character player in activePlayers)
+            if ((activeCharacter as PlayerCharacter).heatState == PlayerCharacter.HeatZone.InHeat)
             {
-                player.currentHeat += 10; //or whatever value gets settled on, just picked 10 for easy math //use heat level of current heat zone
-                Debug.Log(player.currentHeat + " < this is the current heat");
+                foreach (Character player in activePlayers)
+                {
+                    player.currentHeat += 10; //or whatever value gets settled on, just picked 10 for easy math //use heat level of current heat zone
+                    Debug.Log(player.currentHeat + " < this is the current heat");
+                }
             }
         }
         //TEST to keep things going until proper EndCombat checks are in place.

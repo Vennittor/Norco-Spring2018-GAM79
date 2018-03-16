@@ -35,43 +35,45 @@ public class PlayerCharacter : Character
 		}
 	}
 
-	public Ability SkillOne() // Basic Attack
-	{
-		//Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
+    public void AbilityComplete()
+    {
+        combatState = CombatState.ABLE;
+        EndTurn();
+    }
 
-        if(abilities[0].Usable) {           // if cooldown can start, do rest  of Ability
+    public Ability SkillOne() // Basic Attack
+    {
+        if (abilities[0].Usable)
+        {           // if cooldown can start, do rest  of Ability
             combatState = CombatState.USEABILITY;
 
             // In Ability
             return abilities[0];
-
-            //set target state to targetting
-
-                      //abilities[1].ReadyAbility(name); // pass in Character name, gets target(s)
-            //          abilities[1].UseAbility(); // uses ability on target(s)
-            //combatState = CombatState.ABLE;
         }
         return null;
-
-        
-        //combatManager.NextTurn();
     }
-	public void SkillTwo()
+	public Ability SkillTwo()
 	{
-		combatState = CombatState.USEABILITY;
+        if (abilities[1].Usable)
+        {           // if cooldown can start, do rest  of Ability
+            combatState = CombatState.USEABILITY;
 
-		Announcer.UseAbility(name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
-		combatState = CombatState.ABLE;
-		combatManager.NextTurn();
-	}
-	public void SkillThree()
+            // In Ability
+            return abilities[1];
+        }
+        return null;
+    }
+	public Ability SkillThree()
 	{
-		combatState = CombatState.USEABILITY;
+        if (abilities[2].Usable)
+        {           // if cooldown can start, do rest  of Ability
+            combatState = CombatState.USEABILITY;
 
-		Announcer.UseAbility(name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
-		combatState = CombatState.ABLE;
-		combatManager.NextTurn();
-	}
+            // In Ability
+            return abilities[2];
+        }
+        return null;
+    }
     //Use water (Robert)
     public void SkillWater()
     {

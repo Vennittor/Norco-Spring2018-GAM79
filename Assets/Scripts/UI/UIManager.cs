@@ -59,16 +59,14 @@ public class UIManager : MonoBehaviour
 	{
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("LMB");
             if(state == ActiveState.TARGETING)
             {
-                Debug.Log("state targeting");
-                //Debug.Log("targets.Count: " + targets.Count);
                 if(targets.Count > 0)
                 {
                     ability.SetTargets(targets);
                     ability.UseAbility();
-                    // Call function in Ability that would accept target info and start using Ability
+                    state = ActiveState.NORMAL;
+                    TurnWhite();
                 }
             }
         }
@@ -85,8 +83,11 @@ public class UIManager : MonoBehaviour
             }
             else // working
             {
-                SetMode_Targeting();
-                eventSystemManager.AcceptTargetType(ability.targetType);
+                if (ability.Usable)
+                {
+                    SetMode_Targeting();
+                    eventSystemManager.AcceptTargetType(ability.targetType);
+                }
             }
         }
     }
@@ -95,8 +96,19 @@ public class UIManager : MonoBehaviour
     {
         if (state == ActiveState.NORMAL)
         {
-            (combatManager.activeCharacter as PlayerCharacter).SkillTwo();
-            SetMode_Targeting();
+            ability = (combatManager.activeCharacter as PlayerCharacter).SkillTwo();
+            if (ability == null)
+            {
+                Debug.Log("UIManager: OutputAttackOne(): ERROR");
+            }
+            else // working
+            {
+                if (ability.Usable)
+                {
+                    SetMode_Targeting();
+                    eventSystemManager.AcceptTargetType(ability.targetType);
+                }
+            }
         }
     }
 
@@ -104,8 +116,19 @@ public class UIManager : MonoBehaviour
     {
         if (state == ActiveState.NORMAL)
         {
-            (combatManager.activeCharacter as PlayerCharacter).SkillThree();
-            SetMode_Targeting();
+            ability = (combatManager.activeCharacter as PlayerCharacter).SkillThree();
+            if (ability == null)
+            {
+                Debug.Log("UIManager: OutputAttackOne(): ERROR");
+            }
+            else // working
+            {
+                if (ability.Usable)
+                {
+                    SetMode_Targeting();
+                    eventSystemManager.AcceptTargetType(ability.targetType);
+                }
+            }
         }
     }
 

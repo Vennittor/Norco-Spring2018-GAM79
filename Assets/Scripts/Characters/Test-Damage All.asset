@@ -9,21 +9,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa4c18fc4b5b743408b8eb69d212b657, type: 3}
-  m_Name: New Ability
+  m_Name: Test-Damage All
   m_EditorClassIdentifier: 
-  abilityName: Skill1
+  abilityName: Test-Damage All
   description: 
   callOutText: 
   targetType:
-    _who: 0
+    _who: 3
     _formation: 0
     _numberOfTargets: 1
-  damage: []
+  damage:
+  - damageRanges:
+    - {x: 2, y: 5}
+    - {x: 7, y: 8}
+    elementType: 0
   statuses: []
   numberOfActions: 1
   cooldown: 0
   cooldownTimer: 0
   characterUser: {fileID: 0}
-  targets:
-  - {fileID: 0}
+  targets: []
   waterUses: 3

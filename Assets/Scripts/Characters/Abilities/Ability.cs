@@ -53,15 +53,22 @@ public class Ability : ScriptableObject
 			}
 			else if (targets.Count > 1)
 			{
-				string targetString = targets[0].name + ", "; // first target name
-				for (int i = 1; i < targets.Count - 1; i++)
-				{
-					targetString += targets[i].name + ", "; // every target name between first and last
-				}
-				targetString += ", and " + targets[targets.Count]; // last target name
-				return targetString; // Example: "EnemyA, EnemyB, and EnemyC"
-			}
-			else
+                //string targetstring = targets[0].name + ", "; // first target name
+                //for (int i = 1; i < targets.Count - 1; i++)
+                //{
+                //    targetstring += targets[i].name + ", "; // every target name between first and last
+                //}
+                //targetstring += ", and " + targets[targets.Count].name; // last target name
+                //return targetstring; // example: "enemya, enemyb, and enemyc"
+
+                string targetString = "";
+                foreach (Character character in targets)
+                {
+                    targetString += character.name + " ";
+                }
+                return targetString;
+            }
+            else
 			{
 				return "Error: 0 targets!";
 			}
@@ -93,24 +100,23 @@ public class Ability : ScriptableObject
 		characterUser = playerUser as Character;
 	}
 
-	public void StartAbility()
-	{
+    public void StartAbility()
+    {
         if (Usable)
         {
-			//enter ready animation
+            //enter ready animation
             // transfer control to UI for targeting:
-				// tell it the TargetType (single, multiple; allies, opponents, everyone)
-				//THis is compared against the class of the caller (Player or Enemy) to determine who are allies and who are enemies
-                // Perform target selection with UI targeting mode
+            // tell it the TargetType (single, multiple; allies, opponents, everyone)
+            //THis is compared against the class of the caller (Player or Enemy) to determine who are allies and who are enemies
+            // Perform target selection with UI targeting mode
             // Return target(s) info to teh caller Ability from UI Manager
             // *after this function* -> UseAbility(); // Ability resolves with target(s)
-			// call back to character that used Ability, tell them Ability has been used.
+            // call back to character that used Ability, tell them Ability has been used.
         }
     }
 
     public void UseAbility()
     {
-        Debug.Log(targets);
 		if (targets.Count == 0) 
 		{
 			Debug.LogWarning ("There are no targets for Abiility " + this.name);
@@ -141,12 +147,12 @@ public class Ability : ScriptableObject
 	{
 		if (actionsUsed < numberOfActions)
 		{
-			StartAbility ();
+			//StartAbility ();
 		}
 		else
 		{
 			StartCooldown();
-			//tell characterUser Ability is complete
+            (characterUser as PlayerCharacter).AbilityComplete();
 		}
 	}
 

@@ -95,7 +95,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - {fileID: 11400000, guid: 00ed88802774a2d49a63ea322162b7bb, type: 2}
+  - {fileID: 11400000, guid: 1061199b3a8c00f4cacba1583a90de7d, type: 2}
+  - {fileID: 11400000, guid: 5f8eeebe0028af54fb2a368452e5ff59, type: 2}
+  - {fileID: 11400000, guid: 56b8a8ed7ef885d4e8b4d8f552b5fc3e, type: 2}
   statuses: []
   combatState: 0
   name: 
