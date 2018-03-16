@@ -53,6 +53,21 @@ public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerE
         print("no hit");
     }
 
+    void FixedUpdate()
+    {
+        if (uIManager.state == UIManager.ActiveState.TARGETING)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray))
+            {
+                uIManager.TurnRed();
+
+            }
+
+        }
+
+    }
+
     //public void TurnRed()
     //{
     //    foreach (Character character in targets)
@@ -60,7 +75,7 @@ public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerE
     //        // check if "sometargetvariable" == "one" or "all"
     //        character.GetComponent<Renderer>().material.color = Color.red;
     //    }
-        
+
     //}
 
     //public void TurnWhite()
