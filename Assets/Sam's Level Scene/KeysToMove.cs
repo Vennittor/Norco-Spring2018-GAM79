@@ -38,19 +38,12 @@ public class KeysToMove : MonoBehaviour
             Instantiate(interactionPrefab, transform.position + Vector3.right * (facingRight ? 1 : -1), Quaternion.identity);
         }
 
-        if(agent.velocity != Vector3.zero)
-        {
-            print("im walkin");
-        }
-
         if (agent.velocity.x > 0)
         {
-            print("right");
             facingRight = true;
         }
         else if(agent.velocity.x < 0)
         {
-            print("left");
             facingRight = false;
         }
 	}
