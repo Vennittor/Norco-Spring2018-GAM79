@@ -56,18 +56,20 @@ public class Party : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        
         if (collision.gameObject.tag != "Enemy") //TODO change the way we check for this
         {
             return;
         }
         else if (collision.gameObject.GetComponent<Party>().type == PartyType.ENEMY)
         {
+            Debug.Log("mom hes touching me");
             List<Character> enemies = new List<Character>();
             Party enemyParty = collision.gameObject.GetComponent<Party>();
 
             levelMan.InitiateCombat(this, enemyParty);
 
-            Debug.Log("mom hes touching me");
+            
         }
     }
 }
