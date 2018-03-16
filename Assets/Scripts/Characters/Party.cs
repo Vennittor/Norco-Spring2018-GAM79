@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Party : MonoBehaviour
 {
+    private LevelManager levelMan;
+
     public HeatZone heatState;
     public List<Character> partyMembers;
     public PartyType type = PartyType.ENEMY;
@@ -21,7 +23,9 @@ public class Party : MonoBehaviour
 
     void Start()
     {
-        if(type == PartyType.PLAYER)
+        levelMan = LevelManager.Instance;
+
+        if (type == PartyType.PLAYER)
         {
             for (int i = partyMembers.Count-1; i > 0; i--)
             {
@@ -59,8 +63,9 @@ public class Party : MonoBehaviour
         else if (collision.gameObject.GetComponent<Party>().type == PartyType.ENEMY)
         {
             List<Character> enemies = new List<Character>();
-            Party otherParty = collision.gameObject.GetComponent<Party>();
-            enemies.AddRange(otherParty.partyMembers);
+            Party enemyParty = collision.gameObject.GetComponent<Party>();
+
+            levelMan.InitiateCombat(this, enemyParty);
 
             Debug.Log("mom hes touching me");
         }
