@@ -44,10 +44,17 @@ public class LevelManager : MonoBehaviour
 
     public void InitiateCombat(Party player, Party enemy)
     {
-        Debug.Log("init Combat");
-        combatManager.AddCharactersToCombat(player.partyMembers);
-        combatManager.AddCharactersToCombat(enemy.partyMembers);
 
-        combatManager.StartCombat();
+        if(!combatManager.inCombat)
+        {
+            combatManager.AddCharactersToCombat(player.partyMembers);
+            combatManager.AddCharactersToCombat(enemy.partyMembers);
+
+            combatManager.StartCombat();
+        }
+        else
+        {
+            Debug.LogError("CombatManger is currently running combat, collision and Initiate Combat calls should no longer be called.");
+        }
     }
 }
