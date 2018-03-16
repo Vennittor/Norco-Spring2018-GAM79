@@ -65,14 +65,14 @@ public class CombatManager : MonoBehaviour
         currentRoundCharacters = new List<Character>();
         activePlayers = new List<PlayerCharacter>();
         activeEnemies = new List<EnemyCharacter>();
-        //TEST
-        if (characters.Count == 0)
-        {
-            Debug.LogWarning("characters List is empty, finding all Characters in scene");
-            characters.AddRange(FindObjectsOfType<Character>());
-        }
-		//TEST StartCombat() should be called by either the GameManger, an Event, or encountering an enemy.
-		//StartCombat();
+        ////TEST
+        //if (characters.Count == 0)
+        //{
+        //    Debug.LogWarning("characters List is empty, finding all Characters in scene");
+        //    characters.AddRange(FindObjectsOfType<Character>());
+        //}
+        //TEST StartCombat() should be called by either the GameManger, an Event, or encountering an enemy.
+        //StartCombat();
     }
 
     void Update()
