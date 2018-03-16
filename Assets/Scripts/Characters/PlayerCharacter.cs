@@ -14,6 +14,10 @@ public class PlayerCharacter : Character
         uIManager = UIManager.Instance;
         //heatState = HeatZone.OutofHeat;
         // TODO set up ability attachments
+        foreach(Ability ability in abilities)
+        {
+            ability.EquipAbility(this);
+        }
     }
 
     void Update()
@@ -31,7 +35,7 @@ public class PlayerCharacter : Character
 		}
 	}
 
-	public TargetType SkillOne() // Basic Attack
+	public Ability SkillOne() // Basic Attack
 	{
 		//Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
 
@@ -39,7 +43,7 @@ public class PlayerCharacter : Character
             combatState = CombatState.USEABILITY;
 
             // In Ability
-            return abilities[0].targetType;
+            return abilities[0];
 
             //set target state to targetting
 

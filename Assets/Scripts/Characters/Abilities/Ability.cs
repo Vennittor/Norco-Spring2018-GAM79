@@ -110,6 +110,7 @@ public class Ability : ScriptableObject
 
     public void UseAbility()
     {
+        Debug.Log(targets);
 		if (targets.Count == 0) 
 		{
 			Debug.LogWarning ("There are no targets for Abiility " + this.name);
@@ -152,7 +153,7 @@ public class Ability : ScriptableObject
     public void AnnounceAbility() 
 	{
         //TODO This will need more logic to determine which Announcer message to call based on the properties of the Ability
-		Announcer.UseAbility(characterUser.name, targetName, abilityName, callOutText);
+		Announcer.UseAbility(characterUser.gameObject.name, targetName, abilityName, callOutText);
     }
 
     //for water ability(robert)

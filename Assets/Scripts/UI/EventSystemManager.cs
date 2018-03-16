@@ -75,8 +75,8 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
                 }
                 history = hitInfo.transform.gameObject.GetComponent<Character>();
                 List<Character> outputs = new List<Character>();
-                Debug.Log(hitInfo.transform.gameObject.name);
-                Debug.Log("TargetType:" + targetType.who);
+                //Debug.Log(hitInfo.transform.gameObject.name);
+                //Debug.Log("TargetType:" + targetType.who);
                 if (input == combatManager.activeCharacter && targetType.who == TargetType.Who.SELF) // if targeting SELF
                 {
                     outputs.Add(input);
