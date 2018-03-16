@@ -4,15 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
 {
 	#region Variables
 	public EventSystem eventSystem;
     //public CombatManager combatManager;
     //private static EventSystemManager eventInstance;
     public UIManager uIManager;
+    public CombatManager combatManager;
 
     public Camera main;
+
+    public TargetType targetType;
 
     //public List<Character> targets; //tie in to combat system
 
@@ -43,16 +46,9 @@ public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerE
     //    DontDestroyOnLoad(gameObject);
     //}
 
-    public void OnPointerEnter(PointerEventData eventData)
+    private void Start()
     {
-        uIManager.TurnRed();
-        print("hit");
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        uIManager.TurnWhite();
-        print("no hit");
+        combatManager = CombatManager.Instance;
     }
 
     void FixedUpdate()
@@ -63,15 +59,69 @@ public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerE
 
         Color debugColor = Color.blue;
 
+        RaycastHit hitInfo;
         if (uIManager.state == UIManager.ActiveState.TARGETING)
         {
             debugColor = Color.green;
 
-            if (Physics.Raycast(ray))
+            if (Physics.Raycast(ray, out hitInfo))
             {
-                uIManager.TurnRed();
-                
-                print("hit");
+                Character input = hitInfo.transform.gameObject.GetComponent<Character>();
+                List<Character> outputs = new List<Character>();
+                Debug.Log(hitInfo.transform.gameObject.name);
+                Debug.Log("TargetType:" + TargetType.Who.SELF);
+                if (input is PlayerCharacter && targetType.who == TargetType.Who.SELF) // if targeting SELF
+                {
+                    outputs.Add(input);
+                    uIManager.TurnRed(outputs); //target type, how many
+                    debugColor = Color.red;
+
+                }
+                else if (input is PlayerCharacter && targetType.who == TargetType.Who.ALLY) // if selecting ALLY
+                {
+                    if (targetType.formation == TargetType.Formation.SINGLE) // target ALLY
+                    {
+                        outputs.Add(input);
+                        uIManager.TurnRed(outputs); //target type, how many
+                    }
+                    else if(targetType.formation == TargetType.Formation.GROUP) // target ALLIES
+                    {
+                        //outputs = combatManager.activePlayers;
+                        foreach(PlayerCharacter player in combatManager.activePlayers)
+                        {
+                            outputs.Add(player as Character);
+                        }
+                        uIManager.TurnRed(outputs); //target type, how many
+                    }
+                }
+                else if(input is EnemyCharacter && targetType.who == TargetType.Who.OPPONENT) // if selecting OPPONENT
+                {
+                    if (targetType.formation == TargetType.Formation.SINGLE) // target OPPONENT
+                    {
+                        outputs.Add(input);
+                        uIManager.TurnRed(outputs); //target type, how many
+                    }
+                    else if (targetType.formation == TargetType.Formation.GROUP) // target OPPONENTS
+                    {
+                        foreach (EnemyCharacter enemy in combatManager.activeEnemies)
+                        {
+                            outputs.Add(enemy as Character);
+                        }
+                        uIManager.TurnRed(outputs); //target type, how many
+                    }
+                }
+                else if((input is PlayerCharacter || input is EnemyCharacter) && targetType.who == TargetType.Who.EVERYONE) // if selecting EVERYONE (may be redundant)
+                {
+                    foreach (PlayerCharacter player in combatManager.activePlayers)
+                    {
+                        outputs.Add(player as Character);
+                    }
+                    foreach (EnemyCharacter enemy in combatManager.activeEnemies)
+                    {
+                        outputs.Add(enemy as Character);
+                    }
+                    uIManager.TurnRed(outputs); //target type, how many
+                }
             }
 
             else
@@ -85,29 +135,11 @@ public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     }
 
-    //public void TurnRed()
-    //{
-    //    foreach (Character character in targets)
-    //    {
-    //        // check if "sometargetvariable" == "one" or "all"
-    //        character.GetComponent<Renderer>().material.color = Color.red;
-    //    }
+    public void AcceptTargetType(TargetType targetType)
+    {
+        this.targetType = targetType;
+    }
 
-    //}
-
-    //public void TurnWhite()
-    //{
-    //    foreach (Character character in targets)
-    //    {
-    //        character.GetComponent<Renderer>().material.color = Color.white;
-    //    }
-    //}
-
-    //public void AcceptTargets(List<Character> targets)
-    //{
-    //    this.targets = targets;
-    //    uIManager.SetMode_Targeting();
-    //}
     #endregion
 
 }

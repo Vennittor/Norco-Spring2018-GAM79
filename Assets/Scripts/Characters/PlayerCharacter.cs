@@ -31,19 +31,23 @@ public class PlayerCharacter : Character
 		}
 	}
 
-	public void SkillOne()
+	public TargetType SkillOne() // Basic Attack
 	{
 		//Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
 
-        if(abilities[1].Usable) {           // if cooldown can start, do rest  of Ability
+        if(abilities[0].Usable) {           // if cooldown can start, do rest  of Ability
             combatState = CombatState.USEABILITY;
+
+            // In Ability
+            return abilities[0].targetType;
 
             //set target state to targetting
 
-            //          abilities[1].ReadyAbility(name); // pass in Character name, gets target(s)
+                      //abilities[1].ReadyAbility(name); // pass in Character name, gets target(s)
             //          abilities[1].UseAbility(); // uses ability on target(s)
             //combatState = CombatState.ABLE;
         }
+        return null;
 
         
         //combatManager.NextTurn();

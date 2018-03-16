@@ -7,19 +7,38 @@ public class TargetType
 {
     public enum Who
     {
+        SELF,
         ALLY,
         OPPONENT,
-        SELF,
         EVERYONE
     }
 
+    public enum Formation
+    {
+        SINGLE,
+        GROUP
+    }
+
 	[SerializeField] private Who _who = Who.OPPONENT;
+    [SerializeField] private Formation _formation = Formation.SINGLE;
+
 	[SerializeField] private int _numberOfTargets = 1;
 
     public Who who
 	{
-		get { return _who; }
+		get
+        {
+            return _who;
+        }
 	}
+
+    public Formation formation
+    {
+        get
+        {
+            return _formation;
+        }
+    }
 
 	public int numberOfTargets 
 	{
