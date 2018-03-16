@@ -9,8 +9,6 @@ public class Damage
 
 	[SerializeField] private DamageType elementType = DamageType.PHYSICAL;
 
-
-
 	public DamageType element
 	{
 		get 
@@ -25,18 +23,14 @@ public class Damage
 
 		foreach (Vector2 damageRange in damageRanges) 
 		{
-			if (damageRange == null) 
-			{
-				Debug.LogError ("undeclared value in damageRanges");
-				continue;
-			}
-
 			if (damageRange.x > damageRange.y) 
 			{
-				damageRange = new Vector2 (damageRange.y, damageRange.x);
+				totalDamage += Random.Range ((int)damageRange.y, (int)damageRange.x + 1);
+			} 
+			else 
+			{
+				totalDamage += Random.Range ((int)damageRange.x, (int)damageRange.y + 1);
 			}
-
-			totalDamage += Random.Range ((int)damageRange.x, (int)damageRange.y + 1);
 		}
 
 		return totalDamage;
@@ -50,12 +44,6 @@ public class Damage
 
 			foreach (Vector2 damageRange in damageRanges) 
 			{
-				if (damageRange == null) 
-				{
-					Debug.LogError ("undeclared value in damageRanges");
-					continue;
-				}
-
 				totalMinDamage += (int)damageRange.x;
 			}
 
@@ -70,12 +58,6 @@ public class Damage
 
 		foreach (Vector2 damageRange in damageRanges) 
 		{
-			if (damageRange == null) 
-			{
-				Debug.LogError ("undeclared value in damageRanges");
-				continue;
-			}
-
 			totalMaxDamage += (int)damageRange.y;
 		}
 

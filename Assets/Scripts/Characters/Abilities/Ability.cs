@@ -25,10 +25,7 @@ public class Ability : ScriptableObject {
     // targets (single, multiple, ally)
     [SerializeField] private List<Character> targets = new List<Character>();
 
-    [SerializeField] private List<Vector2> damageRanges = new List<Vector2>();
-
-    // damage types? Incorporate this into a damage type Class
-    [SerializeField] private List<Damage> damageTypes;
+	[SerializeField] private List<Damage> damage = new List<Damage>();
 
     // list types of effects (statuses)
     [SerializeField] private List<Status> statuses;
@@ -93,7 +90,7 @@ public class Ability : ScriptableObject {
     {
         foreach (Character target in targets)					// Target all applicable targets
         { 
-            foreach (Damage damage in damageTypes)			// Deal all types of Damage in List
+			foreach (Damage range in damage)//TODO change to use new Damage class properties				// Deal all types of Damage in List
             { 
                 // target.TakeDamage() -- with damage
             } 
