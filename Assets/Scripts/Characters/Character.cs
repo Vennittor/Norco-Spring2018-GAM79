@@ -63,27 +63,52 @@ public class Character : MonoBehaviour
 		}
 	}
 
-    public void TakeDamage(uint damage = 0)
+	public void TakeDamage(uint damage = 0, DamageType damageType = DamageType.PHYSICAL)
     {
-        damage -= defense;
-        if (damage >= 1)
-        {
-            currentHealth -= (uint)Mathf.Clamp(damage, 0, currentHealth);
-            if (currentHealth == 0)
-            {
-                Faint();
-            }
-        }
+		if (damageType == DamageType.PHYSICAL)
+		{
+			DealPhysicalDamage (damage);
+		}
+		else if(damageType == DamageType.HEAT)
+		{
+			DealHeatDamage (damage);
+		}
+		else if(damageType == DamageType.POISON)
+		{
+			DealPoisonDamage (damage);
+		}
     }
-    public void TakeHeatDamage(uint heatDamage = 0)
+
+	void DealPhysicalDamage(uint physicalDamage = 0)
+	{
+		physicalDamage -= defense;
+		if (physicalDamage >= 1)
+		{
+			currentHealth -= (uint)Mathf.Clamp(physicalDamage, 0, currentHealth);
+			if (currentHealth == 0)
+			{
+				Faint();
+			}
+		}
+
+	}
+
+    void DealHeatDamage(uint heatDamage = 0)
     {
-        currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));
+        currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
         if (currentHeat == maxHeat)
         {
             EndTurn();
             currentHeat = maxHeat - 100; //or whatever we settle on the value for 1 bar is
         }
     }
+
+	void DealPoisonDamage(uint poisonDamage)
+	{
+		//reduce poisonDamage here.
+		DealPhysicalDamage (poisonDamage);
+		Debug.Log ("Poison Damage is not currently implemented, Physical damage was deal instead.");
+	}
 
     public void ApplyStatus(Status status) { // Tandy: added this to work with Ability
         if(statuses.Contains(status) == false) { // if not already affected by Status
