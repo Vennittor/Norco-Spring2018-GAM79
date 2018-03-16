@@ -7,9 +7,9 @@ public class LevelManager : MonoBehaviour
     public static LevelManager _instance;
 
     public CombatManager combatManager;
+
     public Canvas combatUI;
     public Canvas levelUI;
-
 
     public GameObject playerParty;
 
@@ -39,6 +39,8 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         combatManager = CombatManager.Instance;
+
+        combatUI.gameObject.SetActive(false);
 	}
 	
 
@@ -61,6 +63,9 @@ public class LevelManager : MonoBehaviour
             //TODO this is blunt force, change later to proper disable of control
             playerParty.gameObject.GetComponent<KeysToMove>().enabled = false;
             playerParty.gameObject.GetComponent<Collider>().enabled = false;
+
+            combatUI.gameObject.SetActive(true);
+            //levelUI.gameObject.SetActive(false);
         }
         else
         {
@@ -74,6 +79,9 @@ public class LevelManager : MonoBehaviour
         //TODO dirty blutn force change to better
         playerParty.gameObject.GetComponent<KeysToMove>().enabled = true;
         playerParty.gameObject.GetComponent<Collider>().enabled = true;
+
+        combatUI.gameObject.SetActive(false);
+        //levelUI.gameObject.SetActive(true);
 
     }
 }

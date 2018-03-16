@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 217785314}
   - component: {fileID: 217785313}
   m_Layer: 0
-  m_Name: L:evel Manager
+  m_Name: Level Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,6 +220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatManager: {fileID: 0}
+  combatUI: {fileID: 821642633}
+  levelUI: {fileID: 0}
   playerParty: {fileID: 0}
 --- !u!4 &217785314
 Transform:
@@ -627,9 +629,18 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1831643141162578, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
+      propertyPath: m_Name
+      value: Combat UI Canvas
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
   m_IsPrefabParent: 0
+--- !u!223 &821642633 stripped
+Canvas:
+  m_PrefabParentObject: {fileID: 223481081065036012, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
+    type: 2}
+  m_PrefabInternal: {fileID: 821642632}
 --- !u!1 &985501907
 GameObject:
   m_ObjectHideFlags: 0
