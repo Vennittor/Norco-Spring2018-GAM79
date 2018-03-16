@@ -36,6 +36,9 @@ public class Ability : ScriptableObject {
     [SerializeField] private int cooldown;
     [SerializeField] private int cooldownTimer = 0;
 
+    //Water Related(Robert)
+    [SerializeField] private int waterUses = 3;
+
     // targets (single, multiple, ally)
     [SerializeField] private List<Character> targets = new List<Character>();
 
@@ -95,5 +98,18 @@ public class Ability : ScriptableObject {
     public void AnnounceAbility(string attackerName, string targetName, string skillName, string attackText) {
         // Tandy: This just announces that it occurs (how much damage, and who it targets)
         Announcer.UseAbility(attackerName, targetName, skillName, attackText);
+    }
+
+    //for water ability(robert)
+    public void UseWater()
+    {
+        if (waterUses > 0)
+        {
+            waterUses--;
+        }
+        else if (waterUses == 0)
+        {
+            Debug.Log("you have no water");
+        }
     }
 }
