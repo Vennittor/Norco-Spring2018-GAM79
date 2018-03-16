@@ -9,34 +9,11 @@ public class Ability : ScriptableObject {
     [SerializeField] private string abilityName;
     [SerializeField] private string description;
     [SerializeField] private string attackText;
-    public Target target;
+	public TargetType targetType;
     //public Sprite image; // for effects
 
     // COMBATANT DATA
     [SerializeField] private string attackerName;
-	public string targetName {
-        get
-        {
-            if (targets.Count == 1)
-            {
-                return targets[0].name;
-            }
-            else if (targets.Count > 1)
-            {
-                string targetString = targets[0].name + ", "; // first target name
-                for (int i = 1; i < targets.Count - 1; i++)
-                {
-                    targetString += targets[i].name + ", "; // every target name between first and last
-                }
-                targetString += ", and " + targets[targets.Count]; // last target name
-                return targetString; // Example: "EnemyA, EnemyB, and EnemyC"
-            }
-            else
-            {
-                return "Error: 0 targets!";
-            }
-        }
-    }
 
     // FUNCTIONAL DATA
     [SerializeField] private int cooldown;
@@ -51,14 +28,41 @@ public class Ability : ScriptableObject {
     [SerializeField] private List<Vector2> damageRanges = new List<Vector2>();
 
     // damage types? Incorporate this into a damage type Class
-    [SerializeField] private List<DamageType> damageTypes;
+    [SerializeField] private List<Damage> damageTypes;
 
     // list types of effects (statuses)
     [SerializeField] private List<Status> statuses;
 
-    public bool Usable {
+	public string targetName 
+	{
+		get
+		{
+			if (targets.Count == 1)
+			{
+				return targets[0].name;
+			}
+			else if (targets.Count > 1)
+			{
+				string targetString = targets[0].name + ", "; // first target name
+				for (int i = 1; i < targets.Count - 1; i++)
+				{
+					targetString += targets[i].name + ", "; // every target name between first and last
+				}
+				targetString += ", and " + targets[targets.Count]; // last target name
+				return targetString; // Example: "EnemyA, EnemyB, and EnemyC"
+			}
+			else
+			{
+				return "Error: 0 targets!";
+			}
+		}
+	}
+
+    public bool Usable 
+	{
         get {
-            if (cooldownTimer == 0) {
+            if (cooldownTimer == 0) 
+			{
                 return true;
             }
         return false;
@@ -70,49 +74,58 @@ public class Ability : ScriptableObject {
         return targets;
     }
 
-    public void ReadyAbility(string attackerName) {
+    public void ReadyAbility(string attackerName)
+	{
         if (Usable)
         {
             this.attackerName = attackerName;
 
-            // get all target(s) info - transfer control to UI:
+			//enter ready animation
+            // transfer control to UI for targeting:
                 // Switch targeting mode (single, multiple, allies, enemies, all, etc.)
                 // Perform target selection with mode
-            // Return target(s) info to Ability
+            // Return target(s) info to Ability from UIManager
             // *after this function* -> UseAbility(); // Ability resolves with target(s)
         }
     }
 
     public void UseAbility()
     {
-        foreach (Character target in targets)  // Target all applicable targets
+        foreach (Character target in targets)					// Target all applicable targets
         { 
-            foreach (DamageType damage in damageTypes)  // Deal all types of Damage in List
+            foreach (Damage damage in damageTypes)			// Deal all types of Damage in List
             { 
                 // target.TakeDamage() -- with damage
             } 
-            foreach (Status status in statuses)  // Apply all Status affects
+            foreach (Status status in statuses)					// Apply all Status affects
             { 
-                target.ApplyStatus(status); // pass all Status effects to target Character
+                target.ApplyStatus(status);						// pass all Status effects to target Character
             } 
         }
         StartCooldown();
-        AnnounceAbility(attackerName, targetName, abilityName, attackerName);
+		AnnounceAbility(attackerName, targetName, abilityName, attackerName);
     }
 
-    private void StartCooldown() {
+    private void StartCooldown() 
+	{
         cooldownTimer = cooldown;
     }
 
-    public void ProgressCooldown() {
-        // Tandy: changed from cooldownTimer == 0 just in case of error if it's negative
+    public void ProgressCooldown()
+	{
         if (cooldownTimer > 0) {
             cooldownTimer--;
         }
     }
 
-    public void AnnounceAbility(string attackerName, string targetName, string skillName, string attackText) {
-        // Tandy: This just announces that it occurs (how much damage, and who it targets)
+	public void SetTargets(List<Character> targetsToSet)
+	{
+		targets = targetsToSet;
+	}
+
+    public void AnnounceAbility(string attackerName, string targetName, string skillName, string attackText) 
+	{
+        //TODO This will need more logic to determine which Announcer message to call based on the properties of the Ability
         Announcer.UseAbility(attackerName, targetName, skillName, attackText);
     }
 
