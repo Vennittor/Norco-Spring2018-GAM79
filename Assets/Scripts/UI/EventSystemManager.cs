@@ -8,36 +8,74 @@ public class EventSystemManager : MonoBehaviour, IPointerEnterHandler, IPointerE
 {
 	#region Variables
 	public EventSystem eventSystem;
-    public CombatManager combatManager;
+    //public CombatManager combatManager;
+    //private static EventSystemManager eventInstance;
     public UIManager uIManager;
 
-    public GameObject target; //tie in to combat system
+    //public List<Character> targets; //tie in to combat system
 
     #endregion
 
     #region Functions
+    //public static EventSystemManager Instance
+    //{
+    //    get
+    //    {
+    //        if (eventInstance == null)
+    //        {
+    //            eventInstance = new EventSystemManager();
+    //        }
+    //        return eventInstance;
+    //    }
+    //}
+
+    //void Awake()
+    //{
+    //    if (eventInstance != null && eventInstance != this)
+    //    {
+    //        Destroy(gameObject);
+    //        return;
+    //    }
+
+    //    eventInstance = this;
+    //    DontDestroyOnLoad(gameObject);
+    //}
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        TurnRed();
+        uIManager.TurnRed();
         print("hit");
-
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        TurnWhite();
+        uIManager.TurnWhite();
         print("no hit");
     }
 
-    public void TurnRed()
-    {
-        target.GetComponent<Renderer>().material.color = Color.red;
-    }
+    //public void TurnRed()
+    //{
+    //    foreach (Character character in targets)
+    //    {
+    //        // check if "sometargetvariable" == "one" or "all"
+    //        character.GetComponent<Renderer>().material.color = Color.red;
+    //    }
+        
+    //}
 
-    public void TurnWhite()
-    {
-        target.GetComponent<Renderer>().material.color = Color.white;
-    }
+    //public void TurnWhite()
+    //{
+    //    foreach (Character character in targets)
+    //    {
+    //        character.GetComponent<Renderer>().material.color = Color.white;
+    //    }
+    //}
+
+    //public void AcceptTargets(List<Character> targets)
+    //{
+    //    this.targets = targets;
+    //    uIManager.SetMode_Targeting();
+    //}
     #endregion
 
 }
