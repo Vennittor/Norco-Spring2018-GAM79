@@ -37,8 +37,7 @@ public class PlayerCharacter : Character
 
         if(abilities[1].Usable) {           // if cooldown can start, do rest  of Ability
             combatState = CombatState.USEABILITY;
-            List<Character> targets = abilities[1].GetTargets();
-            uIManager.AcceptTargets(targets);     // feed targetting info to ESM
+
             //set target state to targetting
 
             //          abilities[1].ReadyAbility(name); // pass in Character name, gets target(s)

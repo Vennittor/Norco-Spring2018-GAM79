@@ -3,32 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Ability", menuName = "Ability")]
-public class Ability : ScriptableObject {
-    
+public class Ability : ScriptableObject 
+{
 	// DESCRIPTIVE DATA
     [SerializeField] private string abilityName;
     [SerializeField] private string description;
-    [SerializeField] private string attackText;
+    [SerializeField] private string callOutText;
+
+	// COMBAT DATA
 	public TargetType targetType;
-    //public Sprite image; // for effects
+	[SerializeField] private List<Damage> damage = new List<Damage>();
+	[SerializeField] private List<Status> statuses;
 
-    // COMBATANT DATA
-    public Character characterUser;
+	[SerializeField] private uint numberOfActions = 1;
+	private uint actionsUsed = 0;
 
-    // FUNCTIONAL DATA
-    [SerializeField] private int cooldown;
-    [SerializeField] private int cooldownTimer = 0;
+	[SerializeField] private uint cooldown;
+	[SerializeField] private uint cooldownTimer = 0;
+
+	public Character characterUser;
+	[SerializeField] private List<Character> targets = new List<Character>();
+
+	// EFFECTS DATA
+	//public Sprite image; // for effects
+	//Animators & Parameters
 
     //Water Related(Robert)
     [SerializeField] private int waterUses = 3;
 
-    // targets (single, multiple, ally)
-    [SerializeField] private List<Character> targets = new List<Character>();
-
-	[SerializeField] private List<Damage> damage = new List<Damage>();
-
-    // list types of effects (statuses)
-    [SerializeField] private List<Status> statuses;
+	public bool Usable 
+	{
+		get {
+			if (cooldownTimer <= 0) 
+			{
+				return true;
+			}
+			return false;
+		}
+	}
 
 	public string targetName 
 	{
@@ -55,17 +67,6 @@ public class Ability : ScriptableObject {
 		}
 	}
 
-    public bool Usable 
-	{
-        get {
-            if (cooldownTimer <= 0) 
-			{
-                return true;
-            }
-        return false;
-        }
-    }
-
 	private void StartCooldown() 
 	{
 		cooldownTimer = cooldown;
@@ -77,25 +78,21 @@ public class Ability : ScriptableObject {
 		}
 	}
 
-	public void SetTargets(List<Character> targetsToSet)
+	public void SetTargets(List<Character> targetsToSet)	
 	{
 		targets = targetsToSet;
 	}
 
-	public void ReadyAbility(EnemyCharacter enemyUser)
+	public void EquipAbility(EnemyCharacter enemyUser)		//TODO These need to be called from Character when they are intially set up.  They also register if the user is Player or Enemy
 	{
 		characterUser = enemyUser as Character;
-
-		StartAbility ();
 	}
-	public void ReadyAbility(PlayerCharacter playerUser)
+	public void EquipAbility(PlayerCharacter playerUser)
 	{
 		characterUser = playerUser as Character;
-
-		StartAbility ();
 	}
 
-	void StartAbility()
+	public void StartAbility()
 	{
         if (Usable)
         {
@@ -120,9 +117,9 @@ public class Ability : ScriptableObject {
 		{
 	        foreach (Character target in targets)					// Target all applicable targets
 	        { 
-				foreach (Damage range in damage)//TODO change to use new Damage class properties				// Deal all types of Damage in List
+				foreach (Damage range in damage)					// Deal all types of Damage in List
 	            { 
-					target.TakeDamage (range.RollDamage(), range.element);
+					target.TakeDamage ( (uint)range.RollDamage(), range.element);
 	            } 
 
 	            foreach (Status status in statuses)					// Apply all Status affects
@@ -131,21 +128,30 @@ public class Ability : ScriptableObject {
 	            } 
 	        }
 		}
-			
+
 		AnnounceAbility();
+
+		actionsUsed++;
+		EndAbility ();
     }
 
-	void StopAbility()
+	void EndAbility()
 	{
-		//check against number of uses, if there are still uses left, go back to start ability.
-		StartCooldown();
-		//tell characterUser Ability is complete
+		if (actionsUsed < numberOfActions)
+		{
+			StartAbility ();
+		}
+		else
+		{
+			StartCooldown();
+			//tell characterUser Ability is complete
+		}
 	}
 
     public void AnnounceAbility() 
 	{
         //TODO This will need more logic to determine which Announcer message to call based on the properties of the Ability
-		Announcer.UseAbility(characterUser.name, targetName, abilityName, attackText);
+		Announcer.UseAbility(characterUser.name, targetName, abilityName, callOutText);
     }
 
     //for water ability(robert)
