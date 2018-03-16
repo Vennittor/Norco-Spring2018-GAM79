@@ -8,7 +8,6 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
 {
 	#region Variables
 	public EventSystem eventSystem;
-    //public CombatManager combatManager;
     private static EventSystemManager eventInstance;
     public UIManager uIManager;
     public CombatManager combatManager;
@@ -50,6 +49,7 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
 
     private void Start()
     {
+        uIManager = UIManager.Instance;
         combatManager = CombatManager.Instance;
     }
 
@@ -119,7 +119,6 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
                 }
                 else if((input is PlayerCharacter || input is EnemyCharacter) && targetType.who == TargetType.Who.EVERYONE) // if selecting EVERYONE (may be redundant)
                 {
-                    Debug.Log("Hey, we hit it!");
                     foreach (PlayerCharacter player in combatManager.activePlayers)
                     {
                         outputs.Add(player as Character);
@@ -128,12 +127,8 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
                     {
                         outputs.Add(enemy as Character);
                     }
-                    Debug.Log(outputs);
                     uIManager.TurnRed(outputs); //target type, how many
                 }
-                Debug.Log("input" + input.name);
-                Debug.Log("targetType: " + targetType.who);
-                Debug.Log("outputs.Count: " + outputs.Count);
             }
 
             else

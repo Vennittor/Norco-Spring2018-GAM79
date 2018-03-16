@@ -177,7 +177,7 @@ public class UIManager : MonoBehaviour
 
     public void TurnWhite() // de-highlight red, return to white after not moused-over
     {
-        foreach (Character character in combatManager.characters)
+        foreach (Character character in combatManager.charactersInCombat)
         {
             character.transform.GetComponentInChildren<SpriteRenderer>().material.color = Color.white;
             targets.Clear();
