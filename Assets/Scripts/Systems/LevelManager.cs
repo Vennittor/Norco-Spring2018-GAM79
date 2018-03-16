@@ -7,6 +7,9 @@ public class LevelManager : MonoBehaviour
     public static LevelManager _instance;
 
     public CombatManager combatManager;
+    public Canvas combatUI;
+    public Canvas levelUI;
+
 
     public GameObject playerParty;
 
