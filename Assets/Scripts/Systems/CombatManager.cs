@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
-    public static CombatManager combatInstance;
+    private static CombatManager combatInstance;
     private static Announcer announcer;
 
-    public enum ActiveState { ACTIVE, INACTIVE }
+	public bool inCombat = false;
 
 	[SerializeField] private List<Character> characters;
+
     public Character activeCharacter;
+	public List<PlayerCharacter> activePlayers;
+	public List<EnemyCharacter> activeEnemies;
+
     public List<Character> currentRoundCharacters;
-    public List<PlayerCharacter> activePlayers;
-    //public List<PlayerCharacter> inactivePlayers;
-    public List<EnemyCharacter> activeEnemies;
-    //public List<EnemyCharacter> inactiveEnemies;
 
 	public uint roundCounter = 0;
 
@@ -23,11 +23,7 @@ public class CombatManager : MonoBehaviour
     public static CombatManager Instance
     {
         get
-        {
-            if (combatInstance == null)
-            {
-                combatInstance = new CombatManager();
-            }
+		{
             return combatInstance;
         }
     }
@@ -76,21 +72,30 @@ public class CombatManager : MonoBehaviour
             characters.AddRange(FindObjectsOfType<Character>());
         }
 		//TEST StartCombat() should be called by either the GameManger, an Event, or encountering an enemy.
-		StartCombat();
+		//StartCombat();
     }
 
     void Update()
     {
-        //TEST
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            activeCharacter.TakeDamage(4);
-        }
+//        //TEST
+//        if (Input.GetKeyDown(KeyCode.S))
+//        {
+//            activeCharacter.TakeDamage(4);
+//        }
     }
 
 	//
 	public void StartCombat()
 	{
+		if(!inCombat) 
+		{
+			inCombat = true;
+		}
+		else
+		{
+			return;
+		}
+
 		roundCounter = 0;
 		if (characters.Count != 0)
 		{
@@ -130,12 +135,14 @@ public class CombatManager : MonoBehaviour
 	}
 
 	//This ends combat, cleanup, return level/field movement, and handling player victory/defeat should be performed or started here
-	public void EndCombat(bool playerVictory)
+	void EndCombat(bool playerVictory)
 	{
 		if (playerVictory == true) // party wins
 		{
 			Debug.Log ("Party Wins");
-			//Return to Field/Level GameState
+
+			inCombat = false;
+			//TODO return control to LevelManager
 		}
 		else if (playerVictory == false) // party loses
 		{
@@ -144,7 +151,7 @@ public class CombatManager : MonoBehaviour
 		}
 	}
 
-    public void EnemyCheck()
+    void EnemyCheck()
     {
         if (activeCharacter is EnemyCharacter)
         {
@@ -152,7 +159,7 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void SortRoundQueue() // clears round/active characters, repopulates round from actives, sorts round
+    void SortRoundQueue() // clears round/active characters, repopulates round from actives, sorts round
     {
         activePlayers.Clear();
         foreach (Character character in characters)
@@ -230,7 +237,7 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-	public IEnumerator WaitForNextTurn()	//TEST  This is here to create a visible delay between turns.  It also prevents a lock when only enemies are acting in a round
+	IEnumerator WaitForNextTurn()	//TEST  This is here to create a visible delay between turns.  It also prevents a lock when only enemies are acting in a round
 	{
 		yield return new WaitForSeconds(0.5f);
 
