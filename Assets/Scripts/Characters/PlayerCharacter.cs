@@ -6,12 +6,12 @@ public class PlayerCharacter : Character
 {
     public HeatZone heatState;
     public int heatIntensity;
-    private EventSystemManager eventManager;
+    private UIManager uIManager;
 
     private new void Start()
     {
         base.Start();
-        eventManager = EventSystemManager.eventInstance;
+        uIManager = UIManager.Instance;
         //heatState = HeatZone.OutofHeat;
         // TODO set up ability attachments
     }
@@ -38,11 +38,12 @@ public class PlayerCharacter : Character
         if(abilities[1].Usable) {           // if cooldown can start, do rest  of Ability
             combatState = CombatState.USEABILITY;
             List<Character> targets = abilities[1].GetTargets();
-            eventManager.AcceptTargets(targets);     // feed targetting info to ESM
+            uIManager.AcceptTargets(targets);     // feed targetting info to ESM
+            //set target state to targetting
 
             //          abilities[1].ReadyAbility(name); // pass in Character name, gets target(s)
             //          abilities[1].UseAbility(); // uses ability on target(s)
-            combatState = CombatState.ABLE;
+            //combatState = CombatState.ABLE;
         }
 
         

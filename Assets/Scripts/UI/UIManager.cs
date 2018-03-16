@@ -6,10 +6,24 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     #region Variables
+    private static UIManager uIInstance;
+    public static UIManager Instance
+    {
+        get
+        {
+            if (uIInstance == null)
+            {
+                uIInstance = new UIManager();
+            }
+            return uIInstance;
+        }
+    }
+
     public CombatManager combatManager;
     public EventSystemManager eventSystemManager;
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
+    public List<Character> targets;
 
     public delegate void MyDelegate();
     MyDelegate myDelegate;
@@ -22,6 +36,18 @@ public class UIManager : MonoBehaviour
 
 
     #region Functions
+    void Awake()
+    {
+        if (uIInstance != null && uIInstance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        uIInstance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void Start ()
     {
         combatManager = CombatManager.Instance;
@@ -90,5 +116,27 @@ public class UIManager : MonoBehaviour
         //eventSystemManager.target = 
     }
 
+    public void TurnRed()
+    {
+        foreach (Character character in targets)
+        {
+            // check if "sometargetvariable" == "one" or "all"
+            character.GetComponent<Renderer>().material.color = Color.red;
+        }
+    }
+
+    public void TurnWhite()
+    {
+        foreach (Character character in targets)
+        {
+            character.GetComponent<Renderer>().material.color = Color.white;
+        }
+    }
+
+    public void AcceptTargets(List<Character> targets)
+    {
+        this.targets = targets;
+        SetMode_Targeting();
+    }
     #endregion
 }
