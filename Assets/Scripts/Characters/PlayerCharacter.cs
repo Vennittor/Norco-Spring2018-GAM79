@@ -8,6 +8,8 @@ public class PlayerCharacter : Character
     public int heatIntensity;
     private UIManager uIManager;
 
+	private Ability activeAbility = null;
+
     private new void Start()
     {
         base.Start();
@@ -37,7 +39,7 @@ public class PlayerCharacter : Character
 
         if(abilities[1].Usable) {           // if cooldown can start, do rest  of Ability
             combatState = CombatState.USEABILITY;
-
+			activeAbility = abilities [1];
             //set target state to targetting
 
             //          abilities[1].ReadyAbility(name); // pass in Character name, gets target(s)
