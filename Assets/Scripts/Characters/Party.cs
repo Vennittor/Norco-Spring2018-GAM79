@@ -64,12 +64,11 @@ public class Party : MonoBehaviour
         else if (collision.gameObject.GetComponent<Party>().type == PartyType.ENEMY)
         {
             Debug.Log("mom hes touching me");
-            List<Character> enemies = new List<Character>();
+            //List<Character> enemies = new List<Character>();
             Party enemyParty = collision.gameObject.GetComponent<Party>();
+            collision.gameObject.GetComponent<Collider>().enabled = false;
 
             levelMan.InitiateCombat(this, enemyParty);
-
-            
         }
     }
 }

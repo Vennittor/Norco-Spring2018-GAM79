@@ -6,14 +6,12 @@ public class PlayerCharacter : Character
 {
     public HeatZone heatState;
     public int heatIntensity;
-    private UIManager uIManager;
 
-	private Ability activeAbility = null;
+	//private Ability activeAbility = null;
 
     private new void Start()
     {
         base.Start();
-        uIManager = UIManager.Instance;
         //heatState = HeatZone.OutofHeat;
         // TODO set up ability attachments
         foreach(Ability ability in abilities)

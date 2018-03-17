@@ -39,11 +39,6 @@ public class CombatManager : MonoBehaviour
 		}
 	}
 
-	public void AddCharactersToCombat(List<Character> charactersToAdd)
-	{
-		characters.AddRange (charactersToAdd);
-	}
-
     void Awake()
     {
         if (combatInstance != null && combatInstance != this)
@@ -107,8 +102,12 @@ public class CombatManager : MonoBehaviour
 		}
 	}
 
+    public void AddCharactersToCombat(List<Character> charactersToAdd)
+    {
+        characters.AddRange(charactersToAdd);
+    }
 
-	void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
+    void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
 	{	Debug.Log ("New Round!");
 		roundCounter++;
 		//Check time left on status effects
@@ -137,6 +136,42 @@ public class CombatManager : MonoBehaviour
 	}
 
 	//This ends combat, cleanup, return level/field movement, and handling player victory/defeat should be performed or started here
+    public bool VictoryCheck()
+    {
+        int ablePlayers = 0;
+        foreach (Character player in characters)
+        {
+            if (player is PlayerCharacter && player.combatState != Character.CombatState.EXHAUSTED)
+            {
+                ablePlayers++;
+            }
+        }
+        int ableEnemies = 0;
+        foreach (Character enemy in characters)
+        {
+            if (enemy is EnemyCharacter && enemy.combatState != Character.CombatState.EXHAUSTED)
+            {
+                ableEnemies++;
+            }
+        }
+        if (ablePlayers == 0 && ableEnemies == 0)
+        {
+            EndCombat(false);
+            return true;
+        }
+        else if (ablePlayers == 0)
+        {
+            EndCombat(false);
+            return true;
+        }
+        else if (ableEnemies == 0)
+        {
+            EndCombat(true);
+            return true;
+        }
+        return false;
+    }
+
 	void EndCombat(bool playerVictory)
 	{
 		if (playerVictory == true) // party wins
@@ -144,12 +179,16 @@ public class CombatManager : MonoBehaviour
 			Debug.Log ("Party Wins");
 
 			inCombat = false;
-			//TODO return control to LevelManager
+            //Combat rewards?
+            LevelManager.Instance.ReturnFromCombat();
 		}
 		else if (playerVictory == false) // party loses
 		{
 			Debug.Log ("Party Loses");
-			//Goto Defeat or Gameover GameState
+
+            inCombat = false;
+            //Goto Defeat or Gameover GameState
+            LevelManager.Instance.ReturnFromCombat();
 		}
 	}
 
@@ -173,7 +212,6 @@ public class CombatManager : MonoBehaviour
                     activePlayers.Add(character as PlayerCharacter);
                 }
             }
-            
         }
 
         activeEnemies.Clear();
@@ -186,17 +224,16 @@ public class CombatManager : MonoBehaviour
                     activeEnemies.Add(character as EnemyCharacter);
                 }
             }
-            
         }
 
         currentRoundCharacters.Clear();
-        foreach (Character character in activePlayers) // adds both previous lists to the round
+        foreach (PlayerCharacter character in activePlayers) // adds both previous lists to the round
         {
-            currentRoundCharacters.Add(character);
+            currentRoundCharacters.Add(character as Character);
         }
-        foreach (Character character in activeEnemies) // ^
+        foreach (EnemyCharacter character in activeEnemies) // ^
         {
-            currentRoundCharacters.Add(character);
+            currentRoundCharacters.Add(character as Character);
         }
         //Sort the currentRoundCharacterss characters by speed hi/lo
         currentRoundCharacters.Sort(SortBySpeed);
@@ -228,64 +265,19 @@ public class CombatManager : MonoBehaviour
 
     public void NextTurn() // active player finishing their turn calls this
     {
-		currentRoundCharacters.Remove(activeCharacter); // The activeCharacter removes themself from the current round
-        if (currentRoundCharacters.Count == 0) // if they were the last one to leave
+        if (!VictoryCheck())
         {
-			EndRound ();
-        }
-        else
-        {	//The contents of this Coroutine should be moved back into this Function once it is no longer needed.
-			StartCoroutine ("WaitForNextTurn");
-        }
-    }
-
-	IEnumerator WaitForNextTurn()	//TEST  This is here to create a visible delay between turns.  It also prevents a lock when only enemies are acting in a round
-	{
-		yield return new WaitForSeconds(0.5f);
-
-		activeCharacter = currentRoundCharacters[0];
-		Debug.Log(activeCharacter + "'s turn.");
-		EnemyCheck();
-	}
-
-    public void Enable(Character enabled)
-    {
-        if (!currentRoundCharacters.Contains(enabled))
-        {
-            if (enabled is PlayerCharacter)
+            currentRoundCharacters.Remove(activeCharacter); // The activeCharacter removes themself from the current round
+            if (currentRoundCharacters.Count == 0) // if they were the last one to leave
             {
-                activePlayers.Add(enabled as PlayerCharacter);
-//                inactivePlayers.Remove(enabled as PlayerCharacter);
+			    EndRound ();
             }
-            else if (enabled is EnemyCharacter)
+            else
             {
-                activeEnemies.Add(enabled as EnemyCharacter);
-//                inactiveEnemies.Remove(enabled as EnemyCharacter);
+                activeCharacter = currentRoundCharacters[0];
+                Debug.Log(activeCharacter + "'s turn.");
+                EnemyCheck();
             }
         }
     }
-
-    public void Disable(Character disabled) // remove character from active list, add to inactive
-    {
-//        if (currentRoundCharacters.Contains(disabled))
-//        {
-//            if (disabled != activeCharacter)
-//            {
-//                currentRoundCharacters.Remove(disabled);
-//            }
-//            if (disabled is PlayerCharacter)
-//            {
-//                inactivePlayers.Add(disabled as PlayerCharacter);
-//                activePlayers.Remove(disabled as PlayerCharacter);
-//            }
-//            else if (disabled is EnemyCharacter)
-//            {
-//                inactiveEnemies.Add(disabled as EnemyCharacter);
-//                activeEnemies.Remove(disabled as EnemyCharacter);
-//            }
-//        }
-    }
-
-
-
 }

@@ -61,11 +61,9 @@ public class LevelManager : MonoBehaviour
 
             //remove control from LevelManagement and Player.
             //TODO this is blunt force, change later to proper disable of control
-            playerParty.gameObject.GetComponent<KeysToMove>().enabled = false;
             playerParty.gameObject.GetComponent<Collider>().enabled = false;
 
             combatUI.gameObject.SetActive(true);
-            //levelUI.gameObject.SetActive(false);
         }
         else
         {
@@ -77,11 +75,8 @@ public class LevelManager : MonoBehaviour
     {
         //return control to Level and Player Party
         //TODO dirty blutn force change to better
-        playerParty.gameObject.GetComponent<KeysToMove>().enabled = true;
         playerParty.gameObject.GetComponent<Collider>().enabled = true;
 
         combatUI.gameObject.SetActive(false);
-        //levelUI.gameObject.SetActive(true);
-
     }
 }

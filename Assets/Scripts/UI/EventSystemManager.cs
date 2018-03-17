@@ -57,7 +57,7 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        Vector3 rayVector = ray.direction - ray.origin;
+        //Vector3 rayVector = ray.direction - ray.origin;
 
         Color debugColor = Color.blue;
 

@@ -119,10 +119,11 @@ public class Ability : ScriptableObject
     {
 		if (targets.Count == 0) 
 		{
-			Debug.LogWarning ("There are no targets for Abiility " + this.name);
+			Debug.LogWarning ("There are no targets for Abiility " + name);
 		} 
 		else 
 		{
+            AnnounceAbility();
 	        foreach (Character target in targets)					// Target all applicable targets
 	        { 
 				foreach (Damage range in damage)					// Deal all types of Damage in List
@@ -136,8 +137,6 @@ public class Ability : ScriptableObject
 	            } 
 	        }
 		}
-
-		AnnounceAbility();
 
 		actionsUsed++;
 		EndAbility ();

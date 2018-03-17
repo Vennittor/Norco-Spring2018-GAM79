@@ -37,19 +37,6 @@ public class Character : MonoBehaviour
 		combatState = CombatState.ABLE;
     }
 
-    public void SetState(CombatState state)
-    {
-        combatState = state;
-		if (combatState == CombatState.ABLE)
-        {
-
-        }
-		else if (combatState == CombatState.DISABLED)
-        {
-            combatManager.Disable(this);
-        }
-    }
-
 	public virtual void BeginTurn()
 	{
 
@@ -107,7 +94,7 @@ public class Character : MonoBehaviour
 	{
 		//reduce poisonDamage here.
 		DealPhysicalDamage (poisonDamage);
-		Debug.Log ("Poison Damage is not currently implemented, Physical damage was deal instead.");
+		Debug.Log ("Poison Damage is not currently implemented, Physical damage was dealt instead.");
 	}
 
     public void ApplyStatus(Status status) { // Tandy: added this to work with Ability
@@ -120,7 +107,6 @@ public class Character : MonoBehaviour
     {
         Debug.Log(name + " died!");
         combatState = CombatState.EXHAUSTED;
-        combatManager.Disable(this);
-		EndTurn();
+        EndTurn();
     }
 }
