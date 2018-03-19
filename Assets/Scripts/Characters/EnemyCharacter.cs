@@ -21,36 +21,58 @@ public class EnemyCharacter : Character
 
 	public override void BeginTurn()
     {
-		Debug.Log ("Enemy " + this.name + " begins thier turn.");
-
-        float selection = Random.Range(min, max);
-        if (selection <= 1)
+		Debug.Log ("Enemy " + name + " begins their turn.");
+        // status check
+        if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED)
         {
-            AttackOne();
+            Debug.Log("Enemy " + name + " cannot act this turn");
+            combatManager.NextTurn();
         }
-        else if (selection > 1 && selection < 2)
+        else
         {
-            AttackTwo();
-        }
-        else if (selection >= 2)
-        {
-            AttackThree();
+            float selection = Random.Range(min, max);
+            if (selection <= 1)
+            {
+                AttackOne();
+            }
+            else if (selection > 1 && selection < 2)
+            {
+                AttackTwo();
+            }
+            else if (selection >= 2)
+            {
+                AttackThree();
+            }
         }
     }
 
     void AttackOne()
     {
-		Debug.Log(this.name + " used AttackOne");
+		Debug.Log(name + " used AttackOne");
         combatManager.NextTurn();
     }
     void AttackTwo()
     {
-		Debug.Log(this.name + " used AttackTwo");
+		Debug.Log(name + " used AttackTwo");
         combatManager.NextTurn();
     }
     void AttackThree()
     {
-		Debug.Log(this.name + " used AttackThree");
+		Debug.Log(name + " used AttackThree");
         combatManager.NextTurn();
+    }
+
+    private PlayerCharacter RandPlayerTarget()
+    {
+        List<PlayerCharacter> players = new List<PlayerCharacter>();
+        foreach (Character character in combatManager.charactersInCombat)
+        {
+            if (character is PlayerCharacter)
+            {
+                players.Add(character as PlayerCharacter);
+            }
+        }
+        PlayerCharacter playerCharacter = players[Random.Range(0, players.Count)];
+        return playerCharacter;
     }
 }

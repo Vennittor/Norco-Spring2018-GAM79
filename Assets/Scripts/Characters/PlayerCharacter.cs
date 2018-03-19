@@ -28,9 +28,10 @@ public class PlayerCharacter : Character
 	public override void BeginTurn()
 	{
 		Debug.Log ("Player " + name + " begins their turn.");
+        // status check
 		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED) 
 		{
-			Debug.Log("Player " + name + " cannont act this turn");
+			Debug.Log("Player " + name + " cannot act this turn");
 			combatManager.NextTurn ();
 		}
 	}
@@ -41,39 +42,6 @@ public class PlayerCharacter : Character
         EndTurn();
     }
 
-    public Ability SkillOne() // Basic Attack
-    {
-        if (abilities[0].Usable)
-        {           // if cooldown can start, do rest  of Ability
-            combatState = CombatState.USEABILITY;
-
-            // In Ability
-            return abilities[0];
-        }
-        return null;
-    }
-	public Ability SkillTwo()
-	{
-        if (abilities[1].Usable)
-        {           // if cooldown can start, do rest  of Ability
-            combatState = CombatState.USEABILITY;
-
-            // In Ability
-            return abilities[1];
-        }
-        return null;
-    }
-	public Ability SkillThree()
-	{
-        if (abilities[2].Usable)
-        {           // if cooldown can start, do rest  of Ability
-            combatState = CombatState.USEABILITY;
-
-            // In Ability
-            return abilities[2];
-        }
-        return null;
-    }
     //Use water (Robert)
     public void SkillWater()
     {

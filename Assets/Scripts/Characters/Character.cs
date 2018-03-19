@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
 //    public List<StatusEffect> statusEffects = new List<StatusEffect>();
     
@@ -37,10 +37,7 @@ public class Character : MonoBehaviour
 		combatState = CombatState.ABLE;
     }
 
-	public virtual void BeginTurn()
-	{
-
-	}
+    public abstract void BeginTurn();
 
 	public void EndTurn()
 	{
@@ -50,7 +47,41 @@ public class Character : MonoBehaviour
 		}
 	}
 
-	public void TakeDamage(uint damage = 0, DamageType damageType = DamageType.PHYSICAL)
+    public Ability SkillOne() // Basic Attack
+    {
+        if (abilities[0].Usable)
+        {           // if cooldown can start, do rest  of Ability
+            combatState = CombatState.USEABILITY;
+
+            // In Ability
+            return abilities[0];
+        }
+        return null;
+    }
+    public Ability SkillTwo()
+    {
+        if (abilities[1].Usable)
+        {           // if cooldown can start, do rest  of Ability
+            combatState = CombatState.USEABILITY;
+
+            // In Ability
+            return abilities[1];
+        }
+        return null;
+    }
+    public Ability SkillThree()
+    {
+        if (abilities[2].Usable)
+        {           // if cooldown can start, do rest  of Ability
+            combatState = CombatState.USEABILITY;
+
+            // In Ability
+            return abilities[2];
+        }
+        return null;
+    }
+
+    public void TakeDamage(uint damage = 0, DamageType damageType = DamageType.PHYSICAL)
     {
 		if (damageType == DamageType.PHYSICAL)
 		{

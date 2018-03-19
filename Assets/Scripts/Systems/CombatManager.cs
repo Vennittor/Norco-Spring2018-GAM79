@@ -251,7 +251,7 @@ public class CombatManager : MonoBehaviour
             {
                 return -1; // prioritizes player
             }
-            if (c1 is EnemyCharacter && c2 is PlayerCharacter)
+            else if (c1 is EnemyCharacter && c2 is PlayerCharacter)
             {
                 return 1; // prioritizes player
             }
