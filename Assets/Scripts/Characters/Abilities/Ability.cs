@@ -29,8 +29,7 @@ public class Ability : ScriptableObject
     //public Sprite image; // for effects
     //Animators & Parameters
 
-    //Water Related(Robert)
-    [SerializeField] private int waterUses = 3;
+    
 
 	public bool Usable 
 	{
@@ -163,16 +162,5 @@ public class Ability : ScriptableObject
 		Announcer.UseAbility(characterUser.gameObject.name, targetName, abilityName, callOutText);
     }
 
-    //for water ability(robert)
-    public void UseWater()
-    {
-        if (waterUses > 0)
-        {
-            waterUses--;
-        }
-        else if (waterUses == 0)
-        {
-            Debug.Log("you have no water");
-        }
-    }
+    
 }

@@ -38,18 +38,7 @@ public class PlayerCharacter : Character
 		combatState = newState;
         EndTurn();
     }
-
-
-	//Use water (Robert)
-	public void SkillWater()
-	{
-		combatState = CombatState.USEABILITY;
-		Announcer.UseAbility(name, name, "water", "gotta hydrate my dude");
-
-		combatState = CombatState.ABLE;
-		combatManager.NextTurn();
-	}
-
+    
     /*public void EnterHeat()
     {
         heatState = HeatZone.InHeat;
