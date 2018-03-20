@@ -60,26 +60,8 @@ public class CombatManager : MonoBehaviour
         currentRoundCharacters = new List<Character>();
         activePlayers = new List<PlayerCharacter>();
         activeEnemies = new List<EnemyCharacter>();
-        ////TEST
-        //if (characters.Count == 0)
-        //{
-        //    Debug.LogWarning("characters List is empty, finding all Characters in scene");
-        //    characters.AddRange(FindObjectsOfType<Character>());
-        //}
-        //TEST StartCombat() should be called by either the GameManger, an Event, or encountering an enemy.
-        //StartCombat();
     }
-
-    void Update()
-    {
-//        //TEST
-//        if (Input.GetKeyDown(KeyCode.S))
-//        {
-//            activeCharacter.TakeDamage(4);
-//        }
-    }
-
-	//
+		
 	public void StartCombat()
 	{
 		if(!inCombat) 
@@ -122,7 +104,7 @@ public class CombatManager : MonoBehaviour
         //check if group is in a heat zone before entering combat (passed to here from game manager, not implemented yet)
         if (activeCharacter is PlayerCharacter)
         {
-            if ((activeCharacter as PlayerCharacter).heatState == PlayerCharacter.HeatZone.InHeat)
+			if ((activeCharacter as PlayerCharacter).heatState == PlayerCharacter.HeatZone.INHEAT)
             {
                 foreach (Character player in activePlayers)
                 {
@@ -131,46 +113,31 @@ public class CombatManager : MonoBehaviour
                 }
             }
         }
-        //TEST to keep things going until proper EndCombat checks are in place.
-        StartRound();
+        
+		if ( !VictoryCheck () ) 
+		{
+			StartRound();
+		}
+
 	}
 
-	//This ends combat, cleanup, return level/field movement, and handling player victory/defeat should be performed or started here
-    public bool VictoryCheck()
-    {
-        int ablePlayers = 0;
-        foreach (Character player in characters)
-        {
-            if (player is PlayerCharacter && player.combatState != Character.CombatState.EXHAUSTED)
-            {
-                ablePlayers++;
-            }
-        }
-        int ableEnemies = 0;
-        foreach (Character enemy in characters)
-        {
-            if (enemy is EnemyCharacter && enemy.combatState != Character.CombatState.EXHAUSTED)
-            {
-                ableEnemies++;
-            }
-        }
-        if (ablePlayers == 0 && ableEnemies == 0)
-        {
-            EndCombat(false);
-            return true;
-        }
-        else if (ablePlayers == 0)
-        {
-            EndCombat(false);
-            return true;
-        }
-        else if (ableEnemies == 0)
-        {
-            EndCombat(true);
-            return true;
-        }
-        return false;
-    }
+	public void NextTurn() // active player finishing their turn calls this
+	{
+		if (!VictoryCheck())
+		{
+			currentRoundCharacters.Remove(activeCharacter); // The activeCharacter is removed from the current round
+			if (currentRoundCharacters.Count == 0) // if they were the last one to leave, then end the round
+			{
+				EndRound ();
+			}
+			else
+			{
+				activeCharacter = currentRoundCharacters[0];
+				Debug.Log(activeCharacter + "'s turn.");
+				EnemyCheck();
+			}
+		}
+	}
 
 	void EndCombat(bool playerVictory)
 	{
@@ -192,13 +159,43 @@ public class CombatManager : MonoBehaviour
 		}
 	}
 
-    void EnemyCheck()
-    {
-        if (activeCharacter is EnemyCharacter)
-        {
-            (activeCharacter as EnemyCharacter).BeginTurn();
-        }
-    }
+	//This ends combat, cleanup, return level/field movement, and handling player victory/defeat should be performed or started here
+	public bool VictoryCheck()
+	{
+		int ablePlayers = 0;
+		foreach (Character player in characters)
+		{
+			if (player is PlayerCharacter && player.combatState != Character.CombatState.EXHAUSTED)
+			{
+				ablePlayers++;
+			}
+		}
+		int ableEnemies = 0;
+		foreach (Character enemy in characters)
+		{
+			if (enemy is EnemyCharacter && enemy.combatState != Character.CombatState.EXHAUSTED)
+			{
+				ableEnemies++;
+			}
+		}
+		if (ablePlayers == 0 && ableEnemies == 0)
+		{
+			EndCombat(false);
+			return true;
+		}
+		else if (ablePlayers == 0)
+		{
+			EndCombat(false);
+			return true;
+		}
+		else if (ableEnemies == 0)
+		{
+			EndCombat(true);
+			return true;
+		}
+
+		return false;
+	}
 
     void SortRoundQueue() // clears round/active characters, repopulates round from actives, sorts round
     {
@@ -241,6 +238,7 @@ public class CombatManager : MonoBehaviour
 
         EnemyCheck();
     }
+
     private int SortBySpeed(Character c1, Character c2) // sorts by highest speed, player first
     {
         int char1 = c1.speed;
@@ -263,21 +261,13 @@ public class CombatManager : MonoBehaviour
         return -char1.CompareTo(char2);
     }
 
-    public void NextTurn() // active player finishing their turn calls this
-    {
-        if (!VictoryCheck())
-        {
-            currentRoundCharacters.Remove(activeCharacter); // The activeCharacter removes themself from the current round
-            if (currentRoundCharacters.Count == 0) // if they were the last one to leave
-            {
-			    EndRound ();
-            }
-            else
-            {
-                activeCharacter = currentRoundCharacters[0];
-                Debug.Log(activeCharacter + "'s turn.");
-                EnemyCheck();
-            }
-        }
-    }
+	void EnemyCheck()
+	{
+		if (activeCharacter is EnemyCharacter)
+		{
+			(activeCharacter as EnemyCharacter).BeginTurn();
+		}
+	}
+
+
 }
