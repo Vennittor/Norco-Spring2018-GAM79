@@ -95,6 +95,8 @@ public class CombatManager : MonoBehaviour
 		//Check time left on status effects
 		//Check cooldowns on Abilities
 		SortRoundQueue();
+
+		activeCharacter.BeginTurn ();
 	}
 
 	void EndRound()								//Anything that needs to be handled at the end of the round, should be placed in this function.
@@ -200,7 +202,7 @@ public class CombatManager : MonoBehaviour
     void SortRoundQueue() // clears round/active characters, repopulates round from actives, sorts round
     {
         activePlayers.Clear();
-        foreach (Character character in characters)
+        foreach (Character character in characters)					//Populate activePlayers List
         {
             if (character is PlayerCharacter)
             {
@@ -212,7 +214,7 @@ public class CombatManager : MonoBehaviour
         }
 
         activeEnemies.Clear();
-        foreach (Character character in characters)
+        foreach (Character character in characters)					//populate activeEnemies List
         {
             if (character is EnemyCharacter)
             {
@@ -224,19 +226,17 @@ public class CombatManager : MonoBehaviour
         }
 
         currentRoundCharacters.Clear();
-        foreach (PlayerCharacter character in activePlayers) // adds both previous lists to the round
+        foreach (PlayerCharacter character in activePlayers) 		// adds both previous lists to the round
         {
             currentRoundCharacters.Add(character as Character);
         }
-        foreach (EnemyCharacter character in activeEnemies) // ^
+        foreach (EnemyCharacter character in activeEnemies)
         {
             currentRoundCharacters.Add(character as Character);
         }
-        //Sort the currentRoundCharacterss characters by speed hi/lo
-        currentRoundCharacters.Sort(SortBySpeed);
-        activeCharacter = currentRoundCharacters[0];
 
-        EnemyCheck();
+		currentRoundCharacters.Sort(SortBySpeed);					//Sort the currentRoundCharacterss characters by speed hi/lo
+        activeCharacter = currentRoundCharacters[0];
     }
 
     private int SortBySpeed(Character c1, Character c2) // sorts by highest speed, player first

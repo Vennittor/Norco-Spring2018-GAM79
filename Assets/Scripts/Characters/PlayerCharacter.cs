@@ -20,11 +20,6 @@ public class PlayerCharacter : Character
         }
     }
 
-    void Update()
-    {
-
-    }
-
 	public new void BeginTurn()
 	{
 		if (base.BeginTurn ()) 

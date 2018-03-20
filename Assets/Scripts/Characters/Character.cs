@@ -44,7 +44,7 @@ public abstract class Character : MonoBehaviour
 		{
 			Debug.Log(name + " cannot act this turn");
 
-			combatManager.NextTurn();
+			EndTurn ();
 
 			return false;
 		}
@@ -68,7 +68,6 @@ public abstract class Character : MonoBehaviour
         {           // if cooldown can start, do rest  of Ability
             combatState = CombatState.USEABILITY;
 
-            // In Ability
             return abilities[0];
         }
         return null;
@@ -79,7 +78,6 @@ public abstract class Character : MonoBehaviour
         {           // if cooldown can start, do rest  of Ability
             combatState = CombatState.USEABILITY;
 
-            // In Ability
             return abilities[1];
         }
         return null;
@@ -90,7 +88,6 @@ public abstract class Character : MonoBehaviour
         {           // if cooldown can start, do rest  of Ability
             combatState = CombatState.USEABILITY;
 
-            // In Ability
             return abilities[2];
         }
         return null;

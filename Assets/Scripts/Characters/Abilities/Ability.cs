@@ -105,7 +105,7 @@ public class Ability : ScriptableObject
         if (Usable)
         {
             //enter ready animation
-            // transfer control to UI for targeting:
+            // transfer control to UI or AI for targeting:
             // tell it the TargetType (single, multiple; allies, opponents, everyone)
             //THis is compared against the class of the caller (Player or Enemy) to determine who are allies and who are enemies
             // Perform target selection with UI targeting mode

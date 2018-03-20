@@ -4,20 +4,11 @@ using UnityEngine;
 
 public class EnemyCharacter : Character
 {
-    //public float[] attacks;
-    private float min = 0;
-    private float max = 3;
-    
-
+	
     private new void Start()
     {
         base.Start();
     }
-	
-	void Update ()
-    {
-        
-	}
 
 	public new void BeginTurn()
     {
@@ -25,50 +16,34 @@ public class EnemyCharacter : Character
 		{
 			ChooseAbility ();
 		}
- 
-        
     }
 
 	void ChooseAbility()
 	{
 		//TODO establish a seperate AI that will handle Ability choice
 
-		float selection = Random.Range(min, max);
+		float selection = Random.Range(0, abilities.Count);
+
 		if (selection <= 1)
 		{
-			AttackOne();
+			SkillOne();
 		}
 		else if (selection > 1 && selection < 2)
 		{
-			AttackTwo();
+			SkillTwo();
 		}
 		else if (selection >= 2)
 		{
-			AttackThree();
+			SkillThree();
 		}
 	}
 
 	void GetTargets(TargetType targetType)
 	{
 		//TODO establish a seperate AI that will handle Target decisions
+
+		RandPlayerTarget ();
 	}
-
-    void AttackOne()
-    {
-		Debug.Log(name + " used AttackOne");
-
-        combatManager.NextTurn();
-    }
-    void AttackTwo()
-    {
-		Debug.Log(name + " used AttackTwo");
-        combatManager.NextTurn();
-    }
-    void AttackThree()
-    {
-		Debug.Log(name + " used AttackThree");
-        combatManager.NextTurn();
-    }
 
     private PlayerCharacter RandPlayerTarget()
     {
