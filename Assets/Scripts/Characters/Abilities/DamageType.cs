@@ -1,2 +1,2 @@
 ﻿
-public enum DamageType { PHYSICAL, HEAT, POISON };
+public enum DamageType { PHYSICAL, HEAT, HEALING, POISON };

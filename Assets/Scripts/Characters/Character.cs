@@ -130,6 +130,10 @@ public abstract class Character : MonoBehaviour
 		{
 			DealHeatDamage (damage);
 		}
+		else if(damageType == DamageType.HEALING)
+		{
+			Heal(damage);
+		}
 		else if(damageType == DamageType.POISON)
 		{
 			DealPoisonDamage (damage);
@@ -148,6 +152,11 @@ public abstract class Character : MonoBehaviour
 			}
 		}
 
+	}
+
+	void Heal(uint healing = 0)
+	{
+			currentHealth = (currentHealth + healing) > maxhealth ? maxhealth : (currentHealth + healing);
 	}
 
     void DealHeatDamage(uint heatDamage = 0)
