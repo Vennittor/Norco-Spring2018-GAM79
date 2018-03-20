@@ -13,17 +13,12 @@ public class PlayerCharacter : Character
     {
         base.Start();
         //heatState = HeatZone.OutofHeat;
-
-        foreach(Ability ability in abilities)
-        {
-            ability.EquipAbility(this);
-        }
     }
 
 	public new void BeginTurn()
 	{
 		if (base.BeginTurn ()) 
-		{
+		{	Debug.Log ("Player Begin");
 			//TODO swap UI graphics into to match PlayerCharacter
 			ChooseAbility();
 			//Get Targets - currently waits on input from UIManager for ability calls
@@ -35,27 +30,13 @@ public class PlayerCharacter : Character
 		//UIManager.AllowAbilitySelection
 	}
 
-    public void AbilityComplete()
+	public override void AbilityComplete(CombatState newState = CombatState.ABLE)
 	{	
 		//UIManager.BlockAbilitySelection();
-        combatState = CombatState.ABLE;
+		combatState = newState;
         EndTurn();
     }
-		
 
-	private EnemyCharacter RandEnemyTarget()
-    {
-        List<EnemyCharacter> enemies = new List<EnemyCharacter>();
-		foreach(Character character in combatManager.charactersInCombat)
-        {
-			if (character is EnemyCharacter) 
-			{
-				enemies.Add (character as EnemyCharacter);
-			}
-        }
-        EnemyCharacter enemyCharacter = enemies[Random.Range(0, enemies.Count)];
-        return enemyCharacter;
-    }
 
 	//Use water (Robert)
 	public void SkillWater()

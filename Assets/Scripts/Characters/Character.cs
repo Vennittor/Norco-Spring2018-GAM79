@@ -34,15 +34,20 @@ public abstract class Character : MonoBehaviour
     {
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
+
+		foreach(Ability ability in abilities)
+		{
+			ability.EquipAbility(this);
+		}
     }
 
 	public bool BeginTurn()
 	{
-		Debug.Log (name + " begins their turn.");
+		Debug.Log (gameObject.name + " begins their turn.");
 
 		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED)		//Checks if the Character is in a state that they cannot act in, and return true/false if the can/cannot;
 		{
-			Debug.Log(name + " cannot act this turn");
+			Debug.Log(gameObject.name + " cannot act this turn");
 
 			EndTurn ();
 
@@ -56,8 +61,10 @@ public abstract class Character : MonoBehaviour
 
 	protected abstract void ChooseAbility();
 
+	public abstract void AbilityComplete(CombatState newState = CombatState.ABLE);
+
 	public void EndTurn()
-	{
+	{	Debug.Log ("EndTurn");
 		if (combatManager.activeCharacter == this)
 		{
 			combatManager.NextTurn();
@@ -66,32 +73,41 @@ public abstract class Character : MonoBehaviour
 
     public Ability AbilityOne() // Basic Attack
     {
-        if (abilities[0].Usable)
-        {           // if cooldown can start, do rest  of Ability
-            combatState = CombatState.USEABILITY;
+		if(abilities.Count != 0)
+		{
+	        if (abilities[0].Usable)
+	        {           // if cooldown can start, do rest  of Ability
+	            combatState = CombatState.USEABILITY;
 
-            return abilities[0];
-        }
+	            return abilities[0];
+	        }
+		}
         return null;
     }
 	public Ability AbilityTwo()
     {
-        if (abilities[1].Usable)
-        {           // if cooldown can start, do rest  of Ability
-            combatState = CombatState.USEABILITY;
+		if(abilities.Count != 0)
+		{
+	        if (abilities[1].Usable)
+	        {           // if cooldown can start, do rest  of Ability
+	            combatState = CombatState.USEABILITY;
 
-            return abilities[1];
-        }
+	            return abilities[1];
+	        }
+		}
         return null;
     }
 	public Ability AbilityThree()
     {
-        if (abilities[2].Usable)
-        {           // if cooldown can start, do rest  of Ability
-            combatState = CombatState.USEABILITY;
+		if(abilities.Count != 0)
+		{
+	        if (abilities[2].Usable)
+	        {           // if cooldown can start, do rest  of Ability
+	            combatState = CombatState.USEABILITY;
 
-            return abilities[2];
-        }
+	            return abilities[2];
+	        }
+		}
         return null;
     }
 

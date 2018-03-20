@@ -100,7 +100,7 @@ public class CombatManager : MonoBehaviour
 	}
 
 	void EndRound()								//Anything that needs to be handled at the end of the round, should be placed in this function.
-	{
+	{	Debug.Log("End Round");
         //Checks and adjustments to heat should be in seperate function (called here)
         //increase heat by set amount to characters (if combat is in a heat zone)
         //check if group is in a heat zone before entering combat (passed to here from game manager, not implemented yet)
@@ -124,7 +124,7 @@ public class CombatManager : MonoBehaviour
 	}
 
 	public void NextTurn() // active player finishing their turn calls this
-	{
+	{	Debug.Log("Next Turn");
 		if (!VictoryCheck())
 		{
 			currentRoundCharacters.Remove(activeCharacter); // The activeCharacter is removed from the current round
@@ -135,14 +135,14 @@ public class CombatManager : MonoBehaviour
 			else
 			{
 				activeCharacter = currentRoundCharacters[0];
-				Debug.Log(activeCharacter + "'s turn.");
-				EnemyCheck();
+				Debug.Log(activeCharacter.gameObject.name + " is next.");
+				activeCharacter.BeginTurn ();
 			}
 		}
 	}
 
 	void EndCombat(bool playerVictory)
-	{
+	{	Debug.Log ("End Combat");
 		if (playerVictory == true) // party wins
 		{
 			Debug.Log ("Party Wins");
@@ -260,14 +260,5 @@ public class CombatManager : MonoBehaviour
         }
         return -char1.CompareTo(char2);
     }
-
-	void EnemyCheck()
-	{
-		if (activeCharacter is EnemyCharacter)
-		{
-			(activeCharacter as EnemyCharacter).BeginTurn();
-		}
-	}
-
 
 }

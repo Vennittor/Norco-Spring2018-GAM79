@@ -49,7 +49,7 @@ public class Ability : ScriptableObject
 		{
 			if (targets.Count == 1)
 			{
-				return targets[0].name;
+				return targets[0].gameObject.name;
 			}
 			else if (targets.Count > 1)
 			{
@@ -75,6 +75,11 @@ public class Ability : ScriptableObject
 		}
 	}
 
+	public void EquipAbility(Character user)
+	{
+		characterUser = user;
+	}
+
 	private void StartCooldown() 
 	{
 		cooldownTimer = cooldown;
@@ -86,18 +91,15 @@ public class Ability : ScriptableObject
 		}
 	}
 
+	public void SetTarget(Character targetToSet)
+	{
+		targets.Clear ();
+		targets.Add (targetToSet);
+	}
+
 	public void SetTargets(List<Character> targetsToSet)	
 	{
 		targets = targetsToSet;
-	}
-
-	public void EquipAbility(EnemyCharacter enemyUser)		//TODO These need to be called from Character when they are intially set up.  They also register if the user is Player or Enemy
-	{
-		characterUser = enemyUser as Character;
-	}
-	public void EquipAbility(PlayerCharacter playerUser)
-	{
-		characterUser = playerUser as Character;
 	}
 
     public void StartAbility()
@@ -151,7 +153,7 @@ public class Ability : ScriptableObject
 		else
 		{
 			StartCooldown();
-            (characterUser as PlayerCharacter).AbilityComplete();
+            (characterUser).AbilityComplete();
 		}
 	}
 

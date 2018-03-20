@@ -27,5 +27,6 @@ MonoBehaviour:
   cooldown: 0
   cooldownTimer: 0
   characterUser: {fileID: 0}
-  targets: []
+  targets:
+  - {fileID: 0}
   waterUses: 3
