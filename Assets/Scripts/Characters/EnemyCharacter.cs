@@ -14,11 +14,11 @@ public class EnemyCharacter : Character
     {
 		if (base.BeginTurn ()) 
 		{
-			ChooseAbility ();
+			ChooseAbility();
 		}
     }
 
-	void ChooseAbility()
+	protected override void ChooseAbility()
 	{
 		//TODO establish a seperate AI that will handle Ability choice
 
@@ -26,15 +26,15 @@ public class EnemyCharacter : Character
 
 		if (selection <= 1)
 		{
-			SkillOne();
+			AbilityOne();
 		}
 		else if (selection > 1 && selection < 2)
 		{
-			SkillTwo();
+			AbilityTwo();
 		}
 		else if (selection >= 2)
 		{
-			SkillThree();
+			AbilityThree();
 		}
 	}
 

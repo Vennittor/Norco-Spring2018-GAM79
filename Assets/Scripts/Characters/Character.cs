@@ -54,6 +54,8 @@ public abstract class Character : MonoBehaviour
 		}
 	}
 
+	protected abstract void ChooseAbility();
+
 	public void EndTurn()
 	{
 		if (combatManager.activeCharacter == this)
@@ -62,7 +64,7 @@ public abstract class Character : MonoBehaviour
 		}
 	}
 
-    public Ability SkillOne() // Basic Attack
+    public Ability AbilityOne() // Basic Attack
     {
         if (abilities[0].Usable)
         {           // if cooldown can start, do rest  of Ability
@@ -72,7 +74,7 @@ public abstract class Character : MonoBehaviour
         }
         return null;
     }
-    public Ability SkillTwo()
+	public Ability AbilityTwo()
     {
         if (abilities[1].Usable)
         {           // if cooldown can start, do rest  of Ability
@@ -82,7 +84,7 @@ public abstract class Character : MonoBehaviour
         }
         return null;
     }
-    public Ability SkillThree()
+	public Ability AbilityThree()
     {
         if (abilities[2].Usable)
         {           // if cooldown can start, do rest  of Ability

@@ -76,7 +76,7 @@ public class UIManager : MonoBehaviour
     {
         if(state == ActiveState.NORMAL)
         {
-            ability = (combatManager.activeCharacter as PlayerCharacter).SkillOne();
+			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityOne();
             if(ability == null)
             {
                 Debug.Log("UIManager: OutputAttackOne(): ERROR");
@@ -88,6 +88,11 @@ public class UIManager : MonoBehaviour
                     SetMode_Targeting();
                     eventSystemManager.AcceptTargetType(ability.targetType);
                 }
+
+				else
+				{
+					Debug.Log ("Ability on cooldown");
+				}
             }
         }
     }
@@ -96,7 +101,7 @@ public class UIManager : MonoBehaviour
     {
         if (state == ActiveState.NORMAL)
         {
-            ability = (combatManager.activeCharacter as PlayerCharacter).SkillTwo();
+			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityTwo();
             if (ability == null)
             {
                 Debug.Log("UIManager: OutputAttackOne(): ERROR");
@@ -116,7 +121,7 @@ public class UIManager : MonoBehaviour
     {
         if (state == ActiveState.NORMAL)
         {
-            ability = (combatManager.activeCharacter as PlayerCharacter).SkillThree();
+			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityThree();
             if (ability == null)
             {
                 Debug.Log("UIManager: OutputAttackOne(): ERROR");
@@ -150,11 +155,6 @@ public class UIManager : MonoBehaviour
     public void SetMode_Targeting()
     {
         state = ActiveState.TARGETING;
-    }
-
-    public void CallBack()
-    {
-        //remains to be determined
     }
 
     public void AssignTarget()
