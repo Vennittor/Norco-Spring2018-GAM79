@@ -24,25 +24,24 @@ public class PlayerCharacter : Character
 	{
 		if (base.BeginTurn ()) 
 		{
-			//Choose Ability and Get Targets
+			//TODO swap UI graphics into to match PlayerCharacter
+			ChooseAbility();
+			//Get Targets - currently waits on input from UIManager for ability calls
 		}
 	}
 
+	protected override void ChooseAbility()
+	{
+		//UIManager.AllowAbilitySelection
+	}
+
     public void AbilityComplete()
-    {
+	{	
+		//UIManager.BlockAbilitySelection();
         combatState = CombatState.ABLE;
         EndTurn();
     }
-
-    //Use water (Robert)
-    public void SkillWater()
-    {
-        combatState = CombatState.USEABILITY;
-        Announcer.UseAbility(name, name, "water", "gotta hydrate my dude");
-        
-        combatState = CombatState.ABLE;
-        combatManager.NextTurn();
-    }
+		
 
 	private EnemyCharacter RandEnemyTarget()
     {
@@ -57,6 +56,16 @@ public class PlayerCharacter : Character
         EnemyCharacter enemyCharacter = enemies[Random.Range(0, enemies.Count)];
         return enemyCharacter;
     }
+
+	//Use water (Robert)
+	public void SkillWater()
+	{
+		combatState = CombatState.USEABILITY;
+		Announcer.UseAbility(name, name, "water", "gotta hydrate my dude");
+
+		combatState = CombatState.ABLE;
+		combatManager.NextTurn();
+	}
 
     /*public void EnterHeat()
     {

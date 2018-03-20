@@ -18,8 +18,6 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
 
     private Character history;
 
-    //public List<Character> targets; //tie in to combat system
-
     #endregion
 
     #region Functions
