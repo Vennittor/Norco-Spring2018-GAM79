@@ -15,10 +15,12 @@ public class PlayerCharacter : Character
         //heatState = HeatZone.OutofHeat;
     }
 
-	public new void BeginTurn()
+	public override void BeginTurn()
 	{
-		if (base.BeginTurn ()) 
-		{	Debug.Log ("Player Begin");
+		base.BeginTurn ();
+
+		if (canAct) 
+		{
 			//TODO swap UI graphics into to match PlayerCharacter
 			ChooseAbility();
 			//Get Targets - currently waits on input from UIManager for ability calls

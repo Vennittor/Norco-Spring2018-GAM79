@@ -10,13 +10,14 @@ public abstract class Character : MonoBehaviour
 
 	[SerializeField] protected List<Status> statuses = new List<Status>();     	// Tandy: List of Status to show what Character is affected by
 
+	protected CombatManager combatManager;
 
     public enum CombatState
     {
         ABLE, DISABLED, USEABILITY, EXHAUSTED
     }
     public CombatState combatState;
-    protected CombatManager combatManager;
+	protected bool _canActThisTurn = true;
 
     public new string name;
     public int speed;
@@ -30,6 +31,14 @@ public abstract class Character : MonoBehaviour
     public float accuracy = 84.5f;
     public float evade = 10;
 
+	public bool canAct
+	{
+		get
+		{
+			return _canActThisTurn;
+		}
+	}
+
     protected void Start()
     {
         combatManager = CombatManager.Instance;
@@ -41,7 +50,7 @@ public abstract class Character : MonoBehaviour
 		}
     }
 
-	public bool BeginTurn()
+	public virtual void BeginTurn()
 	{
 		Debug.Log (gameObject.name + " begins their turn.");
 
@@ -51,11 +60,11 @@ public abstract class Character : MonoBehaviour
 
 			EndTurn ();
 
-			return false;
+			_canActThisTurn = false;
 		}
 		else
 		{
-			return true;
+			_canActThisTurn = true;
 		}
 	}
 
@@ -64,7 +73,7 @@ public abstract class Character : MonoBehaviour
 	public abstract void AbilityComplete(CombatState newState = CombatState.ABLE);
 
 	public void EndTurn()
-	{	Debug.Log ("EndTurn");
+	{
 		if (combatManager.activeCharacter == this)
 		{
 			combatManager.NextTurn();

@@ -9,16 +9,17 @@ public class EnemyCharacter : Character
         base.Start();
     }
 
-	public new void BeginTurn()
+	public override void BeginTurn()
 	{
-		if (base.BeginTurn ()) 
-		{	Debug.Log ("It's True");
+		base.BeginTurn ();
+		if (canAct) 
+		{
 			ChooseAbility();
 		}
     }
 
 	protected override void ChooseAbility()
-	{	Debug.Log ("Enemy Choose Ability");
+	{
 		//TODO establish a seperate AI that will handle Ability choice
 
 		Ability abilityToUse = null;
@@ -45,7 +46,7 @@ public class EnemyCharacter : Character
 	}
 
 	void GetTargets(Ability ability)
-	{	Debug.Log ("Enemy Get Targets");
+	{
 		//TODO establish a seperate AI that will handle Target decisions
 		ability.SetTarget(RandPlayerTarget() as Character);
 		ability.UseAbility ();
