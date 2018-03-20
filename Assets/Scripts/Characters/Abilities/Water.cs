@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class Water : Ability
 {
-    //Water Related(Robert)
-    [SerializeField]
-    private int waterUses = 3;
+    
 
     //for water ability(robert)
-    public void UseWater()
+    public void UseWater(int uses, float hLevel)
     {
-        if (waterUses > 0)
-        {
-            Announcer.UseAbility(name, name, "water", "gotta hydrate my dude");
-            waterUses--;
-        }
-        else if (waterUses == 0)
-        {
-            Debug.Log("you lean back for a swig, but only drink in disappointment");
-        }
+        uses--;
+        hLevel -= 100;//going off of what i recall the size of the heat bar is (300), since design said that they want 1 use to lower 1/3 of the bar
+        
     }
 }
