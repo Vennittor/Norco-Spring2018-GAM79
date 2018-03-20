@@ -19,36 +19,44 @@ public class EnemyCharacter : Character
         
 	}
 
-	public override void BeginTurn()
+	public new void BeginTurn()
     {
-		Debug.Log ("Enemy " + name + " begins their turn.");
-        // status check
-        if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED)
-        {
-            Debug.Log("Enemy " + name + " cannot act this turn");
-            combatManager.NextTurn();
-        }
-        else
-        {
-            float selection = Random.Range(min, max);
-            if (selection <= 1)
-            {
-                AttackOne();
-            }
-            else if (selection > 1 && selection < 2)
-            {
-                AttackTwo();
-            }
-            else if (selection >= 2)
-            {
-                AttackThree();
-            }
-        }
+		if (base.BeginTurn ()) 
+		{
+			ChooseAbility ();
+		}
+ 
+        
     }
+
+	void ChooseAbility()
+	{
+		//TODO establish a seperate AI that will handle Ability choice
+
+		float selection = Random.Range(min, max);
+		if (selection <= 1)
+		{
+			AttackOne();
+		}
+		else if (selection > 1 && selection < 2)
+		{
+			AttackTwo();
+		}
+		else if (selection >= 2)
+		{
+			AttackThree();
+		}
+	}
+
+	void GetTargets(TargetType targetType)
+	{
+		//TODO establish a seperate AI that will handle Target decisions
+	}
 
     void AttackOne()
     {
 		Debug.Log(name + " used AttackOne");
+
         combatManager.NextTurn();
     }
     void AttackTwo()

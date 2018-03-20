@@ -7,10 +7,9 @@ public abstract class Character : MonoBehaviour
 //    public List<StatusEffect> statusEffects = new List<StatusEffect>();
     
     [SerializeField] protected List<Ability> abilities = new List<Ability>(); 
-    // Tandy: maybe abilites[0] is basic attack? then abilities[1] is SkillOne, etc.
 
-    [SerializeField] protected List<Status> statuses = new List<Status>();
-    // Tandy: List of Status to show what Character is affected by
+	[SerializeField] protected List<Status> statuses = new List<Status>();     	// Tandy: List of Status to show what Character is affected by
+
 
     public enum CombatState
     {
@@ -37,7 +36,23 @@ public abstract class Character : MonoBehaviour
 		combatState = CombatState.ABLE;
     }
 
-    public abstract void BeginTurn();
+	public bool BeginTurn()
+	{
+		Debug.Log (name + " begins their turn.");
+
+		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED)		//Checks if the Character is in a state that they cannot act in, and return true/false if the can/cannot;
+		{
+			Debug.Log(name + " cannot act this turn");
+
+			combatManager.NextTurn();
+
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
 
 	public void EndTurn()
 	{
@@ -128,9 +143,11 @@ public abstract class Character : MonoBehaviour
 		Debug.Log ("Poison Damage is not currently implemented, Physical damage was dealt instead.");
 	}
 
-    public void ApplyStatus(Status status) { // Tandy: added this to work with Ability
-        if(statuses.Contains(status) == false) { // if not already affected by Status
-            statuses.Add(status); // add Status to List to show it affects Character
+    public void ApplyStatus(Status status) 
+	{ 												// Tandy: added this to work with Ability
+		if(statuses.Contains(status) == false) 		// if not already affected by Status
+		{ 										
+            statuses.Add(status); 					// add Status to List to show it affects Character
         }
     }
 

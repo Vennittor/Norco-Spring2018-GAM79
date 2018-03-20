@@ -64,7 +64,7 @@ public class Ability : ScriptableObject
                 string targetString = "";
                 foreach (Character character in targets)
                 {
-                    targetString += character.name + " ";
+                    targetString += character.name + ", ";
                 }
                 return targetString;
             }

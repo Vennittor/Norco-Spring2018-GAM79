@@ -13,7 +13,7 @@ public class PlayerCharacter : Character
     {
         base.Start();
         //heatState = HeatZone.OutofHeat;
-        // TODO set up ability attachments
+
         foreach(Ability ability in abilities)
         {
             ability.EquipAbility(this);
@@ -25,14 +25,11 @@ public class PlayerCharacter : Character
 
     }
 
-	public override void BeginTurn()
+	public new void BeginTurn()
 	{
-		Debug.Log ("Player " + name + " begins their turn.");
-        // status check
-		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED) 
+		if (base.BeginTurn ()) 
 		{
-			Debug.Log("Player " + name + " cannot act this turn");
-			combatManager.NextTurn ();
+			//Choose Ability and Get Targets
 		}
 	}
 
@@ -78,8 +75,8 @@ public class PlayerCharacter : Character
 
     public enum HeatZone
     {
-        OutofHeat,
-        InHeat
+        OUTOFHEAT,
+        INHEAT
     }
 
     public void SetHeatRate(int heat)
