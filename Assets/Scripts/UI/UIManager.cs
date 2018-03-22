@@ -142,7 +142,7 @@ public class UIManager : MonoBehaviour
     {
         if (state == ActiveState.NORMAL)
         {
-            (combatManager.activeCharacter as PlayerCharacter).SkillWater();
+            //(combatManager.activeCharacter as PlayerCharacter).SkillWater();
         }
     }
 

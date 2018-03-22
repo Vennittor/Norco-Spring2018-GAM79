@@ -7,9 +7,9 @@ public class Damage
 {
 	[SerializeField] private List<Vector2> damageRanges = new List<Vector2>();
 
-	[SerializeField] private DamageType elementType = DamageType.PHYSICAL;
+	[SerializeField] private ElementType elementType = ElementType.PHYSICAL;
 
-	public DamageType element
+	public ElementType element
 	{
 		get 
 		{

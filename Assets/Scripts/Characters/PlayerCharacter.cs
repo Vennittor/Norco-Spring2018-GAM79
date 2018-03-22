@@ -6,8 +6,10 @@ public class PlayerCharacter : Character
 {
     public HeatZone heatState;
     public int heatIntensity;
-
-	//private Ability activeAbility = null;
+    //Water Related(Robert)
+    [SerializeField]
+    private int waterUses = 3;
+    //private Ability activeAbility = null;
 
     private new void Start()
     {
@@ -15,41 +17,49 @@ public class PlayerCharacter : Character
         //heatState = HeatZone.OutofHeat;
     }
 
-	public override void BeginTurn()
-	{
-		base.BeginTurn ();
+    public override void BeginTurn()
+    {
+        base.BeginTurn();
 
-		if (canAct) 
-		{
-			//TODO swap UI graphics into to match PlayerCharacter
-			ChooseAbility();
-			//Get Targets - currently waits on input from UIManager for ability calls
-		}
-	}
+        if (canAct)
+        {
+            //TODO swap UI graphics into to match PlayerCharacter
+            ChooseAbility();
+            //Get Targets - currently waits on input from UIManager for ability calls
+        }
+    }
 
-	protected override void ChooseAbility()
-	{
-		//UIManager.AllowAbilitySelection
-	}
+    protected override void ChooseAbility()
+    {
+        //UIManager.AllowAbilitySelection
+    }
 
-	public override void AbilityComplete(CombatState newState = CombatState.ABLE)
+    //call to water class   
+    public void UseWater()
+    {
+        if (waterUses > 0 & currentHeat > 0)
+        {
+            Announcer.UseItem(this.gameObject.name, "water");
+            UseWater();
+
+        }
+        else if (waterUses == 0)
+        {
+            Debug.Log("you lean back for a swig, but only drink in disappointment");
+        }
+        else if (currentHeat == 0)
+        {
+            Debug.Log("your thirst does not require quenching at this time");
+        }
+    }
+
+    public override void AbilityComplete(CombatState newState = CombatState.ABLE)
 	{	
 		//UIManager.BlockAbilitySelection();
 		combatState = newState;
         EndTurn();
     }
-
-
-	//Use water (Robert)
-	public void SkillWater()
-	{
-		combatState = CombatState.USEABILITY;
-		Announcer.UseAbility(name, name, "water", "gotta hydrate my dude");
-
-		combatState = CombatState.ABLE;
-		combatManager.NextTurn();
-	}
-
+    
     /*public void EnterHeat()
     {
         heatState = HeatZone.InHeat;
