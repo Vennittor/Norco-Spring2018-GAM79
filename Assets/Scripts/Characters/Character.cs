@@ -120,24 +120,28 @@ public abstract class Character : MonoBehaviour
         return null;
     }
 
-    public void TakeDamage(uint damage = 0, DamageType damageType = DamageType.PHYSICAL)
+    public void TakeDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
     {
-		if (damageType == DamageType.PHYSICAL)
-		{
-			DealPhysicalDamage (damage);
-		}
-		else if(damageType == DamageType.HEAT)
-		{
-			DealHeatDamage (damage);
-		}
-		else if(damageType == DamageType.HEALING)
-		{
-			Heal(damage);
-		}
-		else if(damageType == DamageType.POISON)
-		{
-			DealPoisonDamage (damage);
-		}
+        if (damageType == ElementType.PHYSICAL)
+        {
+            DealPhysicalDamage(damage);
+        }
+        else if (damageType == ElementType.HEAT)
+        {
+            DealHeatDamage(damage);
+        }
+        else if (damageType == ElementType.HEALING)
+        {
+            Heal(damage);
+        }
+        else if (damageType == ElementType.WATER)
+        {
+            ApplyWater(damage);
+        }
+        else if (damageType == ElementType.POISON)
+        {
+            DealPoisonDamage(damage);
+        }
     }
 
 	void DealPhysicalDamage(uint physicalDamage = 0)
@@ -151,13 +155,17 @@ public abstract class Character : MonoBehaviour
 				Faint();
 			}
 		}
-
 	}
 
 	void Heal(uint healing = 0)
 	{
-			currentHealth = (currentHealth + healing) > maxhealth ? maxhealth : (currentHealth + healing);
+		currentHealth = (currentHealth + healing) > maxhealth ? maxhealth : (currentHealth + healing);
 	}
+
+    void ApplyWater(uint amount = 0)
+    {
+        currentHeat -= (uint)Mathf.Clamp((float)amount, 0f, (float)currentHeat);
+    }
 
     void DealHeatDamage(uint heatDamage = 0)
     {
@@ -165,7 +173,7 @@ public abstract class Character : MonoBehaviour
         if (currentHeat == maxHeat)
         {
             EndTurn();
-            currentHeat = maxHeat - 100; //or whatever we settle on the value for 1 bar is
+            //TODO  move this to EndTurn function.  should not be in deal damage Functions currentHeat = maxHeat - 100; //or whatever we settle on the value for 1 bar is
         }
     }
 

@@ -35,19 +35,23 @@ public class PlayerCharacter : Character
     }
 
     //call to water class   
-    /*public Water UseWater()
+    public void UseWater()
     {
-        if (waterUses > 0)
+        if (waterUses > 0 & currentHeat > 0)
         {
-            Announcer.UseAbility(name, name, "water", "gotta hydrate my dude");
+            Announcer.UseItem(this.gameObject.name, "water");
+            UseWater();
 
         }
         else if (waterUses == 0)
         {
             Debug.Log("you lean back for a swig, but only drink in disappointment");
         }
-        return;
-    }*/
+        else if (currentHeat == 0)
+        {
+            Debug.Log("your thirst does not require quenching at this time");
+        }
+    }
 
     public override void AbilityComplete(CombatState newState = CombatState.ABLE)
 	{	

@@ -6,14 +6,14 @@ using UnityEngine;
 public class Ability : ScriptableObject 
 {
 	// DESCRIPTIVE DATA
-    [SerializeField] private string abilityName;
-    [SerializeField] private string description;
-    [SerializeField] private string callOutText;
+    [SerializeField] protected string abilityName;
+    [SerializeField] protected string description;
+    [SerializeField] protected string callOutText;
 
 	// COMBAT DATA
 	public TargetType targetType;
-	[SerializeField] private List<Damage> damage = new List<Damage>();
-	[SerializeField] private List<Status> statuses;
+	[SerializeField] protected List<Damage> damage = new List<Damage>();
+	[SerializeField] protected List<Status> statuses;
 
 	[SerializeField] private uint numberOfActions = 1;
 	private uint actionsUsed = 0;
@@ -23,7 +23,7 @@ public class Ability : ScriptableObject
 
 	public Character characterUser;
 
-    [SerializeField] private List<Character> targets = new List<Character>();
+    [SerializeField] protected List<Character> targets = new List<Character>();
 
     // EFFECTS DATA
     //public Sprite image; // for effects
@@ -143,7 +143,7 @@ public class Ability : ScriptableObject
 		EndAbility ();
     }
 
-	void EndAbility()
+	protected void EndAbility()
 	{
 		if (actionsUsed < numberOfActions)
 		{

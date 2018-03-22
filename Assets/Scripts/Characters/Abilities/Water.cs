@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class Water : Ability
 {
-    
+    [SerializeField] private uint usesLeft = 3;
+    [SerializeField] private uint maxUses = 3;
 
-    //for water ability(robert)
-    public void UseWater(int uses, float hLevel)
+    uint amount = 100;
+
+    public void RefillWater(uint uses)
     {
-        uses--;
-        hLevel -= 100;//going off of what i recall the size of the heat bar is (300), since design said that they want 1 use to lower 1/3 of the bar
-        
+        usesLeft = (uint)Mathf.Clamp((float)uses, 0, (float)maxUses);
+    }
+
+    public new void UseAbility()
+    {
+        if (usesLeft > 0)
+        {
+            characterUser.TakeDamage(amount, ElementType.WATER);
+
+            usesLeft--;
+        }
+
+        EndAbility();
     }
 }
