@@ -8,10 +8,10 @@ public class HeatZone : MonoBehaviour
     public int myHeatIntensity;
 
     public void OnTriggerEnter(Collider other)
-    {
+	{	print ("Stuff");
         //TODO "if" statements are temporary, since the trigger enter was detecting the ground as well
         if (other.gameObject.name == "Player")
-        {
+		{
             Debug.Log("character entered a heat zone");
             _party = other.gameObject.GetComponent<Party>();
             _party.heatState = Party.HeatZone.InHeat;
@@ -22,7 +22,7 @@ public class HeatZone : MonoBehaviour
         }
     }
     public void OnTriggerExit(Collider other)
-    {
+	{	print ("No Stuff");
         if (other.gameObject.name == "Player")
         {
             Debug.Log("character exited a heat zone");
