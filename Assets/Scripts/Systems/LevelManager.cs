@@ -34,6 +34,11 @@ public class LevelManager : MonoBehaviour
         }
 
         _instance = this;
+
+		if (playerParty == null) 
+		{
+			playerParty = GameObject.FindGameObjectWithTag ("Player");
+		}
     }
 
     void Start()
@@ -53,7 +58,7 @@ public class LevelManager : MonoBehaviour
     {
 
         if(!combatManager.inCombat)
-        {
+		{
             combatManager.AddCharactersToCombat(player.partyMembers);
             combatManager.AddCharactersToCombat(enemy.partyMembers);
 
