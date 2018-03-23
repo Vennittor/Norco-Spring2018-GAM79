@@ -60,7 +60,7 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
         Color debugColor = Color.blue;
 
         RaycastHit hitInfo;
-        if (uIManager.state == UIManager.ActiveState.TARGETING)
+		if (uIManager.state == UIManager.InputMode.TARGETING)
         {
             debugColor = Color.green;
 

@@ -31,8 +31,8 @@ public class UIManager : MonoBehaviour
 
     public float infoDelayTime = 0.5f;
 
-    public enum ActiveState { NORMAL, TARGETING }
-    public ActiveState state;
+    public enum InputMode { NORMAL, TARGETING }
+    public InputMode state;
     #endregion
 
 
@@ -59,13 +59,13 @@ public class UIManager : MonoBehaviour
 	{
         if (Input.GetMouseButtonDown(0))
         {
-            if(state == ActiveState.TARGETING)
+            if(state == InputMode.TARGETING)
             {
                 if(targets.Count > 0)
                 {
                     ability.SetTargets(targets);
                     ability.UseAbility();
-                    state = ActiveState.NORMAL;
+                    state = InputMode.NORMAL;
                     TurnWhite();
                 }
             }
@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
 
     public void OutputAttackOne() // Ability1 , Basic Attack
     {
-        if(state == ActiveState.NORMAL)
+        if(state == InputMode.NORMAL)
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityOne();
             if(ability == null)
@@ -99,7 +99,7 @@ public class UIManager : MonoBehaviour
 
 	public void OutputAttackTwo() // Ability2, Skill1
     {
-        if (state == ActiveState.NORMAL)
+        if (state == InputMode.NORMAL)
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityTwo();
             if (ability == null)
@@ -119,7 +119,7 @@ public class UIManager : MonoBehaviour
 
 	public void OutputAttackThree()
     {
-        if (state == ActiveState.NORMAL)
+        if (state == InputMode.NORMAL)
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityThree();
             if (ability == null)
@@ -140,7 +140,7 @@ public class UIManager : MonoBehaviour
     //water use (Robert)
     public void OutputWaterUse()
     {
-        if (state == ActiveState.NORMAL)
+        if (state == InputMode.NORMAL)
         {
             //(combatManager.activeCharacter as PlayerCharacter).SkillWater();
         }
@@ -149,12 +149,12 @@ public class UIManager : MonoBehaviour
 
     public void SetMode_Normal() 
     {
-        state = ActiveState.NORMAL; 
+        state = InputMode.NORMAL; 
     }
 
     public void SetMode_Targeting()
     {
-        state = ActiveState.TARGETING;
+        state = InputMode.TARGETING;
     }
 
     public void AssignTarget()
