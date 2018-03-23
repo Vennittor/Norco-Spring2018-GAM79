@@ -1398,7 +1398,7 @@ GameObject:
   - component: {fileID: 114046690152080822}
   - component: {fileID: 114510117941555128}
   m_Layer: 5
-  m_Name: Canvas_UI
+  m_Name: Canvas_Combat_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3363,6 +3363,7 @@ MonoBehaviour:
   enemyCharacter: {fileID: 0}
   targets:
   - {fileID: 0}
+  ability: {fileID: 0}
   infoDelayTime: 0.5
   state: 0
 --- !u!114 &114517430092713342
