@@ -15,10 +15,7 @@ public class HeatZone : MonoBehaviour
             Debug.Log("character entered a heat zone");
             _party = other.gameObject.GetComponent<Party>();
             _party.heatState = Party.HeatZone.InHeat;
-            foreach (PlayerCharacter _char in _party.partyMembers)
-            {
-                _char.SetHeatRate(myHeatIntensity);
-            }
+            _party.HeatChecker(myHeatIntensity);
         }
     }
     public void OnTriggerExit(Collider other)
@@ -27,10 +24,6 @@ public class HeatZone : MonoBehaviour
         {
             Debug.Log("character exited a heat zone");
             _party = other.gameObject.GetComponent<Party>();
-            foreach (PlayerCharacter _char in _party.partyMembers)
-            {
-                _char.SetHeatRate(-myHeatIntensity);
-            }
             _party.heatState = Party.HeatZone.OutofHeat;
         }
     }

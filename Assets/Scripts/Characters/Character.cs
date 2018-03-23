@@ -128,7 +128,7 @@ public abstract class Character : MonoBehaviour
         }
         else if (damageType == ElementType.HEAT)
         {
-            DealHeatDamage(damage);
+            DealHeatDamage((int)damage);
         }
         else if (damageType == ElementType.HEALING)
         {
@@ -167,14 +167,14 @@ public abstract class Character : MonoBehaviour
         currentHeat -= (uint)Mathf.Clamp((float)amount, 0f, (float)currentHeat);
     }
 
-    void DealHeatDamage(uint heatDamage = 0)
+    public void DealHeatDamage(int heatDamage)
     {
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
-        if (currentHeat == maxHeat)
+        /*if (currentHeat == maxHeat)
         {
             EndTurn();
             //TODO  move this to EndTurn function.  should not be in deal damage Functions currentHeat = maxHeat - 100; //or whatever we settle on the value for 1 bar is
-        }
+        }*/
     }
 
 	void DealPoisonDamage(uint poisonDamage)

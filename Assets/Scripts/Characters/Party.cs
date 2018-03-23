@@ -50,8 +50,30 @@ public class Party : MonoBehaviour
     }
 
 
-    void Update()
+    public void FixedUpdate()
     {
+    }
+
+    public void HeatChecker(int myHeatIntensity)
+    {
+        if (heatState == HeatZone.InHeat)
+        {
+            foreach (Character _char in partyMembers)
+            {
+                _char.DealHeatDamage(myHeatIntensity);
+            }
+        }
+        else if (heatState == HeatZone.OutofHeat)
+        {
+            foreach (Character _char in partyMembers)
+            {
+                _char.DealHeatDamage(-myHeatIntensity);
+            }
+        }
+        else
+        {
+            return;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
