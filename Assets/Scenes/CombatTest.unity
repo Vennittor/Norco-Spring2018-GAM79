@@ -203,7 +203,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
+  - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
+  - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
   combatState: 0
   name: CharacterB
@@ -313,7 +316,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
+  - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
+  - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
   combatState: 0
   name: CharacterA
@@ -529,7 +535,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
+  - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
+  - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
   combatState: 0
   name: CharacterC

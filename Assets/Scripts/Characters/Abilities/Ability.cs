@@ -23,7 +23,7 @@ public class Ability : ScriptableObject
 
 	public Character characterUser;
 
-    [SerializeField] protected List<Character> targets = new List<Character>();
+    protected List<Character> targets = new List<Character>();
 
     // EFFECTS DATA
     //public Sprite image; // for effects
@@ -147,10 +147,12 @@ public class Ability : ScriptableObject
 	{
 		if (actionsUsed < numberOfActions)
 		{
+			targets.Clear ();
 			//StartAbility ();
 		}
 		else
 		{
+			targets.Clear ();
 			StartCooldown();
             (characterUser).AbilityComplete();
 		}
