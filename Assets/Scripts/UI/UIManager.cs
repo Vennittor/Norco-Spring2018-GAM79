@@ -31,8 +31,8 @@ public class UIManager : MonoBehaviour
 
     public float infoDelayTime = 0.5f;
 
-    public enum InputMode { NORMAL, ABILITYSELECT, TARGETING }
-    public InputMode state;
+    public enum InputMode { NORMAL, ABILITYSELECT, TARGETING, BLOCKED }
+    public InputMode inputState;
     #endregion
 
 
@@ -60,13 +60,13 @@ public class UIManager : MonoBehaviour
 		//RETARGET
         if (Input.GetMouseButtonDown(0))
         {
-            if(state == InputMode.TARGETING)
+			if(inputState == InputMode.TARGETING)
             {
                 if(targets.Count > 0)
                 {
                     ability.SetTargets(targets);
                     ability.UseAbility();
-					state = InputMode.ABILITYSELECT;
+					inputState = InputMode.ABILITYSELECT;
                     TurnWhite();
                 }
             }
@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
 
     public void OutputAttackOne() // Ability1 , Basic Attack
     {
-		if(state == InputMode.ABILITYSELECT)
+		if(inputState == InputMode.ABILITYSELECT)
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityOne();
             if(ability == null)
@@ -100,7 +100,7 @@ public class UIManager : MonoBehaviour
 
 	public void OutputAttackTwo() // Ability2, Skill1
     {
-		if (state == InputMode.ABILITYSELECT)
+		if (inputState == InputMode.ABILITYSELECT)
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityTwo();
             if (ability == null)
@@ -120,7 +120,7 @@ public class UIManager : MonoBehaviour
 
 	public void OutputAttackThree()
     {
-		if (state == InputMode.ABILITYSELECT)
+		if (inputState == InputMode.ABILITYSELECT)
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityThree();
             if (ability == null)
@@ -140,7 +140,7 @@ public class UIManager : MonoBehaviour
 		
     public void OutputWaterUse()
     {
-		if (state == InputMode.ABILITYSELECT)
+		if (inputState == InputMode.ABILITYSELECT)
         {
 			if (combatManager.activeCharacter is PlayerCharacter) 
 			{
@@ -153,22 +153,34 @@ public class UIManager : MonoBehaviour
 
     public void SetMode_Normal() 
     {
-        state = InputMode.NORMAL; 
+		inputState = InputMode.NORMAL; 
     }
 
 	public void SetMode_Select ()
 	{
-		state = InputMode.ABILITYSELECT; 
+		inputState = InputMode.ABILITYSELECT; 
 	}
 
     public void SetMode_Targeting()
     {
-        state = InputMode.TARGETING;
+		inputState = InputMode.TARGETING;
     }
+
+	public void SetMode_Blocked()
+	{
+		inputState = InputMode.BLOCKED;
+	}
+
+	public void GetTargets(TargetType targetType)
+	{
+		//Set top Targeting Mode
+
+		//Go look for Targets in EventSystem
+	}
 
     public void AssignTarget()
     {
-        //eventSystemManager.target = 
+        //Assign Targets back to activeCharacter.
     }
 
     public void TurnRed(List<Character> targets) // highlight in Red on Mouse-over

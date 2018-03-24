@@ -80,8 +80,25 @@ public abstract class Character : MonoBehaviour
 		}
 	}
 
-    public Ability AbilityOne() // Basic Attack
-    {
+	public Ability AbilityOne() // Basic Attack						//selectedAbility, UI calls back to Character.UseAbility(targets) which then runs selectedAbility.DoAbility(targets);
+    {																//UI NEEDS to go through Character in case Character needs to redirect target info before Ability is used
+		if (abilities [0] == null) 
+		{
+			Debug.Log ("There is no AbilityOne for " + this.name);
+			return null;
+		}
+
+		if (abilities [0].Usable) 
+		{
+			combatManager.uiManager.GetTargets (abilities [0].targetType);
+		}
+		else
+		{
+			Debug.Log ("AbilityOne is not usable");
+			return null;
+		}
+
+
 		if(abilities.Count != 0)
 		{
 	        if (abilities[0].Usable)

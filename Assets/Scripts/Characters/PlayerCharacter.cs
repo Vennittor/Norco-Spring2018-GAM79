@@ -26,7 +26,8 @@ public class PlayerCharacter : Character
 
     protected override void ChooseAbility()
     {
-        //UIManager.AllowAbilitySelection
+		combatManager.uiManager.SetMode_Select ();
+		//waits for UI to select an Ability, and the call Use AbilityOne,Two,Three or UseWater
     }
 
     //call to water class   

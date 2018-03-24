@@ -5,6 +5,7 @@ using UnityEngine;
 public class CombatManager : MonoBehaviour
 {
     public static CombatManager combatInstance;
+	public UIManager uiManager;
     private static Announcer announcer;
 
 	public bool inCombat = false;
@@ -52,10 +53,13 @@ public class CombatManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         
         Announcer.AnnounceSelf();
+
     }
 
     void Start()
     {
+		uiManager = UIManager.Instance;
+
         characters = new List<Character>();
         currentRoundCharacters = new List<Character>();
         activePlayers = new List<PlayerCharacter>();
