@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
 
     public float infoDelayTime = 0.5f;
 
-    public enum InputMode { NORMAL, TARGETING }
+    public enum InputMode { NORMAL, ABILITYSELECT, TARGETING }
     public InputMode state;
     #endregion
 
@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour
                 {
                     ability.SetTargets(targets);
                     ability.UseAbility();
-                    state = InputMode.NORMAL;
+					state = InputMode.ABILITYSELECT;
                     TurnWhite();
                 }
             }
@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
 
     public void OutputAttackOne() // Ability1 , Basic Attack
     {
-        if(state == InputMode.NORMAL)
+		if(state == InputMode.ABILITYSELECT)
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityOne();
             if(ability == null)
@@ -100,7 +100,7 @@ public class UIManager : MonoBehaviour
 
 	public void OutputAttackTwo() // Ability2, Skill1
     {
-        if (state == InputMode.NORMAL)
+		if (state == InputMode.ABILITYSELECT)
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityTwo();
             if (ability == null)
@@ -120,7 +120,7 @@ public class UIManager : MonoBehaviour
 
 	public void OutputAttackThree()
     {
-        if (state == InputMode.NORMAL)
+		if (state == InputMode.ABILITYSELECT)
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityThree();
             if (ability == null)
@@ -137,13 +137,16 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-
-    //water use (Robert)
+		
     public void OutputWaterUse()
     {
-        if (state == InputMode.NORMAL)
+		if (state == InputMode.ABILITYSELECT)
         {
-            //(combatManager.activeCharacter as PlayerCharacter).SkillWater();
+			if (combatManager.activeCharacter is PlayerCharacter) 
+			{
+				PlayerCharacter pChar = combatManager.activeCharacter as PlayerCharacter;
+				pChar.UseWater ();
+			}
         }
     }
 
@@ -152,6 +155,11 @@ public class UIManager : MonoBehaviour
     {
         state = InputMode.NORMAL; 
     }
+
+	public void SetMode_Select ()
+	{
+		state = InputMode.ABILITYSELECT; 
+	}
 
     public void SetMode_Targeting()
     {
