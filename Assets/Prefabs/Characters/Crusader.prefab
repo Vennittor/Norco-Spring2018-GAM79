@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 4385083063734628}
   - component: {fileID: 114067328271822216}
   - component: {fileID: 65517087445731398}
+  - component: {fileID: 95445820475501420}
   m_Layer: 0
   m_Name: Crusader
   m_TagString: Untagged
@@ -64,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1962725561991092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9, y: 10.1, z: 16.86}
+  m_LocalPosition: {x: -10.6, y: 10.1, z: 16.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4151048109773140}
@@ -83,6 +84,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.38, y: 12.57, z: 1}
   m_Center: {x: 0, y: -4, z: 0}
+--- !u!95 &95445820475501420
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1962725561991092}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 00643586cd89e624ab66030eb507bd41, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114067328271822216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,6 +118,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 56b8a8ed7ef885d4e8b4d8f552b5fc3e, type: 2}
   statuses: []
   combatState: 0
+  animator: {fileID: 0}
   name: 
   speed: 8
   maxhealth: 50
@@ -111,6 +130,7 @@ MonoBehaviour:
   evade: 10
   heatState: 0
   heatIntensity: 0
+  waterUses: 3
 --- !u!212 &212342927202090716
 SpriteRenderer:
   m_ObjectHideFlags: 1

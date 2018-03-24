@@ -28,7 +28,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1840279445591564
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +118,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 56b8a8ed7ef885d4e8b4d8f552b5fc3e, type: 2}
   statuses: []
   combatState: 0
+  animator: {fileID: 0}
   name: 
   speed: 8
   maxhealth: 50
@@ -130,7 +131,6 @@ MonoBehaviour:
   heatState: 0
   heatIntensity: 0
   waterUses: 3
-  animator: {fileID: 0}
 --- !u!212 &212283426433472834
 SpriteRenderer:
   m_ObjectHideFlags: 1

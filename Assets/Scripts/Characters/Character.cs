@@ -19,6 +19,9 @@ public abstract class Character : MonoBehaviour
     public CombatState combatState;
 	protected bool _canActThisTurn = true;
 
+    public Animator animator;
+    public bool isAnimating;
+
     public new string name;
     public int speed;
 
@@ -87,7 +90,17 @@ public abstract class Character : MonoBehaviour
 	        if (abilities[0].Usable)
 	        {           // if cooldown can start, do rest  of Ability
 	            combatState = CombatState.USEABILITY;
-                //play anim
+
+                if (!isAnimating)
+                {
+                    isAnimating = true;
+                    animator.SetInteger("animState", 1);
+                    print("played animation");
+                    isAnimating = false;
+                }
+
+                animator.SetInteger("animState", 0);
+
 	            return abilities[0];
 	        }
 		}
@@ -102,7 +115,15 @@ public abstract class Character : MonoBehaviour
 	        {           // if cooldown can start, do rest  of Ability
 	            combatState = CombatState.USEABILITY;
 
-	            return abilities[1];
+                if (!isAnimating)
+                {
+                    animator.SetInteger("animState", 2);
+                    print("played animation");
+                }
+
+                animator.SetInteger("animState", 0);
+
+                return abilities[1];
 	        }
 		}
         return null;
@@ -116,7 +137,15 @@ public abstract class Character : MonoBehaviour
 	        {           // if cooldown can start, do rest  of Ability
 	            combatState = CombatState.USEABILITY;
 
-	            return abilities[2];
+                if (!isAnimating)
+                {
+                    animator.SetInteger("animState", 3);
+                    print("played animation");
+                }
+
+                animator.SetInteger("animState", 0);
+
+                return abilities[2];
 	        }
 		}
         return null;
@@ -199,5 +228,10 @@ public abstract class Character : MonoBehaviour
         Debug.Log(name + " died!");
         combatState = CombatState.EXHAUSTED;
         EndTurn();
+    }
+
+    IEnumerator PlayAnimation()
+    {
+        animator.GetCurrentAnimatorStateInfo(0).IsName("state") == true);
     }
 }

@@ -11,7 +11,10 @@ public class PlayerCharacter : Character
     private int waterUses = 3;
     //private Ability activeAbility = null;
 
-    public Animator animator;
+    void Awake()
+    {
+        animator = gameObject.GetComponent<Animator>();
+    }
 
     private new void Start()
     {
