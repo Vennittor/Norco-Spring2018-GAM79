@@ -57,6 +57,7 @@ public class UIManager : MonoBehaviour
 
     public void Update()
 	{
+		//RETARGET
         if (Input.GetMouseButtonDown(0))
         {
             if(state == InputMode.TARGETING)
@@ -79,7 +80,7 @@ public class UIManager : MonoBehaviour
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityOne();
             if(ability == null)
             {
-                Debug.Log("UIManager: OutputAttackOne(): ERROR");
+                Debug.Log("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
             }
             else // working
             {
@@ -104,7 +105,7 @@ public class UIManager : MonoBehaviour
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityTwo();
             if (ability == null)
             {
-                Debug.Log("UIManager: OutputAttackOne(): ERROR");
+				Debug.Log("UIManager: OutputAttackTwo(): activeCharacter has no AbilityTwo");
             }
             else // working
             {
@@ -124,7 +125,7 @@ public class UIManager : MonoBehaviour
 			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityThree();
             if (ability == null)
             {
-                Debug.Log("UIManager: OutputAttackOne(): ERROR");
+				Debug.Log("UIManager: OutputAttackThree(): activeCharacter has no AbilityThree");
             }
             else // working
             {
