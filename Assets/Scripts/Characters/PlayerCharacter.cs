@@ -11,6 +11,8 @@ public class PlayerCharacter : Character
     private int waterUses = 3;
     //private Ability activeAbility = null;
 
+    public Animator animator;
+
     private new void Start()
     {
         base.Start();
@@ -80,4 +82,5 @@ public class PlayerCharacter : Character
     {
         heatIntensity += heat;
     }
+
 }

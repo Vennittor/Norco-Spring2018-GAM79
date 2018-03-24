@@ -87,12 +87,13 @@ public abstract class Character : MonoBehaviour
 	        if (abilities[0].Usable)
 	        {           // if cooldown can start, do rest  of Ability
 	            combatState = CombatState.USEABILITY;
-
+                //play anim
 	            return abilities[0];
 	        }
 		}
         return null;
     }
+
 	public Ability AbilityTwo()
     {
 		if(abilities.Count != 0)
@@ -106,6 +107,7 @@ public abstract class Character : MonoBehaviour
 		}
         return null;
     }
+
 	public Ability AbilityThree()
     {
 		if(abilities.Count != 0)
