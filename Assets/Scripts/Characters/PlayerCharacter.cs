@@ -11,6 +11,11 @@ public class PlayerCharacter : Character
     private int waterUses = 3;
     //private Ability activeAbility = null;
 
+    void Awake()
+    {
+        animator = gameObject.GetComponent<Animator>();
+    }
+
     private new void Start()
     {
         base.Start();
@@ -80,4 +85,5 @@ public class PlayerCharacter : Character
     {
         heatIntensity += heat;
     }
+
 }

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyCharacter : Character
 {
+    void Awake()
+    {
+        animator = gameObject.GetComponent<Animator>();
+    }
+
     private new void Start()
     {
         base.Start();
