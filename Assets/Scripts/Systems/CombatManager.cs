@@ -104,7 +104,7 @@ public class CombatManager : MonoBehaviour
         //Checks and adjustments to heat should be in seperate function (called here)
         //increase heat by set amount to characters (if combat is in a heat zone)
         //check if group is in a heat zone before entering combat (passed to here from game manager, not implemented yet)
-        if (activeCharacter is PlayerCharacter)
+        /*if (activeCharacter is PlayerCharacter)
         {
 			if ((activeCharacter as PlayerCharacter).heatState == PlayerCharacter.HeatZone.INHEAT)
             {
@@ -114,7 +114,7 @@ public class CombatManager : MonoBehaviour
                     Debug.Log(player.currentHeat + " < this is the current heat");
                 }
             }
-        }
+        }*/ //TODO set up so that checks heat state from level manager, which takes from party
         
 		if ( !VictoryCheck () ) 
 		{

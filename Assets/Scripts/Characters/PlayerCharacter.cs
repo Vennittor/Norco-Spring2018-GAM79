@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
-    public HeatZone heatState;
-    public int heatIntensity;
-    //Water Related(Robert)
     [SerializeField]
     private int waterUses = 3;
-    //private Ability activeAbility = null;
 
     private new void Start()
     {
         base.Start();
-        //heatState = HeatZone.OutofHeat;
     }
 
     public override void BeginTurn()
@@ -58,26 +53,5 @@ public class PlayerCharacter : Character
 		//UIManager.BlockAbilitySelection();
 		combatState = newState;
         EndTurn();
-    }
-    
-    /*public void EnterHeat()
-    {
-        heatState = HeatZone.InHeat;
-    }
-
-    public void ExitHeat()
-    {
-        heatState = HeatZone.OutofHeat;
-    }*/
-
-    public enum HeatZone
-    {
-        OUTOFHEAT,
-        INHEAT
-    }
-
-    public void SetHeatRate(int heat)
-    {
-        heatIntensity += heat;
     }
 }
