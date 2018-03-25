@@ -209,6 +209,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
   combatState: 0
+  animator: {fileID: 0}
+  isAnimating: 0
   name: CharacterB
   speed: 4
   maxhealth: 5
@@ -218,8 +220,6 @@ MonoBehaviour:
   defense: 0
   accuracy: 84.5
   evade: 10
-  heatState: 6
-  heatIntensity: 0
   waterUses: 3
 --- !u!1 &476853286
 GameObject:
@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 476853288}
   - component: {fileID: 476853287}
   - component: {fileID: 476853291}
+  - component: {fileID: 476853292}
   m_Layer: 0
   m_Name: Character A
   m_TagString: Untagged
@@ -322,6 +323,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
   combatState: 0
+  animator: {fileID: 0}
+  isAnimating: 0
   name: CharacterA
   speed: 5
   maxhealth: 5
@@ -331,9 +334,24 @@ MonoBehaviour:
   defense: 0
   accuracy: 84.5
   evade: 10
-  heatState: 6
-  heatIntensity: 0
   waterUses: 3
+--- !u!95 &476853292
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 476853286}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 630c69eab344231448529905e8e4d468, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &513945185
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +449,8 @@ MonoBehaviour:
   abilities: []
   statuses: []
   combatState: 0
+  animator: {fileID: 0}
+  isAnimating: 0
   name: enemy b
   speed: 3
   maxhealth: 5
@@ -541,6 +561,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
   combatState: 0
+  animator: {fileID: 0}
+  isAnimating: 0
   name: CharacterC
   speed: 3
   maxhealth: 5
@@ -550,8 +572,6 @@ MonoBehaviour:
   defense: 0
   accuracy: 84.5
   evade: 10
-  heatState: 6
-  heatIntensity: 0
   waterUses: 3
 --- !u!1 &1166834116
 GameObject:
@@ -581,6 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c89948975e84c4bbb2b2eaa180bd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   inCombat: 0
   characters: []
   activeCharacter: {fileID: 0}
@@ -775,6 +796,8 @@ MonoBehaviour:
   abilities: []
   statuses: []
   combatState: 0
+  animator: {fileID: 0}
+  isAnimating: 0
   name: enemy c
   speed: 2
   maxhealth: 5
@@ -1508,6 +1531,8 @@ MonoBehaviour:
   abilities: []
   statuses: []
   combatState: 0
+  animator: {fileID: 0}
+  isAnimating: 0
   name: enemy a
   speed: 4
   maxhealth: 5
