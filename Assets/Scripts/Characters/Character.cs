@@ -247,8 +247,8 @@ public abstract class Character : MonoBehaviour
         EndTurn();
     }
 
-    IEnumerator PlayAnimation()
-    {
-        animator.GetCurrentAnimatorStateInfo(0).IsName("state") == true);
-    }
+//    IEnumerator PlayAnimation()
+//    {
+//        animator.GetCurrentAnimatorStateInfo(0).IsName("state") == true;
+//    }
 }
