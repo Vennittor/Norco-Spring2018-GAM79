@@ -81,6 +81,10 @@ public abstract class Character : MonoBehaviour
 		{
 			combatManager.NextTurn();
 		}
+		else
+		{
+			Debug.LogWarning ("Attempting to run EndTurn() on " + this.gameObject.name + " while they are not the gameManager.activeCharacter. This normally should not be done.");
+		}
 	}
 
 	public Ability AbilityOne() // Basic Attack						//selectedAbility, UI calls back to Character.UseAbility(targets) which then runs selectedAbility.DoAbility(targets);
@@ -168,7 +172,7 @@ public abstract class Character : MonoBehaviour
         return null;
     }
 
-    public void TakeDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
+    public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
     {
         if (damageType == ElementType.PHYSICAL)
         {
@@ -184,7 +188,7 @@ public abstract class Character : MonoBehaviour
         }
         else if (damageType == ElementType.WATER)
         {
-            ApplyWater(damage);
+			ReduceHeat(damage);
         }
         else if (damageType == ElementType.POISON)
         {
@@ -210,7 +214,7 @@ public abstract class Character : MonoBehaviour
 		currentHealth = (currentHealth + healing) > maxhealth ? maxhealth : (currentHealth + healing);
 	}
 
-    void ApplyWater(uint amount = 0)
+    void ReduceHeat(uint amount = 0)
     {
         currentHeat -= (uint)Mathf.Clamp((float)amount, 0f, (float)currentHeat);
     }
@@ -218,11 +222,6 @@ public abstract class Character : MonoBehaviour
     public void DealHeatDamage(int heatDamage)
     {
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
-        /*if (currentHeat == maxHeat)
-        {
-            EndTurn();
-            //TODO  move this to EndTurn function.  should not be in deal damage Functions currentHeat = maxHeat - 100; //or whatever we settle on the value for 1 bar is
-        }*/
     }
 
 	void DealPoisonDamage(uint poisonDamage)

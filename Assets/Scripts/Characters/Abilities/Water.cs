@@ -18,7 +18,7 @@ public class Water : Ability
     {
         if (usesLeft > 0)
         {
-            characterUser.TakeDamage(amount, ElementType.WATER);
+			characterUser.ApplyDamage(amount, ElementType.WATER);
 
             usesLeft--;
         }

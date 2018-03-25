@@ -129,7 +129,7 @@ public class Ability : ScriptableObject
 	        { 
 				foreach (Damage range in damage)					// Deal all types of Damage in List
 	            { 
-					target.TakeDamage ( (uint)range.RollDamage(), range.element);
+					target.ApplyDamage ( (uint)range.RollDamage(), range.element);
 	            } 
 
 	            foreach (Status status in statuses)					// Apply all Status affects
