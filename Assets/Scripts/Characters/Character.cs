@@ -95,8 +95,8 @@ public abstract class Character : MonoBehaviour
 		}
 	}
 
-	public Ability ReadyAbility(int abilityIndex = 0) // Basic Attack						//selectedAbility, UI calls back to Character.UseAbility(targets) which then runs selectedAbility.DoAbility(targets);
-    {																//UI NEEDS to go through Character in case Character needs to redirect target info before Ability is used
+	public Ability ReadyAbility(int abilityIndex = 0) //Takes in an index number to reference that index in the abilities list, and will return that Ability if one is found and Usable
+    {
 		if (abilities [abilityIndex] == null || abilities.Count <= abilityIndex) 
 		{
 			Debug.Log ("There is no AbilityOne for " + this.characterName);
