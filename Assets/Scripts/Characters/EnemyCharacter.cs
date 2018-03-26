@@ -30,23 +30,13 @@ public class EnemyCharacter : Character
 		Ability abilityToUse = null;
 
 		float selection = Random.Range(0, abilities.Count);
+		selection = selection == (float)abilities.Count ? selection - 1f : selection;	// if the selecton is equal to 
 
-		if (selection <= 1)
-		{
-			abilityToUse = ReadyAbilityOne ();
+		abilityToUse = ReadyAbility ((int)selection);
 
-			if (abilityToUse != null) 
-			{
-				GetTargets (abilityToUse);
-			}
-		}
-		else if (selection > 1 && selection < 2)
+		if (abilityToUse != null) 
 		{
-			ReadyAbilityTwo();
-		}
-		else if (selection >= 2)
-		{
-			ReadyAbilityThree();
+			GetTargets (abilityToUse);
 		}
 	}
 

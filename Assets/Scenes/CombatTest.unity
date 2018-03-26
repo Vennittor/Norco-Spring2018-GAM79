@@ -204,23 +204,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
+  animator: {fileID: 0}
+  maxhealth: 5
+  currentHealth: 5
+  maxHeat: 0
+  currentHeat: 0
+  accuracy: 84.5
+  evade: 10
+  speed: 4
+  defense: 0
+  combatState: 0
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
-  combatState: 0
-  animator: {fileID: 0}
-  isAnimating: 0
-  name: CharacterB
-  speed: 4
-  maxhealth: 5
-  currentHealth: 5
-  currentHeat: 0
-  maxHeat: 0
-  defense: 0
-  accuracy: 84.5
-  evade: 10
+  selectedAbility: -1
+  water: {fileID: 0}
   waterUses: 3
 --- !u!95 &330486045
 Animator:
@@ -335,23 +336,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
+  animator: {fileID: 0}
+  maxhealth: 5
+  currentHealth: 5
+  maxHeat: 0
+  currentHeat: 0
+  accuracy: 84.5
+  evade: 10
+  speed: 5
+  defense: 0
+  combatState: 0
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
-  combatState: 0
-  animator: {fileID: 0}
-  isAnimating: 0
-  name: CharacterA
-  speed: 5
-  maxhealth: 5
-  currentHealth: 5
-  currentHeat: 0
-  maxHeat: 0
-  defense: 0
-  accuracy: 84.5
-  evade: 10
+  selectedAbility: -1
+  water: {fileID: 0}
   waterUses: 3
 --- !u!95 &476853292
 Animator:
@@ -464,20 +466,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities: []
-  statuses: []
-  combatState: 0
+  characterName: 
   animator: {fileID: 0}
-  isAnimating: 0
-  name: enemy b
-  speed: 3
   maxhealth: 5
   currentHealth: 5
-  currentHeat: 0
   maxHeat: 0
-  defense: 0
+  currentHeat: 0
   accuracy: 84.5
   evade: 10
+  speed: 3
+  defense: 0
+  combatState: 0
+  abilities: []
+  statuses: []
+  selectedAbility: -1
 --- !u!1 &899112348
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,23 +576,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
+  animator: {fileID: 0}
+  maxhealth: 5
+  currentHealth: 5
+  maxHeat: 0
+  currentHeat: 0
+  accuracy: 84.5
+  evade: 10
+  speed: 3
+  defense: 0
+  combatState: 0
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
-  combatState: 0
-  animator: {fileID: 0}
-  isAnimating: 0
-  name: CharacterC
-  speed: 3
-  maxhealth: 5
-  currentHealth: 5
-  currentHeat: 0
-  maxHeat: 0
-  defense: 0
-  accuracy: 84.5
-  evade: 10
+  selectedAbility: -1
+  water: {fileID: 0}
   waterUses: 3
 --- !u!95 &899112354
 Animator:
@@ -829,20 +832,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities: []
-  statuses: []
-  combatState: 0
+  characterName: 
   animator: {fileID: 0}
-  isAnimating: 0
-  name: enemy c
-  speed: 2
   maxhealth: 5
   currentHealth: 5
-  currentHeat: 0
   maxHeat: 0
-  defense: 0
+  currentHeat: 0
   accuracy: 84.5
   evade: 10
+  speed: 2
+  defense: 0
+  combatState: 0
+  abilities: []
+  statuses: []
+  selectedAbility: -1
 --- !u!1 &1416273166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,10 +1043,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1831643141162578, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
-      propertyPath: m_Name
-      value: Canvas_Combat_UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
@@ -1564,17 +1563,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities: []
-  statuses: []
-  combatState: 0
+  characterName: 
   animator: {fileID: 0}
-  isAnimating: 0
-  name: enemy a
-  speed: 4
   maxhealth: 5
   currentHealth: 5
-  currentHeat: 0
   maxHeat: 0
-  defense: 0
+  currentHeat: 0
   accuracy: 84.5
   evade: 10
+  speed: 4
+  defense: 0
+  combatState: 0
+  abilities: []
+  statuses: []
+  selectedAbility: -1

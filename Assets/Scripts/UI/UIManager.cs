@@ -75,46 +75,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void OutputAttackOne() // Ability1 , Basic Attack
+	public void OutputAttack(int abilityIndex) // Ability1 , Basic Attack
     {
 		if(inputState == InputMode.ABILITYSELECT)
         {
-			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbilityOne();
+			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
             if(ability == null)
             {
                 Debug.LogWarning("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
-            }
-            else 
-            {
-				GetTargets (ability.targetType);
-            }
-        }
-    }
-
-	public void OutputAttackTwo() // Ability2, Skill1
-    {
-		if (inputState == InputMode.ABILITYSELECT)
-        {
-			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbilityTwo();
-            if (ability == null)
-            {
-				Debug.Log("UIManager: OutputAttackTwo(): activeCharacter has no AbilityTwo");
-            }
-            else 
-            {
-				GetTargets (ability.targetType);
-            }
-        }
-    }
-
-	public void OutputAttackThree()
-    {
-		if (inputState == InputMode.ABILITYSELECT)
-        {
-			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbilityThree();
-            if (ability == null)
-            {
-				Debug.Log("UIManager: OutputAttackThree(): activeCharacter has no AbilityThree");
             }
             else 
             {

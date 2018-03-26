@@ -95,15 +95,15 @@ public abstract class Character : MonoBehaviour
 		}
 	}
 
-	public Ability ReadyAbilityOne() // Basic Attack						//selectedAbility, UI calls back to Character.UseAbility(targets) which then runs selectedAbility.DoAbility(targets);
+	public Ability ReadyAbility(int abilityIndex = 0) // Basic Attack						//selectedAbility, UI calls back to Character.UseAbility(targets) which then runs selectedAbility.DoAbility(targets);
     {																//UI NEEDS to go through Character in case Character needs to redirect target info before Ability is used
-		if (abilities [0] == null) 
+		if (abilities [abilityIndex] == null || abilities.Count <= abilityIndex) 
 		{
 			Debug.Log ("There is no AbilityOne for " + this.characterName);
 			return null;
 		}
 
-		if (abilities [0].Usable) 
+		if (abilities [abilityIndex].Usable) 
 		{
 			if (animator != null)
 			{
@@ -115,8 +115,8 @@ public abstract class Character : MonoBehaviour
 				Debug.LogWarning (this.gameObject.name + "Is trying to call it's animator in AbilityOne(), and does not have reference to it");
 			}
 
-			selectedAbility = 0;
-			return abilities [0];
+			selectedAbility = abilityIndex;
+			return abilities [abilityIndex];
 		}
 		else
 		{
@@ -124,35 +124,6 @@ public abstract class Character : MonoBehaviour
 			return null;
 		}
 			
-    }
-
-	public Ability ReadyAbilityTwo()
-    {
-		//TODO TEST empties reference within abilities[1] so that it will return null when searched for
-
-		if (abilities.Count > 1) 
-		{
-			if (abilities [1] != null) 
-			{
-				abilities[1] = null;
-			}
-		}
-		else
-		{
-			abilities [1] = null;
-		}
-
-		return abilities [1];
-    }
-
-	public Ability ReadyAbilityThree()
-    {
-		//TODO TEST Currently Empty for Testing Reasons
-		if (abilities.Count > 2) 
-		{
-			abilities.RemoveRange (2, abilities.Count-2);
-		}
-        return null;
     }
 
     public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
