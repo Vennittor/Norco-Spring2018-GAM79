@@ -47,6 +47,11 @@ public abstract class Character : MonoBehaviour
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
 
+		if (animator == null) 
+		{
+			animator = GetComponent<Animator> ();
+		}
+
 		foreach(Ability ability in abilities)
 		{
 			ability.EquipAbility(this);
@@ -69,8 +74,16 @@ public abstract class Character : MonoBehaviour
 		{
 			_canActThisTurn = true;
 
-			animator.SetBool ("Idle", true);
-			animator.SetBool ("Ready", false);
+			if (animator != null)
+			{
+				animator.SetBool ("Idle", true);
+				animator.SetBool ("Ready", false);
+			}
+			else
+			{
+				Debug.LogWarning (this.gameObject.name + "Is trying to call it's animator in BeginTurn(), and does not have reference to it");
+			}
+
 		}
 	}
 
@@ -100,42 +113,26 @@ public abstract class Character : MonoBehaviour
 
 		if (abilities [0].Usable) 
 		{
-			combatManager.uiManager.GetTargets (abilities [0].targetType);
+			//combatManager.uiManager.GetTargets (abilities [0].targetType);
+
+			if (animator != null)
+			{
+				animator.SetBool ("Ready", true);
+				animator.SetBool ("Idle", false);
+			}
+			else
+			{
+				Debug.LogWarning (this.gameObject.name + "Is trying to call it's animator in AbilityOne(), and does not have reference to it");
+			}
+
+			return abilities [0];
 		}
 		else
 		{
 			Debug.Log ("AbilityOne is not usable");
 			return null;
 		}
-
-		animator.SetBool ("Ready", true);
-		animator.SetBool ("Idle", false);
-
-		return abilities [0];
-
-
-//		if(abilities.Count != 0)
-//		{
-//	        if (abilities[0].Usable)
-//	        {           // if cooldown can start, do rest  of Ability
-//	            combatState = CombatState.USEABILITY;
-//
-//                if (!isAnimating)
-//                {
-//                    isAnimating = true;
-//                    animator.SetInteger("animState", 1);
-//                    print("played animation");
-//                    isAnimating = false;
-//                }
-//
-//                animator.SetInteger("animState", 0);
-//
-//	            return abilities[0];
-//	        }
-//		}
-//        return null;
-
-
+			
     }
 
 	public Ability AbilityTwo()

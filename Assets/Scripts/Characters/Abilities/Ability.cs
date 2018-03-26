@@ -124,9 +124,17 @@ public class Ability : ScriptableObject
 		} 
 		else 
 		{
-			characterUser.animator.SetTrigger ("Strike");		//Tells animator to go into the Strike animation
-			characterUser.animator.SetBool ("Ready", false);	//When the Strike animation goes to REcover, with "Ready" being false, it should transition back to Idle
-			characterUser.animator.SetBool("Idle", true);
+			if (characterUser.animator != null) 
+			{
+				characterUser.animator.SetTrigger ("Strike");		//Tells animator to go into the Strike animation
+				characterUser.animator.SetBool ("Ready", false);	//When the Strike animation goes to REcover, with "Ready" being false, it should transition back to Idle
+				characterUser.animator.SetBool("Idle", true);
+			}
+			else 
+			{
+				Debug.LogWarning ("Ability " + this.abilityName + " on " + characterUser.gameObject.name + " is trying to reference " 
+					+ characterUser.gameObject.name + "'s animator, which does not have reference to an Animator.");
+			}
 
             AnnounceAbility();
 	        foreach (Character target in targets)					// Target all applicable targets
