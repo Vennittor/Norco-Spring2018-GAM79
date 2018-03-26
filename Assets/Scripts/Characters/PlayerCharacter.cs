@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
-    [SerializeField]
-    private int waterUses = 3;
+	[SerializeField] private Water water;
+    [SerializeField] private int waterUses = 3;
 
     void Awake()
     {
@@ -31,12 +31,12 @@ public class PlayerCharacter : Character
 
     protected override void ChooseAbility()
     {
-		combatManager.uiManager.SetMode_Select ();
 		//waits for UI to select an Ability, and the call Use AbilityOne,Two,Three or UseWater
+		combatManager.uiManager.SetMode_Select ();
     }
 
     //call to water class   
-    public void UseWater()
+    public void ReadyUseWater()
     {
         if (waterUses > 0 & currentHeat > 0)
         {
@@ -53,6 +53,11 @@ public class PlayerCharacter : Character
             Debug.Log("your thirst does not require quenching at this time");
         }
     }
+
+	public void UseWater()
+	{
+		water.StartAbility ();
+	}
 
     public override void AbilityComplete(CombatState newState = CombatState.ABLE)
 	{	

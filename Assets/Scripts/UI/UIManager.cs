@@ -77,7 +77,7 @@ public class UIManager : MonoBehaviour
     {
 		if(inputState == InputMode.ABILITYSELECT)
         {
-			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityOne();
+			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbilityOne();
             if(ability == null)
             {
                 Debug.Log("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
@@ -102,7 +102,7 @@ public class UIManager : MonoBehaviour
     {
 		if (inputState == InputMode.ABILITYSELECT)
         {
-			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityTwo();
+			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbilityTwo();
             if (ability == null)
             {
 				Debug.Log("UIManager: OutputAttackTwo(): activeCharacter has no AbilityTwo");
@@ -122,7 +122,7 @@ public class UIManager : MonoBehaviour
     {
 		if (inputState == InputMode.ABILITYSELECT)
         {
-			ability = (combatManager.activeCharacter as PlayerCharacter).AbilityThree();
+			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbilityThree();
             if (ability == null)
             {
 				Debug.Log("UIManager: OutputAttackThree(): activeCharacter has no AbilityThree");
@@ -173,7 +173,7 @@ public class UIManager : MonoBehaviour
 
 	public void GetTargets(TargetType targetType)
 	{
-		//Set top Targeting Mode
+		SetMode_Targeting ();
 
 		//Go look for Targets in EventSystem
 	}

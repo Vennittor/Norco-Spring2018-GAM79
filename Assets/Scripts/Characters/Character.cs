@@ -72,6 +72,8 @@ public abstract class Character : MonoBehaviour
 		else
 		{
 			_canActThisTurn = true;
+
+			ChooseAbility ();
 		}
 	}
 
@@ -91,7 +93,7 @@ public abstract class Character : MonoBehaviour
 		}
 	}
 
-	public Ability AbilityOne() // Basic Attack						//selectedAbility, UI calls back to Character.UseAbility(targets) which then runs selectedAbility.DoAbility(targets);
+	public Ability ReadyAbilityOne() // Basic Attack						//selectedAbility, UI calls back to Character.UseAbility(targets) which then runs selectedAbility.DoAbility(targets);
     {																//UI NEEDS to go through Character in case Character needs to redirect target info before Ability is used
 		if (abilities [0] == null) 
 		{
@@ -123,7 +125,7 @@ public abstract class Character : MonoBehaviour
 			
     }
 
-	public Ability AbilityTwo()
+	public Ability ReadyAbilityTwo()
     {
 		//TODO TEST empties reference within abilities[1] so that it will return null when searched for
 
@@ -142,7 +144,7 @@ public abstract class Character : MonoBehaviour
 		return abilities [1];
     }
 
-	public Ability AbilityThree()
+	public Ability ReadyAbilityThree()
     {
 		//TODO TEST Currently Empty for Testing Reasons
 		if (abilities.Count > 2) 

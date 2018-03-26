@@ -33,7 +33,7 @@ public class EnemyCharacter : Character
 
 		if (selection <= 1)
 		{
-			abilityToUse = AbilityOne ();
+			abilityToUse = ReadyAbilityOne ();
 
 			if (abilityToUse != null) 
 			{
@@ -42,11 +42,11 @@ public class EnemyCharacter : Character
 		}
 		else if (selection > 1 && selection < 2)
 		{
-			AbilityTwo();
+			ReadyAbilityTwo();
 		}
 		else if (selection >= 2)
 		{
-			AbilityThree();
+			ReadyAbilityThree();
 		}
 	}
 
