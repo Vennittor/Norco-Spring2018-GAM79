@@ -25,14 +25,15 @@ public class PlayerCharacter : Character
         {
             //TODO swap UI graphics into to match PlayerCharacter
             ChooseAbility();
-            //Get Targets - currently waits on input from UIManager for ability calls
         }
     }
 
-    protected override void ChooseAbility()
+	protected override void ChooseAbility()					//tells UIManger to enter into an ability selection mode.  That script will then call ReadyAbility() based on the input given
     {
-		//waits for UI to select an Ability, and the call Use AbilityOne,Two,Three or UseWater
-		combatManager.uiManager.SetMode_Select ();
+		if (!combatManager.uiManager.AllowAbilitySelection () ) 
+		{
+			Debug.LogWarning ("UIManager cannot enter into Ability Selection mode right now");
+		}
     }
 
     //call to water class   

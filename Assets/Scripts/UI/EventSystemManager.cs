@@ -66,8 +66,8 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
 
             if (Physics.Raycast(ray, out hitInfo))
             {
-                Character input = hitInfo.transform.gameObject.GetComponent<Character>();
-                if (input != history)
+                Character hitCharacter = hitInfo.transform.gameObject.GetComponent<Character>();
+                if (hitCharacter != history)
                 {
                     uIManager.TurnWhite();
                 }
@@ -75,18 +75,18 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
                 List<Character> outputs = new List<Character>();
                 //Debug.Log(hitInfo.transform.gameObject.name);
                 //Debug.Log("TargetType:" + targetType.who);
-                if (input == combatManager.activeCharacter && targetType.who == TargetType.Who.SELF) // if targeting SELF
+                if (hitCharacter == combatManager.activeCharacter && targetType.who == TargetType.Who.SELF) // if targeting SELF
                 {
-                    outputs.Add(input);
+                    outputs.Add(hitCharacter);
                     uIManager.TurnRed(outputs); //target type, how many
                     debugColor = Color.red;
 
                 }
-                else if (input is PlayerCharacter && targetType.who == TargetType.Who.ALLY) // if selecting ALLY
+                else if (hitCharacter is PlayerCharacter && targetType.who == TargetType.Who.ALLY) // if selecting ALLY
                 {
                     if (targetType.formation == TargetType.Formation.SINGLE) // target ALLY
                     {
-                        outputs.Add(input);
+                        outputs.Add(hitCharacter);
                         uIManager.TurnRed(outputs); //target type, how many
                     }
                     else if(targetType.formation == TargetType.Formation.GROUP) // target ALLIES
@@ -99,11 +99,11 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
                         uIManager.TurnRed(outputs); //target type, how many
                     }
                 }
-                else if(input is EnemyCharacter && targetType.who == TargetType.Who.OPPONENT) // if selecting OPPONENT
+                else if(hitCharacter is EnemyCharacter && targetType.who == TargetType.Who.OPPONENT) // if selecting OPPONENT
                 {
                     if (targetType.formation == TargetType.Formation.SINGLE) // target OPPONENT
                     {
-                        outputs.Add(input);
+                        outputs.Add(hitCharacter);
                         uIManager.TurnRed(outputs); //target type, how many
                     }
                     else if (targetType.formation == TargetType.Formation.GROUP) // target OPPONENTS
@@ -115,7 +115,7 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
                         uIManager.TurnRed(outputs); //target type, how many
                     }
                 }
-                else if((input is PlayerCharacter || input is EnemyCharacter) && targetType.who == TargetType.Who.EVERYONE) // if selecting EVERYONE (may be redundant)
+                else if((hitCharacter is PlayerCharacter || hitCharacter is EnemyCharacter) && targetType.who == TargetType.Who.EVERYONE) // if selecting EVERYONE (may be redundant)
                 {
                     foreach (PlayerCharacter player in combatManager.activePlayers)
                     {

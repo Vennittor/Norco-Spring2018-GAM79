@@ -32,9 +32,28 @@ public class UIManager : MonoBehaviour
     public float infoDelayTime = 0.5f;
 
     public enum InputMode { NORMAL, ABILITYSELECT, TARGETING, BLOCKED }
-    public InputMode inputState;
+    public InputMode inputMode;
     #endregion
 
+	private void SetMode_Normal() 
+	{
+		inputMode = InputMode.NORMAL; 
+	}
+
+	private void SetMode_Select ()
+	{
+		inputMode = InputMode.ABILITYSELECT; 
+	}
+
+	private void SetMode_Targeting()
+	{
+		inputMode = InputMode.TARGETING;
+	}
+
+	private void SetMode_Blocked()
+	{
+		inputMode = InputMode.BLOCKED;
+	}
 
     #region Functions
     void Awake()
@@ -54,30 +73,17 @@ public class UIManager : MonoBehaviour
         combatManager = CombatManager.Instance;
         eventSystemManager = EventSystemManager.Instance;
 
-		inputState = InputMode.NORMAL;
+		inputMode = InputMode.NORMAL;
     }
 
     public void Update()
 	{
-		//RETARGET
-        if (Input.GetMouseButtonDown(0))
-        {
-			if(inputState == InputMode.TARGETING)
-            {
-                if(targets.Count > 0)
-                {
-                    ability.SetTargets(targets);
-                    ability.UseAbility();
-					inputState = InputMode.ABILITYSELECT;
-                    TurnWhite();
-                }
-            }
-        }
+
     }
 
-	public void OutputAttack(int abilityIndex) // Ability1 , Basic Attack
+	public void OutputAttack(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
     {
-		if(inputState == InputMode.ABILITYSELECT)
+		if(inputMode == InputMode.ABILITYSELECT)
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
             if(ability == null)
@@ -93,7 +99,7 @@ public class UIManager : MonoBehaviour
 		
     public void OutputWaterUse()
     {
-		if (inputState == InputMode.ABILITYSELECT)
+		if (inputMode == InputMode.ABILITYSELECT)
         {
 			if (combatManager.activeCharacter is PlayerCharacter) 
 			{
@@ -103,32 +109,41 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
-    public void SetMode_Normal() 
-    {
-		inputState = InputMode.NORMAL; 
-    }
-
-	public void SetMode_Select ()
+	public bool AllowAbilitySelection()
 	{
-		inputState = InputMode.ABILITYSELECT; 
+		if (inputMode != InputMode.BLOCKED)
+		{
+			SetMode_Select ();
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
-    public void SetMode_Targeting()
-    {
-		inputState = InputMode.TARGETING;
-    }
-
-	public void SetMode_Blocked()
+	public bool GetTargets(TargetType targetType)
 	{
-		inputState = InputMode.BLOCKED;
+		if (inputMode != InputMode.BLOCKED)
+		{
+			SetMode_Targeting ();
+
+			eventSystemManager.FindTargets (ability.targetType);
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
-	public void GetTargets(TargetType targetType)
+	public bool BlockInput()
 	{
-		SetMode_Targeting ();
+		SetMode_Blocked ();
 
-		eventSystemManager.FindTargets(ability.targetType);
+		return true;
 	}
 
     public void AssignTarget()
