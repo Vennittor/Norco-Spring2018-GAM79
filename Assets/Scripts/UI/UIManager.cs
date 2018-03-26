@@ -85,12 +85,12 @@ public class UIManager : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown (0)) 									//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
 		{
-			if (inputMode == InputMode.TARGETING && collectedTargets.Count > 0)
+			if (inputMode == InputMode.TARGETING)
 			{
 				AssignTargets ();
 
 				SetMode_Select ();
-				ability.UseAbility ();
+				//ability.UseAbility ();
 			}
 		}
 
@@ -144,9 +144,7 @@ public class UIManager : MonoBehaviour
 		if (inputMode != InputMode.BLOCKED)
 		{
 			SetMode_Targeting ();
-			//eventSystemManager.FindTargets (ability.targetType);
 
-			//TEST
 			searchingTargetType = targetType;
 
 			return true;
@@ -166,6 +164,8 @@ public class UIManager : MonoBehaviour
 
 	public void AssignTargets()        	//Assign Targets back to activeCharacter.
 	{		Debug.Log ("Send Target info to ActiveCharacter");
+
+		//TODO abilityTargets = collectedTargets  OR tell activeCharacter to UseAbility(collectedTargets).  Make sure mode gets set back to Select BEFORE Ability is used
 		TurnWhite ();
 
 		collectedTargets.Clear ();
