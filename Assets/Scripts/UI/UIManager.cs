@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     public EventSystemManager eventSystemManager;
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
-    public List<Character> targets;
+	public List<Character> collectedTargets =  new List<Character>();
     [SerializeField] private Ability ability;
 
     public delegate void MyDelegate();
@@ -34,6 +34,11 @@ public class UIManager : MonoBehaviour
     public enum InputMode { NORMAL, ABILITYSELECT, TARGETING, BLOCKED }
     public InputMode inputMode;
     #endregion
+
+
+	Character previousHitCharacter;
+	TargetType searchingTargetType;
+
 
 	private void SetMode_Normal() 
 	{
@@ -78,11 +83,22 @@ public class UIManager : MonoBehaviour
 
     public void Update()
 	{
+		if (Input.GetMouseButtonDown (0)) 									//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
+		{
+			if (inputMode == InputMode.TARGETING && collectedTargets.Count > 0)
+			{
+				AssignTargets ();
 
+				SetMode_Select ();
+				ability.UseAbility ();
+			}
+		}
+
+		HighlightTargets ();
     }
 
 	public void OutputAttack(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
-    {
+	{
 		if(inputMode == InputMode.ABILITYSELECT)
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
@@ -128,8 +144,10 @@ public class UIManager : MonoBehaviour
 		if (inputMode != InputMode.BLOCKED)
 		{
 			SetMode_Targeting ();
+			//eventSystemManager.FindTargets (ability.targetType);
 
-			eventSystemManager.FindTargets (ability.targetType);
+			//TEST
+			searchingTargetType = targetType;
 
 			return true;
 		}
@@ -146,37 +164,152 @@ public class UIManager : MonoBehaviour
 		return true;
 	}
 
-    public void AssignTarget()
-    {
-        //Assign Targets back to activeCharacter.
+	public void AssignTargets()        	//Assign Targets back to activeCharacter.
+	{		Debug.Log ("Send Target info to ActiveCharacter");
+		TurnWhite ();
+
+		collectedTargets.Clear ();
+
+		searchingTargetType = null;
     }
 
     public void TurnRed(List<Character> targets) // highlight in Red on Mouse-over
     {
         foreach(Character target in targets)
         {
-            target.transform.GetComponentInChildren<SpriteRenderer>().material.color = Color.red;
-            if (!this.targets.Contains(target))
-            {
-                this.targets.Add(target);
-            }
+			if (target.transform.GetComponentInChildren<SpriteRenderer> () != null) 
+			{
+				target.transform.GetComponentInChildren<SpriteRenderer> ().material.color = Color.red;
+			}
         }
-
     }
 
     public void TurnWhite() // de-highlight red, return to white after not moused-over
     {
         foreach (Character character in combatManager.charactersInCombat)
         {
-            character.transform.GetComponentInChildren<SpriteRenderer>().material.color = Color.white;
-            targets.Clear();
+			if (character.transform.GetComponentInChildren<SpriteRenderer> () != null) 
+			{
+				character.transform.GetComponentInChildren<SpriteRenderer> ().material.color = Color.white;
+			}
         }
     }
 
-    public void AcceptTargets(List<Character> targets)
-    {
-        this.targets = targets;
-        SetMode_Targeting();
-    }
+
+	void HighlightTargets()
+	{
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+		Color debugColor = Color.blue;
+
+		RaycastHit hitInfo;
+		if (inputMode == UIManager.InputMode.TARGETING && searchingTargetType != null)
+		{
+
+			debugColor = Color.green;
+
+			if (Physics.Raycast(ray, out hitInfo))
+			{
+				if (hitInfo.transform.gameObject.GetComponent<Character> () == null) 						//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
+				{
+					previousHitCharacter = null;
+				}
+				else 																							//else if we did, Start doing stuff
+				{
+					Character hitCharacter = hitInfo.transform.gameObject.GetComponent<Character>();			//is the hitCharacter the previously hit Charater,  if not TurnWhite
+					if (hitCharacter != previousHitCharacter || previousHitCharacter == null) 
+					{
+						collectedTargets.Clear ();
+						TurnWhite ();
+						hitCharacter = previousHitCharacter;
+					}
+
+					if (searchingTargetType.who == TargetType.Who.SELF && hitCharacter == combatManager.activeCharacter) 	// if targeting SELF
+					{
+						if (!collectedTargets.Contains (hitCharacter)) 
+						{
+							collectedTargets.Add(hitCharacter);
+						}
+
+						TurnRed(collectedTargets);
+						debugColor = Color.red;
+
+					}
+					else if (searchingTargetType.who == TargetType.Who.ALLY && hitCharacter is PlayerCharacter) 				// if selecting ALLY
+					{
+						if (searchingTargetType.formation == TargetType.Formation.SINGLE) 										// target ALLY
+						{
+							if (!collectedTargets.Contains (hitCharacter)) 
+							{
+								collectedTargets.Add(hitCharacter);
+							}
+							TurnRed(collectedTargets);
+						}
+						else if(searchingTargetType.formation == TargetType.Formation.GROUP) 									// target ALLIES
+						{
+							foreach(PlayerCharacter player in combatManager.activePlayers)
+							{
+								if (!collectedTargets.Contains (player)) 
+								{
+									collectedTargets.Add(player as Character);
+								}
+							}
+							TurnRed(collectedTargets);
+						}
+					}
+					else if(searchingTargetType.who == TargetType.Who.OPPONENT && hitCharacter is EnemyCharacter) 			// if selecting OPPONENT
+					{
+						if (searchingTargetType.formation == TargetType.Formation.SINGLE) 										// target OPPONENT
+						{
+							if (!collectedTargets.Contains (hitCharacter)) 
+							{
+								collectedTargets.Add(hitCharacter);
+							}
+							TurnRed(collectedTargets);
+						}
+						else if (searchingTargetType.formation == TargetType.Formation.GROUP) 									// target OPPONENTS
+						{
+							foreach (EnemyCharacter enemy in combatManager.activeEnemies)
+							{
+								if (!collectedTargets.Contains (enemy)) 
+								{
+									collectedTargets.Add(enemy as Character);
+								}
+							}
+							TurnRed(collectedTargets);
+						}
+					}
+					else if( searchingTargetType.who == TargetType.Who.EVERYONE && (hitCharacter is PlayerCharacter || hitCharacter is EnemyCharacter) ) // if selecting EVERYONE (may be redundant)
+					{
+						foreach (PlayerCharacter player in combatManager.activePlayers)
+						{
+							if (!collectedTargets.Contains (player)) 
+							{
+								collectedTargets.Add(player as Character);
+							}
+						}
+						foreach (EnemyCharacter enemy in combatManager.activeEnemies)
+						{
+							if (!collectedTargets.Contains (enemy)) 
+							{
+								collectedTargets.Add(enemy as Character);
+							}
+						}
+						TurnRed(collectedTargets);
+					}
+						
+				}
+
+			}
+			else
+			{
+				collectedTargets.Clear ();
+				TurnWhite();
+			}
+
+		}
+
+		Debug.DrawRay(ray.origin, ray.direction, debugColor);
+	}
     #endregion
 }

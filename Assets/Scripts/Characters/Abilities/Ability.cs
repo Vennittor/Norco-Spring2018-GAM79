@@ -90,15 +90,15 @@ public class Ability : ScriptableObject
 		}
 	}
 
-	public void SetTarget(Character targetToSet)
+	public void SetTargets(List<Character> targetsToSet)	
+	{
+		targets.Clear ();
+		targets = targetsToSet;
+	}
+	public void SetTargets(Character targetToSet)			//Overload method for SetTargets to accept only a single Character instead of needing a list
 	{
 		targets.Clear ();
 		targets.Add (targetToSet);
-	}
-
-	public void SetTargets(List<Character> targetsToSet)	
-	{
-		targets = targetsToSet;
 	}
 
     public void StartAbility()

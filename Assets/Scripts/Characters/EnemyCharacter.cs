@@ -43,7 +43,7 @@ public class EnemyCharacter : Character
 	void GetTargets(Ability ability)
 	{
 		//TODO establish a seperate AI that will handle Target decisions
-		ability.SetTarget(RandPlayerTarget() as Character);
+		ability.SetTargets(RandPlayerTarget() as Character);
 		ability.UseAbility ();
 	}
 
