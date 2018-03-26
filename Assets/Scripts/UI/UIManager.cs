@@ -53,6 +53,8 @@ public class UIManager : MonoBehaviour
     {
         combatManager = CombatManager.Instance;
         eventSystemManager = EventSystemManager.Instance;
+
+		inputState = InputMode.NORMAL;
     }
 
     public void Update()
@@ -80,20 +82,11 @@ public class UIManager : MonoBehaviour
 			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbilityOne();
             if(ability == null)
             {
-                Debug.Log("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
+                Debug.LogWarning("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
             }
-            else // working
+            else 
             {
-                if (ability.Usable)
-                {
-                    SetMode_Targeting();
-                    eventSystemManager.AcceptTargetType(ability.targetType);
-                }
-
-				else
-				{
-					Debug.Log ("Ability on cooldown");
-				}
+				GetTargets (ability.targetType);
             }
         }
     }
@@ -107,13 +100,9 @@ public class UIManager : MonoBehaviour
             {
 				Debug.Log("UIManager: OutputAttackTwo(): activeCharacter has no AbilityTwo");
             }
-            else // working
+            else 
             {
-                if (ability.Usable)
-                {
-                    SetMode_Targeting();
-                    eventSystemManager.AcceptTargetType(ability.targetType);
-                }
+				GetTargets (ability.targetType);
             }
         }
     }
@@ -127,13 +116,9 @@ public class UIManager : MonoBehaviour
             {
 				Debug.Log("UIManager: OutputAttackThree(): activeCharacter has no AbilityThree");
             }
-            else // working
+            else 
             {
-                if (ability.Usable)
-                {
-                    SetMode_Targeting();
-                    eventSystemManager.AcceptTargetType(ability.targetType);
-                }
+				GetTargets (ability.targetType);
             }
         }
     }
@@ -175,7 +160,7 @@ public class UIManager : MonoBehaviour
 	{
 		SetMode_Targeting ();
 
-		//Go look for Targets in EventSystem
+		eventSystemManager.FindTargets(ability.targetType);
 	}
 
     public void AssignTarget()

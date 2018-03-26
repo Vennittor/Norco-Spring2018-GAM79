@@ -33,6 +33,8 @@ public abstract class Character : MonoBehaviour
 
 	protected bool _canActThisTurn = true;
 
+	public int selectedAbility = -1;
+
 	public bool canAct
 	{
 		get
@@ -103,8 +105,6 @@ public abstract class Character : MonoBehaviour
 
 		if (abilities [0].Usable) 
 		{
-			//combatManager.uiManager.GetTargets (abilities [0].targetType);
-
 			if (animator != null)
 			{
 				animator.SetBool ("Ready", true);
@@ -115,6 +115,7 @@ public abstract class Character : MonoBehaviour
 				Debug.LogWarning (this.gameObject.name + "Is trying to call it's animator in AbilityOne(), and does not have reference to it");
 			}
 
+			selectedAbility = 0;
 			return abilities [0];
 		}
 		else

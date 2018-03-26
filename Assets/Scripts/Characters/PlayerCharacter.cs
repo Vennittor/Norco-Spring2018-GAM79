@@ -36,13 +36,17 @@ public class PlayerCharacter : Character
     }
 
     //call to water class   
-    public void ReadyUseWater()
+    public Ability ReadyUseWater()
     {
+		if (water == null) 
+		{
+			Debug.Log ("There is no Water Ability for " + this.characterName);
+			return null;
+		}
+
         if (waterUses > 0 & currentHeat > 0)
         {
-            Announcer.UseItem(this.gameObject.name, "water");
-            UseWater();
-
+			return water;
         }
         else if (waterUses == 0)
         {
@@ -52,10 +56,13 @@ public class PlayerCharacter : Character
         {
             Debug.Log("your thirst does not require quenching at this time");
         }
+		return null;
     }
 
 	public void UseWater()
 	{
+		Announcer.UseItem(this.gameObject.name, "water");
+
 		water.StartAbility ();
 	}
 

@@ -128,7 +128,6 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
                     uIManager.TurnRed(outputs); //target type, how many
                 }
             }
-
             else
             {
                 uIManager.TurnWhite();
@@ -140,7 +139,7 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
 
     }
 
-    public void AcceptTargetType(TargetType targetType)
+    public void FindTargets(TargetType targetType)
     {
         this.targetType = targetType;
     }
