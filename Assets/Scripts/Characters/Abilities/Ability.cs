@@ -124,6 +124,10 @@ public class Ability : ScriptableObject
 		} 
 		else 
 		{
+			characterUser.animator.SetTrigger ("Strike");		//Tells animator to go into the Strike animation
+			characterUser.animator.SetBool ("Ready", false);	//When the Strike animation goes to REcover, with "Ready" being false, it should transition back to Idle
+			characterUser.animator.SetBool("Idle", true);
+
             AnnounceAbility();
 	        foreach (Character target in targets)					// Target all applicable targets
 	        { 

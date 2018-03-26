@@ -68,6 +68,9 @@ public abstract class Character : MonoBehaviour
 		else
 		{
 			_canActThisTurn = true;
+
+			animator.SetBool ("Idle", true);
+			animator.SetBool ("Ready", false);
 		}
 	}
 
@@ -105,27 +108,34 @@ public abstract class Character : MonoBehaviour
 			return null;
 		}
 
+		animator.SetBool ("Ready", true);
+		animator.SetBool ("Idle", false);
 
-		if(abilities.Count != 0)
-		{
-	        if (abilities[0].Usable)
-	        {           // if cooldown can start, do rest  of Ability
-	            combatState = CombatState.USEABILITY;
+		return abilities [0];
 
-                if (!isAnimating)
-                {
-                    isAnimating = true;
-                    animator.SetInteger("animState", 1);
-                    print("played animation");
-                    isAnimating = false;
-                }
 
-                animator.SetInteger("animState", 0);
+//		if(abilities.Count != 0)
+//		{
+//	        if (abilities[0].Usable)
+//	        {           // if cooldown can start, do rest  of Ability
+//	            combatState = CombatState.USEABILITY;
+//
+//                if (!isAnimating)
+//                {
+//                    isAnimating = true;
+//                    animator.SetInteger("animState", 1);
+//                    print("played animation");
+//                    isAnimating = false;
+//                }
+//
+//                animator.SetInteger("animState", 0);
+//
+//	            return abilities[0];
+//	        }
+//		}
+//        return null;
 
-	            return abilities[0];
-	        }
-		}
-        return null;
+
     }
 
 	public Ability AbilityTwo()
