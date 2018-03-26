@@ -133,7 +133,7 @@ public class Ability : ScriptableObject
 			else 
 			{
 				Debug.LogWarning ("Ability " + this.abilityName + " on " + characterUser.gameObject.name + " is trying to reference " 
-					+ characterUser.gameObject.name + "'s animator, which does not have reference to an Animator.");
+					+ characterUser.gameObject.name + "'s animator within UseAbility(), and " + characterUser.gameObject.name + " does not have reference to an Animator.");
 			}
 
             AnnounceAbility();
@@ -166,6 +166,18 @@ public class Ability : ScriptableObject
 		{
 			targets.Clear ();
 			StartCooldown();
+
+			if (characterUser.animator != null)
+			{
+				characterUser.animator.SetBool ("Idle", true);
+				characterUser.animator.SetBool ("Ready", false);
+			}
+			else
+			{
+				Debug.LogWarning ("Ability " + this.abilityName + " on " + characterUser.gameObject.name + " is trying to reference " 
+					+ characterUser.gameObject.name + "'s animator within EndAbility(), and " + characterUser.gameObject.name + " does not have reference to an Animator.");
+			}
+
             (characterUser).AbilityComplete();
 		}
 	}

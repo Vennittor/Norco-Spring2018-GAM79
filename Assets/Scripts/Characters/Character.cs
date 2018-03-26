@@ -3,36 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
-{
-//    public List<StatusEffect> statusEffects = new List<StatusEffect>();
-    
-    [SerializeField] protected List<Ability> abilities = new List<Ability>(); 
-
-	[SerializeField] protected List<Status> statuses = new List<Status>();     	// Tandy: List of Status to show what Character is affected by
-
+{   
 	protected CombatManager combatManager;
 
     public enum CombatState
     {
-        ABLE, DISABLED, USEABILITY, EXHAUSTED
+        ABLE, DISABLED, USINGABILITY, EXHAUSTED
     }
-    public CombatState combatState;
-	protected bool _canActThisTurn = true;
 
-    public Animator animator;
-    public bool isAnimating;
+    public string characterName;
+	public Animator animator;
 
-    public new string name;
+	public uint maxhealth;
+	public uint currentHealth;
+
+	public uint maxHeat;
+	public uint currentHeat;
+
+	public float accuracy = 84.5f;
+	public float evade = 10;
+
     public int speed;
-
-    public uint maxhealth;
-    public uint currentHealth;
-
-    public uint currentHeat;
-    public uint maxHeat;
     public uint defense;
-    public float accuracy = 84.5f;
-    public float evade = 10;
+
+	public CombatState combatState;
+
+	[SerializeField] protected List<Ability> abilities = new List<Ability>(); 
+	[SerializeField] protected List<Status> statuses = new List<Status>();     	// Tandy: List of Status to show what Character is affected by
+
+	protected bool _canActThisTurn = true;
 
 	public bool canAct
 	{
@@ -73,17 +72,6 @@ public abstract class Character : MonoBehaviour
 		else
 		{
 			_canActThisTurn = true;
-
-			if (animator != null)
-			{
-				animator.SetBool ("Idle", true);
-				animator.SetBool ("Ready", false);
-			}
-			else
-			{
-				Debug.LogWarning (this.gameObject.name + "Is trying to call it's animator in BeginTurn(), and does not have reference to it");
-			}
-
 		}
 	}
 
@@ -107,7 +95,7 @@ public abstract class Character : MonoBehaviour
     {																//UI NEEDS to go through Character in case Character needs to redirect target info before Ability is used
 		if (abilities [0] == null) 
 		{
-			Debug.Log ("There is no AbilityOne for " + this.name);
+			Debug.Log ("There is no AbilityOne for " + this.characterName);
 			return null;
 		}
 
@@ -137,44 +125,29 @@ public abstract class Character : MonoBehaviour
 
 	public Ability AbilityTwo()
     {
-		if(abilities.Count != 0)
+		//TODO TEST empties reference within abilities[1] so that it will return null when searched for
+
+		if (abilities.Count > 1) 
 		{
-	        if (abilities[1].Usable)
-	        {           // if cooldown can start, do rest  of Ability
-	            combatState = CombatState.USEABILITY;
-
-                if (!isAnimating)
-                {
-                    animator.SetInteger("animState", 2);
-                    print("played animation");
-                }
-
-                animator.SetInteger("animState", 0);
-
-                return abilities[1];
-	        }
+			if (abilities [1] != null) 
+			{
+				abilities[1] = null;
+			}
 		}
-        return null;
+		else
+		{
+			abilities [1] = null;
+		}
+
+		return abilities [1];
     }
 
 	public Ability AbilityThree()
     {
-		if(abilities.Count != 0)
+		//TODO TEST Currently Empty for Testing Reasons
+		if (abilities.Count > 2) 
 		{
-	        if (abilities[2].Usable)
-	        {           // if cooldown can start, do rest  of Ability
-	            combatState = CombatState.USEABILITY;
-
-                if (!isAnimating)
-                {
-                    animator.SetInteger("animState", 3);
-                    print("played animation");
-                }
-
-                animator.SetInteger("animState", 0);
-
-                return abilities[2];
-	        }
+			abilities.RemoveRange (2, abilities.Count-2);
 		}
         return null;
     }
@@ -248,7 +221,7 @@ public abstract class Character : MonoBehaviour
 
     public void Faint()
     {
-        Debug.Log(name + " died!");
+		Debug.Log(characterName + " died!");
         combatState = CombatState.EXHAUSTED;
         EndTurn();
     }
