@@ -14,6 +14,7 @@ public class Test_movement : MonoBehaviour
     
     private void Start()
     {
+        DontDestroyOnLoad(this);
         player = this.gameObject;
         pos = this.transform.position;
         hasInteracted = false;
@@ -21,7 +22,7 @@ public class Test_movement : MonoBehaviour
         rB = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void Update() // temp movement
     {
         direction();
 
@@ -34,11 +35,21 @@ public class Test_movement : MonoBehaviour
         if(Input.GetKey(KeyCode.A))
         {
             isInBattle = false;
-            Proceed();
             rB.AddForce(Vector3.left);
         }
 
-        
+        if(Input.GetKey(KeyCode.W))
+        {
+            Proceed();
+            rB.AddForce(Vector3.forward);
+            rB.freezeRotation = true;
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            rB.AddForce(Vector3.back);
+            rB.freezeRotation = true;
+        }
     }
 
     private Vector3 direction()
@@ -50,7 +61,6 @@ public class Test_movement : MonoBehaviour
             {
                 Debug.Log("canMove");
             }
-            Proceed();
         }
         else
         {
@@ -67,7 +77,6 @@ public class Test_movement : MonoBehaviour
         if(hasInteracted)
         {
             float z = transform.position.z * playerSpeed * Time.deltaTime;
-
         }
     }
 }
