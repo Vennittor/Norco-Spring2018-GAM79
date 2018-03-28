@@ -39,28 +39,7 @@ public class UIManager : MonoBehaviour
 	Character previousHitCharacter;
 	TargetType searchingTargetType;
 
-
-	private void SetMode_Normal() 
-	{
-		inputMode = InputMode.NORMAL; 
-	}
-
-	private void SetMode_Select ()
-	{
-		inputMode = InputMode.ABILITYSELECT; 
-	}
-
-	private void SetMode_Targeting()
-	{
-		inputMode = InputMode.TARGETING;
-	}
-
-	private void SetMode_Blocked()
-	{
-		inputMode = InputMode.BLOCKED;
-	}
-
-    #region Functions
+    #region Unity Functions
     void Awake()
     {
         if (uIInstance != null && uIInstance != this)
@@ -83,19 +62,17 @@ public class UIManager : MonoBehaviour
 
     public void Update()
 	{
-		if (Input.GetMouseButtonDown (0)) 									//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
+		if (Input.GetMouseButtonDown (0)) 						//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
 		{
 			if (inputMode == InputMode.TARGETING)
 			{
-				AssignTargets ();
-
-				SetMode_Select ();
-				//ability.UseAbility ();
+				SendTargets ();
 			}
 		}
 
 		HighlightTargets ();
     }
+	#endregion
 
 	public void OutputAttack(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
 	{
@@ -125,6 +102,34 @@ public class UIManager : MonoBehaviour
         }
     }
 
+	#region ModeSwitches
+	private void SetMode_Normal() 
+	{
+		inputMode = InputMode.NORMAL; 
+	}
+
+	private void SetMode_Select ()
+	{
+		inputMode = InputMode.ABILITYSELECT; 
+	}
+
+	private void SetMode_Targeting()
+	{
+		inputMode = InputMode.TARGETING;
+	}
+
+	private void SetMode_Blocked()
+	{
+		inputMode = InputMode.BLOCKED;
+	}
+
+	public bool BlockInput()
+	{
+		SetMode_Blocked ();
+
+		return true;
+	}
+
 	public bool AllowAbilitySelection()
 	{
 		if (inputMode != InputMode.BLOCKED)
@@ -138,6 +143,7 @@ public class UIManager : MonoBehaviour
 			return false;
 		}
 	}
+	#endregion
 
 	public bool GetTargets(TargetType targetType)
 	{
@@ -155,25 +161,22 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-	public bool BlockInput()
+	public void SendTargets()        						//Assign Targets back to activeCharacter.
 	{
-		SetMode_Blocked ();
+		combatManager.AssignTargets(collectedTargets);
 
-		return true;
-	}
-
-	public void AssignTargets()        	//Assign Targets back to activeCharacter.
-	{		Debug.Log ("Send Target info to ActiveCharacter");
-
-		//TODO abilityTargets = collectedTargets  OR tell activeCharacter to UseAbility(collectedTargets).  Make sure mode gets set back to Select BEFORE Ability is used
 		TurnWhite ();
 
 		collectedTargets.Clear ();
 
 		searchingTargetType = null;
+
+		//SetMode_Select ();
     }
 
-    public void TurnRed(List<Character> targets) // highlight in Red on Mouse-over
+
+	#region HighlightTargets
+    public void TurnRed(List<Character> targets) 			// highlight in Red on Mouse-over
     {
         foreach(Character target in targets)
         {
@@ -194,8 +197,7 @@ public class UIManager : MonoBehaviour
 			}
         }
     }
-
-
+		
 	void HighlightTargets()
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

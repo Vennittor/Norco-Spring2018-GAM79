@@ -110,12 +110,11 @@ public class CombatManager : MonoBehaviour
         //check if group is in a heat zone before entering combat (passed to here from game manager, not implemented yet)
         /*if (activeCharacter is PlayerCharacter)
         {
-			if ((activeCharacter as PlayerCharacter).heatState == PlayerCharacter.HeatZone.INHEAT)
+			if (combatManager.inHeat == true)
             {
                 foreach (Character player in activePlayers)
                 {
-                    player.currentHeat += 10; //or whatever value gets settled on, just picked 10 for easy math //use heat level of current heat zone
-                    Debug.Log(player.currentHeat + " < this is the current heat");
+                    player.TakeDamage(heatLevel, DamageType.Heat);   //or whatever value gets settled on, just picked 10 for easy math //use heat level of current heat zone
                 }
             }
         }*/ //TODO set up so that checks heat state from level manager, which takes from party
@@ -203,7 +202,7 @@ public class CombatManager : MonoBehaviour
 		return false;
 	}
 
-    void SortRoundQueue() // clears round/active characters, repopulates round from actives, sorts round
+	void SortRoundQueue() 									// clears round/active characters, repopulates round from actives, sorts round
     {
         activePlayers.Clear();
         foreach (Character character in characters)					//Populate activePlayers List
@@ -243,7 +242,7 @@ public class CombatManager : MonoBehaviour
         activeCharacter = currentRoundCharacters[0];
     }
 
-    private int SortBySpeed(Character c1, Character c2) // sorts by highest speed, player first
+    private int SortBySpeed(Character c1, Character c2) 			// sorts by highest speed, player first
     {
         int char1 = c1.speed;
         int char2 = c2.speed;
@@ -264,5 +263,21 @@ public class CombatManager : MonoBehaviour
         }
         return -char1.CompareTo(char2);
     }
+
+
+	#region Targeting and Ability Use
+	public void AssignTargets(List<Character> targetsToAssign)
+	{
+		//check if the character using the Ability (most likely activeCharacter) has any effect that would cause them to change targets, like StatusEffect confusion.
+		//check if the intended targets have any re-direction effects, (like Cover, or Reflect)
+		//Find new targets if needed.  This should be done within CombatManger and not UIManager
+		//assign targets to Ability and tell Character to UseAbility
+	}
+
+	//TODO
+	//Function Get RandomTarget
+	//Function Redirect Target
+
+	#endregion
 
 }
