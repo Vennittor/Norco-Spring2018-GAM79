@@ -28,11 +28,11 @@ public class PlayerCharacter : Character
         }
     }
 
-	protected override void ChooseAbility()					//tells UIManger to enter into an ability selection mode.  That script will then call ReadyAbility() based on the input given
+	protected override void ChooseAbility()					//tells UIManger to enter into an ability selection mode. It returns true if it switched modes.That script will then call ReadyAbility() based on the input given
     {
-		if (!combatManager.uiManager.AllowAbilitySelection () ) 
+		if (!combatManager.uiManager.AllowAbilitySelection ()) 
 		{
-			Debug.LogWarning ("UIManager cannot enter into Ability Selection mode right now");
+			Debug.LogWarning ("UIManager cannot enter into AbilitySelect mode at the moment");
 		}
     }
 
@@ -66,11 +66,5 @@ public class PlayerCharacter : Character
 
 		water.StartAbility ();
 	}
-
-    public override void AbilityComplete(CombatState newState = CombatState.ABLE)
-	{	
-		//UIManager.BlockAbilitySelection();
-		combatState = newState;
-        EndTurn();
-    }
+		
 }

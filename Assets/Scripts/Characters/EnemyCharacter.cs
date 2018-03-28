@@ -47,12 +47,6 @@ public class EnemyCharacter : Character
 		ability.UseAbility ();
 	}
 
-	public override void AbilityComplete(CombatState newState = CombatState.ABLE)
-	{
-		combatState = newState;
-		EndTurn ();
-	}
-
     private PlayerCharacter RandPlayerTarget()
     {
         List<PlayerCharacter> players = new List<PlayerCharacter>();

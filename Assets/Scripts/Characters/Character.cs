@@ -33,7 +33,7 @@ public abstract class Character : MonoBehaviour
 
 	protected bool _canActThisTurn = true;
 
-	public int selectedAbility = -1;
+	public int selectedAbilityIndex = -1;
 
 	public bool canAct
 	{
@@ -79,24 +79,10 @@ public abstract class Character : MonoBehaviour
 		}
 	}
 
-	protected abstract void ChooseAbility();
-
-	public abstract void AbilityComplete(CombatState newState = CombatState.ABLE);
-
-	public void EndTurn()
-	{
-		if (combatManager.activeCharacter == this)
-		{
-			combatManager.NextTurn();
-		}
-		else
-		{
-			Debug.LogWarning ("Attempting to run EndTurn() on " + this.gameObject.name + " while they are not the gameManager.activeCharacter. This normally should not be done.");
-		}
-	}
+	protected abstract void ChooseAbility();					//This should be used by an inheriting class based on how it will decided upon the Abilities it will use.  via UI input, AI, or some other method
 
 	public Ability ReadyAbility(int abilityIndex = 0) //Takes in an index number to reference that index in the abilities list, and will return that Ability if one is found and Usable
-    {
+	{
 		if (abilities [abilityIndex] == null || abilities.Count <= abilityIndex) 
 		{
 			Debug.Log ("There is no AbilityOne for " + this.characterName);
@@ -115,16 +101,54 @@ public abstract class Character : MonoBehaviour
 				Debug.LogWarning (this.gameObject.name + "Is trying to call it's animator in AbilityOne(), and does not have reference to it");
 			}
 
-			selectedAbility = abilityIndex;
-			return abilities [abilityIndex];
+			selectedAbilityIndex = abilityIndex;
+			abilities [selectedAbilityIndex].StartAbility ();
+
+			return abilities [selectedAbilityIndex];
 		}
 		else
 		{
-			Debug.Log ("AbilityOne is not usable");
+			Debug.Log ( this.gameObject.name + "'s Ability at index " + selectedAbilityIndex.ToString()+ " is not usable");
 			return null;
 		}
-			
-    }
+
+	}
+
+	public void UseAbility(List<Character> targets)
+	{
+		if (selectedAbilityIndex < 0 || selectedAbilityIndex >= abilities.Count) 
+		{
+			Debug.LogError (this.gameObject.name + "'s UseAbility(): No Ability was Selected, or an Ability was selected that the Character does not have. selectedAbilityIndex is out of abilities range");
+		}
+		else 
+		{
+			abilities [selectedAbilityIndex].SetTargets (targets);
+			abilities [selectedAbilityIndex].UseAbility ();
+		}
+	}
+
+	public void AbilityHasCompleted(CombatState enterNewState = CombatState.ABLE)
+	{
+		selectedAbilityIndex = -1;
+
+		combatState = enterNewState;
+
+		EndTurn ();
+	}
+
+	public void EndTurn()
+	{
+		if (combatManager.activeCharacter == this)
+		{
+			combatManager.NextTurn();
+			//TODO uiManager.BlockInput until next PlayerCharacter starts turn
+		}
+		else
+		{
+			Debug.LogWarning ("Attempting to run EndTurn() on " + this.gameObject.name + " while they are not the gameManager.activeCharacter. This normally should not be done.");
+		}
+	}
+		
 
     public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
     {
@@ -197,7 +221,11 @@ public abstract class Character : MonoBehaviour
     {
 		Debug.Log(characterName + " died!");
         combatState = CombatState.EXHAUSTED;
-        EndTurn();
+		if (this == combatManager.activeCharacter) 
+		{
+			EndTurn();
+		}
+
     }
 
 //    IEnumerator PlayAnimation()
