@@ -226,7 +226,7 @@ public abstract class Character : MonoBehaviour
 
     public void Faint()
     {
-		Debug.Log(characterName + " died!");
+		Debug.Log(this.gameObject.name + " died!");
         combatState = CombatState.EXHAUSTED;
 		if (this == combatManager.activeCharacter) 
 		{
