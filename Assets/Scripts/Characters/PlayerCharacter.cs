@@ -36,6 +36,11 @@ public class PlayerCharacter : Character
 		}
     }
 
+	public override void GetNewTargets()
+	{
+		ReadyAbility (selectedAbilityIndex);
+	}
+
     //call to water class   
     public Ability ReadyUseWater()
     {

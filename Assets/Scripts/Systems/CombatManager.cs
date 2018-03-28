@@ -274,6 +274,15 @@ public class CombatManager : MonoBehaviour
 		//assign targets to Ability and tell Character to UseAbility
 	}
 
+	public void AssignTargets(Character targetToAssign)			//Overload to take in a single Character as opposed to a List
+	{
+		List<Character> target = new List<Character> ();
+
+		target.Add (targetToAssign);
+
+		AssignTargets (targetToAssign);
+	}
+
 	//TODO
 	//Function Get RandomTarget
 	//Function Redirect Target

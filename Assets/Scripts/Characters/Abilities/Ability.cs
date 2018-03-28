@@ -170,6 +170,7 @@ public class Ability : ScriptableObject
 		{
 			targets.Clear ();
 			StartAbility ();
+			characterUser.GetNewTargets ();
 		}
 		else
 		{

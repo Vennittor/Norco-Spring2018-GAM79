@@ -81,7 +81,9 @@ public abstract class Character : MonoBehaviour
 
 	protected abstract void ChooseAbility();					//This should be used by an inheriting class based on how it will decided upon the Abilities it will use.  via UI input, AI, or some other method
 
-	public Ability ReadyAbility(int abilityIndex = 0) //Takes in an index number to reference that index in the abilities list, and will return that Ability if one is found and Usable
+	public abstract void GetNewTargets ();					//this is should call ReadyAbility again using the selectedAbilityIndex to go back up to the UI or AI to get another set of targets.  Needs to be called before AbilityHasCompleted
+
+	public Ability ReadyAbility(int abilityIndex = 0) 			//Takes in an index number to reference that index in the abilities list, and will return that Ability if one is found and Usable
 	{
 		if (abilities [abilityIndex] == null || abilities.Count <= abilityIndex) 
 		{

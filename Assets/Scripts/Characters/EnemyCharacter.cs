@@ -32,19 +32,26 @@ public class EnemyCharacter : Character
 		float selection = Random.Range(0, abilities.Count);
 		selection = selection == (float)abilities.Count ? selection - 1f : selection;	// if the selecton is equal to 
 
-		abilityToUse = ReadyAbility ((int)selection);
+		abilityToUse = ReadyAbility ((int)selection);		//Readys the selected Ability
 
-		if (abilityToUse != null) 
+		if (abilityToUse != null) 							//Then tell the AI to GetTargets for the Ability
 		{
 			GetTargets (abilityToUse);
 		}
 	}
 
+	public override void GetNewTargets()
+	{
+		Ability abilityToUseAgain = ReadyAbility (selectedAbilityIndex);
+
+		GetTargets (abilityToUseAgain);
+	}
+
+
+	#region AI Functions.		//TODO These FUnctions should be externalized for more robust and customizable AI's
 	void GetTargets(Ability ability)
 	{
-		//TODO establish a seperate AI that will handle Target decisions
-		ability.SetTargets(RandPlayerTarget() as Character);
-		ability.UseAbility ();
+		combatManager.AssignTargets(RandPlayerTarget() as Character);
 	}
 
     private PlayerCharacter RandPlayerTarget()
@@ -60,4 +67,5 @@ public class EnemyCharacter : Character
         PlayerCharacter playerCharacter = players[Random.Range(0, players.Count)];
         return playerCharacter;
     }
+	#endregion
 }
