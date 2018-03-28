@@ -124,6 +124,11 @@ public abstract class Character : MonoBehaviour
 		}
 		else 
 		{
+			if (targets.Count == 0) 
+			{
+				Debug.LogWarning ("No Targets were passed to UseAbility");
+			}
+
 			abilities [selectedAbilityIndex].SetTargets (targets);
 			abilities [selectedAbilityIndex].UseAbility ();
 		}

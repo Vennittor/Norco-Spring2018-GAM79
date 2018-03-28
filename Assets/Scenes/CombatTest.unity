@@ -220,7 +220,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
-  selectedAbility: -1
+  selectedAbilityIndex: -1
   water: {fileID: 0}
   waterUses: 3
 --- !u!95 &330486045
@@ -352,7 +352,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
-  selectedAbility: -1
+  selectedAbilityIndex: -1
   water: {fileID: 0}
   waterUses: 3
 --- !u!95 &476853292
@@ -477,9 +477,10 @@ MonoBehaviour:
   speed: 3
   defense: 0
   combatState: 0
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   statuses: []
-  selectedAbility: -1
+  selectedAbilityIndex: -1
 --- !u!1 &899112348
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,7 +593,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
   statuses: []
-  selectedAbility: -1
+  selectedAbilityIndex: -1
   water: {fileID: 0}
   waterUses: 3
 --- !u!95 &899112354
@@ -843,9 +844,10 @@ MonoBehaviour:
   speed: 2
   defense: 0
   combatState: 0
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   statuses: []
-  selectedAbility: -1
+  selectedAbilityIndex: -1
 --- !u!1 &1416273166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,6 +1576,7 @@ MonoBehaviour:
   speed: 4
   defense: 0
   combatState: 0
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   statuses: []
-  selectedAbility: -1
+  selectedAbilityIndex: -1

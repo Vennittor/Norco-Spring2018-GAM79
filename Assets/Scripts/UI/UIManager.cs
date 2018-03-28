@@ -62,6 +62,8 @@ public class UIManager : MonoBehaviour
 
     public void Update()
 	{
+		HighlightTargets ();
+		//TEST Debug.Log ("collectedTargets.Count = " + collectedTargets.Count.ToString() );
 		if (Input.GetMouseButtonDown (0)) 						//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
 		{
 			if (inputMode == InputMode.TARGETING)
@@ -69,14 +71,12 @@ public class UIManager : MonoBehaviour
 				SendTargets ();
 			}
 		}
-
-		HighlightTargets ();
     }
 	#endregion
 
 	public void OutputAttack(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
 	{
-		if(inputMode == InputMode.ABILITYSELECT)
+		if(inputMode == InputMode.ABILITYSELECT)				//
         {
 			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
             if(ability == null)
@@ -170,8 +170,6 @@ public class UIManager : MonoBehaviour
 		collectedTargets.Clear ();
 
 		searchingTargetType = null;
-
-		//SetMode_Select ();
     }
 
 
@@ -207,18 +205,18 @@ public class UIManager : MonoBehaviour
 		RaycastHit hitInfo;
 		if (inputMode == UIManager.InputMode.TARGETING && searchingTargetType != null)
 		{
-
 			debugColor = Color.green;
 
 			if (Physics.Raycast(ray, out hitInfo))
-			{
-				if (hitInfo.transform.gameObject.GetComponent<Character> () == null) 						//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
+			{	
+				if (hitInfo.collider.gameObject.GetComponent<Character> () == null) 						//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
 				{
 					previousHitCharacter = null;
 				}
 				else 																							//else if we did, Start doing stuff
 				{
-					Character hitCharacter = hitInfo.transform.gameObject.GetComponent<Character>();			//is the hitCharacter the previously hit Charater,  if not TurnWhite
+					Character hitCharacter = hitInfo.collider.gameObject.GetComponent<Character>();		//is the hitCharacter the previously hit Charater,  if not TurnWhite
+
 					if (hitCharacter != previousHitCharacter || previousHitCharacter == null) 
 					{
 						collectedTargets.Clear ();

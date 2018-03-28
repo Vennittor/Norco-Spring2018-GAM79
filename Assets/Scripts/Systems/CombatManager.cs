@@ -274,7 +274,7 @@ public class CombatManager : MonoBehaviour
 		//Find new targets if needed.  This should be done within CombatManger and not UIManager
 
 		finalizedTargets.AddRange (targetsToAssign);
-
+		Debug.Log (finalizedTargets [0].gameObject.name);
 		activeCharacter.UseAbility (finalizedTargets);
 	}
 
@@ -284,7 +284,7 @@ public class CombatManager : MonoBehaviour
 
 		target.Add (targetToAssign);
 
-		AssignTargets (targetToAssign);
+		AssignTargets (target);
 	}
 
 	//TODO
