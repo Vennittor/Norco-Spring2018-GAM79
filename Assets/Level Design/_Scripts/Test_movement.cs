@@ -5,7 +5,7 @@ using UnityEngine;
 public class Test_movement : MonoBehaviour
 {
     // simple movement system + interaction; 
-    private float playerSpeed = 2.0f;
+    public float playerSpeed = 2.0f;
     public GameObject player;
     private Vector3 pos;
     private bool hasInteracted = false;
@@ -30,24 +30,24 @@ public class Test_movement : MonoBehaviour
         {
             isInBattle = false;
             Proceed();
-            rB.AddForce(Vector3.right);
+            rB.AddForce(Vector3.right * playerSpeed * Time.fixedDeltaTime);
         }
         if(Input.GetKey(KeyCode.A))
         {
             isInBattle = false;
-            rB.AddForce(Vector3.left);
+            rB.AddForce(Vector3.left * playerSpeed * Time.fixedDeltaTime);
         }
 
         if(Input.GetKey(KeyCode.W))
         {
             Proceed();
-            rB.AddForce(Vector3.forward);
+            rB.AddForce(Vector3.forward * playerSpeed * Time.fixedDeltaTime);
             rB.freezeRotation = true;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            rB.AddForce(Vector3.back);
+            rB.AddForce(Vector3.back * playerSpeed * Time.fixedDeltaTime);
             rB.freezeRotation = true;
         }
     }

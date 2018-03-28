@@ -10,7 +10,7 @@ public class TestScene_Tr : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<GameObject>();
-        player.gameObject.SetActive(false);
+        player.gameObject.SetActive(true);
     }
 
     public void LoadCombatScene()
@@ -32,6 +32,7 @@ public class TestScene_Tr : MonoBehaviour
         if(col.gameObject.name == "Player")
         {
             LoadCombatScene();
+            player.gameObject.SetActive(false);
         }
     }
 }
