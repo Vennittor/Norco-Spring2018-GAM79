@@ -268,10 +268,14 @@ public class CombatManager : MonoBehaviour
 	#region Targeting and Ability Use
 	public void AssignTargets(List<Character> targetsToAssign)
 	{
+		List<Character> finalizedTargets = new List<Character> ();
 		//check if the character using the Ability (most likely activeCharacter) has any effect that would cause them to change targets, like StatusEffect confusion.
 		//check if the intended targets have any re-direction effects, (like Cover, or Reflect)
 		//Find new targets if needed.  This should be done within CombatManger and not UIManager
-		//assign targets to Ability and tell Character to UseAbility
+
+		finalizedTargets.AddRange (targetsToAssign);
+
+		activeCharacter.UseAbility (finalizedTargets);
 	}
 
 	public void AssignTargets(Character targetToAssign)			//Overload to take in a single Character as opposed to a List
