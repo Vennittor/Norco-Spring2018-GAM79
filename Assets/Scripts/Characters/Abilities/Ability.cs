@@ -6,7 +6,7 @@ using UnityEngine;
 public class Ability : ScriptableObject 
 {
 	// DESCRIPTIVE DATA
-    [SerializeField] protected string abilityName;
+    public string abilityName;
     [SerializeField] protected string description;
     [SerializeField] protected string callOutText;
 
@@ -77,7 +77,7 @@ public class Ability : ScriptableObject
 
 	public void EquipAbility(Character user)
 	{
-		characterUser = user;
+		characterUser = user;		Debug.Log (abilityName + "'s user is " + characterUser.gameObject.name);
 
 		if (numberOfActions < 1) 
 		{

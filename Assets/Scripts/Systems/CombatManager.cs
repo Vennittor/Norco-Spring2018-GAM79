@@ -129,19 +129,30 @@ public class CombatManager : MonoBehaviour
 	public void NextTurn() // active player finishing their turn calls this
 	{
 		if (!VictoryCheck())
-		{
+		{	Debug.Log (activeCharacter.gameObject.name + " is removed from the queu");
 			currentRoundCharacters.Remove(activeCharacter); // The activeCharacter is removed from the current round
 			if (currentRoundCharacters.Count == 0) // if they were the last one to leave, then end the round
 			{
 				EndRound ();
 			}
 			else
-			{
+			{	
 				activeCharacter = currentRoundCharacters[0];
-				Debug.Log(activeCharacter.gameObject.name + " is next.");
-				activeCharacter.BeginTurn ();
+				Debug.Log (activeCharacter.gameObject.name + " is now the activeCharacter");
+				//TEST
+				StartCoroutine( "DelayNextTurn" );
 			}
 		}
+	}
+
+	//TEST This creates a visible delay between character turns.
+	public IEnumerator DelayNextTurn()
+	{
+		Debug.Log(activeCharacter.gameObject.name + " is next.");
+
+		yield return new WaitForSeconds (0.6f);
+
+		activeCharacter.BeginTurn ();
 	}
 
 	void EndCombat(bool playerVictory)
@@ -175,6 +186,7 @@ public class CombatManager : MonoBehaviour
 				ablePlayers++;
 			}
 		}
+
 		int ableEnemies = 0;
 		foreach (Character enemy in characters)
 		{
@@ -274,7 +286,7 @@ public class CombatManager : MonoBehaviour
 		//Find new targets if needed.  This should be done within CombatManger and not UIManager
 
 		finalizedTargets.AddRange (targetsToAssign);
-		Debug.Log (finalizedTargets [0].gameObject.name);
+
 		activeCharacter.UseAbility (finalizedTargets);
 	}
 

@@ -32,11 +32,11 @@ public class EnemyCharacter : Character
 		float selection = Random.Range(0, abilities.Count);
 		selection = selection == (float)abilities.Count ? selection - 1f : selection;	// if the selecton is equal to 
 
-		abilityToUse = ReadyAbility ((int)selection);		//Readys the selected Ability
+		abilityToUse = ReadyAbility ((int)selection);		//Readies the selected Ability
 
 		if (abilityToUse != null) 							//Then tell the AI to GetTargets for the Ability
 		{
-			GetTargets (abilityToUse);
+			this.GetTargets (abilityToUse);
 		}
 	}
 
@@ -44,7 +44,7 @@ public class EnemyCharacter : Character
 	{
 		Ability abilityToUseAgain = ReadyAbility (selectedAbilityIndex);
 
-		GetTargets (abilityToUseAgain);
+		this.GetTargets (abilityToUseAgain);
 	}
 
 

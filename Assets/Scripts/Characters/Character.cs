@@ -55,7 +55,7 @@ public abstract class Character : MonoBehaviour
 
 		foreach(Ability ability in abilities)
 		{
-			ability.EquipAbility(this);
+			ability.EquipAbility(this as Character);
 		}
     }
 
@@ -100,7 +100,7 @@ public abstract class Character : MonoBehaviour
 			}
 			else
 			{
-				Debug.LogWarning (this.gameObject.name + "Is trying to call it's animator in AbilityOne(), and does not have reference to it");
+				Debug.LogWarning (this.gameObject.name + " is trying to call it's animator in AbilityOne(), and does not have reference to it");
 			}
 
 			selectedAbilityIndex = abilityIndex;
@@ -128,14 +128,14 @@ public abstract class Character : MonoBehaviour
 			{
 				Debug.LogWarning ("No Targets were passed to UseAbility");
 			}
-
+			Debug.Log (this.gameObject.name + " is using " + abilities [selectedAbilityIndex].abilityName);
 			abilities [selectedAbilityIndex].SetTargets (targets);
 			abilities [selectedAbilityIndex].UseAbility ();
 		}
 	}
 
 	public void AbilityHasCompleted(CombatState enterNewState = CombatState.ABLE)
-	{
+	{	Debug.Log (this.gameObject.name + "'s ability has completed.");
 		selectedAbilityIndex = -1;
 
 		combatState = enterNewState;
@@ -144,7 +144,7 @@ public abstract class Character : MonoBehaviour
 	}
 
 	public void EndTurn()
-	{
+	{	Debug.Log (this.gameObject.name + " is ending their turn.");
 		if (combatManager.activeCharacter == this)
 		{
 			combatManager.NextTurn();
@@ -158,7 +158,7 @@ public abstract class Character : MonoBehaviour
 		
 
     public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
-    {
+	{	Debug.Log (this.gameObject.name + " takes " + damage.ToString () + " of " + ElementType.PHYSICAL.ToString () + " damage!");
         if (damageType == ElementType.PHYSICAL)
         {
             DealPhysicalDamage(damage);
@@ -187,7 +187,7 @@ public abstract class Character : MonoBehaviour
 		if (physicalDamage >= 1)
 		{
 			currentHealth -= (uint)Mathf.Clamp(physicalDamage, 0, currentHealth);
-			if (currentHealth == 0)
+			if (currentHealth <= 0)
 			{
 				Faint();
 			}
@@ -228,8 +228,8 @@ public abstract class Character : MonoBehaviour
     {
 		Debug.Log(this.gameObject.name + " died!");
         combatState = CombatState.EXHAUSTED;
-		if (this == combatManager.activeCharacter) 
-		{
+		if (this as Character == combatManager.activeCharacter)
+		{	Debug.Log ("Active Character died");
 			EndTurn();
 		}
 

@@ -206,8 +206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 5
-  currentHealth: 5
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 0
   currentHeat: 0
   accuracy: 84.5
@@ -338,8 +338,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 5
-  currentHealth: 5
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 0
   currentHeat: 0
   accuracy: 84.5
@@ -468,8 +468,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 5
-  currentHealth: 5
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 0
   currentHeat: 0
   accuracy: 84.5
@@ -579,8 +579,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 5
-  currentHealth: 5
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 0
   currentHeat: 0
   accuracy: 84.5
@@ -835,8 +835,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 5
-  currentHealth: 5
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 0
   currentHeat: 0
   accuracy: 84.5
@@ -1489,7 +1489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1954916233
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1567,8 +1567,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 5
-  currentHealth: 5
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 0
   currentHeat: 0
   accuracy: 84.5

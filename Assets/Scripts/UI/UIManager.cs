@@ -218,14 +218,14 @@ public class UIManager : MonoBehaviour
 					Character hitCharacter = hitInfo.collider.gameObject.GetComponent<Character>();		//is the hitCharacter the previously hit Charater,  if not TurnWhite
 
 					if (hitCharacter != previousHitCharacter || previousHitCharacter == null) 
-					{	Debug.Log ("N/A");
+					{
 						collectedTargets.Clear ();
 						TurnWhite ();
 						previousHitCharacter = hitCharacter;
 					}
 
 					if (searchingTargetType.who == TargetType.Who.SELF && hitCharacter == combatManager.activeCharacter) 	// if targeting SELF
-					{	Debug.Log ("Self");
+					{
 						if (!collectedTargets.Contains (hitCharacter)) 
 						{
 							collectedTargets.Add(hitCharacter);
@@ -238,7 +238,7 @@ public class UIManager : MonoBehaviour
 					else if (searchingTargetType.who == TargetType.Who.ALLY && hitCharacter is PlayerCharacter) 				// if selecting ALLY
 					{	
 						if (searchingTargetType.formation == TargetType.Formation.SINGLE) 										// target ALLY
-						{	Debug.Log ("ALLY Single");
+						{
 							if (!collectedTargets.Contains (hitCharacter)) 
 							{
 								collectedTargets.Add(hitCharacter);
@@ -246,7 +246,7 @@ public class UIManager : MonoBehaviour
 							TurnRed(collectedTargets);
 						}
 						else if(searchingTargetType.formation == TargetType.Formation.GROUP) 									// target ALLIES
-						{	Debug.Log ("ALLY Group");
+						{
 							foreach(PlayerCharacter player in combatManager.activePlayers)
 							{
 								if (!collectedTargets.Contains (player)) 
@@ -260,7 +260,7 @@ public class UIManager : MonoBehaviour
 					else if(searchingTargetType.who == TargetType.Who.OPPONENT && hitCharacter is EnemyCharacter) 			// if selecting OPPONENT
 					{
 						if (searchingTargetType.formation == TargetType.Formation.SINGLE) 										// target OPPONENT
-						{	Debug.Log ("ENEMY Single");
+						{
 							if (!collectedTargets.Contains (hitCharacter)) 
 							{
 								collectedTargets.Add(hitCharacter);
@@ -268,7 +268,7 @@ public class UIManager : MonoBehaviour
 							TurnRed(collectedTargets);
 						}
 						else if (searchingTargetType.formation == TargetType.Formation.GROUP) 									// target OPPONENTS
-						{	Debug.Log ("ENEMY Group");
+						{
 							foreach (EnemyCharacter enemy in combatManager.activeEnemies)
 							{
 								if (!collectedTargets.Contains (enemy)) 
@@ -280,7 +280,7 @@ public class UIManager : MonoBehaviour
 						}
 					}
 					else if( searchingTargetType.who == TargetType.Who.EVERYONE && (hitCharacter is PlayerCharacter || hitCharacter is EnemyCharacter) ) // if selecting EVERYONE (may be redundant)
-					{	Debug.Log ("Everyone");
+					{
 						foreach (PlayerCharacter player in combatManager.activePlayers)
 						{
 							if (!collectedTargets.Contains (player)) 
