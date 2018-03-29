@@ -53,9 +53,9 @@ public abstract class Character : MonoBehaviour
 			animator = GetComponent<Animator> ();
 		}
 
-		foreach(Ability ability in abilities)
+		for(int i = 0 ; i < abilities.Count; i++)
 		{
-			ability.EquipAbility(this as Character);
+			abilities[i] = abilities[i].EquipAbility(this as Character);
 		}
     }
 

@@ -13,7 +13,7 @@ public class Ability : ScriptableObject
 	// COMBAT DATA
 	public TargetType targetType;
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
-	[SerializeField] protected List<Status> statuses;
+	[SerializeField] protected List<Status> statuses = new List<Status>();
 
 	[SerializeField] protected uint numberOfActions = 1;			//When the Ability is done, instead of telling the player AbilityHasCompleted, it can accept another targeting input
 	protected uint actionsUsed = 0;
@@ -75,8 +75,14 @@ public class Ability : ScriptableObject
 		}
 	}
 
-	public void EquipAbility(Character user)
+	public Ability EquipAbility(Character user)
 	{
+		Ability newSO = ScriptableObject.CreateInstance("Ability") as Ability;
+
+		newSO.characterUser = user;
+		newSO.abilityName = this.abilityName;
+		//newSO.name = this.characterUser.gameObject.name + "'s " + this.name;
+
 		characterUser = user;		Debug.Log (abilityName + "'s user is " + characterUser.gameObject.name);
 
 		if (numberOfActions < 1) 
@@ -87,6 +93,8 @@ public class Ability : ScriptableObject
 		{
 			hitsPerAction = 1;
 		}
+
+		return newSO;
 	}
 
 	private void StartCooldown() 
