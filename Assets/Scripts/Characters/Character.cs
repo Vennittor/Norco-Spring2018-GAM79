@@ -53,10 +53,10 @@ public abstract class Character : MonoBehaviour
 			animator = GetComponent<Animator> ();
 		}
 
-		for(int i = 0 ; i < abilities.Count; i++)
-		{
-			abilities[i] = abilities[i].EquipAbility(this as Character);
-		}
+//		for(int i = 0 ; i < abilities.Count; i++)
+//		{
+//			abilities[i].EquipAbility(this as Character);
+//		}
     }
 
 	public virtual void BeginTurn()
@@ -104,6 +104,7 @@ public abstract class Character : MonoBehaviour
 			}
 
 			selectedAbilityIndex = abilityIndex;
+			abilities [selectedAbilityIndex].EquipAbility (this as Character);
 			abilities [selectedAbilityIndex].StartAbility ();
 
 			return abilities [selectedAbilityIndex];

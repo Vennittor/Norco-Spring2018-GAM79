@@ -22,7 +22,7 @@ public class Ability : ScriptableObject
 	[SerializeField] protected uint cooldown;
 	[SerializeField] protected uint cooldownTimer = 0;
 
-	public Character characterUser;
+	public Character characterUser = null;
 
     protected List<Character> targets = new List<Character>();
 
@@ -75,14 +75,14 @@ public class Ability : ScriptableObject
 		}
 	}
 
-	public Ability EquipAbility(Character user)
+	public void EquipAbility(Character user)
 	{
-		Ability newSO = ScriptableObject.CreateInstance("Ability") as Ability;
-
-		newSO.characterUser = user;
-		newSO.abilityName = this.abilityName;
-		//newSO.name = this.characterUser.gameObject.name + "'s " + this.name;
-
+//		Ability newSO = ScriptableObject.CreateInstance("Ability") as Ability;
+//
+//		newSO.characterUser = user;
+//		newSO.abilityName = this.abilityName;
+//		//newSO.name = this.characterUser.gameObject.name + "'s " + this.name;
+//
 		characterUser = user;		Debug.Log (abilityName + "'s user is " + characterUser.gameObject.name);
 
 		if (numberOfActions < 1) 
@@ -93,8 +93,7 @@ public class Ability : ScriptableObject
 		{
 			hitsPerAction = 1;
 		}
-
-		return newSO;
+			
 	}
 
 	private void StartCooldown() 
@@ -123,6 +122,7 @@ public class Ability : ScriptableObject
     {
         if (Usable)
         {
+			
 			//Ready an special effects that may happen when a Character is preparing to use the Ability
         }
     }
@@ -195,10 +195,11 @@ public class Ability : ScriptableObject
 				Debug.LogWarning ("Ability " + this.abilityName + " on " + characterUser.gameObject.name + " is trying to reference " 
 					+ characterUser.gameObject.name + "'s animator within EndAbility(), and " + characterUser.gameObject.name + " does not have reference to an Animator.");
 			}
-
+				
 			actionsUsed = 0;
 
 			characterUser.AbilityHasCompleted();
+			characterUser = null;
 		}
 	}
 
