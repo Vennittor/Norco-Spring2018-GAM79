@@ -85,17 +85,7 @@ public class Ability : ScriptableObject
 		}
 			
 	}
-
-//	private void StartCooldown() 
-//	{
-//		cooldownTimer = cooldown;
-//	}
-//	public void ProgressCooldown()
-//	{
-//		if (cooldownTimer > 0) {
-//			cooldownTimer--;
-//		}
-//	}
+		
 
 	public void SetTargets(List<Character> targetsToSet)	
 	{

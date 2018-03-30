@@ -54,9 +54,12 @@ public abstract class Character : MonoBehaviour
 		{
 			animator = GetComponent<Animator> ();
 		}
-
-		//COOLDOWN
-		//enfore size of cooldownTimers to abilities
+			
+		cooldownTimers.Clear();									//enfore size of cooldownTimers to abilities and set the timer to 0
+		foreach(Ability ability in abilities)
+		{
+			cooldownTimers.Add(0);
+		}
 
     }
 
@@ -92,7 +95,7 @@ public abstract class Character : MonoBehaviour
 			return null;
 		}
 
-		if (abilities [abilityIndex].Cooldown) 		//COOLDOWN  compare to new List of cooldownTimers
+		if (cooldownTimers[abilityIndex] == 0)
 		{
 			if (animator != null)
 			{
@@ -112,7 +115,7 @@ public abstract class Character : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log ( this.gameObject.name + "'s Ability at index " + selectedAbilityIndex.ToString()+ " is not usable");
+			Debug.Log ( this.gameObject.name + "'s Ability at index " + selectedAbilityIndex.ToString()+ " is on cooldown");
 			return null;
 		}
 
@@ -132,6 +135,7 @@ public abstract class Character : MonoBehaviour
 			}
 			Debug.Log (this.gameObject.name + " is using " + abilities [selectedAbilityIndex].abilityName);
 			abilities [selectedAbilityIndex].SetTargets (targets);
+			cooldownTimers [selectedAbilityIndex] = abilities [selectedAbilityIndex].Cooldown;
 			abilities [selectedAbilityIndex].UseAbility ();
 		}
 	}
@@ -149,6 +153,8 @@ public abstract class Character : MonoBehaviour
 	{	Debug.Log (this.gameObject.name + " is ending their turn.");
 		if (combatManager.activeCharacter == this)
 		{
+			ProgressCooldowns ();
+
 			combatManager.NextTurn();
 			//TODO uiManager.BlockInput until next PlayerCharacter starts turn
 		}
@@ -158,6 +164,22 @@ public abstract class Character : MonoBehaviour
 		}
 	}
 		
+	private void StartCooldown(int i = 0)
+	{
+		cooldownTimers[i] = abilities[i].Cooldown;
+	}
+
+	public void ProgressCooldowns()
+	{
+		for (int i = 0; i < cooldownTimers.Count; i++) 
+		{
+			if (cooldownTimers[i] > 0)
+			{
+				cooldownTimers[i]--;
+			}
+		}
+	}
+
 
     public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
 	{	Debug.Log (this.gameObject.name + " takes " + damage.ToString () + " of " + ElementType.PHYSICAL.ToString () + " damage!");
