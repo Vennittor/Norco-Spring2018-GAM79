@@ -135,13 +135,14 @@ public abstract class Character : MonoBehaviour
 			}
 			Debug.Log (this.gameObject.name + " is using " + abilities [selectedAbilityIndex].abilityName);
 			abilities [selectedAbilityIndex].SetTargets (targets);
-			cooldownTimers [selectedAbilityIndex] = abilities [selectedAbilityIndex].Cooldown;
 			abilities [selectedAbilityIndex].UseAbility ();
 		}
 	}
 
 	public void AbilityHasCompleted(CombatState enterNewState = CombatState.ABLE)
 	{	Debug.Log (this.gameObject.name + "'s ability has completed.");
+		cooldownTimers [selectedAbilityIndex] = abilities [selectedAbilityIndex].Cooldown;
+
 		selectedAbilityIndex = -1;
 
 		combatState = enterNewState;

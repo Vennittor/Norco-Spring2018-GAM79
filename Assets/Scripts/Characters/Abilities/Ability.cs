@@ -31,7 +31,7 @@ public class Ability : ScriptableObject
 
     
 
-	public int Cooldown 
+	public uint Cooldown 
 	{
 		get
 		{
@@ -100,11 +100,7 @@ public class Ability : ScriptableObject
 
     public void StartAbility()
     {
-        if (Usable)
-        {
-			
-			//Ready an special effects that may happen when a Character is preparing to use the Ability
-        }
+		//TODO Ready an special effects that may happen when a Character is preparing to use the Ability
     }
 
 	public void UseAbility()
@@ -163,7 +159,6 @@ public class Ability : ScriptableObject
 		else
 		{
 			targets.Clear ();
-			StartCooldown();
 
 			if (characterUser.animator != null)
 			{
