@@ -104,7 +104,7 @@ public abstract class Character : MonoBehaviour
 			}
 
 			selectedAbilityIndex = abilityIndex;
-			abilities [selectedAbilityIndex].EquipAbility (this as Character);
+			abilities [selectedAbilityIndex].PrepAbility (this as Character);		
 			abilities [selectedAbilityIndex].StartAbility ();
 
 			return abilities [selectedAbilityIndex];

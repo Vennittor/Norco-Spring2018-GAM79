@@ -75,14 +75,8 @@ public class Ability : ScriptableObject
 		}
 	}
 
-	public void EquipAbility(Character user)
+	public void PrepAbility(Character user)
 	{
-//		Ability newSO = ScriptableObject.CreateInstance("Ability") as Ability;
-//
-//		newSO.characterUser = user;
-//		newSO.abilityName = this.abilityName;
-//		//newSO.name = this.characterUser.gameObject.name + "'s " + this.name;
-//
 		characterUser = user;		Debug.Log (abilityName + "'s user is " + characterUser.gameObject.name);
 
 		if (numberOfActions < 1) 
