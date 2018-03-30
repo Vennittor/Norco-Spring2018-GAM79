@@ -28,12 +28,14 @@ public abstract class Character : MonoBehaviour
 
 	public CombatState combatState;
 
-	[SerializeField] protected List<Ability> abilities = new List<Ability>(); 
+	public int selectedAbilityIndex = -1;
+
+	[SerializeField] protected List<Ability> abilities = new List<Ability>();
+	[SerializeField] protected List<uint> cooldownTimers = new List<uint>();
 	[SerializeField] protected List<Status> statuses = new List<Status>();     	// Tandy: List of Status to show what Character is affected by
 
 	protected bool _canActThisTurn = true;
 
-	public int selectedAbilityIndex = -1;
 
 	public bool canAct
 	{
@@ -53,10 +55,9 @@ public abstract class Character : MonoBehaviour
 			animator = GetComponent<Animator> ();
 		}
 
-//		for(int i = 0 ; i < abilities.Count; i++)
-//		{
-//			abilities[i].EquipAbility(this as Character);
-//		}
+		//COOLDOWN
+		//enfore size of cooldownTimers to abilities
+
     }
 
 	public virtual void BeginTurn()
@@ -91,7 +92,7 @@ public abstract class Character : MonoBehaviour
 			return null;
 		}
 
-		if (abilities [abilityIndex].Usable) 
+		if (abilities [abilityIndex].Cooldown) 		//COOLDOWN  compare to new List of cooldownTimers
 		{
 			if (animator != null)
 			{
@@ -236,8 +237,4 @@ public abstract class Character : MonoBehaviour
 
     }
 
-//    IEnumerator PlayAnimation()
-//    {
-//        animator.GetCurrentAnimatorStateInfo(0).IsName("state") == true;
-//    }
 }

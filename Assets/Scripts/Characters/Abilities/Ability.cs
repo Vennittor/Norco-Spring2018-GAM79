@@ -19,8 +19,7 @@ public class Ability : ScriptableObject
 	protected uint actionsUsed = 0;
 	[SerializeField] protected uint hitsPerAction = 1;				//This is the number of times the Ability will hit each time it is used.  This it's only the assigned targets
 
-	[SerializeField] protected uint cooldown;
-	[SerializeField] protected uint cooldownTimer = 0;
+	[SerializeField] protected uint _cooldown;
 
 	public Character characterUser = null;
 
@@ -32,14 +31,11 @@ public class Ability : ScriptableObject
 
     
 
-	public bool Usable 
+	public int Cooldown 
 	{
-		get {
-			if (cooldownTimer <= 0) 
-			{
-				return true;
-			}
-			return false;
+		get
+		{
+			return _cooldown;
 		}
 	}
 
@@ -90,16 +86,16 @@ public class Ability : ScriptableObject
 			
 	}
 
-	private void StartCooldown() 
-	{
-		cooldownTimer = cooldown;
-	}
-	public void ProgressCooldown()
-	{
-		if (cooldownTimer > 0) {
-			cooldownTimer--;
-		}
-	}
+//	private void StartCooldown() 
+//	{
+//		cooldownTimer = cooldown;
+//	}
+//	public void ProgressCooldown()
+//	{
+//		if (cooldownTimer > 0) {
+//			cooldownTimer--;
+//		}
+//	}
 
 	public void SetTargets(List<Character> targetsToSet)	
 	{
