@@ -17,10 +17,11 @@ public class EnemyCharacter : Character
 	public override void BeginTurn()
 	{
 		base.BeginTurn ();
-		if (canAct) 
-		{
-			ChooseAbility();
-		}
+
+//		if (canAct) 
+//		{
+//			ChooseAbility();				//TEST This may be why there are multiple use Ability Calls.
+//		}
     }
 
 	protected override void ChooseAbility()
@@ -42,15 +43,15 @@ public class EnemyCharacter : Character
 
 	public override void GetNewTargets()
 	{
-		Ability abilityToUseAgain = ReadyAbility (selectedAbilityIndex);
+		Ability abilityToUseAgain = ReadyAbility (selectedAbilityIndex);		//Ready the previsouly selected ability
 
-		this.GetTargets (abilityToUseAgain);
+		this.GetTargets (abilityToUseAgain);										//Then get Targets for it
 	}
 
 
 	#region AI Functions.		//TODO These FUnctions should be externalized for more robust and customizable AI's
 	void GetTargets(Ability ability)
-	{
+	{	Debug.Log ("Enemy GetTargets");
 		combatManager.AssignTargets(RandPlayerTarget() as Character);
 	}
 

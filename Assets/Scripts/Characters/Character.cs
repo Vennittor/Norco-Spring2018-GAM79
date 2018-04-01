@@ -28,12 +28,14 @@ public abstract class Character : MonoBehaviour
 
 	public CombatState combatState;
 
-	[SerializeField] protected List<Ability> abilities = new List<Ability>(); 
+	public int selectedAbilityIndex = -1;
+
+	[SerializeField] protected List<Ability> abilities = new List<Ability>();
+	[SerializeField] protected List<uint> cooldownTimers = new List<uint>();
 	[SerializeField] protected List<Status> statuses = new List<Status>();     	// Tandy: List of Status to show what Character is affected by
 
 	protected bool _canActThisTurn = true;
 
-	public int selectedAbilityIndex = -1;
 
 	public bool canAct
 	{
@@ -52,11 +54,13 @@ public abstract class Character : MonoBehaviour
 		{
 			animator = GetComponent<Animator> ();
 		}
-
+			
+		cooldownTimers.Clear();									//enfore size of cooldownTimers to abilities and set the timer to 0
 		foreach(Ability ability in abilities)
 		{
-			ability.EquipAbility(this as Character);
+			cooldownTimers.Add(0);
 		}
+
     }
 
 	public virtual void BeginTurn()
@@ -91,7 +95,7 @@ public abstract class Character : MonoBehaviour
 			return null;
 		}
 
-		if (abilities [abilityIndex].Usable) 
+		if (cooldownTimers[abilityIndex] == 0)
 		{
 			if (animator != null)
 			{
@@ -104,13 +108,14 @@ public abstract class Character : MonoBehaviour
 			}
 
 			selectedAbilityIndex = abilityIndex;
+			abilities [selectedAbilityIndex].PrepAbility (this as Character);		
 			abilities [selectedAbilityIndex].StartAbility ();
 
 			return abilities [selectedAbilityIndex];
 		}
 		else
 		{
-			Debug.Log ( this.gameObject.name + "'s Ability at index " + selectedAbilityIndex.ToString()+ " is not usable");
+			Debug.Log ( this.gameObject.name + "'s Ability at index " + selectedAbilityIndex.ToString()+ " is on cooldown");
 			return null;
 		}
 
@@ -136,6 +141,8 @@ public abstract class Character : MonoBehaviour
 
 	public void AbilityHasCompleted(CombatState enterNewState = CombatState.ABLE)
 	{	Debug.Log (this.gameObject.name + "'s ability has completed.");
+		cooldownTimers [selectedAbilityIndex] = abilities [selectedAbilityIndex].Cooldown;
+
 		selectedAbilityIndex = -1;
 
 		combatState = enterNewState;
@@ -147,6 +154,8 @@ public abstract class Character : MonoBehaviour
 	{	Debug.Log (this.gameObject.name + " is ending their turn.");
 		if (combatManager.activeCharacter == this)
 		{
+			ProgressCooldowns ();
+
 			combatManager.NextTurn();
 			//TODO uiManager.BlockInput until next PlayerCharacter starts turn
 		}
@@ -156,6 +165,22 @@ public abstract class Character : MonoBehaviour
 		}
 	}
 		
+	private void StartCooldown(int i = 0)
+	{
+		cooldownTimers[i] = abilities[i].Cooldown;
+	}
+
+	public void ProgressCooldowns()
+	{
+		for (int i = 0; i < cooldownTimers.Count; i++) 
+		{
+			if (cooldownTimers[i] > 0)
+			{
+				cooldownTimers[i]--;
+			}
+		}
+	}
+
 
     public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
 	{	Debug.Log (this.gameObject.name + " takes " + damage.ToString () + " of " + ElementType.PHYSICAL.ToString () + " damage!");
@@ -235,8 +260,4 @@ public abstract class Character : MonoBehaviour
 
     }
 
-//    IEnumerator PlayAnimation()
-//    {
-//        animator.GetCurrentAnimatorStateInfo(0).IsName("state") == true;
-//    }
 }

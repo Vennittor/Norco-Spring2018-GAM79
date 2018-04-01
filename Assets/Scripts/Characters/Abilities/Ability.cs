@@ -13,16 +13,15 @@ public class Ability : ScriptableObject
 	// COMBAT DATA
 	public TargetType targetType;
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
-	[SerializeField] protected List<Status> statuses;
+	[SerializeField] protected List<Status> statuses = new List<Status>();
 
 	[SerializeField] protected uint numberOfActions = 1;			//When the Ability is done, instead of telling the player AbilityHasCompleted, it can accept another targeting input
 	protected uint actionsUsed = 0;
 	[SerializeField] protected uint hitsPerAction = 1;				//This is the number of times the Ability will hit each time it is used.  This it's only the assigned targets
 
-	[SerializeField] protected uint cooldown;
-	[SerializeField] protected uint cooldownTimer = 0;
+	[SerializeField] protected uint _cooldown;
 
-	public Character characterUser;
+	public Character characterUser = null;
 
     protected List<Character> targets = new List<Character>();
 
@@ -32,14 +31,11 @@ public class Ability : ScriptableObject
 
     
 
-	public bool Usable 
+	public uint Cooldown 
 	{
-		get {
-			if (cooldownTimer <= 0) 
-			{
-				return true;
-			}
-			return false;
+		get
+		{
+			return _cooldown;
 		}
 	}
 
@@ -75,7 +71,7 @@ public class Ability : ScriptableObject
 		}
 	}
 
-	public void EquipAbility(Character user)
+	public void PrepAbility(Character user)
 	{
 		characterUser = user;		Debug.Log (abilityName + "'s user is " + characterUser.gameObject.name);
 
@@ -87,18 +83,9 @@ public class Ability : ScriptableObject
 		{
 			hitsPerAction = 1;
 		}
+			
 	}
-
-	private void StartCooldown() 
-	{
-		cooldownTimer = cooldown;
-	}
-	public void ProgressCooldown()
-	{
-		if (cooldownTimer > 0) {
-			cooldownTimer--;
-		}
-	}
+		
 
 	public void SetTargets(List<Character> targetsToSet)	
 	{
@@ -113,10 +100,7 @@ public class Ability : ScriptableObject
 
     public void StartAbility()
     {
-        if (Usable)
-        {
-			//Ready an special effects that may happen when a Character is preparing to use the Ability
-        }
+		//TODO Ready an special effects that may happen when a Character is preparing to use the Ability
     }
 
 	public void UseAbility()
@@ -175,7 +159,6 @@ public class Ability : ScriptableObject
 		else
 		{
 			targets.Clear ();
-			StartCooldown();
 
 			if (characterUser.animator != null)
 			{
@@ -187,10 +170,11 @@ public class Ability : ScriptableObject
 				Debug.LogWarning ("Ability " + this.abilityName + " on " + characterUser.gameObject.name + " is trying to reference " 
 					+ characterUser.gameObject.name + "'s animator within EndAbility(), and " + characterUser.gameObject.name + " does not have reference to an Animator.");
 			}
-
+				
 			actionsUsed = 0;
 
 			characterUser.AbilityHasCompleted();
+			characterUser = null;
 		}
 	}
 
