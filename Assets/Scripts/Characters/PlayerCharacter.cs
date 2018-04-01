@@ -4,90 +4,72 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
-    // TODO ability variables
-    public HeatZone heatState;
-    public int heatRate;
-    
+	[SerializeField] private Water water;
+    [SerializeField] private int waterUses = 3;
+
+    void Awake()
+    {
+        animator = gameObject.GetComponent<Animator>();
+    }
 
     private new void Start()
     {
         base.Start();
-        //heatState = HeatZone.OutofHeat;
-        // TODO set up ability attachments
     }
 
-    void Update()
+    public override void BeginTurn()
     {
+        base.BeginTurn();
 
-    }
-
-	public override void BeginTurn()
-	{
-		Debug.Log ("Player " + name + " begins thier turn.");
-		if (combatState == CombatState.DISABLED || combatState == CombatState.DEAD) 
-		{
-			Debug.Log("Player " + name + " cannont act this turn");
-			combatManager.NextTurn ();
-		}
-	}
-
-	public void SkillOne()
-	{
-		combatState = CombatState.USEABILITY;
-
-		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #1", "It's over 9000!");
-		combatState = CombatState.ABLE;
-		combatManager.NextTurn();
-	}
-	public void SkillTwo()
-	{
-		combatState = CombatState.USEABILITY;
-
-		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #2", "How do I turn this thing on?");
-		combatState = CombatState.ABLE;
-		combatManager.NextTurn();
-	}
-	public void SkillThree()
-	{
-		combatState = CombatState.USEABILITY;
-
-		Announcer.UseSkill(name, RandEnemyTarget().name, "Skill #3", "I wish I had more Skills to use.");
-		combatState = CombatState.ABLE;
-		combatManager.NextTurn();
-	}
-
-	private EnemyCharacter RandEnemyTarget()
-    {
-        List<EnemyCharacter> enemies = new List<EnemyCharacter>();
-		foreach(Character character in combatManager.characters)
+        if (canAct)
         {
-			if (character is EnemyCharacter) 
-			{
-				enemies.Add (character as EnemyCharacter);
-			}
+            //TODO swap UI graphics into to match PlayerCharacter
+            ChooseAbility();
         }
-        EnemyCharacter enemyCharacter = enemies[Random.Range(0, enemies.Count)];
-        return enemyCharacter;
-    }
-    
-    /*public void EnterHeat()
-    {
-        heatState = HeatZone.InHeat;
     }
 
-    public void ExitHeat()
+	protected override void ChooseAbility()					//tells UIManger to enter into an ability selection mode. It returns true if it switched modes.That script will then call ReadyAbility() based on the input given
     {
-        heatState = HeatZone.OutofHeat;
+		if (!combatManager.uiManager.AllowAbilitySelection ()) 
+		{
+			Debug.LogWarning ("UIManager cannot enter into AbilitySelect mode at the moment");
+		}
     }
 
-    public enum HeatZone
-    {
-        OutofHeat,
-        InHeat
-    }*/
+	public override void GetNewTargets()
+	{
+		ReadyAbility (selectedAbilityIndex);
+	}
 
-    public void SetHeatRate(int heat)
+    //call to water class   
+    public Ability ReadyUseWater()
     {
-        heatRate += heat;        
+		if (water == null) 
+		{
+			Debug.Log ("There is no Water Ability for " + this.characterName);
+			return null;
+		}
+
+        if (waterUses > 0 & currentHeat > 0)
+        {
+			return water;
+        }
+        else if (waterUses == 0)
+        {
+            Debug.Log("you lean back for a swig, but only drink in disappointment");
+        }
+        else if (currentHeat == 0)
+        {
+            Debug.Log("your thirst does not require quenching at this time");
+        }
+		return null;
     }
+
+	public void UseWater()
+	{
+		Announcer.UseItem(this.gameObject.name, "water");
+
+		water.StartAbility ();
+	}
+		
 }

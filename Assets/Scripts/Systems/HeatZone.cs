@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class HeatZone : MonoBehaviour
 {
-    public PlayerCharacter _char;
-    public int myHeatRate;
+    public Party _party;
+    public int myHeatIntensity;
 
-	public void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("yo i gotS it");
-        _char = other.gameObject.GetComponent<PlayerCharacter>();
-        //_char.heatState = PlayerCharacter.HeatZone.InHeat;
-        _char.SetHeatRate(myHeatRate);
+    public void OnTriggerEnter(Collider other)
+	{
+        //TODO "if" statements are temporary, since the trigger enter was detecting the ground as well
+		if (other.gameObject.name == "Player") {
+			Debug.Log ("character entered a heat zone");
+
+			_party = other.gameObject.GetComponent<Party> ();
+
+			_party.heatState = Party.HeatZone.InHeat;
+
+			_party.HeatChecker (myHeatIntensity);
+		}
     }
 
     public void OnTriggerExit(Collider other)
     {
-        Debug.Log("yo i dont not gots it");
-        _char = other.gameObject.GetComponent<PlayerCharacter>();
-        _char.SetHeatRate(-myHeatRate);
+		if (other.gameObject.name == "Player")
+		{
+
+			Debug.Log("character exited a heat zone");
+
+			_party = other.gameObject.GetComponent<Party>();
+
+			_party.heatState = Party.HeatZone.OutofHeat;
+
+		}
     }
 }
+
+

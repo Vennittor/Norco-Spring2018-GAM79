@@ -4,53 +4,59 @@ using UnityEngine;
 
 public class EnemyCharacter : Character
 {
-    //public float[] attacks;
-    private float min = 0;
-    private float max = 3;
-    
+    void Awake()
+    {
+        animator = gameObject.GetComponent<Animator>();
+    }
 
     private new void Start()
     {
         base.Start();
     }
-	
-	void Update ()
-    {
-        
+
+	protected override void ChooseAbility()
+	{
+		//TODO establish a seperate AI that will handle Ability choice
+
+		Ability abilityToUse = null;
+
+		float selection = Random.Range(0, abilities.Count);
+		selection = selection == (float)abilities.Count ? selection - 1f : selection;	// if the selecton is equal to 
+
+		abilityToUse = ReadyAbility ((int)selection);		//Readies the selected Ability
+
+		if (abilityToUse != null) 							//Then tell the AI to GetTargets for the Ability
+		{
+			this.GetTargets (abilityToUse);
+		}
 	}
 
-	public override void BeginTurn()
-    {
-		Debug.Log ("Enemy " + this.name + " begins thier turn.");
+	public override void GetNewTargets()
+	{
+		Ability abilityToUseAgain = ReadyAbility (selectedAbilityIndex);		//Ready the previsouly selected ability
 
-        float selection = Random.Range(min, max);
-        if (selection <= 1)
-        {
-            AttackOne();
-        }
-        else if (selection > 1 && selection < 2)
-        {
-            AttackTwo();
-        }
-        else if (selection >= 2)
-        {
-            AttackThree();
-        }
-    }
+		this.GetTargets (abilityToUseAgain);										//Then get Targets for it
+	}
 
-    void AttackOne()
+
+	#region AI Functions.		//TODO These FUnctions should be externalized for more robust and customizable AI's
+	void GetTargets(Ability ability)
+	{	Debug.Log ("Enemy GetTargets");
+		combatManager.AssignTargets(RandPlayerTarget() as Character);
+	}
+
+    private PlayerCharacter RandPlayerTarget()
     {
-		Debug.Log(this.name + " used AttackOne");
-        combatManager.NextTurn();
+        List<PlayerCharacter> players = new List<PlayerCharacter>();
+        foreach (Character character in combatManager.charactersInCombat)
+        {
+            if (character is PlayerCharacter)
+            {
+                players.Add(character as PlayerCharacter);
+            }
+        }
+        PlayerCharacter playerCharacter = players[Random.Range(0, players.Count)];
+        return playerCharacter;
     }
-    void AttackTwo()
-    {
-		Debug.Log(this.name + " used AttackTwo");
-        combatManager.NextTurn();
-    }
-    void AttackThree()
-    {
-		Debug.Log(this.name + " used AttackThree");
-        combatManager.NextTurn();
-    }
+	#endregion
 }
