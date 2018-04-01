@@ -14,16 +14,6 @@ public class EnemyCharacter : Character
         base.Start();
     }
 
-	public override void BeginTurn()
-	{
-		base.BeginTurn ();
-
-//		if (canAct) 
-//		{
-//			ChooseAbility();				//TEST This may be why there are multiple use Ability Calls.
-//		}
-    }
-
 	protected override void ChooseAbility()
 	{
 		//TODO establish a seperate AI that will handle Ability choice
