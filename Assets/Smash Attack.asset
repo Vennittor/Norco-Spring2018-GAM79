@@ -26,6 +26,7 @@ MonoBehaviour:
     elementType: 0
   statuses: []
   numberOfActions: 1
+  hitsPerAction: 1
   cooldown: 0
   cooldownTimer: 0
   characterUser: {fileID: 0}

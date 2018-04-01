@@ -17,10 +17,11 @@ public class EnemyCharacter : Character
 	public override void BeginTurn()
 	{
 		base.BeginTurn ();
-		if (canAct) 
-		{
-			ChooseAbility();
-		}
+
+//		if (canAct) 
+//		{
+//			ChooseAbility();				//TEST This may be why there are multiple use Ability Calls.
+//		}
     }
 
 	protected override void ChooseAbility()
@@ -30,37 +31,28 @@ public class EnemyCharacter : Character
 		Ability abilityToUse = null;
 
 		float selection = Random.Range(0, abilities.Count);
+		selection = selection == (float)abilities.Count ? selection - 1f : selection;	// if the selecton is equal to 
 
-		if (selection <= 1)
-		{
-			abilityToUse = AbilityOne ();
+		abilityToUse = ReadyAbility ((int)selection);		//Readies the selected Ability
 
-			if (abilityToUse != null) 
-			{
-				GetTargets (abilityToUse);
-			}
-		}
-		else if (selection > 1 && selection < 2)
+		if (abilityToUse != null) 							//Then tell the AI to GetTargets for the Ability
 		{
-			AbilityTwo();
-		}
-		else if (selection >= 2)
-		{
-			AbilityThree();
+			this.GetTargets (abilityToUse);
 		}
 	}
 
+	public override void GetNewTargets()
+	{
+		Ability abilityToUseAgain = ReadyAbility (selectedAbilityIndex);		//Ready the previsouly selected ability
+
+		this.GetTargets (abilityToUseAgain);										//Then get Targets for it
+	}
+
+
+	#region AI Functions.		//TODO These FUnctions should be externalized for more robust and customizable AI's
 	void GetTargets(Ability ability)
-	{
-		//TODO establish a seperate AI that will handle Target decisions
-		ability.SetTarget(RandPlayerTarget() as Character);
-		ability.UseAbility ();
-	}
-
-	public override void AbilityComplete(CombatState newState = CombatState.ABLE)
-	{
-		combatState = newState;
-		EndTurn ();
+	{	Debug.Log ("Enemy GetTargets");
+		combatManager.AssignTargets(RandPlayerTarget() as Character);
 	}
 
     private PlayerCharacter RandPlayerTarget()
@@ -76,4 +68,5 @@ public class EnemyCharacter : Character
         PlayerCharacter playerCharacter = players[Random.Range(0, players.Count)];
         return playerCharacter;
     }
+	#endregion
 }

@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 330486041}
   - component: {fileID: 330486040}
   - component: {fileID: 330486044}
+  - component: {fileID: 330486045}
   m_Layer: 0
   m_Name: Character B
   m_TagString: Untagged
@@ -203,24 +204,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
+  animator: {fileID: 0}
+  maxhealth: 100
+  currentHealth: 100
+  maxHeat: 0
+  currentHeat: 0
+  accuracy: 84.5
+  evade: 10
+  speed: 4
+  defense: 0
+  combatState: 0
+  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
+  cooldownTimers: 
   statuses: []
-  combatState: 0
-  name: CharacterB
-  speed: 4
-  maxhealth: 5
-  currentHealth: 5
-  currentHeat: 0
-  maxHeat: 0
-  defense: 0
-  accuracy: 84.5
-  evade: 10
-  heatState: 6
-  heatIntensity: 0
+  water: {fileID: 0}
   waterUses: 3
+--- !u!95 &330486045
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 330486039}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 630c69eab344231448529905e8e4d468, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &476853286
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +253,7 @@ GameObject:
   - component: {fileID: 476853288}
   - component: {fileID: 476853287}
   - component: {fileID: 476853291}
+  - component: {fileID: 476853292}
   m_Layer: 0
   m_Name: Character A
   m_TagString: Untagged
@@ -316,24 +337,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
+  animator: {fileID: 0}
+  maxhealth: 100
+  currentHealth: 100
+  maxHeat: 0
+  currentHeat: 0
+  accuracy: 84.5
+  evade: 10
+  speed: 5
+  defense: 0
+  combatState: 0
+  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
+  cooldownTimers: 
   statuses: []
-  combatState: 0
-  name: CharacterA
-  speed: 5
-  maxhealth: 5
-  currentHealth: 5
-  currentHeat: 0
-  maxHeat: 0
-  defense: 0
-  accuracy: 84.5
-  evade: 10
-  heatState: 6
-  heatIntensity: 0
+  water: {fileID: 0}
   waterUses: 3
+--- !u!95 &476853292
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 476853286}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 630c69eab344231448529905e8e4d468, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &513945185
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,18 +468,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities: []
-  statuses: []
-  combatState: 0
-  name: enemy b
-  speed: 3
-  maxhealth: 5
-  currentHealth: 5
-  currentHeat: 0
+  characterName: 
+  animator: {fileID: 0}
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 0
-  defense: 0
+  currentHeat: 0
   accuracy: 84.5
   evade: 10
+  speed: 3
+  defense: 0
+  combatState: 0
+  selectedAbilityIndex: -1
+  abilities:
+  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
+  cooldownTimers: 
+  statuses: []
 --- !u!1 &899112348
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,6 +496,7 @@ GameObject:
   - component: {fileID: 899112350}
   - component: {fileID: 899112349}
   - component: {fileID: 899112353}
+  - component: {fileID: 899112354}
   m_Layer: 0
   m_Name: Character C
   m_TagString: Untagged
@@ -535,24 +580,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
+  animator: {fileID: 0}
+  maxhealth: 100
+  currentHealth: 100
+  maxHeat: 0
+  currentHeat: 0
+  accuracy: 84.5
+  evade: 10
+  speed: 8
+  defense: 0
+  combatState: 0
+  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: 77e18a9df79275949ae493fc02fb120f, type: 2}
+  cooldownTimers: 
   statuses: []
-  combatState: 0
-  name: CharacterC
-  speed: 3
-  maxhealth: 5
-  currentHealth: 5
-  currentHeat: 0
-  maxHeat: 0
-  defense: 0
-  accuracy: 84.5
-  evade: 10
-  heatState: 6
-  heatIntensity: 0
+  water: {fileID: 0}
   waterUses: 3
+--- !u!95 &899112354
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 899112348}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 630c69eab344231448529905e8e4d468, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1166834116
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c89948975e84c4bbb2b2eaa180bd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   inCombat: 0
   characters: []
   activeCharacter: {fileID: 0}
@@ -772,18 +837,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities: []
-  statuses: []
-  combatState: 0
-  name: enemy c
-  speed: 2
-  maxhealth: 5
-  currentHealth: 5
-  currentHeat: 0
+  characterName: 
+  animator: {fileID: 0}
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 0
-  defense: 0
+  currentHeat: 0
   accuracy: 84.5
   evade: 10
+  speed: 2
+  defense: 0
+  combatState: 0
+  selectedAbilityIndex: -1
+  abilities:
+  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
+  cooldownTimers: 
+  statuses: []
 --- !u!1 &1416273166
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,10 +1050,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1831643141162578, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
-      propertyPath: m_Name
-      value: Canvas_Combat_UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
@@ -1505,15 +1570,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities: []
-  statuses: []
-  combatState: 0
-  name: enemy a
-  speed: 4
-  maxhealth: 5
-  currentHealth: 5
-  currentHeat: 0
+  characterName: 
+  animator: {fileID: 0}
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 0
-  defense: 0
+  currentHeat: 0
   accuracy: 84.5
   evade: 10
+  speed: 4
+  defense: 0
+  combatState: 0
+  selectedAbilityIndex: -1
+  abilities:
+  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
+  cooldownTimers: 
+  statuses: []

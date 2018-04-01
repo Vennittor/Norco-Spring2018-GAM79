@@ -3,36 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
-{
-//    public List<StatusEffect> statusEffects = new List<StatusEffect>();
-    
-    [SerializeField] protected List<Ability> abilities = new List<Ability>(); 
-
-	[SerializeField] protected List<Status> statuses = new List<Status>();     	// Tandy: List of Status to show what Character is affected by
-
+{   
 	protected CombatManager combatManager;
 
     public enum CombatState
     {
-        ABLE, DISABLED, USEABILITY, EXHAUSTED
+        ABLE, DISABLED, USINGABILITY, EXHAUSTED
     }
-    public CombatState combatState;
+
+    public string characterName;
+	public Animator animator;
+
+	public uint maxhealth;
+	public uint currentHealth;
+
+	public uint maxHeat;
+	public uint currentHeat;
+
+	public float accuracy = 84.5f;
+	public float evade = 10;
+
+    public int speed;
+    public uint defense;
+
+	public CombatState combatState;
+
+	public int selectedAbilityIndex = -1;
+
+	[SerializeField] protected List<Ability> abilities = new List<Ability>();
+	[SerializeField] protected List<uint> cooldownTimers = new List<uint>();
+	[SerializeField] protected List<Status> statuses = new List<Status>();     	// Tandy: List of Status to show what Character is affected by
+
 	protected bool _canActThisTurn = true;
 
-    public Animator animator;
-    public bool isAnimating;
-
-    public new string name;
-    public int speed;
-
-    public uint maxhealth;
-    public uint currentHealth;
-
-    public uint currentHeat;
-    public uint maxHeat;
-    public uint defense;
-    public float accuracy = 84.5f;
-    public float evade = 10;
 
 	public bool canAct
 	{
@@ -47,10 +50,17 @@ public abstract class Character : MonoBehaviour
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
 
+		if (animator == null) 
+		{
+			animator = GetComponent<Animator> ();
+		}
+			
+		cooldownTimers.Clear();									//enfore size of cooldownTimers to abilities and set the timer to 0
 		foreach(Ability ability in abilities)
 		{
-			ability.EquipAbility(this);
+			cooldownTimers.Add(0);
 		}
+
     }
 
 	public virtual void BeginTurn()
@@ -68,98 +78,119 @@ public abstract class Character : MonoBehaviour
 		else
 		{
 			_canActThisTurn = true;
+
+			ChooseAbility ();
 		}
 	}
 
-	protected abstract void ChooseAbility();
+	protected abstract void ChooseAbility();					//This should be used by an inheriting class based on how it will decided upon the Abilities it will use.  via UI input, AI, or some other method
 
-	public abstract void AbilityComplete(CombatState newState = CombatState.ABLE);
+	public abstract void GetNewTargets ();					//this is should call ReadyAbility again using the selectedAbilityIndex to go back up to the UI or AI to get another set of targets.  Needs to be called before AbilityHasCompleted
+
+	public Ability ReadyAbility(int abilityIndex = 0) 			//Takes in an index number to reference that index in the abilities list, and will return that Ability if one is found and Usable
+	{
+		if (abilities [abilityIndex] == null || abilities.Count <= abilityIndex) 
+		{
+			Debug.Log ("There is no AbilityOne for " + this.characterName);
+			return null;
+		}
+
+		if (cooldownTimers[abilityIndex] == 0)
+		{
+			if (animator != null)
+			{
+				animator.SetBool ("Ready", true);
+				animator.SetBool ("Idle", false);
+			}
+			else
+			{
+				Debug.LogWarning (this.gameObject.name + " is trying to call it's animator in AbilityOne(), and does not have reference to it");
+			}
+
+			selectedAbilityIndex = abilityIndex;
+			abilities [selectedAbilityIndex].PrepAbility (this as Character);		
+			abilities [selectedAbilityIndex].StartAbility ();
+
+			return abilities [selectedAbilityIndex];
+		}
+		else
+		{
+			Debug.Log ( this.gameObject.name + "'s Ability at index " + selectedAbilityIndex.ToString()+ " is on cooldown");
+			return null;
+		}
+
+	}
+
+	public void UseAbility(List<Character> targets)
+	{
+		if (selectedAbilityIndex < 0 || selectedAbilityIndex >= abilities.Count) 
+		{
+			Debug.LogError (this.gameObject.name + "'s UseAbility(): No Ability was Selected, or an Ability was selected that the Character does not have. selectedAbilityIndex is out of abilities range");
+		}
+		else 
+		{
+			if (targets.Count == 0) 
+			{
+				Debug.LogWarning ("No Targets were passed to UseAbility");
+			}
+			Debug.Log (this.gameObject.name + " is using " + abilities [selectedAbilityIndex].abilityName);
+			abilities [selectedAbilityIndex].SetTargets (targets);
+			abilities [selectedAbilityIndex].UseAbility ();
+		}
+	}
+
+	public void AbilityHasCompleted(CombatState enterNewState = CombatState.ABLE)
+	{	Debug.Log (this.gameObject.name + "'s ability has completed.");
+		cooldownTimers [selectedAbilityIndex] = abilities [selectedAbilityIndex].Cooldown;
+
+		selectedAbilityIndex = -1;
+
+		combatState = enterNewState;
+
+		EndTurn ();
+	}
 
 	public void EndTurn()
-	{
+	{	Debug.Log (this.gameObject.name + " is ending their turn.");
 		if (combatManager.activeCharacter == this)
 		{
+			ProgressCooldowns ();
+
 			combatManager.NextTurn();
+			//TODO uiManager.BlockInput until next PlayerCharacter starts turn
+		}
+		else
+		{
+			Debug.LogWarning ("Attempting to run EndTurn() on " + this.gameObject.name + " while they are not the gameManager.activeCharacter. This normally should not be done.");
+		}
+	}
+		
+	private void StartCooldown(int i = 0)
+	{
+		cooldownTimers[i] = abilities[i].Cooldown;
+	}
+
+	public void ProgressCooldowns()
+	{
+		for (int i = 0; i < cooldownTimers.Count; i++) 
+		{
+			if (cooldownTimers[i] > 0)
+			{
+				cooldownTimers[i]--;
+			}
 		}
 	}
 
-    public Ability AbilityOne() // Basic Attack
-    {
-		if(abilities.Count != 0)
-		{
-	        if (abilities[0].Usable)
-	        {           // if cooldown can start, do rest  of Ability
-	            combatState = CombatState.USEABILITY;
 
-                if (!isAnimating)
-                {
-                    isAnimating = true;
-                    animator.SetInteger("animState", 1);
-                    print("played animation");
-                    isAnimating = false;
-                }
-
-                animator.SetInteger("animState", 0);
-
-	            return abilities[0];
-	        }
-		}
-        return null;
-    }
-
-	public Ability AbilityTwo()
-    {
-		if(abilities.Count != 0)
-		{
-	        if (abilities[1].Usable)
-	        {           // if cooldown can start, do rest  of Ability
-	            combatState = CombatState.USEABILITY;
-
-                if (!isAnimating)
-                {
-                    animator.SetInteger("animState", 2);
-                    print("played animation");
-                }
-
-                animator.SetInteger("animState", 0);
-
-                return abilities[1];
-	        }
-		}
-        return null;
-    }
-
-	public Ability AbilityThree()
-    {
-		if(abilities.Count != 0)
-		{
-	        if (abilities[2].Usable)
-	        {           // if cooldown can start, do rest  of Ability
-	            combatState = CombatState.USEABILITY;
-
-                if (!isAnimating)
-                {
-                    animator.SetInteger("animState", 3);
-                    print("played animation");
-                }
-
-                animator.SetInteger("animState", 0);
-
-                return abilities[2];
-	        }
-		}
-        return null;
-    }
-
-    public void TakeDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
-    {
+    public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
+	{	Debug.Log (this.gameObject.name + " takes " + damage.ToString () + " of " + ElementType.PHYSICAL.ToString () + " damage!");
         if (damageType == ElementType.PHYSICAL)
         {
             DealPhysicalDamage(damage);
         }
         else if (damageType == ElementType.HEAT)
         {
-            DealHeatDamage(damage);
+            DealHeatDamage((int)damage);
         }
         else if (damageType == ElementType.HEALING)
         {
@@ -167,7 +198,7 @@ public abstract class Character : MonoBehaviour
         }
         else if (damageType == ElementType.WATER)
         {
-            ApplyWater(damage);
+			ReduceHeat(damage);
         }
         else if (damageType == ElementType.POISON)
         {
@@ -181,7 +212,7 @@ public abstract class Character : MonoBehaviour
 		if (physicalDamage >= 1)
 		{
 			currentHealth -= (uint)Mathf.Clamp(physicalDamage, 0, currentHealth);
-			if (currentHealth == 0)
+			if (currentHealth <= 0)
 			{
 				Faint();
 			}
@@ -193,19 +224,14 @@ public abstract class Character : MonoBehaviour
 		currentHealth = (currentHealth + healing) > maxhealth ? maxhealth : (currentHealth + healing);
 	}
 
-    void ApplyWater(uint amount = 0)
+    void ReduceHeat(uint amount = 0)
     {
         currentHeat -= (uint)Mathf.Clamp((float)amount, 0f, (float)currentHeat);
     }
 
-    void DealHeatDamage(uint heatDamage = 0)
+    public void DealHeatDamage(int heatDamage)
     {
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
-        if (currentHeat == maxHeat)
-        {
-            EndTurn();
-            //TODO  move this to EndTurn function.  should not be in deal damage Functions currentHeat = maxHeat - 100; //or whatever we settle on the value for 1 bar is
-        }
     }
 
 	void DealPoisonDamage(uint poisonDamage)
@@ -225,13 +251,13 @@ public abstract class Character : MonoBehaviour
 
     public void Faint()
     {
-        Debug.Log(name + " died!");
+		Debug.Log(this.gameObject.name + " died!");
         combatState = CombatState.EXHAUSTED;
-        EndTurn();
+		if (this as Character == combatManager.activeCharacter)
+		{	Debug.Log ("Active Character died");
+			EndTurn();
+		}
+
     }
 
-//    IEnumerator PlayAnimation()
-//    {
-//        animator.GetCurrentAnimatorStateInfo(0).IsName("state") == true;
-//    }
 }

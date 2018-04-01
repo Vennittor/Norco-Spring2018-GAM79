@@ -6,22 +6,22 @@ using UnityEngine;
 public class Ability : ScriptableObject 
 {
 	// DESCRIPTIVE DATA
-    [SerializeField] protected string abilityName;
+    public string abilityName;
     [SerializeField] protected string description;
     [SerializeField] protected string callOutText;
 
 	// COMBAT DATA
 	public TargetType targetType;
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
-	[SerializeField] protected List<Status> statuses;
+	[SerializeField] protected List<Status> statuses = new List<Status>();
 
-	[SerializeField] private uint numberOfActions = 1;
-	private uint actionsUsed = 0;
+	[SerializeField] protected uint numberOfActions = 1;			//When the Ability is done, instead of telling the player AbilityHasCompleted, it can accept another targeting input
+	protected uint actionsUsed = 0;
+	[SerializeField] protected uint hitsPerAction = 1;				//This is the number of times the Ability will hit each time it is used.  This it's only the assigned targets
 
-	[SerializeField] private uint cooldown;
-	[SerializeField] private uint cooldownTimer = 0;
+	[SerializeField] protected uint _cooldown;
 
-	public Character characterUser;
+	public Character characterUser = null;
 
     protected List<Character> targets = new List<Character>();
 
@@ -31,14 +31,11 @@ public class Ability : ScriptableObject
 
     
 
-	public bool Usable 
+	public uint Cooldown 
 	{
-		get {
-			if (cooldownTimer <= 0) 
-			{
-				return true;
-			}
-			return false;
+		get
+		{
+			return _cooldown;
 		}
 	}
 
@@ -74,49 +71,39 @@ public class Ability : ScriptableObject
 		}
 	}
 
-	public void EquipAbility(Character user)
+	public void PrepAbility(Character user)
 	{
-		characterUser = user;
-	}
+		characterUser = user;		Debug.Log (abilityName + "'s user is " + characterUser.gameObject.name);
 
-	private void StartCooldown() 
-	{
-		cooldownTimer = cooldown;
-	}
-	public void ProgressCooldown()
-	{
-		if (cooldownTimer > 0) {
-			cooldownTimer--;
+		if (numberOfActions < 1) 
+		{
+			numberOfActions = 1;
 		}
+		if (hitsPerAction < 1) 
+		{
+			hitsPerAction = 1;
+		}
+			
 	}
+		
 
-	public void SetTarget(Character targetToSet)
+	public void SetTargets(List<Character> targetsToSet)	
+	{
+		targets.Clear ();
+		targets = targetsToSet;
+	}
+	public void SetTargets(Character targetToSet)			//Overload method for SetTargets to accept only a single Character instead of needing a list
 	{
 		targets.Clear ();
 		targets.Add (targetToSet);
 	}
 
-	public void SetTargets(List<Character> targetsToSet)	
-	{
-		targets = targetsToSet;
-	}
-
     public void StartAbility()
     {
-        if (Usable)
-        {
-            //enter ready animation
-            // transfer control to UI or AI for targeting:
-            // tell it the TargetType (single, multiple; allies, opponents, everyone)
-            //THis is compared against the class of the caller (Player or Enemy) to determine who are allies and who are enemies
-            // Perform target selection with UI targeting mode
-            // Return target(s) info to teh caller Ability from UI Manager
-            // *after this function* -> UseAbility(); // Ability resolves with target(s)
-            // call back to character that used Ability, tell them Ability has been used.
-        }
+		//TODO Ready an special effects that may happen when a Character is preparing to use the Ability
     }
 
-    public void UseAbility()
+	public void UseAbility()
     {
 		if (targets.Count == 0) 
 		{
@@ -124,19 +111,37 @@ public class Ability : ScriptableObject
 		} 
 		else 
 		{
-            AnnounceAbility();
-	        foreach (Character target in targets)					// Target all applicable targets
-	        { 
-				foreach (Damage range in damage)					// Deal all types of Damage in List
-	            { 
-					target.TakeDamage ( (uint)range.RollDamage(), range.element);
-	            } 
+			if (characterUser.animator != null) 
+			{
+				characterUser.animator.SetTrigger ("Strike");		//Tells animator to go into the Strike animation
+				characterUser.animator.SetBool ("Ready", false);	//When the Strike animation goes to REcover, with "Ready" being false, it should transition back to Idle
+				characterUser.animator.SetBool("Idle", true);
+			}
+			else 
+			{
+				Debug.LogWarning ("Ability " + this.abilityName + " on " + characterUser.gameObject.name + " is trying to reference " 
+					+ characterUser.gameObject.name + "'s animator within UseAbility(), and " + characterUser.gameObject.name + " does not have reference to an Animator.");
+			}
 
-	            foreach (Status status in statuses)					// Apply all Status affects
-	            { 
-	                target.ApplyStatus(status);						// pass all Status effects to target Character
-	            } 
-	        }
+            AnnounceAbility();
+
+			for(int hitsDone = 0; hitsDone < hitsPerAction; hitsDone ++)
+			{
+				foreach (Character target in targets)					// Target all applicable targets
+				{ 
+					foreach (Damage range in damage)					// Deal all types of Damage in List
+					{ 
+						target.ApplyDamage ( (uint)range.RollDamage(), range.element);
+					} 
+
+					foreach (Status status in statuses)					// Apply all Status affects
+					{ 
+						target.ApplyStatus(status);						// pass all Status effects to target Character
+					} 
+				}
+				//TODO Wait Between hits
+			}
+				
 		}
 
 		actionsUsed++;
@@ -148,13 +153,28 @@ public class Ability : ScriptableObject
 		if (actionsUsed < numberOfActions)
 		{
 			targets.Clear ();
-			//StartAbility ();
+			StartAbility ();
+			characterUser.GetNewTargets ();
 		}
 		else
 		{
 			targets.Clear ();
-			StartCooldown();
-            (characterUser).AbilityComplete();
+
+			if (characterUser.animator != null)
+			{
+				characterUser.animator.SetBool ("Idle", true);
+				characterUser.animator.SetBool ("Ready", false);
+			}
+			else
+			{
+				Debug.LogWarning ("Ability " + this.abilityName + " on " + characterUser.gameObject.name + " is trying to reference " 
+					+ characterUser.gameObject.name + "'s animator within EndAbility(), and " + characterUser.gameObject.name + " does not have reference to an Animator.");
+			}
+				
+			actionsUsed = 0;
+
+			characterUser.AbilityHasCompleted();
+			characterUser = null;
 		}
 	}
 

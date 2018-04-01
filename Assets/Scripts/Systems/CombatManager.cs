@@ -5,6 +5,7 @@ using UnityEngine;
 public class CombatManager : MonoBehaviour
 {
     public static CombatManager combatInstance;
+	public UIManager uiManager;
     private static Announcer announcer;
 
 	public bool inCombat = false;
@@ -52,10 +53,13 @@ public class CombatManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         
         Announcer.AnnounceSelf();
+
     }
 
     void Start()
     {
+		uiManager = UIManager.Instance;
+
         characters = new List<Character>();
         currentRoundCharacters = new List<Character>();
         activePlayers = new List<PlayerCharacter>();
@@ -104,17 +108,16 @@ public class CombatManager : MonoBehaviour
         //Checks and adjustments to heat should be in seperate function (called here)
         //increase heat by set amount to characters (if combat is in a heat zone)
         //check if group is in a heat zone before entering combat (passed to here from game manager, not implemented yet)
-        if (activeCharacter is PlayerCharacter)
+        /*if (activeCharacter is PlayerCharacter)
         {
-			if ((activeCharacter as PlayerCharacter).heatState == PlayerCharacter.HeatZone.INHEAT)
+			if (combatManager.inHeat == true)
             {
                 foreach (Character player in activePlayers)
                 {
-                    player.currentHeat += 10; //or whatever value gets settled on, just picked 10 for easy math //use heat level of current heat zone
-                    Debug.Log(player.currentHeat + " < this is the current heat");
+                    player.TakeDamage(heatLevel, DamageType.Heat);   //or whatever value gets settled on, just picked 10 for easy math //use heat level of current heat zone
                 }
             }
-        }
+        }*/ //TODO set up so that checks heat state from level manager, which takes from party
         
 		if ( !VictoryCheck () ) 
 		{
@@ -126,19 +129,30 @@ public class CombatManager : MonoBehaviour
 	public void NextTurn() // active player finishing their turn calls this
 	{
 		if (!VictoryCheck())
-		{
+		{	Debug.Log (activeCharacter.gameObject.name + " is removed from the queu");
 			currentRoundCharacters.Remove(activeCharacter); // The activeCharacter is removed from the current round
 			if (currentRoundCharacters.Count == 0) // if they were the last one to leave, then end the round
 			{
 				EndRound ();
 			}
 			else
-			{
+			{	
 				activeCharacter = currentRoundCharacters[0];
-				Debug.Log(activeCharacter.gameObject.name + " is next.");
-				activeCharacter.BeginTurn ();
+				Debug.Log (activeCharacter.gameObject.name + " is now the activeCharacter");
+				//TEST
+				StartCoroutine( "DelayNextTurn" );
 			}
 		}
+	}
+
+	//TEST This creates a visible delay between character turns.
+	public IEnumerator DelayNextTurn()
+	{
+		Debug.Log(activeCharacter.gameObject.name + " is next.");
+
+		yield return new WaitForSeconds (0.6f);
+
+		activeCharacter.BeginTurn ();
 	}
 
 	void EndCombat(bool playerVictory)
@@ -172,6 +186,7 @@ public class CombatManager : MonoBehaviour
 				ablePlayers++;
 			}
 		}
+
 		int ableEnemies = 0;
 		foreach (Character enemy in characters)
 		{
@@ -199,7 +214,7 @@ public class CombatManager : MonoBehaviour
 		return false;
 	}
 
-    void SortRoundQueue() // clears round/active characters, repopulates round from actives, sorts round
+	void SortRoundQueue() 									// clears round/active characters, repopulates round from actives, sorts round
     {
         activePlayers.Clear();
         foreach (Character character in characters)					//Populate activePlayers List
@@ -239,7 +254,7 @@ public class CombatManager : MonoBehaviour
         activeCharacter = currentRoundCharacters[0];
     }
 
-    private int SortBySpeed(Character c1, Character c2) // sorts by highest speed, player first
+    private int SortBySpeed(Character c1, Character c2) 			// sorts by highest speed, player first
     {
         int char1 = c1.speed;
         int char2 = c2.speed;
@@ -260,5 +275,34 @@ public class CombatManager : MonoBehaviour
         }
         return -char1.CompareTo(char2);
     }
+
+
+	#region Targeting and Ability Use
+	public void AssignTargets(List<Character> targetsToAssign)
+	{
+		List<Character> finalizedTargets = new List<Character> ();
+		//check if the character using the Ability (most likely activeCharacter) has any effect that would cause them to change targets, like StatusEffect confusion.
+		//check if the intended targets have any re-direction effects, (like Cover, or Reflect)
+		//Find new targets if needed.  This should be done within CombatManger and not UIManager
+
+		finalizedTargets.AddRange (targetsToAssign);
+
+		activeCharacter.UseAbility (finalizedTargets);
+	}
+
+	public void AssignTargets(Character targetToAssign)			//Overload to take in a single Character as opposed to a List
+	{
+		List<Character> target = new List<Character> ();
+
+		target.Add (targetToAssign);
+
+		AssignTargets (target);
+	}
+
+	//TODO
+	//Function Get RandomTarget
+	//Function Redirect Target
+
+	#endregion
 
 }

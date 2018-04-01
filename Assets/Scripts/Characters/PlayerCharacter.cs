@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
-    public HeatZone heatState;
-    public int heatIntensity;
-    //Water Related(Robert)
-    [SerializeField]
-    private int waterUses = 3;
-    //private Ability activeAbility = null;
+	[SerializeField] private Water water;
+    [SerializeField] private int waterUses = 3;
 
     void Awake()
     {
@@ -19,7 +15,6 @@ public class PlayerCharacter : Character
     private new void Start()
     {
         base.Start();
-        //heatState = HeatZone.OutofHeat;
     }
 
     public override void BeginTurn()
@@ -30,23 +25,34 @@ public class PlayerCharacter : Character
         {
             //TODO swap UI graphics into to match PlayerCharacter
             ChooseAbility();
-            //Get Targets - currently waits on input from UIManager for ability calls
         }
     }
 
-    protected override void ChooseAbility()
+	protected override void ChooseAbility()					//tells UIManger to enter into an ability selection mode. It returns true if it switched modes.That script will then call ReadyAbility() based on the input given
     {
-        //UIManager.AllowAbilitySelection
+		if (!combatManager.uiManager.AllowAbilitySelection ()) 
+		{
+			Debug.LogWarning ("UIManager cannot enter into AbilitySelect mode at the moment");
+		}
     }
 
+	public override void GetNewTargets()
+	{
+		ReadyAbility (selectedAbilityIndex);
+	}
+
     //call to water class   
-    public void UseWater()
+    public Ability ReadyUseWater()
     {
+		if (water == null) 
+		{
+			Debug.Log ("There is no Water Ability for " + this.characterName);
+			return null;
+		}
+
         if (waterUses > 0 & currentHeat > 0)
         {
-            Announcer.UseItem(this.gameObject.name, "water");
-            UseWater();
-
+			return water;
         }
         else if (waterUses == 0)
         {
@@ -56,34 +62,14 @@ public class PlayerCharacter : Character
         {
             Debug.Log("your thirst does not require quenching at this time");
         }
+		return null;
     }
 
-    public override void AbilityComplete(CombatState newState = CombatState.ABLE)
-	{	
-		//UIManager.BlockAbilitySelection();
-		combatState = newState;
-        EndTurn();
-    }
-    
-    /*public void EnterHeat()
-    {
-        heatState = HeatZone.InHeat;
-    }
+	public void UseWater()
+	{
+		Announcer.UseItem(this.gameObject.name, "water");
 
-    public void ExitHeat()
-    {
-        heatState = HeatZone.OutofHeat;
-    }*/
-
-    public enum HeatZone
-    {
-        OUTOFHEAT,
-        INHEAT
-    }
-
-    public void SetHeatRate(int heat)
-    {
-        heatIntensity += heat;
-    }
-
+		water.StartAbility ();
+	}
+		
 }
