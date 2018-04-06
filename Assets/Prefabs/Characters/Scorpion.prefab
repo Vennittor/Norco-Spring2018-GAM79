@@ -49,10 +49,17 @@ Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1625730174729702}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+=======
+  m_GameObject: {fileID: 1397154592775430}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.76, y: 1.55, z: 136.09}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+>>>>>>> Stashed changes
   m_Children: []
   m_Father: {fileID: 4555918166417948}
   m_RootOrder: 0
@@ -81,7 +88,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
+<<<<<<< Updated upstream
   m_Size: {x: 8.19, y: 7.71, z: 1}
+=======
+  m_Size: {x: 2, y: 1.6, z: 1}
+>>>>>>> Stashed changes
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114708998290825076
 MonoBehaviour:
@@ -138,12 +149,16 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< Updated upstream
   m_Sprite: {fileID: 21300000, guid: 44a1c57df7b19174db7aa886d091ca0c, type: 3}
+=======
+  m_Sprite: {fileID: 21300000, guid: 3f7c9ec360b896a48a03eec9c93a1ccc, type: 3}
+>>>>>>> Stashed changes
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 15, y: 15.17}
+  m_Size: {x: 2.15, y: 1.84}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
