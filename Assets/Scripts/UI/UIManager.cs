@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
     public EventSystemManager eventSystemManager;
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
+
+    public LayerMask targetable;
 	public List<Character> collectedTargets;
     [SerializeField] private Ability ability;
 
@@ -64,15 +66,25 @@ public class UIManager : MonoBehaviour
     public void Update()
 	{
 		HighlightTargets ();
-        Debug.LogWarning(collectedTargets.Count);
         //TEST Debug.Log ("collectedTargets.Count = " + collectedTargets.Count.ToString() );
         if (Input.GetMouseButtonDown (0)) 						//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
 		{
-			if (inputMode == InputMode.TARGETING)
-			{
-				SendTargets ();
-			}
+            if (collectedTargets.Count > 0)
+            {
+                if (inputMode == InputMode.TARGETING)
+			    {
+				    SendTargets ();
+			    }
+            }
+			else
+            {
+                Debug.Log("No targets were collected, continuing to target");
+            }
 		}
+        if (Input.GetMouseButtonDown(1))
+        {
+            Debug.Log("Hello");
+        }
     }
 	#endregion
 
@@ -209,7 +221,7 @@ public class UIManager : MonoBehaviour
 		{
 			debugColor = Color.green;
 
-			if (Physics.Raycast(ray, out hitInfo))
+			if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, targetable))
 			{
                 Debug.LogError(hitInfo.collider.gameObject.name);
 
