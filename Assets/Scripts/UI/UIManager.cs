@@ -134,18 +134,30 @@ public class UIManager : MonoBehaviour
 
 	public void OutputAttack(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
 	{
-		if(inputMode == InputMode.ABILITYSELECT)				//
+        int length = combatManager.activeCharacter.effectStructList.Count;
+        foreach(Character.effectStruct effect in combatManager.activeCharacter.effectStructList)
         {
-			ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
-            if(ability == null)
+            if(effect.statusEffectType != StatusEffectType.Berserk) //TODO move out of this level
             {
-                Debug.LogWarning("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
-            }
-            else 
-            {
-				GetTargets (ability.targetType);
+                length--;                
             }
         }
+        if (length == 0)
+        {
+            if (inputMode == InputMode.ABILITYSELECT)               //
+            {
+                ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
+                if (ability == null)
+                {
+                    Debug.LogWarning("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
+                }
+                else
+                {
+                    GetTargets(ability.targetType);
+                }
+            }
+        }
+		
     }
 		
     public void OutputWaterUse()
