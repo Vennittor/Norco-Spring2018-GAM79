@@ -962,7 +962,7 @@ GameObject:
   - component: {fileID: 778379357}
   - component: {fileID: 778379356}
   m_Layer: 0
-  m_Name: PC 1
+  m_Name: crusader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -992,8 +992,8 @@ MonoBehaviour:
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
-  - {fileID: 11400000, guid: 56b8a8ed7ef885d4e8b4d8f552b5fc3e, type: 2}
-  - {fileID: 11400000, guid: 1061199b3a8c00f4cacba1583a90de7d, type: 2}
+  - {fileID: 11400000, guid: 16ebf805f74cc734890345856cdf7bda, type: 2}
+  - {fileID: 11400000, guid: d5e7b28ae9c08cb4fbf876ff9cbd1cec, type: 2}
   - {fileID: 11400000, guid: 5f8eeebe0028af54fb2a368452e5ff59, type: 2}
   cooldownTimers: 
   statuses: []
@@ -1493,7 +1493,7 @@ GameObject:
   - component: {fileID: 1419816680}
   - component: {fileID: 1419816679}
   m_Layer: 0
-  m_Name: PC 1 (1)
+  m_Name: crossbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1523,8 +1523,8 @@ MonoBehaviour:
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
-  - {fileID: 11400000, guid: 56b8a8ed7ef885d4e8b4d8f552b5fc3e, type: 2}
-  - {fileID: 11400000, guid: 1061199b3a8c00f4cacba1583a90de7d, type: 2}
+  - {fileID: 11400000, guid: d03541933ed0b9c4696ee5027a55ac45, type: 2}
+  - {fileID: 11400000, guid: e89ee1049b3f44147bb86df882d750a6, type: 2}
   - {fileID: 11400000, guid: 5f8eeebe0028af54fb2a368452e5ff59, type: 2}
   cooldownTimers: 
   statuses: []
@@ -1717,7 +1717,7 @@ GameObject:
   - component: {fileID: 1615567288}
   - component: {fileID: 1615567287}
   m_Layer: 0
-  m_Name: PC 1 (2)
+  m_Name: alchemist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1747,8 +1747,8 @@ MonoBehaviour:
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
-  - {fileID: 11400000, guid: 56b8a8ed7ef885d4e8b4d8f552b5fc3e, type: 2}
-  - {fileID: 11400000, guid: 1061199b3a8c00f4cacba1583a90de7d, type: 2}
+  - {fileID: 11400000, guid: cb5e6e8b07c35d4428431e4e183c8469, type: 2}
+  - {fileID: 11400000, guid: 11f76bb2dacd88d4baf173185474f927, type: 2}
   - {fileID: 11400000, guid: 5f8eeebe0028af54fb2a368452e5ff59, type: 2}
   cooldownTimers: 
   statuses: []
