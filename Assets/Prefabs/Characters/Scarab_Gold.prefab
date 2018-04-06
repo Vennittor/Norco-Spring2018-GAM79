@@ -9,86 +9,62 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1397154592775430}
+  m_RootGameObject: {fileID: 1663389467060272}
   m_IsPrefabParent: 1
---- !u!1 &1397154592775430
+--- !u!1 &1663389467060272
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4882641348762498}
-  - component: {fileID: 114139241219256426}
-  - component: {fileID: 65843933682617822}
-  - component: {fileID: 95801523666634166}
-  - component: {fileID: 212377398054015062}
+  - component: {fileID: 4538256083559936}
+  - component: {fileID: 114002356766521628}
+  - component: {fileID: 65704980530643708}
+  - component: {fileID: 95943222544419264}
+  - component: {fileID: 212703295154919112}
   m_Layer: 0
-  m_Name: Scorpion
+  m_Name: Scarab_Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4882641348762498
+--- !u!4 &4538256083559936
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 1625730174729702}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1663389467060272}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.05, y: 2.17, z: 136.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
-=======
-  m_GameObject: {fileID: 1397154592775430}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.76, y: 1.55, z: 136.09}
-  m_LocalScale: {x: 2, y: 2, z: 1}
->>>>>>> Stashed changes
-  m_Children: []
-  m_Father: {fileID: 4555918166417948}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4555918166417948
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1080691790273724}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.22, y: 0.983, z: 136.09}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65843933682617822
+--- !u!65 &65704980530643708
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1397154592775430}
+  m_GameObject: {fileID: 1663389467060272}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-<<<<<<< Updated upstream
-  m_Size: {x: 8.19, y: 7.71, z: 1}
-=======
-  m_Size: {x: 2, y: 1.6, z: 1}
->>>>>>> Stashed changes
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &95801523666634166
+  m_Size: {x: 6, y: 4, z: 1}
+  m_Center: {x: 0.15, y: 0.07, z: 0}
+--- !u!95 &95943222544419264
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1397154592775430}
+  m_GameObject: {fileID: 1663389467060272}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a917e5724f335ce42a3c2cd0d7ca0ff2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 45c19b20e254ffc4fab781a45f66b933, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -96,12 +72,12 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114139241219256426
+--- !u!114 &114002356766521628
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1397154592775430}
+  m_GameObject: {fileID: 1663389467060272}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
@@ -122,12 +98,12 @@ MonoBehaviour:
   abilities: []
   cooldownTimers: 
   statuses: []
---- !u!212 &212377398054015062
+--- !u!212 &212703295154919112
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1397154592775430}
+  m_GameObject: {fileID: 1663389467060272}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -154,11 +130,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-<<<<<<< Updated upstream
-  m_Sprite: {fileID: 21300000, guid: 44a1c57df7b19174db7aa886d091ca0c, type: 3}
-=======
-  m_Sprite: {fileID: 21300000, guid: 3f7c9ec360b896a48a03eec9c93a1ccc, type: 3}
->>>>>>> Stashed changes
+  m_Sprite: {fileID: 21300000, guid: 185fc9f8d07157a4fa83c3b42ae0bd89, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
