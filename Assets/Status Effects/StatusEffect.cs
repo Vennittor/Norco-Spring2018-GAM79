@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Status : MonoBehaviour 
+public class StatusEffect: MonoBehaviour 
 {
 
 }
