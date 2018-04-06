@@ -46,12 +46,20 @@ public class KeysToMove : MonoBehaviour
 			if (input != Vector3.zero) 
 			{
 				walking = true;
-				myAnimator.SetBool ("Walk", true);
+				if (myAnimator != null) 
+				{
+					myAnimator.SetBool ("Walk", true);
+				}
+
 			}
 			else 
 			{
 				walking = false;
-				myAnimator.SetBool("Walk", false);
+				if (myAnimator != null) 
+				{
+					myAnimator.SetBool("Walk", false);
+				}
+
 			}
             agent.destination = transform.position + input;
             //So if the agent is given a destination that is too far away it will make a path to it, as it should
