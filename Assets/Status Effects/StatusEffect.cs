@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class StatusEffect: MonoBehaviour 
 {
+	public enum EffectType
+	{
+		Stun,
+		Berserk,
+		Lethargy
+	}
 
 }

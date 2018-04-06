@@ -32,7 +32,7 @@ public abstract class Character : MonoBehaviour
 
 	[SerializeField] protected List<Ability> abilities = new List<Ability>();
 	[SerializeField] protected List<uint> cooldownTimers = new List<uint>();
-	[SerializeField] protected List<Status> statuses = new List<Status>();     	// Tandy: List of Status to show what Character is affected by
+	[SerializeField] protected List<StatusEffect> statuses = new List<StatusEffect>();     	// Tandy: List of Status to show what Character is affected by
 
 	protected bool _canActThisTurn = true;
 
@@ -242,7 +242,7 @@ public abstract class Character : MonoBehaviour
 		Debug.Log ("Poison Damage is not currently implemented, Physical damage was dealt instead.");
 	}
 
-    public void ApplyStatus(Status status) 
+    public void ApplyStatus(StatusEffect status) 
 	{ 												// Tandy: added this to work with Ability
 		if(statuses.Contains(status) == false) 		// if not already affected by Status
 		{ 										

@@ -13,7 +13,7 @@ public class Ability : ScriptableObject
 	// COMBAT DATA
 	public TargetType targetType;
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
-	[SerializeField] protected List<Status> statuses = new List<Status>();
+	[SerializeField] protected List<StatusEffect> statuses = new List<StatusEffect>();
 
 	[SerializeField] protected uint numberOfActions = 1;			//When the Ability is done, instead of telling the player AbilityHasCompleted, it can accept another targeting input
 	protected uint actionsUsed = 0;
@@ -134,7 +134,7 @@ public class Ability : ScriptableObject
 						target.ApplyDamage ( (uint)range.RollDamage(), range.element);
 					} 
 
-					foreach (Status status in statuses)					// Apply all Status affects
+					foreach (StatusEffect status in statuses)					// Apply all Status affects
 					{ 
 						target.ApplyStatus(status);						// pass all Status effects to target Character
 					} 
