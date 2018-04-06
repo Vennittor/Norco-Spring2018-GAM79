@@ -14,6 +14,7 @@ public class Party : MonoBehaviour
     float heatInterval = 2;
     float NextTickAt = 0;
     public uint myCurrentHeatIntensity;
+    public uint lastHeat;
 
     public enum PartyType
     {
@@ -57,6 +58,11 @@ public class Party : MonoBehaviour
 
     public void Update()
     {
+        if (lastHeat != myCurrentHeatIntensity)
+        {
+            levelMan.GetHeat(myCurrentHeatIntensity);
+            lastHeat = myCurrentHeatIntensity;
+        }
         if (levelMan.combatManager.inCombat == false)
         {
             if (NextTickAt <= Time.time)

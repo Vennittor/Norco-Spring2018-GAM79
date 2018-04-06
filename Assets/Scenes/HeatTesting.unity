@@ -205,6 +205,7 @@ MonoBehaviour:
   - {fileID: 608146778}
   type: 1
   myCurrentHeatIntensity: 0
+  lastHeat: 0
 --- !u!54 &43431834
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -801,6 +802,7 @@ MonoBehaviour:
   - {fileID: 1615567287}
   type: 0
   myCurrentHeatIntensity: 0
+  lastHeat: 0
 --- !u!23 &663169861
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -979,8 +981,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 0
-  currentHealth: 0
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 300
   currentHeat: 0
   accuracy: 84.5
@@ -1510,8 +1512,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 0
-  currentHealth: 0
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 300
   currentHeat: 0
   accuracy: 84.5
@@ -1734,8 +1736,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 0
-  currentHealth: 0
+  maxhealth: 100
+  currentHealth: 100
   maxHeat: 300
   currentHeat: 0
   accuracy: 84.5

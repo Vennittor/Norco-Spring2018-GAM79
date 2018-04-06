@@ -129,9 +129,10 @@ public class CombatManager : MonoBehaviour
 
     void CombatHeatDealer()
     {
+        Debug.LogError(partyHeatLevel);
         if (partyHeatLevel > 0)
         {
-            foreach (Character player in activePlayers)
+            foreach (PlayerCharacter player in activePlayers)
             {
                 player.ApplyDamage(partyHeatLevel, ElementType.HEAT);
             }
@@ -144,7 +145,7 @@ public class CombatManager : MonoBehaviour
 		if (!VictoryCheck())
 		{	Debug.Log (activeCharacter.gameObject.name + " is removed from the queu");
 			currentRoundCharacters.Remove(activeCharacter); // The activeCharacter is removed from the current round
-			if (currentRoundCharacters.Count == 0) // if they were the last one to leave, then end the round
+            if (currentRoundCharacters.Count == 0) // if they were the last one to leave, then end the round
 			{
 				EndRound ();
 			}
