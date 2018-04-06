@@ -3,7 +3,7 @@ guid: 1b67cf9fa22059d4b8b3aa13263a40e3
 timeCreated: 1521606821
 licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     100002: polySurface3_BarrelsCrates:polySurface607
@@ -13,10 +13,12 @@ ModelImporter:
     2300000: polySurface3_BarrelsCrates:polySurface607
     3300000: polySurface3_BarrelsCrates:polySurface607
     4300000: polySurface3_BarrelsCrates:polySurface607
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -29,6 +31,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -53,6 +56,8 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
