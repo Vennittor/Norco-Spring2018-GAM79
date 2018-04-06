@@ -65,7 +65,7 @@ public abstract class Character : MonoBehaviour
 
 	public virtual void BeginTurn()
 	{
-		Debug.Log (gameObject.name + " begins their turn.");
+		Announcer.BeginTurn (this.characterName);
 
 		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED)		//Checks if the Character is in a state that they cannot act in, and return true/false if the can/cannot;
 		{

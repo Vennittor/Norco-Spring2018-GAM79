@@ -21,6 +21,11 @@ public class UIManager : MonoBehaviour
 
     public CombatManager combatManager;
     public EventSystemManager eventSystemManager;
+
+	public GameObject splashMessagePanel;
+	public Text splashMessageText;
+	public float splashLifeTime = 1.0f;
+
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
 
@@ -58,6 +63,8 @@ public class UIManager : MonoBehaviour
 
     public void Start ()
     {
+		Announcer.combatUIManager = UIManager.Instance;
+		Announcer.announcementDestination = splashMessageText;
         combatManager = CombatManager.Instance;
         eventSystemManager = EventSystemManager.Instance;
 
@@ -90,6 +97,22 @@ public class UIManager : MonoBehaviour
         }
     }
 	#endregion
+
+	public void SplashAnnouncement(string splashMessage, Text destination)
+	{
+		splashMessagePanel.SetActive (true);
+
+		destination.text = splashMessage;
+
+		StartCoroutine ( DisplaySplash () );
+	}
+
+	public IEnumerator DisplaySplash()
+	{
+		yield return new WaitForSeconds (splashLifeTime);
+
+		splashMessagePanel.SetActive (false);
+	}
 
 	public void UpdateAbilityButtons(List<Ability> activeAbilities)
 	{

@@ -54,9 +54,6 @@ public class CombatManager : MonoBehaviour
         combatInstance = this;
         Debug.Log("Awake: CombatManager created!");
         DontDestroyOnLoad(gameObject);
-        
-        Announcer.AnnounceSelf();
-
     }
 
     void Start()
