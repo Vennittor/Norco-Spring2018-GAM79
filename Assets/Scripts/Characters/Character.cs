@@ -11,8 +11,16 @@ public abstract class Character : MonoBehaviour
         ABLE, DISABLED, USINGABILITY, EXHAUSTED
     }
 
+    public struct effectStruct
+    {
+        public StatusEffectType statusEffectType;
+        public uint duration;
+    }
+    public List<effectStruct> effectStructList;
+
     public string characterName;
 	public Animator animator;
+    public StatusEffect statusEffect;
 
 	public uint maxhealth;
 	public uint currentHealth;
@@ -20,6 +28,7 @@ public abstract class Character : MonoBehaviour
 	public uint maxHeat;
 	public uint currentHeat;
 
+    public float attack;
 	public float accuracy = 84.5f;
 	public float evade = 10;
 
@@ -49,7 +58,7 @@ public abstract class Character : MonoBehaviour
     {
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
-
+        new List<effectStruct>();
 		if (animator == null) 
 		{
 			animator = GetComponent<Animator> ();
@@ -79,7 +88,12 @@ public abstract class Character : MonoBehaviour
 		{
 			_canActThisTurn = true;
 
-			ChooseAbility ();
+            if(this is PlayerCharacter)
+            {               //HERE
+                //combatManager.uiManager.UpdateAbilityButtons(abilities);
+            }
+
+            ChooseAbility ();
 		}
 	}
 
@@ -233,17 +247,27 @@ public abstract class Character : MonoBehaviour
     public void DealHeatDamage(int heatDamage)
     {
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
-        if(currentHeat == 100)
+        CheckHeatThreshold();
+    }
+
+    public void CheckHeatThreshold()
+    {
+        if (currentHeat >= 100)
         {
             print("my heat is now 100, im a little thirsty");
+            statusEffect.LethargyFunction(speed);
         }
-        else if(currentHeat == 200)
+        else if (currentHeat >= 200)
         {
             print("my heat is now 200, i need AC");
+            statusEffect.BerserkFunction();
         }
-        else if(currentHeat == 300)
+        else if (currentHeat == 300)
         {
-            print("my heat has reached 300, i am now stunned");
+            print("my heat has reached 300, i am now stunned"); //TODO clean up here
+            //statusEffect.StunAbility();
+            combatManager.activeCharacter.EndTurn();
+            combatManager.activeCharacter.currentHeat = 200;
         }
     }
 
