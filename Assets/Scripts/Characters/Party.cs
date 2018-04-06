@@ -10,6 +10,11 @@ public class Party : MonoBehaviour
     public List<Character> partyMembers;
     public PartyType type = PartyType.ENEMY;
 
+    
+    float heatInterval = 2;
+    float NextTickAt = 0;
+    public uint myCurrentHeatIntensity;
+
     public enum PartyType
     {
         PLAYER,
@@ -50,24 +55,46 @@ public class Party : MonoBehaviour
     }
 
 
-    public void FixedUpdate()
+    public void Update()
     {
+        if (levelMan.combatManager.inCombat == false)
+        {
+            if (NextTickAt <= Time.time)
+            {
+                if (heatState == HeatZone.InHeat)
+                {
+                    LevelHeatApplication();
+                    NextTickAt = Time.time + heatInterval;
+                }
+            }
+        }
     }
 
-    public void HeatChecker(int myHeatIntensity)
+    public void IncreaseHeatRate(uint heatZoneIntensity)
+    {
+        myCurrentHeatIntensity += heatZoneIntensity;
+        if (myCurrentHeatIntensity > 0)
+        {
+            heatState = HeatZone.InHeat;
+        }
+    }
+
+    public void DecreaseHeatRate(uint heatZoneIntensity)
+    {
+        myCurrentHeatIntensity -= heatZoneIntensity;
+        if (myCurrentHeatIntensity == 0)
+        {
+            heatState = HeatZone.OutofHeat;
+        }
+    }
+
+    public void LevelHeatApplication()
     {
         if (heatState == HeatZone.InHeat)
         {
             foreach (Character _char in partyMembers)
             {
-                _char.DealHeatDamage(myHeatIntensity);
-            }
-        }
-        else if (heatState == HeatZone.OutofHeat)
-        {
-            foreach (Character _char in partyMembers)
-            {
-                _char.DealHeatDamage(-myHeatIntensity);
+                _char.ApplyDamage(myCurrentHeatIntensity, ElementType.HEAT);
             }
         }
         else

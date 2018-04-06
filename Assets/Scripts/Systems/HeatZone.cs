@@ -13,11 +13,10 @@ public class HeatZone : MonoBehaviour
 		if (other.gameObject.name == "Player") {
 			Debug.Log ("character entered a heat zone");
 
-			_party = other.gameObject.GetComponent<Party> ();
+			_party = other.gameObject.GetComponent<Party>();
+            
 
-			_party.heatState = Party.HeatZone.InHeat;
-
-			_party.HeatChecker (myHeatIntensity);
+			_party.IncreaseHeatRate((uint)myHeatIntensity);
 		}
     }
 
@@ -29,9 +28,8 @@ public class HeatZone : MonoBehaviour
 			Debug.Log("character exited a heat zone");
 
 			_party = other.gameObject.GetComponent<Party>();
-
-			_party.heatState = Party.HeatZone.OutofHeat;
-
+            
+            _party.DecreaseHeatRate((uint)myHeatIntensity);
 		}
     }
 }
