@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
     public Canvas levelUI;
 
     public GameObject playerParty;
+    public Party pParty;
+    public Party eParty;
     public uint partyHeatIntensity;
 
     public static LevelManager Instance
@@ -61,7 +63,8 @@ public class LevelManager : MonoBehaviour
 
     public void InitiateCombat(Party player, Party enemy)
     {
-
+        pParty = player;
+        eParty = enemy;
         if(!combatManager.inCombat)
 		{
             combatManager.AddCharactersToCombat(player.partyMembers);
@@ -71,7 +74,20 @@ public class LevelManager : MonoBehaviour
 
             //remove control from LevelManagement and Player.
             //TODO this is blunt force, change later to proper disable of control
-            playerParty.gameObject.GetComponent<Collider>().enabled = false;
+            playerParty.GetComponent<Collider>().enabled = false;
+            // potentially not mesh renderer when sprites are imported
+            foreach (Character character in player.partyMembers)
+            {
+                character.GetComponent<MeshRenderer>().enabled = true;
+                character.GetComponent<Collider>().enabled = true;
+            }
+            foreach (Character character in enemy.partyMembers)
+            {
+                character.GetComponent<MeshRenderer>().enabled = true;
+                character.GetComponent<Collider>().enabled = true;
+            }
+            player.GetComponent<MeshRenderer>().enabled = false;
+            enemy.GetComponent<MeshRenderer>().enabled = false;
 
             combatUI.gameObject.SetActive(true);
         }
@@ -87,6 +103,20 @@ public class LevelManager : MonoBehaviour
         //TODO dirty blutn force change to better
         playerParty.gameObject.GetComponent<Collider>().enabled = true;
 
+        foreach (Character character in pParty.partyMembers)
+        {
+            character.GetComponent<MeshRenderer>().enabled = false;
+            character.GetComponent<Collider>().enabled = false;
+        }
+        foreach (Character character in eParty.partyMembers)
+        {
+            character.GetComponent<MeshRenderer>().enabled = false;
+            character.GetComponent<Collider>().enabled = false;
+        }
+        pParty.GetComponent<MeshRenderer>().enabled = true;
+        eParty.GetComponent<MeshRenderer>().enabled = true;
+
         combatUI.gameObject.SetActive(false);
+        
     }
 }
