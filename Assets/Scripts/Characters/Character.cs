@@ -79,6 +79,11 @@ public abstract class Character : MonoBehaviour
 		{
 			_canActThisTurn = true;
 
+			if (this is PlayerCharacter) {
+
+				combatManager.uiManager.UpdateAbilityButtons (abilities);
+			}
+
 			ChooseAbility ();
 		}
 	}
