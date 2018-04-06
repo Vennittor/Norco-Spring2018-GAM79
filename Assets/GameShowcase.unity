@@ -107,7 +107,7 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-  m_NavMeshData: {fileID: 23800000, guid: f0c1176df11cd5d4380f9a236e3527ce, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 76226eef27ae82342889030e5cbdf4ec, type: 2}
 --- !u!1001 &12424727
 Prefab:
   m_ObjectHideFlags: 0
@@ -697,7 +697,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 663169858}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000030100346}
-  m_LocalPosition: {x: -13.882434, y: 1.94, z: -1.9325771}
+  m_LocalPosition: {x: -42.2, y: 1.94, z: -1.9325771}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
