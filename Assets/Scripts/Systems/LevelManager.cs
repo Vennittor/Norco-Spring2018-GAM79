@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     public Canvas levelUI;
 
     public GameObject playerParty;
+    public uint partyHeatIntensity;
 
     public static LevelManager Instance
     {
@@ -35,10 +36,10 @@ public class LevelManager : MonoBehaviour
 
         _instance = this;
 
-		if (playerParty == null) 
-		{
-			playerParty = GameObject.FindGameObjectWithTag ("Player");
-		}
+        if (playerParty == null)
+        {
+            playerParty = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 
     void Start()
@@ -46,13 +47,17 @@ public class LevelManager : MonoBehaviour
         combatManager = CombatManager.Instance;
 
         combatUI.gameObject.SetActive(false);
-	}
-	
+    }
 
-	void Update ()
+
+    void Update()
     {
-		
-	}
+    }
+
+    public void GetHeat(uint heat)
+    {
+        partyHeatIntensity = heat;
+    }
 
     public void InitiateCombat(Party player, Party enemy)
     {
@@ -61,7 +66,7 @@ public class LevelManager : MonoBehaviour
 		{
             combatManager.AddCharactersToCombat(player.partyMembers);
             combatManager.AddCharactersToCombat(enemy.partyMembers);
-
+            combatManager.HeatValueTaker(partyHeatIntensity);
             combatManager.StartCombat();
 
             //remove control from LevelManagement and Player.

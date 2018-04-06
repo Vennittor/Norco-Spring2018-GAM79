@@ -7,8 +7,10 @@ public class CombatManager : MonoBehaviour
     public static CombatManager combatInstance;
 	public UIManager uiManager;
     private static Announcer announcer;
+    
+    public GameObject levelManager;
 
-	public bool inCombat = false;
+    public bool inCombat = false;
 
 	[SerializeField] private List<Character> characters;
 
@@ -20,6 +22,7 @@ public class CombatManager : MonoBehaviour
 
 	public uint roundCounter = 0;
 
+    public uint partyHeatLevel;
 
     public static CombatManager Instance
     {
@@ -64,6 +67,8 @@ public class CombatManager : MonoBehaviour
         currentRoundCharacters = new List<Character>();
         activePlayers = new List<PlayerCharacter>();
         activeEnemies = new List<EnemyCharacter>();
+
+        partyHeatLevel = 0;
     }
 		
 	public void StartCombat()
@@ -108,30 +113,39 @@ public class CombatManager : MonoBehaviour
         //Checks and adjustments to heat should be in seperate function (called here)
         //increase heat by set amount to characters (if combat is in a heat zone)
         //check if group is in a heat zone before entering combat (passed to here from game manager, not implemented yet)
-        /*if (activeCharacter is PlayerCharacter)
-        {
-			if (combatManager.inHeat == true)
-            {
-                foreach (Character player in activePlayers)
-                {
-                    player.TakeDamage(heatLevel, DamageType.Heat);   //or whatever value gets settled on, just picked 10 for easy math //use heat level of current heat zone
-                }
-            }
-        }*/ //TODO set up so that checks heat state from level manager, which takes from party
-        
+        //TODO set up so that checks heat state from level manager, which takes from party
+        CombatHeatDealer();
+
 		if ( !VictoryCheck () ) 
 		{
 			StartRound();
 		}
-
 	}
+    
+    public void HeatValueTaker(uint partyHeat)
+    {
+        partyHeatLevel = partyHeat;
+    }
+
+    void CombatHeatDealer()
+    {
+        Debug.LogError(partyHeatLevel);
+        if (partyHeatLevel > 0)
+        {
+            foreach (PlayerCharacter player in activePlayers)
+            {
+                player.ApplyDamage(partyHeatLevel, ElementType.HEAT);
+            }
+            Debug.Log("player party took heat damage at end of round");
+        }
+    }
 
 	public void NextTurn() // active player finishing their turn calls this
 	{
 		if (!VictoryCheck())
 		{	Debug.Log (activeCharacter.gameObject.name + " is removed from the queu");
 			currentRoundCharacters.Remove(activeCharacter); // The activeCharacter is removed from the current round
-			if (currentRoundCharacters.Count == 0) // if they were the last one to leave, then end the round
+            if (currentRoundCharacters.Count == 0) // if they were the last one to leave, then end the round
 			{
 				EndRound ();
 			}

@@ -183,7 +183,8 @@ public abstract class Character : MonoBehaviour
 
 
     public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
-	{	Debug.Log (this.gameObject.name + " takes " + damage.ToString () + " of " + ElementType.PHYSICAL.ToString () + " damage!");
+	{
+        Debug.Log (this.gameObject.name + " takes " + damage.ToString () + " of " + damageType.ToString() + " damage!");
         if (damageType == ElementType.PHYSICAL)
         {
             DealPhysicalDamage(damage);
