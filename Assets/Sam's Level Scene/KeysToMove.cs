@@ -8,6 +8,8 @@ public class KeysToMove : MonoBehaviour
 {
     NavMeshAgent agent;
     //Set the agent's angular speed in the inspector to zero
+	public float walkingSpeed = 12;
+
     public bool walking;
     public bool facingRight = true;
     public GameObject interactionPrefab;
@@ -31,6 +33,8 @@ public class KeysToMove : MonoBehaviour
 		{
 			myAnimator = this.gameObject.GetComponent<Animator> ();
 		}
+
+		agent.speed = walkingSpeed;
     }
 
     void Update ()
