@@ -53,6 +53,11 @@ public class Party : MonoBehaviour
                 }
             }
         }
+        foreach (Character character in partyMembers)
+        {
+            character.GetComponent<MeshRenderer>().enabled = false; // potentially not mesh renderer when sprites are imported
+            character.GetComponent<Collider>().enabled = false;
+        }
     }
 
 

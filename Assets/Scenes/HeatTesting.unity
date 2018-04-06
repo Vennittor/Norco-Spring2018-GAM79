@@ -981,19 +981,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 100
-  currentHealth: 100
+  maxhealth: 20
+  currentHealth: 20
   maxHeat: 300
   currentHeat: 0
   accuracy: 84.5
   evade: 10
-  speed: 0
+  speed: 2
   defense: 0
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
-  - {fileID: 11400000, guid: 16ebf805f74cc734890345856cdf7bda, type: 2}
-  - {fileID: 11400000, guid: d5e7b28ae9c08cb4fbf876ff9cbd1cec, type: 2}
+  - {fileID: 11400000, guid: 56b8a8ed7ef885d4e8b4d8f552b5fc3e, type: 2}
+  - {fileID: 11400000, guid: 1061199b3a8c00f4cacba1583a90de7d, type: 2}
   - {fileID: 11400000, guid: 5f8eeebe0028af54fb2a368452e5ff59, type: 2}
   cooldownTimers: 
   statuses: []
@@ -1512,19 +1512,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 100
-  currentHealth: 100
+  maxhealth: 18
+  currentHealth: 18
   maxHeat: 300
   currentHeat: 0
   accuracy: 84.5
   evade: 10
-  speed: 0
+  speed: 4
   defense: 0
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
-  - {fileID: 11400000, guid: d03541933ed0b9c4696ee5027a55ac45, type: 2}
-  - {fileID: 11400000, guid: e89ee1049b3f44147bb86df882d750a6, type: 2}
+  - {fileID: 11400000, guid: 56b8a8ed7ef885d4e8b4d8f552b5fc3e, type: 2}
+  - {fileID: 11400000, guid: 1061199b3a8c00f4cacba1583a90de7d, type: 2}
   - {fileID: 11400000, guid: 5f8eeebe0028af54fb2a368452e5ff59, type: 2}
   cooldownTimers: 
   statuses: []
@@ -1736,19 +1736,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   animator: {fileID: 0}
-  maxhealth: 100
-  currentHealth: 100
+  maxhealth: 16
+  currentHealth: 16
   maxHeat: 300
   currentHeat: 0
   accuracy: 84.5
   evade: 10
-  speed: 0
+  speed: 6
   defense: 0
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
-  - {fileID: 11400000, guid: cb5e6e8b07c35d4428431e4e183c8469, type: 2}
-  - {fileID: 11400000, guid: 11f76bb2dacd88d4baf173185474f927, type: 2}
+  - {fileID: 11400000, guid: 56b8a8ed7ef885d4e8b4d8f552b5fc3e, type: 2}
+  - {fileID: 11400000, guid: 1061199b3a8c00f4cacba1583a90de7d, type: 2}
   - {fileID: 11400000, guid: 5f8eeebe0028af54fb2a368452e5ff59, type: 2}
   cooldownTimers: 
   statuses: []
@@ -1900,6 +1900,48 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1683432877}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1944669164
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4777319291571286, guid: 11263057f55bf2040ad954ec7c9b33e8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777319291571286, guid: 11263057f55bf2040ad954ec7c9b33e8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777319291571286, guid: 11263057f55bf2040ad954ec7c9b33e8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777319291571286, guid: 11263057f55bf2040ad954ec7c9b33e8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777319291571286, guid: 11263057f55bf2040ad954ec7c9b33e8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777319291571286, guid: 11263057f55bf2040ad954ec7c9b33e8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777319291571286, guid: 11263057f55bf2040ad954ec7c9b33e8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777319291571286, guid: 11263057f55bf2040ad954ec7c9b33e8, type: 2}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 11263057f55bf2040ad954ec7c9b33e8, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2025513877
 GameObject:
   m_ObjectHideFlags: 0

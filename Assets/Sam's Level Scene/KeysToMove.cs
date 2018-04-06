@@ -13,6 +13,8 @@ public class KeysToMove : MonoBehaviour
     public GameObject interactionPrefab;
     CombatManager combatManager;
 
+	public Animator myAnimator;
+
     private void Start()
     {
         //Gemme dat booty
@@ -24,6 +26,11 @@ public class KeysToMove : MonoBehaviour
         LevelManager levMan = LevelManager.Instance;
         levMan.playerParty = this.gameObject;
         combatManager = CombatManager.Instance;
+
+		if (myAnimator == null) 
+		{
+			myAnimator = this.gameObject.GetComponent<Animator> ();
+		}
     }
 
     void Update ()
@@ -31,6 +38,17 @@ public class KeysToMove : MonoBehaviour
         if (!combatManager.inCombat)
         {
             Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+
+			if (input != Vector3.zero) 
+			{
+				walking = true;
+				myAnimator.SetBool ("Walk", true);
+			}
+			else 
+			{
+				walking = false;
+				myAnimator.SetBool("Walk", false);
+			}
             agent.destination = transform.position + input;
             //So if the agent is given a destination that is too far away it will make a path to it, as it should
             //However, an exception needs to be made if the player is holding right against a ledge with a walkable area
