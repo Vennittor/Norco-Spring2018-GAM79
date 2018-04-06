@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream:Assets/Sprites/scorpion_colored_edit.JPG.meta
-guid: 44b563789206ed54787cf38997569ad7
-timeCreated: 1523031787
-=======
-guid: 0c8944f4efe5b4643b884b491b762bf6
-timeCreated: 1523040240
->>>>>>> Stashed changes:Assets/Sprites/Mummy_Placeholder.png.meta
+guid: 99c911a361ae197449cc0b1b1a35d080
+timeCreated: 1523051629
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}

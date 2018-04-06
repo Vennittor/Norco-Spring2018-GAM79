@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: AnimController_Snake
+  m_Name: AnimController_CrocShadow
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Strike
@@ -213,7 +213,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Crusader_Walk
+  m_Name: Walk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -226,7 +226,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9f79a6986f05ff74ba7cf09e5a89c053, type: 2}
+  m_Motion: {fileID: 7400000, guid: b86d163a00f5f0648a026ae22609ae65, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -250,7 +250,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b8bde98d404a226419773b60e607f82f, type: 2}
+  m_Motion: {fileID: 7400000, guid: b86d163a00f5f0648a026ae22609ae65, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -300,7 +300,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ed2fae2bdf67d614e8d7643d2f6d30c7, type: 2}
+  m_Motion: {fileID: 7400000, guid: b86d163a00f5f0648a026ae22609ae65, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
