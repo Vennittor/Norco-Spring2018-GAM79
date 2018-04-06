@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1962725561991092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.6, y: 10.1, z: 16.86}
+  m_LocalPosition: {x: -10.6, y: 5, z: 16.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4151048109773140}
@@ -93,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 1962725561991092}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 00643586cd89e624ab66030eb507bd41, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6af08727e6d20aa42a983e0f09918a24, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -112,24 +112,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
+  animator: {fileID: 0}
+  maxhealth: 50
+  currentHealth: 50
+  maxHeat: 0
+  currentHeat: 0
+  accuracy: 84.5
+  evade: 10
+  speed: 8
+  defense: 1
+  combatState: 0
+  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: 1061199b3a8c00f4cacba1583a90de7d, type: 2}
   - {fileID: 11400000, guid: 5f8eeebe0028af54fb2a368452e5ff59, type: 2}
   - {fileID: 11400000, guid: 56b8a8ed7ef885d4e8b4d8f552b5fc3e, type: 2}
+  cooldownTimers: 
   statuses: []
-  combatState: 0
-  animator: {fileID: 0}
-  name: 
-  speed: 8
-  maxhealth: 50
-  currentHealth: 50
-  currentHeat: 0
-  maxHeat: 0
-  defense: 1
-  accuracy: 84.5
-  evade: 10
-  heatState: 0
-  heatIntensity: 0
+  water: {fileID: 0}
   waterUses: 3
 --- !u!212 &212342927202090716
 SpriteRenderer:
@@ -163,7 +164,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 30e96eb9dce761e4da8c9f2c0bf1af17, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 35e9a3d0892e81640bce52c12957c624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
