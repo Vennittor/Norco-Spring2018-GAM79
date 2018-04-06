@@ -73,7 +73,8 @@ public class Ability : ScriptableObject
 
 	public void PrepAbility(Character user)
 	{
-		characterUser = user;		Debug.Log (abilityName + "'s user is " + characterUser.gameObject.name);
+		characterUser = user;
+        Debug.Log (abilityName + "'s user is " + characterUser.gameObject.name);
 
 		if (numberOfActions < 1) 
 		{

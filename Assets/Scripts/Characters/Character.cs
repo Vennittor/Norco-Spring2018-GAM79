@@ -233,6 +233,18 @@ public abstract class Character : MonoBehaviour
     public void DealHeatDamage(int heatDamage)
     {
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
+        if(currentHeat == 100)
+        {
+            print("my heat is now 100, im a little thirsty");
+        }
+        else if(currentHeat == 200)
+        {
+            print("my heat is now 200, i need AC");
+        }
+        else if(currentHeat == 300)
+        {
+            print("my heat has reached 300, i am now stunned");
+        }
     }
 
 	void DealPoisonDamage(uint poisonDamage)
