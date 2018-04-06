@@ -49,14 +49,6 @@ public class Ability : ScriptableObject
 			}
 			else if (targets.Count > 1)
 			{
-                //string targetstring = targets[0].name + ", "; // first target name
-                //for (int i = 1; i < targets.Count - 1; i++)
-                //{
-                //    targetstring += targets[i].name + ", "; // every target name between first and last
-                //}
-                //targetstring += ", and " + targets[targets.Count].name; // last target name
-                //return targetstring; // example: "enemya, enemyb, and enemyc"
-
                 string targetString = "";
                 foreach (Character character in targets)
                 {
@@ -68,6 +60,14 @@ public class Ability : ScriptableObject
 			{
 				return "Error: 0 targets!";
 			}
+		}
+	}
+
+	void OnEnable()
+	{
+		if (abilityName == "")
+		{
+			abilityName = this.name;
 		}
 	}
 

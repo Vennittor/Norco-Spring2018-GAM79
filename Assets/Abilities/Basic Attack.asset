@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4c18fc4b5b743408b8eb69d212b657, type: 3}
   m_Name: Basic Attack
   m_EditorClassIdentifier: 
-  abilityName: Ability 1
+  abilityName: Basic Attack
   description: this is Ability one
   callOutText: ONE!
   targetType:

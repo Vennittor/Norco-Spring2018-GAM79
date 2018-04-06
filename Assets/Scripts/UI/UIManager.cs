@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
     public PlayerCharacter playerCharacter;
     public EnemyCharacter enemyCharacter;
 
+	public List<Button> skillButtons = new List<Button> ();
+
     public LayerMask targetable;
 	public List<Character> collectedTargets;
     [SerializeField] private Ability ability;
@@ -61,6 +63,7 @@ public class UIManager : MonoBehaviour
 
 		inputMode = InputMode.NORMAL;
         collectedTargets = new List<Character>();
+
     }
 
     public void Update()
@@ -87,6 +90,24 @@ public class UIManager : MonoBehaviour
         }
     }
 	#endregion
+
+	public void UpdateAbilityButtons(List<Ability> activeAbilities)
+	{
+		for (int i = 0; i < activeAbilities.Count; i++) 
+		{
+			if (i >= skillButtons.Count) 
+			{
+				//Disable buttons visual
+			}
+			else 
+			{
+				Text buttonText;
+				buttonText = skillButtons [i].gameObject.GetComponentInChildren<Text> ();
+
+				buttonText.text = activeAbilities [i].abilityName;
+			}
+		}
+	}
 
 	public void OutputAttack(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
 	{

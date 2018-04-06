@@ -78,16 +78,30 @@ public class LevelManager : MonoBehaviour
             // potentially not mesh renderer when sprites are imported
             foreach (Character character in player.partyMembers)
             {
-                character.GetComponent<MeshRenderer>().enabled = true;
+				if (character.GetComponent<MeshRenderer> () != null) 
+				{
+					character.GetComponent<MeshRenderer>().enabled = true;
+				}
+
                 character.GetComponent<Collider>().enabled = true;
             }
             foreach (Character character in enemy.partyMembers)
             {
-                character.GetComponent<MeshRenderer>().enabled = true;
+				if (character.GetComponent<MeshRenderer> () != null) 
+				{
+					character.GetComponent<MeshRenderer>().enabled = true;
+				}
                 character.GetComponent<Collider>().enabled = true;
             }
-            player.GetComponent<MeshRenderer>().enabled = false;
-            enemy.GetComponent<MeshRenderer>().enabled = false;
+			if (player.GetComponent<MeshRenderer> () != null)
+			{
+				player.GetComponent<MeshRenderer>().enabled = false;
+
+			}
+			if (enemy.GetComponent<MeshRenderer> () != null)
+			{
+				enemy.GetComponent<MeshRenderer>().enabled = false;
+			}
 
             combatUI.gameObject.SetActive(true);
         }

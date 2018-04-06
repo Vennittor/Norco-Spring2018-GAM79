@@ -9,62 +9,62 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1438904811108154}
+  m_RootGameObject: {fileID: 1135200808349076}
   m_IsPrefabParent: 1
---- !u!1 &1438904811108154
+--- !u!1 &1135200808349076
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4015888714215386}
-  - component: {fileID: 114906543840987110}
-  - component: {fileID: 65803193124118826}
-  - component: {fileID: 95069523617149640}
-  - component: {fileID: 212227176055161104}
+  - component: {fileID: 4778601158696200}
+  - component: {fileID: 114323916350633946}
+  - component: {fileID: 65946522782699920}
+  - component: {fileID: 95990153270772648}
+  - component: {fileID: 212353993777637856}
   m_Layer: 0
-  m_Name: Scorpion
+  m_Name: CrocShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4015888714215386
+--- !u!4 &4778601158696200
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1438904811108154}
+  m_GameObject: {fileID: 1135200808349076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.86, y: 6.7042303, z: 10.507839}
+  m_LocalPosition: {x: 1.78, y: 6.7042303, z: 10.507839}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65803193124118826
+--- !u!65 &65946522782699920
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1438904811108154}
+  m_GameObject: {fileID: 1135200808349076}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.7, y: 1.6, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &95069523617149640
+--- !u!95 &95990153270772648
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1438904811108154}
+  m_GameObject: {fileID: 1135200808349076}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 12195765a93793949bd8f5eb1254f6c5, type: 2}
+  m_Controller: {fileID: 9100000, guid: b9f62a0c096d3e84ca5234093cd5dbf8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -72,12 +72,12 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114906543840987110
+--- !u!114 &114323916350633946
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1438904811108154}
+  m_GameObject: {fileID: 1135200808349076}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
@@ -98,12 +98,12 @@ MonoBehaviour:
   abilities: []
   cooldownTimers: 
   statuses: []
---- !u!212 &212227176055161104
+--- !u!212 &212353993777637856
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1438904811108154}
+  m_GameObject: {fileID: 1135200808349076}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -130,7 +130,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3f7c9ec360b896a48a03eec9c93a1ccc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 19f66683b1c769c4083d8813c9a8235f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
