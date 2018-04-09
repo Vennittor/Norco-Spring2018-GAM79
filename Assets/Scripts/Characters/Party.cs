@@ -70,7 +70,15 @@ public class Party : MonoBehaviour
 			}
 			foreach (Character character in partyMembers)
 			{
-				character.GetComponent<MeshRenderer>().enabled = false; // potentially not mesh renderer when sprites are imported
+				if (character.GetComponent<SpriteRenderer> () != null) 
+				{
+					character.GetComponent<SpriteRenderer>().enabled = false;
+				}
+				if (character.GetComponent<MeshRenderer> () != null) 
+				{
+					character.GetComponent<MeshRenderer>().enabled = false;
+				}
+
 				character.GetComponent<Collider>().enabled = false;
 			}
 		}
@@ -133,14 +141,13 @@ public class Party : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+		
         if (collision.gameObject.tag != "Enemy") //TODO change the way we check for this
         {
             return;
         }
         else if (collision.gameObject.GetComponent<Party>().type == PartyType.ENEMY)
         {
-            Debug.Log("mom hes touching me");
             //List<Character> enemies = new List<Character>();
             Party enemyParty = collision.gameObject.GetComponent<Party>();
             collision.gameObject.GetComponent<Collider>().enabled = false;

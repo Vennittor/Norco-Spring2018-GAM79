@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     public CombatManager combatManager;
 
 	public GameObject combatUI;
-    public Canvas levelUI;
+	public GameObject levelUI;
 
     public GameObject playerParty;
     private Party pParty;
@@ -54,7 +54,7 @@ public class LevelManager : MonoBehaviour
 		}
 		if (combatUI != null) 
 		{
-			combatUI.gameObject.SetActive (false);
+			combatUI.SetActive (false);
 		}
 		else 
 		{
@@ -75,48 +75,66 @@ public class LevelManager : MonoBehaviour
     }
 
     public void InitiateCombat(Party player, Party enemy)
-    {
+	{
         pParty = player;
         eParty = enemy;
         if(!combatManager.inCombat)
 		{
-            combatManager.AddCharactersToCombat(player.partyMembers);
-            combatManager.AddCharactersToCombat(enemy.partyMembers);
-            combatManager.HeatValueTaker(partyHeatIntensity);
-            combatManager.StartCombat();
-
             //remove control from LevelManagement and Player.
-            //TODO this is blunt force, change later to proper disable of control
-            playerParty.GetComponent<Collider>().enabled = false;
-            // potentially not mesh renderer when sprites are imported
-            foreach (Character character in player.partyMembers)
-            {
+
+            foreach (Character character in player.partyMembers)					//Turn on the player Party members renderers and Colliders on
+			{
 				if (character.GetComponent<MeshRenderer> () != null) 
 				{
 					character.GetComponent<MeshRenderer>().enabled = true;
+				}
+				if (character.GetComponent<SpriteRenderer> () != null) 
+				{
+					character.GetComponent<SpriteRenderer>().enabled = true;
 				}
 
                 character.GetComponent<Collider>().enabled = true;
             }
-            foreach (Character character in enemy.partyMembers)
+			foreach (Character character in enemy.partyMembers)						//Turn on the player Enemy members renderers and Colliders on
             {
 				if (character.GetComponent<MeshRenderer> () != null) 
 				{
 					character.GetComponent<MeshRenderer>().enabled = true;
 				}
+				if (character.GetComponent<SpriteRenderer> () != null) 
+				{
+					character.GetComponent<SpriteRenderer>().enabled = true;
+				}
                 character.GetComponent<Collider>().enabled = true;
             }
-			if (player.GetComponent<MeshRenderer> () != null)
+
+			if (player.GetComponent<MeshRenderer> () != null)						//Turn off the player and enemy Party's renderers off
 			{
 				player.GetComponent<MeshRenderer>().enabled = false;
-
 			}
+			if (player.GetComponent<SpriteRenderer> () != null)
+			{
+				player.GetComponent<SpriteRenderer>().enabled = false;
+			}
+			player.GetComponent<Collider>().enabled = false;
+
 			if (enemy.GetComponent<MeshRenderer> () != null)
 			{
 				enemy.GetComponent<MeshRenderer>().enabled = false;
 			}
+			if (enemy.GetComponent<SpriteRenderer> () != null)
+			{
+				enemy.GetComponent<SpriteRenderer>().enabled = false;
+			}
+			enemy.GetComponent<Collider>().enabled = false;
+
+			combatManager.AddCharactersToCombat(player.partyMembers);
+			combatManager.AddCharactersToCombat(enemy.partyMembers);
+			combatManager.HeatValueTaker(partyHeatIntensity);
 
             combatUI.SetActive(true);
+
+			combatManager.StartCombat();
         }
         else
         {
@@ -128,7 +146,7 @@ public class LevelManager : MonoBehaviour
     {
         //return control to Level and Player Party
         //TODO dirty blutn force change to better
-        playerParty.gameObject.GetComponent<Collider>().enabled = true;
+
 
         foreach (Character character in pParty.partyMembers)
         {
@@ -142,6 +160,8 @@ public class LevelManager : MonoBehaviour
         }
         pParty.GetComponent<MeshRenderer>().enabled = true;
         eParty.GetComponent<MeshRenderer>().enabled = true;
+
+		playerParty.gameObject.GetComponent<Collider>().enabled = true;
 
         combatUI.SetActive(false);
         

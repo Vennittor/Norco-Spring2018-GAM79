@@ -89,15 +89,20 @@ MonoBehaviour:
   currentHealth: 0
   maxHeat: 0
   currentHeat: 0
+  attack: 0
+  attackMod: 0
   accuracy: 84.5
+  accuracyMod: 0
   evade: 10
+  evadeMod: 0
   speed: 0
+  speedMod: 0
   defense: 0
+  defenseMod: 0
   combatState: 0
   selectedAbilityIndex: -1
   abilities: []
   cooldownTimers: 
-  statuses: []
 --- !u!212 &212864908984823234
 SpriteRenderer:
   m_ObjectHideFlags: 1
