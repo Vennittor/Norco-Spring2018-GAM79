@@ -270,8 +270,8 @@ public class CombatManager : MonoBehaviour
 
     private int SortBySpeed(Character c1, Character c2) 			// sorts by highest speed, player first
     {
-        int char1 = c1.speed;
-        int char2 = c2.speed;
+        float char1 = c1.speed;
+        float char2 = c2.speed;
         if (char1 == char2)
         {
             if (c1 is PlayerCharacter && c2 is EnemyCharacter)
