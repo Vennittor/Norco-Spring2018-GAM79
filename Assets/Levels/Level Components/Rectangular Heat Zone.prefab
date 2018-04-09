@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65642929712674660}
   - component: {fileID: 114303192577479366}
   m_Layer: 0
-  m_Name: Heat Zone
+  m_Name: Rectangular Heat Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
