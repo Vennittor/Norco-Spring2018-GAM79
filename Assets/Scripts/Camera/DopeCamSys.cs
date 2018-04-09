@@ -13,14 +13,23 @@ public class DopeCamSys : MonoBehaviour
     public Vector3 targetPosition = Vector3.zero;
     public float cameraSnapSpeed = 1.0f;
 
-    public GameObject cameraDock = null;
+    public Transform cameraDock = null;
 
 	// Use this for initialization
 	void Start ()
     {
+		if (target == null) 
+		{
+			target = GameObject.FindGameObjectWithTag ("Player");
+		}
+
+		if (cameraDock == null && target != null) 
+		{
+			cameraDock = target.transform.Find ("CamDock");
+		}
+
         transform.position = cameraDock.transform.position;
         transform.LookAt(target.transform.position);
-
     }
 	
 	// Update is called once per frame

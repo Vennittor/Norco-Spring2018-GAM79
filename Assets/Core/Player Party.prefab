@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 95429566619419478}
   m_Layer: 0
   m_Name: Player Party
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4891253443211064}
-  - component: {fileID: 33566499189641986}
   m_Layer: 0
   m_Name: CamDock
   m_TagString: Untagged
@@ -76,13 +75,6 @@ Transform:
   m_Father: {fileID: 4274544609537054}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 33.690002, y: 0, z: 0}
---- !u!33 &33566499189641986
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265823576747896}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54418240753708314
 Rigidbody:
   m_ObjectHideFlags: 1

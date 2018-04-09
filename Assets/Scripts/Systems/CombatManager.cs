@@ -7,8 +7,6 @@ public class CombatManager : MonoBehaviour
     public static CombatManager combatInstance;
 	public UIManager uiManager;
     private static Announcer announcer;
-    
-    public GameObject levelManager;
 
     public bool inCombat = false;
 
@@ -52,7 +50,7 @@ public class CombatManager : MonoBehaviour
         }
 
         combatInstance = this;
-        Debug.Log("Awake: CombatManager created!");
+
         DontDestroyOnLoad(gameObject);
     }
 

@@ -1224,7 +1224,7 @@ GameObject:
   - component: {fileID: 114046690152080822}
   - component: {fileID: 114510117941555128}
   m_Layer: 5
-  m_Name: Canvas_Combat_UI
+  m_Name: Canvas Combat UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2869,8 +2869,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatManager: {fileID: 0}
   eventSystemManager: {fileID: 0}
-  splashMessagePanel: {fileID: 0}
-  splashMessageText: {fileID: 0}
+  splashMessagePanel: {fileID: 1367261415709302}
+  splashMessageText: {fileID: 114329499611013138}
   splashLifeTime: 1
   playerCharacter: {fileID: 0}
   enemyCharacter: {fileID: 0}

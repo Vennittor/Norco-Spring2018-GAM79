@@ -31,33 +31,50 @@ public class Party : MonoBehaviour
     {
         levelMan = LevelManager.Instance;
 
-        if (type == PartyType.PLAYER)
-        {
-            for (int i = partyMembers.Count-1; i > 0; i--)
-            {
-                PlayerCharacter charType = partyMembers[i].GetComponent<PlayerCharacter>();
-                if (charType == null)
-                {
-                    partyMembers.RemoveAt(i);
-                }
-            }
-        }
-        else
-        {
-            for (int i = partyMembers.Count - 1; i > 0; i--)
-            {
-                EnemyCharacter charType = partyMembers[i].GetComponent<EnemyCharacter>();
-                if (charType == null)
-                {
-                    partyMembers.RemoveAt(i);
-                }
-            }
-        }
-        foreach (Character character in partyMembers)
-        {
-            character.GetComponent<MeshRenderer>().enabled = false; // potentially not mesh renderer when sprites are imported
-            character.GetComponent<Collider>().enabled = false;
-        }
+		for (int i = partyMembers.Count - 1; i >= 0; i--) 
+		{
+			if (partyMembers [i] == null)
+			{
+				partyMembers.RemoveAt(i);
+			}
+		}
+
+		if (partyMembers.Count == 0)
+		{
+			Debug.LogError ("The " + this.gameObject.name + " has no party Memebers!");
+		}
+		else 
+		{
+			if (type == PartyType.PLAYER)
+			{
+				for (int i = partyMembers.Count-1; i > 0; i--)
+				{
+					PlayerCharacter charType = partyMembers[i].GetComponent<PlayerCharacter>();
+					if (charType == null)
+					{
+						partyMembers.RemoveAt(i);
+					}
+				}
+
+			}
+			else
+			{
+				for (int i = partyMembers.Count - 1; i > 0; i--)
+				{
+					EnemyCharacter charType = partyMembers[i].GetComponent<EnemyCharacter>();
+					if (charType == null)
+					{
+						partyMembers.RemoveAt(i);
+					}
+				}
+			}
+			foreach (Character character in partyMembers)
+			{
+				character.GetComponent<MeshRenderer>().enabled = false; // potentially not mesh renderer when sprites are imported
+				character.GetComponent<Collider>().enabled = false;
+			}
+		}
+
     }
 
 

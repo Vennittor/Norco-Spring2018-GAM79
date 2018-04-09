@@ -8,12 +8,12 @@ public class LevelManager : MonoBehaviour
 
     public CombatManager combatManager;
 
-    public Canvas combatUI;
+	public GameObject combatUI;
     public Canvas levelUI;
 
     public GameObject playerParty;
-    public Party pParty;
-    public Party eParty;
+    private Party pParty;
+    private Party eParty;
     public uint partyHeatIntensity;
 
     public static LevelManager Instance
@@ -48,7 +48,20 @@ public class LevelManager : MonoBehaviour
     {
         combatManager = CombatManager.Instance;
 
-        combatUI.gameObject.SetActive(false);
+		if (combatUI == null) 
+		{
+			combatUI = GameObject.Find ("Canvas Combat UI");
+		}
+		if (combatUI != null) 
+		{
+			combatUI.gameObject.SetActive (false);
+		}
+		else 
+		{
+			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
+		}
+
+
     }
 
 
@@ -103,7 +116,7 @@ public class LevelManager : MonoBehaviour
 				enemy.GetComponent<MeshRenderer>().enabled = false;
 			}
 
-            combatUI.gameObject.SetActive(true);
+            combatUI.SetActive(true);
         }
         else
         {
@@ -130,7 +143,7 @@ public class LevelManager : MonoBehaviour
         pParty.GetComponent<MeshRenderer>().enabled = true;
         eParty.GetComponent<MeshRenderer>().enabled = true;
 
-        combatUI.gameObject.SetActive(false);
+        combatUI.SetActive(false);
         
     }
 }
