@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a0a168fb5f40a4ba0bcedce8b701cf, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  abilityName: 
+  abilityName: Water
   description: 
   callOutText: 
   targetType:
-    _who: 2
+    _who: 0
     _formation: 0
     _numberOfTargets: 1
   damage: []
