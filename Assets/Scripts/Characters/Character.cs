@@ -89,16 +89,16 @@ public abstract class Character : MonoBehaviour
 	{
 		Announcer.BeginTurn (this.characterName);
 
-		if (effectStructList.Count > 0)
-		{
-			foreach (EffectStruct effect in effectStructList)
-			{
-				if (effect.checkAtStart == true)
-				{
-					//do something
-				}
-			}
-		}
+//		if (effectStructList.Count > 0)
+//		{
+//			foreach (EffectStruct effect in effectStructList)
+//			{
+//				if (effect.checkAtStart == true)
+//				{
+//					//do something
+//				}
+//			}
+//		}
 
 
 		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED)		//Checks if the Character is in a state that they cannot act in, and return true/false if the can/cannot;
