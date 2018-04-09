@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class HeatZone : MonoBehaviour
 {
-    public Party _party;
+    private Party _party;
     public int myHeatIntensity;
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = new Color(1.0f, 0.36f, 0.016f, 0.5f);
+
+		Gizmos.DrawCube (this.transform.position, this.GetComponent<Collider>().bounds.size);
+	}
 
     public void OnTriggerEnter(Collider other)
 	{
@@ -34,4 +41,4 @@ public class HeatZone : MonoBehaviour
     }
 }
 
-
+
