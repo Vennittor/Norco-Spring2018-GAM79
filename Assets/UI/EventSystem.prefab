@@ -69,6 +69,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 114325399647163610}
   uIManager: {fileID: 0}
+  combatManager: {fileID: 0}
+  main: {fileID: 0}
+  targetType:
+    _who: 2
+    _formation: 0
+    _numberOfTargets: 1
 --- !u!114 &114739030729248898
 MonoBehaviour:
   m_ObjectHideFlags: 1

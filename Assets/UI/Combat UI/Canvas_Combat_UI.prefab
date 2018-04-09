@@ -2869,6 +2869,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatManager: {fileID: 0}
   eventSystemManager: {fileID: 0}
+  splashMessagePanel: {fileID: 0}
+  splashMessageText: {fileID: 0}
+  splashLifeTime: 1
   playerCharacter: {fileID: 0}
   enemyCharacter: {fileID: 0}
   skillButtons:
