@@ -14,7 +14,7 @@ public abstract class Announcer
 	{
 		string compiledMessage = "It's " + characterName + "'s turn!";
 
-		if (combatUIManager != null || combatUIManager.enabled) 
+		if (combatUIManager != null && combatUIManager.enabled) 
 		{
 			combatUIManager.SplashAnnouncement (compiledMessage, announcementDestination);
 		}
@@ -31,7 +31,7 @@ public abstract class Announcer
 		Debug.Log(attackerName + " used " + skillName + " on " + targetName + "!");
 		string compiledMessage = "Skill Text: " + attackText;
 
-		if (combatUIManager != null || combatUIManager.enabled) 
+		if (combatUIManager != null && combatUIManager.enabled) 
 		{
 			combatUIManager.SplashAnnouncement (compiledMessage, announcementDestination);
 		}
@@ -46,7 +46,7 @@ public abstract class Announcer
 	{
 		string compiledMessage = characterName + " used " + itemName + "!";
 
-		if (combatUIManager != null || combatUIManager.enabled) 
+		if (combatUIManager != null && combatUIManager.enabled) 
 		{
 			combatUIManager.SplashAnnouncement (compiledMessage, announcementDestination);
 		}
@@ -61,7 +61,7 @@ public abstract class Announcer
 	{
 		string compiledMessage = targetName + " takes " + damage + " damage!";
 
-		if (combatUIManager != null || combatUIManager.enabled)
+		if (combatUIManager != null && combatUIManager.enabled)
 		{
 			combatUIManager.SplashAnnouncement (compiledMessage, announcementDestination);
 		}
@@ -76,7 +76,7 @@ public abstract class Announcer
 	{
 		string compiledMessage = "End of " + characterName + "'s turn!";
 
-		if (combatUIManager != null || combatUIManager.enabled) 
+		if (combatUIManager != null && combatUIManager.enabled) 
 		{
 			combatUIManager.SplashAnnouncement (compiledMessage, announcementDestination);
 		}
