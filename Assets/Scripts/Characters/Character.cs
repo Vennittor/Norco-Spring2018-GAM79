@@ -29,10 +29,12 @@ public abstract class Character : MonoBehaviour
 	public uint currentHeat;
 
     public float attack;
-	public float accuracy = 84.5f;
+    public float attackMod;
+    public float accuracy = 84.5f;
 	public float evade = 10;
 
-    public int speed;
+    public float speed;
+    public float baseSpeed;
     public uint defense;
 
 	public CombatState combatState;
@@ -41,7 +43,7 @@ public abstract class Character : MonoBehaviour
 
 	[SerializeField] protected List<Ability> abilities = new List<Ability>();
 	[SerializeField] protected List<uint> cooldownTimers = new List<uint>();
-	[SerializeField] protected List<StatusEffect> statuses = new List<StatusEffect>();     	// Tandy: List of Status to show what Character is affected by
+	[SerializeField] protected List<StatusEffectType> statuses = new List<StatusEffectType>();     	// Tandy: List of Status to show what Character is affected by
 
 	protected bool _canActThisTurn = true;
 
@@ -255,7 +257,7 @@ public abstract class Character : MonoBehaviour
         if (currentHeat >= 100)
         {
             print("my heat is now 100, im a little thirsty");
-            statusEffect.LethargyFunction(speed);
+            statusEffect.LethargyFunction();
         }
         else if (currentHeat >= 200)
         {
@@ -278,7 +280,14 @@ public abstract class Character : MonoBehaviour
 		Debug.Log ("Poison Damage is not currently implemented, Physical damage was dealt instead.");
 	}
 
-    public void ApplyStatus(StatusEffect status) 
+    void DealBleedDamage(uint bleedDamage)
+    {
+        //reduce poisonDamage here.
+        DealPhysicalDamage(bleedDamage);
+        Debug.Log("Bleed Damage is not currently implemented, Physical damage was dealt instead.");
+    }
+
+    public void ApplyStatus(StatusEffectType status) 
 	{ 												// Tandy: added this to work with Ability
 		if(statuses.Contains(status) == false) 		// if not already affected by Status
 		{ 										

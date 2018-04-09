@@ -4,25 +4,56 @@ using UnityEngine;
 
 public class StatusEffect
 {
-    public StatusEffectType effectType;
+    public Character connectedCharacter;
+    public int duration;
 
-	
+    StatusEffectType statusEffectType;
 
-    public void LethargyFunction(int speed)
+    public void LethargyStatus()
     {
-        effectType = StatusEffectType.Lethargy;
-        speed = speed / 2;
+        statusEffectType = StatusEffectType.Lethargy;
+        connectedCharacter.speed /= 2;
+        duration = -1;
     }
 
-    public void BerserkFunction()
+    public void BerserkStatus()
     {
-        effectType = StatusEffectType.Berserk;
+        statusEffectType = StatusEffectType.Berserk;
         //player can only use ability 1
+        duration = -1;
     }
 
-    public void StunAbility()
+    public void StunStatus()
     {
-        effectType = StatusEffectType.Stun;
-        //player looses 1 turn and then has heat reduced
+        statusEffectType = StatusEffectType.Stun;
+        //player loses 1 turn and then has heat reduced
+        duration = 1;
+        connectedCharacter.currentHealth -= 100;
+    }
+
+    public void LegalizeGayWeed()
+    {
+        statusEffectType = StatusEffectType.Smoke;
+        connectedCharacter.evade = 100;
+        duration = 1;
+    }
+
+    public void ScaredStatus(Character character)
+    {
+        statusEffectType = StatusEffectType.Scared;
+        connectedCharacter.attackMod = .7f; // 70% damage output
+    }
+
+    public void BlindStatus()
+    {
+        statusEffectType = StatusEffectType.Blind;
+        connectedCharacter.accuracy = 70;
+    }
+
+    public void BleedStatus()
+    {
+        statusEffectType = StatusEffectType.Bleed;
+        uint dot = 1;
+        duration = 3;
     }
 }
