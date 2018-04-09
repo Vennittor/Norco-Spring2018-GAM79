@@ -135,7 +135,7 @@ public class UIManager : MonoBehaviour
 	public void OutputAttack(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
 	{
         int length = combatManager.activeCharacter.effectStructList.Count;
-        foreach(Character.effectStruct effect in combatManager.activeCharacter.effectStructList)
+        foreach(Character.EffectStruct effect in combatManager.activeCharacter.effectStructList)
         {
             if(effect.statusEffectType != StatusEffectType.Berserk) //TODO move out of this level
             {

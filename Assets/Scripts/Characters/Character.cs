@@ -11,12 +11,20 @@ public abstract class Character : MonoBehaviour
         ABLE, DISABLED, USINGABILITY, EXHAUSTED
     }
 
-    public struct effectStruct
+    public struct EffectStruct
     {
         public StatusEffectType statusEffectType;
-        public uint duration;
+        public int duration;
+        public bool checkAtStart;
+
+        public EffectStruct(StatusEffectType statusType, int duration, bool checkStart)
+        {
+            statusEffectType = statusType;
+            this.duration = duration;
+            checkAtStart = checkStart;
+        }
     }
-    public List<effectStruct> effectStructList;
+    public List<EffectStruct> effectStructList;
 
     public string characterName;
 	public Animator animator;
@@ -30,20 +38,21 @@ public abstract class Character : MonoBehaviour
 
     public float attack;
     public float attackMod;
-    public float accuracy = 84.5f;
-	public float evade = 10;
-
+    public float accuracy;
+    public float accuracyMod;
+	public float evade;
+    public float evadeMod;
     public float speed;
-    public float baseSpeed;
+    public float speedMod;
     public uint defense;
+    public uint defenseMod;
 
 	public CombatState combatState;
 
-	public int selectedAbilityIndex = -1;
+	public int selectedAbilityIndex;
 
-	[SerializeField] protected List<Ability> abilities = new List<Ability>();
-	[SerializeField] protected List<uint> cooldownTimers = new List<uint>();
-	[SerializeField] protected List<StatusEffectType> statuses = new List<StatusEffectType>();     	// Tandy: List of Status to show what Character is affected by
+	[SerializeField] protected List<Ability> abilities;
+	[SerializeField] protected List<uint> cooldownTimers;
 
 	protected bool _canActThisTurn = true;
 
@@ -60,23 +69,33 @@ public abstract class Character : MonoBehaviour
     {
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
-        new List<effectStruct>();
+        new List<EffectStruct>();
 		if (animator == null) 
 		{
 			animator = GetComponent<Animator> ();
 		}
-			
-		cooldownTimers.Clear();									//enfore size of cooldownTimers to abilities and set the timer to 0
+
+        cooldownTimers = new List<uint>();									//enfore size of cooldownTimers to abilities and set the timer to 0
 		foreach(Ability ability in abilities)
 		{
 			cooldownTimers.Add(0);
 		}
-
+        accuracy = 84.5f;
+        evade = 10;
+        selectedAbilityIndex = -1;
     }
 
 	public virtual void BeginTurn()
 	{
 		Announcer.BeginTurn (this.characterName);
+
+        foreach (EffectStruct effect in effectStructList)
+        {
+            if (effect.checkAtStart == true)
+            {
+                //do something
+            }
+        }
 
 		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED)		//Checks if the Character is in a state that they cannot act in, and return true/false if the can/cannot;
 		{
@@ -89,11 +108,6 @@ public abstract class Character : MonoBehaviour
 		else
 		{
 			_canActThisTurn = true;
-
-			if (this is PlayerCharacter) {
-
-				combatManager.uiManager.UpdateAbilityButtons (abilities);
-			}
 
 			ChooseAbility ();
 		}
@@ -170,7 +184,15 @@ public abstract class Character : MonoBehaviour
 	{	Debug.Log (this.gameObject.name + " is ending their turn.");
 		if (combatManager.activeCharacter == this)
 		{
-			ProgressCooldowns ();
+            foreach (EffectStruct effect in effectStructList)
+            {
+                if (effect.checkAtStart == false)
+                {
+                    //do something
+                }
+            }
+
+            ProgressCooldowns ();
 
 			combatManager.NextTurn();
 			//TODO uiManager.BlockInput until next PlayerCharacter starts turn
@@ -287,13 +309,13 @@ public abstract class Character : MonoBehaviour
         Debug.Log("Bleed Damage is not currently implemented, Physical damage was dealt instead.");
     }
 
-    public void ApplyStatus(StatusEffectType status) 
-	{ 												// Tandy: added this to work with Ability
-		if(statuses.Contains(status) == false) 		// if not already affected by Status
-		{ 										
-            statuses.Add(status); 					// add Status to List to show it affects Character
-        }
-    }
+    //public void ApplyStatus(StatusEffectType status)
+    //{                                               // Tandy: added this to work with Ability
+    //    if (effectStructList.Contains(status) == false)         // if not already affected by Status
+    //    {
+    //        effectStructList.Add(status); 					// add Status to List to show it affects Character
+    //    }
+    //}
 
     public void Faint()
     {
