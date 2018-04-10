@@ -2872,8 +2872,6 @@ MonoBehaviour:
   splashMessagePanel: {fileID: 1367261415709302}
   splashMessageText: {fileID: 114329499611013138}
   splashLifeTime: 1
-  playerCharacter: {fileID: 0}
-  enemyCharacter: {fileID: 0}
   skillButtons:
   - {fileID: 114784021664711690}
   - {fileID: 114130227571889426}

@@ -26,17 +26,11 @@ public class UIManager : MonoBehaviour
 	public Text splashMessageText;
 	public float splashLifeTime = 1.0f;
 
-    public PlayerCharacter playerCharacter;
-    public EnemyCharacter enemyCharacter;
-
 	public List<Button> skillButtons = new List<Button> ();
 
     public LayerMask targetable;
 	public List<Character> collectedTargets;
     [SerializeField] private Ability ability;
-
-    public delegate void MyDelegate();
-    MyDelegate myDelegate;
 
     public float infoDelayTime = 0.5f;
 
@@ -93,7 +87,7 @@ public class UIManager : MonoBehaviour
 		}
         if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("Hello");
+            Debug.Log("TODO/ Cancel Targeting ");
         }
     }
 	#endregion

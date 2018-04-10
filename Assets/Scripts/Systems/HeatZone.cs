@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeatZone : MonoBehaviour
 {
-    private Party _party;
+    public Party _party;
     public int myHeatIntensity;
 
 	void OnDrawGizmos()
@@ -17,7 +17,7 @@ public class HeatZone : MonoBehaviour
     public void OnTriggerEnter(Collider other)
 	{
         //TODO "if" statements are temporary, since the trigger enter was detecting the ground as well
-		if (other.gameObject.name == "Player") {
+		if (other.gameObject.tag == "Player") {
 			Debug.Log ("character entered a heat zone");
 
 			_party = other.gameObject.GetComponent<Party>();
