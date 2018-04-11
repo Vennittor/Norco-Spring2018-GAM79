@@ -4,74 +4,134 @@ using UnityEngine;
 
 public class StatusEffect
 {
-    public Character connectedCharacter;
     public int duration;
+    public bool applyImmediately;
     public bool checkAtStart;
 
     StatusEffectType statusEffectType;
 
-    public void LethargyStatus()
+    public void Apply(Character character, StatusEffectType statusType)
     {
-        //connectedCharacter.speedMod -= .5f;
+        if (statusType == StatusEffectType.Lethargy)
+        {
+            LethargyStatus(character);
+        }
+        else if (statusType == StatusEffectType.Berserk)
+        {
+            BerserkStatus(character);
+        }
+        else if (statusType == StatusEffectType.Stun)
+        {
+            StunStatus(character);
+        }
+        else if (statusType == StatusEffectType.Smoke)
+        {
+            LegalizeGayWeed(character);
+        }
+        else if (statusType == StatusEffectType.Scared)
+        {
+            ScaredStatus(character);
+        }
+        else if (statusType == StatusEffectType.Blind)
+        {
+            BlindStatus(character);
+        }
+        else if (statusType == StatusEffectType.Bleed)
+        {
+            BleedStatus(character);
+        }
+    }
+
+    public void LethargyStatus(Character connectedCharacter)
+    {
+        connectedCharacter.speedMod -= .5f;
     }
     public Character.EffectStruct ApplyLethargy()
     {
         statusEffectType = StatusEffectType.Lethargy;
         duration = -1;
+        applyImmediately = true;
         checkAtStart = true;
-        return new Character.EffectStruct(statusEffectType, duration, checkAtStart);
+        return new Character.EffectStruct(statusEffectType, duration, applyImmediately, checkAtStart);
     }
 
-    public void BerserkStatus()
+    public void BerserkStatus(Character connectedCharacter)
     {
-        checkAtStart = true;
-        statusEffectType = StatusEffectType.Berserk;
         //player can only use ability 1
+    }
+    public Character.EffectStruct ApplyBerserk()
+    {
+        statusEffectType = StatusEffectType.Berserk;
         duration = -1;
-        //Character.EffectStruct effect = new Character.EffectStruct(checkAtStart, statusEffectType, duration);
+        applyImmediately = false;
+        checkAtStart = true;
+        return new Character.EffectStruct(statusEffectType, duration, applyImmediately, checkAtStart);
     }
 
-    public void StunStatus()
+    public void StunStatus(Character connectedCharacter)
     {
-        checkAtStart = true;
+        //player loses 2 turns
+    }
+    public Character.EffectStruct ApplyStun()
+    {
         statusEffectType = StatusEffectType.Stun;
-        //player loses 1 turn and then has heat reduced
-        duration = 1;
-        //connectedCharacter.currentHealth -= 100;
-        //Character.EffectStruct effect = new Character.EffectStruct(checkAtStart, statusEffectType, duration);
+        duration = 2;
+        applyImmediately = false;
+        checkAtStart = true;
+        return new Character.EffectStruct(statusEffectType, duration, applyImmediately, checkAtStart);
     }
 
-    public void LegalizeGayWeed()
+    // How long does this last? Until end of round?
+    public void LegalizeGayWeed(Character connectedCharacter)
     {
-        checkAtStart = true;
+        connectedCharacter.evadeBonus = 10000;
+    }
+    public Character.EffectStruct InjectDank()
+    {
         statusEffectType = StatusEffectType.Smoke;
-        //connectedCharacter.evade = 100;
         duration = 1;
-        //Character.EffectStruct effect = new Character.EffectStruct(checkAtStart, statusEffectType, duration);
+        applyImmediately = true;
+        checkAtStart = true;
+        return new Character.EffectStruct(statusEffectType, duration, applyImmediately, checkAtStart);
     }
 
-    public void ScaredStatus(Character character)
+    public void ScaredStatus(Character connectedCharacter)
     {
-        checkAtStart = true;
+        connectedCharacter.attackMod = -.3f; // 70% damage output
+    }
+    public Character.EffectStruct ApplyScared()
+    {
         statusEffectType = StatusEffectType.Scared;
-        //connectedCharacter.attackMod = -.3f; // 70% damage output
-        //Character.EffectStruct effect = new Character.EffectStruct(checkAtStart, statusEffectType, duration);
-    }
-
-    public void BlindStatus()
-    {
+        duration = 2;
+        applyImmediately = true;
         checkAtStart = true;
-        statusEffectType = StatusEffectType.Blind;
-        //connectedCharacter.accuracy = 70;
-        //Character.EffectStruct effect = new Character.EffectStruct(checkAtStart, statusEffectType, duration);
+        return new Character.EffectStruct(statusEffectType, duration, applyImmediately, checkAtStart);
     }
 
-    public void BleedStatus()
+    public void BlindStatus(Character connectedCharacter)
     {
-        checkAtStart = false;
+        connectedCharacter.accuracyMod = 70;
+    }
+    public Character.EffectStruct ApplyBlind()
+    {
+        statusEffectType = StatusEffectType.Blind;
+        duration = 2;
+        applyImmediately = false;
+        checkAtStart = true;
+        return new Character.EffectStruct(statusEffectType, duration, applyImmediately, checkAtStart);
+    }
+
+    public void BleedStatus(Character connectedCharacter)
+    {
+        uint dot = 1;
+        connectedCharacter.ApplyDamage(dot, ElementType.BLEED);
+    }
+    public Character.EffectStruct ApplyBleed()
+    {
         statusEffectType = StatusEffectType.Bleed;
-        //uint dot = 1;
-        duration = 3;
-        //Character.EffectStruct effect = new Character.EffectStruct(checkAtStart, statusEffectType, duration);
+        duration = 2;
+        applyImmediately = false;
+        checkAtStart = false;
+        return new Character.EffectStruct(statusEffectType, duration, applyImmediately, checkAtStart);
     }
 }

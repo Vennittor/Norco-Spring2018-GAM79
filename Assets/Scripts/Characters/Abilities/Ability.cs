@@ -13,7 +13,7 @@ public class Ability : ScriptableObject
 	// COMBAT DATA
 	public TargetType targetType;
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
-	[SerializeField] protected List<StatusEffectType> statuses = new List<StatusEffectType>();
+	[SerializeField] protected List<Character.EffectStruct> statuses = new List<Character.EffectStruct>();
 
 	[SerializeField] protected uint numberOfActions = 1;			//When the Ability is done, instead of telling the player AbilityHasCompleted, it can accept another targeting input
 	protected uint actionsUsed = 0;
@@ -126,7 +126,7 @@ public class Ability : ScriptableObject
 
             AnnounceAbility();
 
-			for(int hitsDone = 0; hitsDone < hitsPerAction; hitsDone ++)
+			for(int hitsDone = 0; hitsDone < hitsPerAction; hitsDone++)
 			{
 				foreach (Character target in targets)					// Target all applicable targets
 				{ 
@@ -135,14 +135,13 @@ public class Ability : ScriptableObject
 						target.ApplyDamage ( (uint)range.RollDamage(), range.element);
 					} 
 
-					foreach (StatusEffectType status in statuses)					// Apply all Status affects
+					foreach (Character.EffectStruct status in statuses)					// Apply all Status affects
 					{ 
-						//target.ApplyStatus(status);						// TODO Greg: commenting out because Tandy's unused stuff needed it, will replace with new setup
+						target.ApplyStatus(status);
 					} 
 				}
 				//TODO Wait Between hits
 			}
-				
 		}
 
 		actionsUsed++;

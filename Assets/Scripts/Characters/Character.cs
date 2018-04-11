@@ -15,12 +15,14 @@ public abstract class Character : MonoBehaviour
     {
         public StatusEffectType statusEffectType;
         public int duration;
+        public bool applyImmediately;
         public bool checkAtStart;
 
-        public EffectStruct(StatusEffectType statusType, int duration, bool checkStart)
+        public EffectStruct(StatusEffectType statusType, int duration, bool applyNow, bool checkStart)
         {
             statusEffectType = statusType;
             this.duration = duration;
+            applyImmediately = applyNow;
             checkAtStart = checkStart;
         }
     }
@@ -36,16 +38,21 @@ public abstract class Character : MonoBehaviour
 	public uint maxHeat;
 	public uint currentHeat;
 
-    public float attack;
+    public uint attack;
+    public float attackBonus;
     public float attackMod;
     public float accuracy;
+    public float accuracyBonus;
     public float accuracyMod;
 	public float evade;
+    public float evadeBonus;
     public float evadeMod;
-    public float speed;
+    public uint speed;
+    public float speedBonus;
     public float speedMod;
     public uint defense;
-    public uint defenseMod;
+    public float defenseBonus;
+    public float defenseMod;
 
 	public CombatState combatState;
 
@@ -279,17 +286,17 @@ public abstract class Character : MonoBehaviour
         if (currentHeat >= 100)
         {
             print("my heat is now 100, im a little thirsty");
-            statusEffect.LethargyStatus();
+            effectStructList.Add(statusEffect.ApplyLethargy());
         }
         else if (currentHeat >= 200)
         {
             print("my heat is now 200, i need AC");
-            statusEffect.BerserkStatus();
+            effectStructList.Add(statusEffect.ApplyBerserk());
         }
         else if (currentHeat == 300)
         {
             print("my heat has reached 300, i am now stunned"); //TODO clean up here
-            //statusEffect.StunAbility();
+            //effectStructList.Add(statusEffect.ApplyStun());
             combatManager.activeCharacter.EndTurn();
             combatManager.activeCharacter.currentHeat = 200;
         }
@@ -309,13 +316,17 @@ public abstract class Character : MonoBehaviour
         Debug.Log("Bleed Damage is not currently implemented, Physical damage was dealt instead.");
     }
 
-    //public void ApplyStatus(StatusEffectType status)
-    //{                                               // Tandy: added this to work with Ability
-    //    if (effectStructList.Contains(status) == false)         // if not already affected by Status
-    //    {
-    //        effectStructList.Add(status); 					// add Status to List to show it affects Character
-    //    }
-    //}
+    public void ApplyStatus(EffectStruct status)
+    {                                               // Tandy: added this to work with Ability
+        if (!effectStructList.Contains(status))         // if not already affected by Status
+        {
+            effectStructList.Add(status); 					// add Status to List to show it affects Character
+            if (status.applyImmediately)
+            {
+                // StatusEffect.Apply(this, status.StatusEffectType)
+            }
+        }
+    }
 
     public void Faint()
     {
