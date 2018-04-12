@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65910871059768720}
   - component: {fileID: 95231541775676398}
   - component: {fileID: 212864908984823234}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Scarab_Basic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

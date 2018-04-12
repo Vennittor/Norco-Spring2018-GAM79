@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65274639753615340}
   - component: {fileID: 95262411615272458}
   - component: {fileID: 212088768140189850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SphinxShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65704980530643708}
   - component: {fileID: 95943222544419264}
   - component: {fileID: 212703295154919112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Scarab_Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}

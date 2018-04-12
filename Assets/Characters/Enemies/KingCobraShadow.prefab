@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65602922858644244}
   - component: {fileID: 95791654011638288}
   - component: {fileID: 212036375495569318}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: KingCobraShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

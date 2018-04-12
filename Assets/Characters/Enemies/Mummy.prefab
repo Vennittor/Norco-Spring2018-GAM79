@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65529137333533346}
   - component: {fileID: 95444897444858340}
   - component: {fileID: 212317648538142344}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

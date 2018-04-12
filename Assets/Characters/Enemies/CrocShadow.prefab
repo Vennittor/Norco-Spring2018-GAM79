@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65946522782699920}
   - component: {fileID: 95990153270772648}
   - component: {fileID: 212353993777637856}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CrocShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

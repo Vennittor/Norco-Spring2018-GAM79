@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65517087445731398}
   - component: {fileID: 95445820475501420}
   - component: {fileID: 212234901084478002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crusader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
