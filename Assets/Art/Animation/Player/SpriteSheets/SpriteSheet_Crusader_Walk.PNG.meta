@@ -1,0 +1,1207 @@
+fileFormatVersion: 2
+guid: 8b3054c500e4c9843b42662b891db35d
+timeCreated: 1523031622
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SpriteSheet_Crusader_Walk_0
+    21300002: SpriteSheet_Crusader_Walk_1
+    21300004: SpriteSheet_Crusader_Walk_2
+    21300006: SpriteSheet_Crusader_Walk_3
+    21300008: SpriteSheet_Crusader_Walk_4
+    21300010: SpriteSheet_Crusader_Walk_5
+    21300012: SpriteSheet_Crusader_Walk_6
+    21300014: SpriteSheet_Crusader_Walk_7
+    21300016: SpriteSheet_Crusader_Walk_8
+    21300018: SpriteSheet_Crusader_Walk_9
+    21300020: SpriteSheet_Crusader_Walk_10
+    21300022: SpriteSheet_Crusader_Walk_11
+    21300024: SpriteSheet_Crusader_Walk_12
+    21300026: SpriteSheet_Crusader_Walk_13
+    21300028: SpriteSheet_Crusader_Walk_14
+    21300030: SpriteSheet_Crusader_Walk_15
+    21300032: SpriteSheet_Crusader_Walk_16
+    21300034: SpriteSheet_Crusader_Walk_17
+    21300036: SpriteSheet_Crusader_Walk_18
+    21300038: SpriteSheet_Crusader_Walk_19
+    21300040: SpriteSheet_Crusader_Walk_20
+    21300042: SpriteSheet_Crusader_Walk_21
+    21300044: SpriteSheet_Crusader_Walk_22
+    21300046: SpriteSheet_Crusader_Walk_23
+    21300048: SpriteSheet_Crusader_Walk_24
+    21300050: SpriteSheet_Crusader_Walk_25
+    21300052: SpriteSheet_Crusader_Walk_26
+    21300054: SpriteSheet_Crusader_Walk_27
+    21300056: SpriteSheet_Crusader_Walk_28
+    21300058: SpriteSheet_Crusader_Walk_29
+    21300060: SpriteSheet_Crusader_Walk_30
+    21300062: SpriteSheet_Crusader_Walk_31
+    21300064: SpriteSheet_Crusader_Walk_32
+    21300066: SpriteSheet_Crusader_Walk_33
+    21300068: SpriteSheet_Crusader_Walk_34
+    21300070: SpriteSheet_Crusader_Walk_35
+    21300072: SpriteSheet_Crusader_Walk_36
+    21300074: SpriteSheet_Crusader_Walk_37
+    21300076: SpriteSheet_Crusader_Walk_38
+    21300078: SpriteSheet_Crusader_Walk_39
+    21300080: SpriteSheet_Crusader_Walk_40
+    21300082: SpriteSheet_Crusader_Walk_41
+    21300084: SpriteSheet_Crusader_Walk_42
+    21300086: SpriteSheet_Crusader_Walk_43
+    21300088: SpriteSheet_Crusader_Walk_44
+    21300090: SpriteSheet_Crusader_Walk_45
+    21300092: SpriteSheet_Crusader_Walk_46
+    21300094: SpriteSheet_Crusader_Walk_47
+    21300096: SpriteSheet_Crusader_Walk_48
+    21300098: SpriteSheet_Crusader_Walk_49
+    21300100: SpriteSheet_Crusader_Walk_50
+    21300102: SpriteSheet_Crusader_Walk_51
+    21300104: SpriteSheet_Crusader_Walk_52
+    21300106: SpriteSheet_Crusader_Walk_53
+    21300108: SpriteSheet_Crusader_Walk_54
+    21300110: SpriteSheet_Crusader_Walk_55
+    21300112: SpriteSheet_Crusader_Walk_56
+    21300114: SpriteSheet_Crusader_Walk_57
+    21300116: SpriteSheet_Crusader_Walk_58
+    21300118: SpriteSheet_Crusader_Walk_59
+    21300120: SpriteSheet_Crusader_Walk_60
+    21300122: SpriteSheet_Crusader_Walk_61
+    21300124: SpriteSheet_Crusader_Walk_62
+    21300126: SpriteSheet_Crusader_Walk_63
+    21300128: SpriteSheet_Crusader_Walk_64
+    21300130: SpriteSheet_Crusader_Walk_65
+    21300132: SpriteSheet_Crusader_Walk_66
+    21300134: SpriteSheet_Crusader_Walk_67
+    21300136: SpriteSheet_Crusader_Walk_68
+    21300138: SpriteSheet_Crusader_Walk_69
+    21300140: SpriteSheet_Crusader_Walk_70
+    21300142: SpriteSheet_Crusader_Walk_71
+    21300144: SpriteSheet_Crusader_Walk_72
+    21300146: SpriteSheet_Crusader_Walk_73
+    21300148: SpriteSheet_Crusader_Walk_74
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: -1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 300
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 11330
+        width: 973
+        height: 1237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 1742
+        y: 11342
+        width: 979
+        height: 1225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 3261
+        y: 11352
+        width: 986
+        height: 1215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 4774
+        y: 11362
+        width: 997
+        height: 1205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 6293
+        y: 11362
+        width: 1002
+        height: 1205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 7811
+        y: 11362
+        width: 1006
+        height: 1205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 9330
+        y: 11362
+        width: 1013
+        height: 1205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 10843
+        y: 11362
+        width: 1025
+        height: 1205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 12362
+        y: 11363
+        width: 1031
+        height: 1203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 9949
+        width: 1032
+        height: 1199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 1756
+        y: 9949
+        width: 1039
+        height: 1199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 3268
+        y: 9949
+        width: 1052
+        height: 1199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 4787
+        y: 9949
+        width: 1052
+        height: 1199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 6306
+        y: 9949
+        width: 1059
+        height: 1199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 7825
+        y: 9949
+        width: 1064
+        height: 1198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 9338
+        y: 9949
+        width: 1071
+        height: 1193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_16
+      rect:
+        serializedVersion: 2
+        x: 10856
+        y: 9949
+        width: 1079
+        height: 1193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_17
+      rect:
+        serializedVersion: 2
+        x: 12375
+        y: 9949
+        width: 1079
+        height: 1193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_18
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 8537
+        width: 1086
+        height: 1192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_19
+      rect:
+        serializedVersion: 2
+        x: 1769
+        y: 8537
+        width: 1086
+        height: 1192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_20
+      rect:
+        serializedVersion: 2
+        x: 3282
+        y: 8537
+        width: 1098
+        height: 1189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_21
+      rect:
+        serializedVersion: 2
+        x: 4800
+        y: 8537
+        width: 1099
+        height: 1186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_22
+      rect:
+        serializedVersion: 2
+        x: 6319
+        y: 8537
+        width: 1106
+        height: 1186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_23
+      rect:
+        serializedVersion: 2
+        x: 7838
+        y: 8537
+        width: 1106
+        height: 1186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_24
+      rect:
+        serializedVersion: 2
+        x: 9357
+        y: 8537
+        width: 1112
+        height: 1186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_25
+      rect:
+        serializedVersion: 2
+        x: 10871
+        y: 8537
+        width: 1117
+        height: 1186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_26
+      rect:
+        serializedVersion: 2
+        x: 12389
+        y: 8537
+        width: 1121
+        height: 1186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_27
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 7118
+        width: 1126
+        height: 1186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_28
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 7118
+        width: 1126
+        height: 1186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_29
+      rect:
+        serializedVersion: 2
+        x: 3301
+        y: 7118
+        width: 1126
+        height: 1186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_30
+      rect:
+        serializedVersion: 2
+        x: 4820
+        y: 7118
+        width: 1132
+        height: 1186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_31
+      rect:
+        serializedVersion: 2
+        x: 6339
+        y: 7119
+        width: 1132
+        height: 1185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_32
+      rect:
+        serializedVersion: 2
+        x: 7855
+        y: 7119
+        width: 1135
+        height: 1185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_33
+      rect:
+        serializedVersion: 2
+        x: 9371
+        y: 7119
+        width: 1138
+        height: 1185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_34
+      rect:
+        serializedVersion: 2
+        x: 10889
+        y: 7119
+        width: 1145
+        height: 1185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_35
+      rect:
+        serializedVersion: 2
+        x: 12408
+        y: 7119
+        width: 1146
+        height: 1185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_36
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 5706
+        width: 1146
+        height: 1179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_37
+      rect:
+        serializedVersion: 2
+        x: 1802
+        y: 5706
+        width: 1146
+        height: 1179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_38
+      rect:
+        serializedVersion: 2
+        x: 3321
+        y: 5706
+        width: 1146
+        height: 1179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_39
+      rect:
+        serializedVersion: 2
+        x: 4840
+        y: 5706
+        width: 1146
+        height: 1179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_40
+      rect:
+        serializedVersion: 2
+        x: 6359
+        y: 5706
+        width: 1146
+        height: 1179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_41
+      rect:
+        serializedVersion: 2
+        x: 7878
+        y: 5706
+        width: 1146
+        height: 1179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_42
+      rect:
+        serializedVersion: 2
+        x: 9397
+        y: 5706
+        width: 1146
+        height: 1179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_43
+      rect:
+        serializedVersion: 2
+        x: 10916
+        y: 5706
+        width: 1146
+        height: 1178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_44
+      rect:
+        serializedVersion: 2
+        x: 12432
+        y: 5706
+        width: 1149
+        height: 1178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_45
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 4294
+        width: 1151
+        height: 1172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_46
+      rect:
+        serializedVersion: 2
+        x: 1823
+        y: 4294
+        width: 1152
+        height: 1172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_47
+      rect:
+        serializedVersion: 2
+        x: 3335
+        y: 4294
+        width: 1152
+        height: 1172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_48
+      rect:
+        serializedVersion: 2
+        x: 4847
+        y: 4291
+        width: 1152
+        height: 1175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_49
+      rect:
+        serializedVersion: 2
+        x: 6359
+        y: 4288
+        width: 1152
+        height: 1178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_50
+      rect:
+        serializedVersion: 2
+        x: 7872
+        y: 4288
+        width: 1151
+        height: 1178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_51
+      rect:
+        serializedVersion: 2
+        x: 9384
+        y: 4287
+        width: 1148
+        height: 1179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_52
+      rect:
+        serializedVersion: 2
+        x: 10896
+        y: 4287
+        width: 1146
+        height: 1185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_53
+      rect:
+        serializedVersion: 2
+        x: 12408
+        y: 4287
+        width: 1146
+        height: 1185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_54
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 2875
+        width: 1139
+        height: 1179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_55
+      rect:
+        serializedVersion: 2
+        x: 1789
+        y: 2875
+        width: 1139
+        height: 1179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_56
+      rect:
+        serializedVersion: 2
+        x: 3301
+        y: 2875
+        width: 1133
+        height: 1183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_57
+      rect:
+        serializedVersion: 2
+        x: 4814
+        y: 2875
+        width: 1131
+        height: 1185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_58
+      rect:
+        serializedVersion: 2
+        x: 6326
+        y: 2875
+        width: 1125
+        height: 1185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_59
+      rect:
+        serializedVersion: 2
+        x: 7840
+        y: 2875
+        width: 1117
+        height: 1185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_60
+      rect:
+        serializedVersion: 2
+        x: 9357
+        y: 2870
+        width: 1109
+        height: 1190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_61
+      rect:
+        serializedVersion: 2
+        x: 10869
+        y: 2869
+        width: 1106
+        height: 1191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_62
+      rect:
+        serializedVersion: 2
+        x: 12382
+        y: 2868
+        width: 1099
+        height: 1192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_63
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 1456
+        width: 1092
+        height: 1192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_64
+      rect:
+        serializedVersion: 2
+        x: 1762
+        y: 1456
+        width: 1086
+        height: 1192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_65
+      rect:
+        serializedVersion: 2
+        x: 3275
+        y: 1456
+        width: 1078
+        height: 1192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_66
+      rect:
+        serializedVersion: 2
+        x: 4793
+        y: 1456
+        width: 1066
+        height: 1192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_67
+      rect:
+        serializedVersion: 2
+        x: 6306
+        y: 1456
+        width: 1058
+        height: 1192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_68
+      rect:
+        serializedVersion: 2
+        x: 7818
+        y: 1456
+        width: 1049
+        height: 1192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_69
+      rect:
+        serializedVersion: 2
+        x: 9331
+        y: 1456
+        width: 1039
+        height: 1195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_70
+      rect:
+        serializedVersion: 2
+        x: 10844
+        y: 1456
+        width: 1031
+        height: 1198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_71
+      rect:
+        serializedVersion: 2
+        x: 12362
+        y: 1453
+        width: 1018
+        height: 1202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_72
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 37
+        width: 1006
+        height: 1199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_73
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 37
+        width: 998
+        height: 1199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Walk_74
+      rect:
+        serializedVersion: 2
+        x: 3261
+        y: 19
+        width: 979
+        height: 1222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

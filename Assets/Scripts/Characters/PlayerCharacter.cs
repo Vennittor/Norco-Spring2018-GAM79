@@ -23,8 +23,7 @@ public class PlayerCharacter : Character
 
         if (canAct)
         {
-            //TODO swap UI graphics into to match PlayerCharacter
-            ChooseAbility();
+            combatManager.uiManager.UpdateAbilityButtons(abilities);
         }
     }
 

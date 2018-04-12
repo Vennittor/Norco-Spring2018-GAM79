@@ -13,7 +13,7 @@ public class Ability : ScriptableObject
 	// COMBAT DATA
 	public TargetType targetType;
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
-	[SerializeField] protected List<Status> statuses = new List<Status>();
+	[SerializeField] protected List<StatusEffectType> statuses = new List<StatusEffectType>();
 
 	[SerializeField] protected uint numberOfActions = 1;			//When the Ability is done, instead of telling the player AbilityHasCompleted, it can accept another targeting input
 	protected uint actionsUsed = 0;
@@ -49,14 +49,6 @@ public class Ability : ScriptableObject
 			}
 			else if (targets.Count > 1)
 			{
-                //string targetstring = targets[0].name + ", "; // first target name
-                //for (int i = 1; i < targets.Count - 1; i++)
-                //{
-                //    targetstring += targets[i].name + ", "; // every target name between first and last
-                //}
-                //targetstring += ", and " + targets[targets.Count].name; // last target name
-                //return targetstring; // example: "enemya, enemyb, and enemyc"
-
                 string targetString = "";
                 foreach (Character character in targets)
                 {
@@ -71,9 +63,18 @@ public class Ability : ScriptableObject
 		}
 	}
 
+	void OnEnable()
+	{
+		if (abilityName == "")
+		{
+			abilityName = this.name;
+		}
+	}
+
 	public void PrepAbility(Character user)
 	{
-		characterUser = user;		Debug.Log (abilityName + "'s user is " + characterUser.gameObject.name);
+		characterUser = user;
+        Debug.Log (abilityName + "'s user is " + characterUser.gameObject.name);
 
 		if (numberOfActions < 1) 
 		{
@@ -134,9 +135,9 @@ public class Ability : ScriptableObject
 						target.ApplyDamage ( (uint)range.RollDamage(), range.element);
 					} 
 
-					foreach (Status status in statuses)					// Apply all Status affects
+					foreach (StatusEffectType status in statuses)					// Apply all Status affects
 					{ 
-						target.ApplyStatus(status);						// pass all Status effects to target Character
+						//target.ApplyStatus(status);						// TODO Greg: commenting out because Tandy's unused stuff needed it, will replace with new setup
 					} 
 				}
 				//TODO Wait Between hits

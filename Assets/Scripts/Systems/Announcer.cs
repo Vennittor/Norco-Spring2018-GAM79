@@ -1,36 +1,88 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public abstract class Announcer {
-	
-	public static void AnnounceSelf() {
-		Debug.Log("I hereby Announce that I have been statically compiled! \nI exist purely as an abstract utility class with no instance, only static functions.");
-	}
+public abstract class Announcer 
+{
+	public static UIManager combatUIManager;
+
+	public static Text announcementDestination;
 
 	// Begin Turn
-	public static void BeginTurn(string characterName) {
-		Debug.Log("It's " + characterName + "'s turn!");
+	public static void BeginTurn(string characterName)
+	{
+		string compiledMessage = "It's " + characterName + "'s turn!";
+
+		if (combatUIManager != null && combatUIManager.enabled) 
+		{
+			combatUIManager.SplashAnnouncement (compiledMessage, announcementDestination);
+		}
+		else 
+		{
+			Debug.Log(compiledMessage);
+		}
+
 	}
 
 	// Use Skill
-	public static void UseAbility(string attackerName, string targetName, string skillName, string attackText) {
+	public static void UseAbility(string attackerName, string targetName, string skillName, string attackText) 
+	{
 		Debug.Log(attackerName + " used " + skillName + " on " + targetName + "!");
-		Debug.Log("Skill Text: " + attackText);
+		string compiledMessage = "Skill Text: " + attackText;
+
+		if (combatUIManager != null && combatUIManager.enabled) 
+		{
+			combatUIManager.SplashAnnouncement (compiledMessage, announcementDestination);
+		}
+		else 
+		{
+			Debug.Log(compiledMessage);
+		}
 	}
 
 	// Use Item
-	public static void UseItem(string characterName, string itemName) {
-		Debug.Log(characterName + " used " + itemName + "!");
+	public static void UseItem(string characterName, string itemName) 
+	{
+		string compiledMessage = characterName + " used " + itemName + "!";
+
+		if (combatUIManager != null && combatUIManager.enabled) 
+		{
+			combatUIManager.SplashAnnouncement (compiledMessage, announcementDestination);
+		}
+		else 
+		{
+			Debug.Log(compiledMessage);
+		}
 	}
 
 	// Take Damage
-	public static void TakeDamage(string targetName, float damage) {
-		Debug.Log(targetName + " takes " + damage + " damage!");
+	public static void TakeDamage(string targetName, float damage) 
+	{
+		string compiledMessage = targetName + " takes " + damage + " damage!";
+
+		if (combatUIManager != null && combatUIManager.enabled)
+		{
+			combatUIManager.SplashAnnouncement (compiledMessage, announcementDestination);
+		}
+		else 
+		{
+			Debug.Log(compiledMessage);
+		}
 	}
 
 	// End Turn
-	public static void EndTurn(string characterName) {
-		Debug.Log("End of " + characterName + "'s turn!");
+	public static void EndTurn(string characterName) 
+	{
+		string compiledMessage = "End of " + characterName + "'s turn!";
+
+		if (combatUIManager != null && combatUIManager.enabled) 
+		{
+			combatUIManager.SplashAnnouncement (compiledMessage, announcementDestination);
+		}
+		else 
+		{
+			Debug.Log(compiledMessage);
+		}
 	}
 }

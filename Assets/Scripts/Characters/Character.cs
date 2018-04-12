@@ -11,8 +11,24 @@ public abstract class Character : MonoBehaviour
         ABLE, DISABLED, USINGABILITY, EXHAUSTED
     }
 
+    public struct EffectStruct
+    {
+        public StatusEffectType statusEffectType;
+        public int duration;
+        public bool checkAtStart;
+
+        public EffectStruct(StatusEffectType statusType, int duration, bool checkStart)
+        {
+            statusEffectType = statusType;
+            this.duration = duration;
+            checkAtStart = checkStart;
+        }
+    }
+    public List<EffectStruct> effectStructList;
+
     public string characterName;
 	public Animator animator;
+    public StatusEffect statusEffect;
 
 	public uint maxhealth;
 	public uint currentHealth;
@@ -20,19 +36,23 @@ public abstract class Character : MonoBehaviour
 	public uint maxHeat;
 	public uint currentHeat;
 
-	public float accuracy = 84.5f;
-	public float evade = 10;
-
-    public int speed;
+    public float attack;
+    public float attackMod;
+    public float accuracy;
+    public float accuracyMod;
+	public float evade;
+    public float evadeMod;
+    public float speed;
+    public float speedMod;
     public uint defense;
+    public uint defenseMod;
 
 	public CombatState combatState;
 
-	public int selectedAbilityIndex = -1;
+	public int selectedAbilityIndex;
 
-	[SerializeField] protected List<Ability> abilities = new List<Ability>();
-	[SerializeField] protected List<uint> cooldownTimers = new List<uint>();
-	[SerializeField] protected List<Status> statuses = new List<Status>();     	// Tandy: List of Status to show what Character is affected by
+	[SerializeField] protected List<Ability> abilities;
+	[SerializeField] protected List<uint> cooldownTimers;
 
 	protected bool _canActThisTurn = true;
 
@@ -49,23 +69,37 @@ public abstract class Character : MonoBehaviour
     {
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
-
+        effectStructList = new List<EffectStruct>();
 		if (animator == null) 
 		{
 			animator = GetComponent<Animator> ();
 		}
-			
-		cooldownTimers.Clear();									//enfore size of cooldownTimers to abilities and set the timer to 0
+
+        cooldownTimers = new List<uint>();									//enfore size of cooldownTimers to abilities and set the timer to 0
 		foreach(Ability ability in abilities)
 		{
 			cooldownTimers.Add(0);
 		}
-
+        accuracy = 84.5f;
+        evade = 10;
+        selectedAbilityIndex = -1;
     }
 
 	public virtual void BeginTurn()
 	{
-		Debug.Log (gameObject.name + " begins their turn.");
+		Announcer.BeginTurn (this.characterName);
+
+		if (effectStructList.Count > 0)
+		{
+			foreach (EffectStruct effect in effectStructList)
+			{
+				if (effect.checkAtStart == true)
+				{
+					//do something
+				}
+			}
+		}
+
 
 		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED)		//Checks if the Character is in a state that they cannot act in, and return true/false if the can/cannot;
 		{
@@ -154,7 +188,15 @@ public abstract class Character : MonoBehaviour
 	{	Debug.Log (this.gameObject.name + " is ending their turn.");
 		if (combatManager.activeCharacter == this)
 		{
-			ProgressCooldowns ();
+            foreach (EffectStruct effect in effectStructList)
+            {
+                if (effect.checkAtStart == false)
+                {
+                    //do something
+                }
+            }
+
+            ProgressCooldowns ();
 
 			combatManager.NextTurn();
 			//TODO uiManager.BlockInput until next PlayerCharacter starts turn
@@ -183,7 +225,8 @@ public abstract class Character : MonoBehaviour
 
 
     public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
-	{	Debug.Log (this.gameObject.name + " takes " + damage.ToString () + " of " + ElementType.PHYSICAL.ToString () + " damage!");
+	{
+        Debug.Log (this.gameObject.name + " takes " + damage.ToString () + " of " + damageType.ToString() + " damage!");
         if (damageType == ElementType.PHYSICAL)
         {
             DealPhysicalDamage(damage);
@@ -232,6 +275,28 @@ public abstract class Character : MonoBehaviour
     public void DealHeatDamage(int heatDamage)
     {
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
+        CheckHeatThreshold();
+    }
+
+    public void CheckHeatThreshold()
+    {
+        if (currentHeat >= 100)
+        {
+            print("my heat is now 100, im a little thirsty");
+            statusEffect.LethargyStatus();
+        }
+        else if (currentHeat >= 200)
+        {
+            print("my heat is now 200, i need AC");
+            statusEffect.BerserkStatus();
+        }
+        else if (currentHeat == 300)
+        {
+            print("my heat has reached 300, i am now stunned"); //TODO clean up here
+            //statusEffect.StunAbility();
+            combatManager.activeCharacter.EndTurn();
+            combatManager.activeCharacter.currentHeat = 200;
+        }
     }
 
 	void DealPoisonDamage(uint poisonDamage)
@@ -241,18 +306,38 @@ public abstract class Character : MonoBehaviour
 		Debug.Log ("Poison Damage is not currently implemented, Physical damage was dealt instead.");
 	}
 
-    public void ApplyStatus(Status status) 
-	{ 												// Tandy: added this to work with Ability
-		if(statuses.Contains(status) == false) 		// if not already affected by Status
-		{ 										
-            statuses.Add(status); 					// add Status to List to show it affects Character
-        }
+    void DealBleedDamage(uint bleedDamage)
+    {
+        //reduce poisonDamage here.
+        DealPhysicalDamage(bleedDamage);
+        Debug.Log("Bleed Damage is not currently implemented, Physical damage was dealt instead.");
     }
+
+    //public void ApplyStatus(StatusEffectType status)
+    //{                                               // Tandy: added this to work with Ability
+    //    if (effectStructList.Contains(status) == false)         // if not already affected by Status
+    //    {
+    //        effectStructList.Add(status); 					// add Status to List to show it affects Character
+    //    }
+    //}
 
     public void Faint()
     {
 		Debug.Log(this.gameObject.name + " died!");
         combatState = CombatState.EXHAUSTED;
+
+		if (this is EnemyCharacter)
+		{
+			this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
+			this.gameObject.GetComponent<Collider> ().enabled = false;
+		}
+		else 
+		{
+			//Set Animation state to Dead
+			this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
+			this.gameObject.GetComponent<Collider> ().enabled = false;
+		}
+
 		if (this as Character == combatManager.activeCharacter)
 		{	Debug.Log ("Active Character died");
 			EndTurn();
