@@ -325,6 +325,19 @@ public abstract class Character : MonoBehaviour
     {
 		Debug.Log(this.gameObject.name + " died!");
         combatState = CombatState.EXHAUSTED;
+
+		if (this is EnemyCharacter)
+		{
+			this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
+			this.gameObject.GetComponent<Collider> ().enabled = false;
+		}
+		else 
+		{
+			//Set Animation state to Dead
+			this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
+			this.gameObject.GetComponent<Collider> ().enabled = false;
+		}
+
 		if (this as Character == combatManager.activeCharacter)
 		{	Debug.Log ("Active Character died");
 			EndTurn();

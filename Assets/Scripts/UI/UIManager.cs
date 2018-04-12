@@ -87,7 +87,7 @@ public class UIManager : MonoBehaviour
 		}
         if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("TODO/ Cancel Targeting ");
+			CancelInput ();
         }
     }
 	#endregion
@@ -166,7 +166,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-	#region ModeSwitches
+	#region Internal Mode Switches
 	private void SetMode_Normal() 
 	{
 		inputMode = InputMode.NORMAL; 
@@ -193,7 +193,13 @@ public class UIManager : MonoBehaviour
 
 		return true;
 	}
+	#endregion
 
+	#region Exposed Mode Switches
+	public void ReturnToNormalMode()
+	{
+		SetMode_Normal ();
+	}
 	public bool AllowAbilitySelection()
 	{
 		if (inputMode != InputMode.BLOCKED)
@@ -205,6 +211,13 @@ public class UIManager : MonoBehaviour
 		else
 		{
 			return false;
+		}
+	}
+	public void CancelInput()
+	{
+		if (inputMode == InputMode.TARGETING) 
+		{
+			SetMode_Select ();
 		}
 	}
 	#endregion
@@ -275,7 +288,7 @@ public class UIManager : MonoBehaviour
 			{
                 Debug.LogError(hitInfo.collider.gameObject.name);
 
-                if (hitInfo.collider.gameObject.GetComponent<Character> () == null) 						//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
+				if (hitInfo.collider.gameObject.GetComponent<Character> () == null || hitInfo.collider.gameObject.GetComponent<Character>().combatState == Character.CombatState.EXHAUSTED) 						//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
 				{
 					previousHitCharacter = null;
                     collectedTargets.Clear();

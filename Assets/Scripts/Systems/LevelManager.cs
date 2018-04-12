@@ -142,28 +142,44 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void ReturnFromCombat()
+	public void ReturnFromCombat(bool playersWin = true)
     {
-        //return control to Level and Player Party
-        //TODO dirty blutn force change to better
+		if (!playersWin)
+		{
+			Debug.LogError ("Player Lost");
+			//TODO go to gameover screen
+		}
 
 
-        foreach (Character character in pParty.partyMembers)
+		UIManager.Instance.ReturnToNormalMode ();									//return the UIManager to normal mode
+
+        foreach (Character character in pParty.partyMembers)						//Turn off the playerParty members renderers off
         {
-            character.GetComponent<MeshRenderer>().enabled = false;
-            character.GetComponent<Collider>().enabled = false;
-        }
-        foreach (Character character in eParty.partyMembers)
-        {
-            character.GetComponent<MeshRenderer>().enabled = false;
-            character.GetComponent<Collider>().enabled = false;
-        }
-        pParty.GetComponent<MeshRenderer>().enabled = true;
-        eParty.GetComponent<MeshRenderer>().enabled = true;
+			if (character.GetComponent<MeshRenderer> () != null) 
+			{
+				character.GetComponent<MeshRenderer>().enabled = false;
+			}
+			if (character.GetComponent<SpriteRenderer> () != null) 
+			{
+				character.GetComponent<SpriteRenderer>().enabled = false;
+			}
 
-		playerParty.gameObject.GetComponent<Collider>().enabled = true;
+			character.GetComponent<Collider>().enabled = true;
+        }
 
-        combatUI.SetActive(false);
+		if (playerParty.GetComponent<MeshRenderer> () != null)						//Turn on the player Party's renderers on
+		{
+			playerParty.GetComponent<MeshRenderer>().enabled = true;
+		}
+		if (playerParty.GetComponent<SpriteRenderer> () != null)
+		{
+			playerParty.GetComponent<SpriteRenderer>().enabled = true;
+		}
+		playerParty.GetComponent<Collider>().enabled = true;
+
+		Destroy (eParty.gameObject);												//remove the Enemy Party
+
+        combatUI.SetActive(false);													//disable the CombatUI
         
     }
 }
