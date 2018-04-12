@@ -929,7 +929,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f1b92b6da0942654b9a2b0a401ddfdc2,
+      objectReference: {fileID: 21300000, guid: 3f7c9ec360b896a48a03eec9c93a1ccc,
         type: 3}
     - target: {fileID: 212257160482806548, guid: f666e98f44c35304cb9cdd3213c3caa8,
         type: 2}
@@ -950,7 +950,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f1b92b6da0942654b9a2b0a401ddfdc2,
+      objectReference: {fileID: 21300000, guid: 3f7c9ec360b896a48a03eec9c93a1ccc,
         type: 3}
     - target: {fileID: 212206965655283480, guid: f666e98f44c35304cb9cdd3213c3caa8,
         type: 2}
@@ -971,7 +971,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f1b92b6da0942654b9a2b0a401ddfdc2,
+      objectReference: {fileID: 21300000, guid: 3f7c9ec360b896a48a03eec9c93a1ccc,
         type: 3}
     - target: {fileID: 212202839329558756, guid: f666e98f44c35304cb9cdd3213c3caa8,
         type: 2}
@@ -984,6 +984,27 @@ Prefab:
       value: 2.18
       objectReference: {fileID: 0}
     - target: {fileID: 212202839329558756, guid: f666e98f44c35304cb9cdd3213c3caa8,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212299292615293032, guid: f666e98f44c35304cb9cdd3213c3caa8,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3f7c9ec360b896a48a03eec9c93a1ccc,
+        type: 3}
+    - target: {fileID: 212299292615293032, guid: f666e98f44c35304cb9cdd3213c3caa8,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 2.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 212299292615293032, guid: f666e98f44c35304cb9cdd3213c3caa8,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 1.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 212299292615293032, guid: f666e98f44c35304cb9cdd3213c3caa8,
         type: 2}
       propertyPath: m_WasSpriteAssigned
       value: 1

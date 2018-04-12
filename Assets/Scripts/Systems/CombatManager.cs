@@ -166,20 +166,29 @@ public class CombatManager : MonoBehaviour
 
 	void EndCombat(bool playerVictory)
 	{	Debug.Log ("End Combat");
-		if (playerVictory == true) // party wins
+		partyHeatLevel = 0;
+		characters.Clear();
+
+		activeCharacter = null;
+		activePlayers.Clear();
+		activeEnemies.Clear();
+
+		currentRoundCharacters.Clear();
+
+		if (playerVictory == true)				// party wins
 		{
 			Debug.Log ("Party Wins");
 
 			inCombat = false;
-            //Combat rewards?
+            //TODO Combat rewards?
             LevelManager.Instance.ReturnFromCombat();
 		}
-		else if (playerVictory == false) // party loses
+		else if (playerVictory == false)		// party loses
 		{
 			Debug.Log ("Party Loses");
 
             inCombat = false;
-            //Goto Defeat or Gameover GameState
+
             LevelManager.Instance.ReturnFromCombat();
 		}
 	}
