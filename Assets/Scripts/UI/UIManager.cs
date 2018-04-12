@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
     public void Update()
 	{
 		HighlightTargets ();
-        //TEST Debug.Log ("collectedTargets.Count = " + collectedTargets.Count.ToString() );
+
         if (Input.GetMouseButtonDown (0)) 						//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
 		{
 			if (inputMode == InputMode.TARGETING) 
