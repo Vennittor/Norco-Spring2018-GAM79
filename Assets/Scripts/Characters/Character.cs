@@ -226,7 +226,7 @@ public abstract class Character : MonoBehaviour
 
     public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
 	{
-        Debug.Log (this.gameObject.name + " takes " + damage.ToString () + " of " + damageType.ToString() + " damage!");
+        string dmgText = this.gameObject.name + " takes " + damage.ToString () + " of " + damageType.ToString() + " damage!";
         if (damageType == ElementType.PHYSICAL)
         {
             DealPhysicalDamage(damage);
@@ -247,6 +247,7 @@ public abstract class Character : MonoBehaviour
         {
             DealPoisonDamage(damage);
         }
+        combatManager.uiManager.splashMessageText.text = dmgText;
     }
 
 	void DealPhysicalDamage(uint physicalDamage = 0)
@@ -269,7 +270,7 @@ public abstract class Character : MonoBehaviour
 
     void ReduceHeat(uint amount = 0)
     {
-        currentHeat -= (uint)Mathf.Clamp((float)amount, 0f, (float)currentHeat);
+        currentHeat -= (uint)Mathf.Clamp(amount, 0, currentHeat);
     }
 
     public void DealHeatDamage(int heatDamage)

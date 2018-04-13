@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
 
 	public GameObject splashMessagePanel;
 	public Text splashMessageText;
-	public float splashLifeTime = 1.0f;
+	public float splashLifeTime = .02f;
 
 	public List<Button> skillButtons = new List<Button> ();
 
@@ -103,6 +103,7 @@ public class UIManager : MonoBehaviour
 
 	public IEnumerator DisplaySplash()
 	{
+        Debug.Log("Getting called");
 		yield return new WaitForSeconds (splashLifeTime);
 
 		splashMessagePanel.SetActive (false);
@@ -217,6 +218,7 @@ public class UIManager : MonoBehaviour
 	{
 		if (inputMode == InputMode.TARGETING) 
 		{
+            TurnWhite();
 			SetMode_Select ();
 		}
 	}

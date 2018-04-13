@@ -12,7 +12,7 @@ public class Water : Ability
 
     public void RefillWater(uint uses)
     {
-        usesLeft = (uint)Mathf.Clamp((float)uses, 0, (float)maxUses);
+        usesLeft = (uint)Mathf.Clamp(uses, 0, maxUses);
     }
 
     public new void UseAbility()
