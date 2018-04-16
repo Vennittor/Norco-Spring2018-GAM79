@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class LevelManager : MonoBehaviour
 {
@@ -42,6 +44,8 @@ public class LevelManager : MonoBehaviour
         {
             playerParty = GameObject.FindGameObjectWithTag("Player");
         }
+
+        //SceneManager.LoadScene("OtherSceneName", LoadSceneMode.Additive);
     }
 
     void Start()
@@ -182,4 +186,27 @@ public class LevelManager : MonoBehaviour
         combatUI.SetActive(false);													//disable the CombatUI
         
     }
+
+    public void LoadScene(int sceneANumber)
+    {
+        Debug.Log("sceneBuildIndex to load: " + sceneANumber);
+        SceneManager.LoadScene(sceneANumber);
+    }
+
+    public void LoadSceneAsync()
+    {
+        StartCoroutine(LoadYourAsyncScene());
+    }
+
+    IEnumerator LoadYourAsyncScene()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Scene2");
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
+    
 }
