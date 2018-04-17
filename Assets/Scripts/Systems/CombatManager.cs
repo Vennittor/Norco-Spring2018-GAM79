@@ -124,7 +124,7 @@ public class CombatManager : MonoBehaviour
 
     void CombatHeatDealer()
     {
-        Debug.LogError(partyHeatLevel);
+       // Debug.LogError(partyHeatLevel);
         if (partyHeatLevel > 0)
         {
             foreach (PlayerCharacter player in activePlayers)

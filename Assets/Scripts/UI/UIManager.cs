@@ -23,6 +23,10 @@ public class UIManager : MonoBehaviour
     public EventSystemManager eventSystemManager;
 
 	public GameObject splashMessagePanel;
+    public Transform partyPosA;
+    public Transform enemyPosA;
+    private Vector3 pPos;
+    private Vector3 ePos;
 	public Text splashMessageText;
 	public float splashLifeTime = .02f;
 
@@ -65,6 +69,13 @@ public class UIManager : MonoBehaviour
 		inputMode = InputMode.NORMAL;
         collectedTargets = new List<Character>();
 
+        partyPosA = FindObjectOfType<Transform>();
+        enemyPosA = FindObjectOfType<Transform>(); 
+
+        pPos = partyPosA.transform.position;
+        ePos = enemyPosA.transform.position;
+        partyPosA = transform;
+        enemyPosA = transform;  
     }
 
     public void Update()
@@ -288,7 +299,7 @@ public class UIManager : MonoBehaviour
 
 			if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, targetable))
 			{
-                Debug.LogError(hitInfo.collider.gameObject.name);
+              //  Debug.LogError(hitInfo.collider.gameObject.name);
 
 				if (hitInfo.collider.gameObject.GetComponent<Character> () == null || hitInfo.collider.gameObject.GetComponent<Character>().combatState == Character.CombatState.EXHAUSTED) 						//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
 				{

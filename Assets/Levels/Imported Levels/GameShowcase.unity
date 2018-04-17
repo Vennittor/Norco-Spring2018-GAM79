@@ -77,15 +77,17 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFiltering: 0
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousColorSigma: 1
-    m_PVRFilteringAtrousNormalSigma: 1
-    m_PVRFilteringAtrousPositionSigma: 1
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -487,7 +489,7 @@ Prefab:
     - target: {fileID: 224225967702042372, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -53
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224225967702042372, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
@@ -497,7 +499,7 @@ Prefab:
     - target: {fileID: 224225967702042372, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224499930297440490, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
@@ -517,7 +519,7 @@ Prefab:
     - target: {fileID: 224499930297440490, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -144
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224499930297440490, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
@@ -527,7 +529,7 @@ Prefab:
     - target: {fileID: 224499930297440490, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224417324587055666, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
@@ -547,7 +549,7 @@ Prefab:
     - target: {fileID: 224417324587055666, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -235
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224417324587055666, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
@@ -557,7 +559,7 @@ Prefab:
     - target: {fileID: 224417324587055666, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224407648207080412, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
@@ -577,7 +579,7 @@ Prefab:
     - target: {fileID: 224407648207080412, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -326
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224407648207080412, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
@@ -587,7 +589,7 @@ Prefab:
     - target: {fileID: 224407648207080412, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 76
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
@@ -629,10 +631,15 @@ MonoBehaviour:
   maxHeat: 0
   currentHeat: 0
   attack: 0
+  attackMod: 0
   accuracy: 84.5
+  accuracyMod: 0
   evade: 10
+  evadeMod: 0
   speed: 4
+  speedMod: 0
   defense: 0
+  defenseMod: 0
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
@@ -974,10 +981,15 @@ MonoBehaviour:
   maxHeat: 300
   currentHeat: 0
   attack: 0
+  attackMod: 0
   accuracy: 84.5
+  accuracyMod: 0
   evade: 10
+  evadeMod: 0
   speed: 0
+  speedMod: 0
   defense: 0
+  defenseMod: 0
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
@@ -1088,10 +1100,15 @@ MonoBehaviour:
   maxHeat: 0
   currentHeat: 0
   attack: 0
+  attackMod: 0
   accuracy: 84.5
+  accuracyMod: 0
   evade: 10
+  evadeMod: 0
   speed: 4
+  speedMod: 0
   defense: 0
+  defenseMod: 0
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
@@ -1261,20 +1278,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -1384,10 +1387,15 @@ MonoBehaviour:
   maxHeat: 300
   currentHeat: 0
   attack: 0
+  attackMod: 0
   accuracy: 84.5
+  accuracyMod: 0
   evade: 10
+  evadeMod: 0
   speed: 0
+  speedMod: 0
   defense: 0
+  defenseMod: 0
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
@@ -1540,10 +1548,15 @@ MonoBehaviour:
   maxHeat: 0
   currentHeat: 0
   attack: 0
+  attackMod: 0
   accuracy: 84.5
+  accuracyMod: 0
   evade: 10
+  evadeMod: 0
   speed: 4
+  speedMod: 0
   defense: 0
+  defenseMod: 0
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
@@ -1650,10 +1663,15 @@ MonoBehaviour:
   maxHeat: 300
   currentHeat: 0
   attack: 0
+  attackMod: 0
   accuracy: 84.5
+  accuracyMod: 0
   evade: 10
+  evadeMod: 0
   speed: 0
+  speedMod: 0
   defense: 0
+  defenseMod: 0
   combatState: 0
   selectedAbilityIndex: -1
   abilities:
@@ -1776,8 +1794,7 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!4 &1890169695 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 4882845387987006, guid: b7e4cdf162de14b71b271afb2e9d9626,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 1890169694}
 --- !u!1 &2025513877
 GameObject:

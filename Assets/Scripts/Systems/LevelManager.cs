@@ -16,6 +16,11 @@ public class LevelManager : MonoBehaviour
     private Party eParty;
     public uint partyHeatIntensity;
 
+    public Transform partyPosB;
+    public Transform enemyPosB;
+
+    private UIManager uiInstance; 
+
     public static LevelManager Instance
     {
         get
@@ -61,7 +66,9 @@ public class LevelManager : MonoBehaviour
 			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
 		}
 
-
+        uiInstance = FindObjectOfType<UIManager>();
+        partyPosB = FindObjectOfType<Transform>();
+        enemyPosB = FindObjectOfType<Transform>(); 
     }
 
 
@@ -134,11 +141,14 @@ public class LevelManager : MonoBehaviour
 
             combatUI.SetActive(true);
 
+            player.transform.position = partyPosB.transform.position;
+            enemy.transform.position = enemyPosB.transform.position;
+
 			combatManager.StartCombat();
         }
         else
         {
-            Debug.LogError("CombatManger is currently running combat, collision and Initiate Combat calls should no longer be called.");
+           // Debug.LogError("CombatManger is currently running combat, collision and Initiate Combat calls should no longer be called.");
         }
     }
 

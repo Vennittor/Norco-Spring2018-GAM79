@@ -284,7 +284,7 @@ public abstract class Character : MonoBehaviour
         if (currentHeat >= 100)
         {
             print("my heat is now 100, im a little thirsty");
-            statusEffect.LethargyStatus();
+          //  statusEffect.LethargyStatus();
         }
         else if (currentHeat >= 200)
         {
