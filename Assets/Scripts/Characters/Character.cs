@@ -274,7 +274,9 @@ public abstract class Character : MonoBehaviour
 
     public void DealHeatDamage(int heatDamage)
     {
+        Debug.Log("heat +");
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
+        Debug.Log(name + " current heat is " + currentHeat);
         CheckHeatThreshold();
     }
 
@@ -296,6 +298,10 @@ public abstract class Character : MonoBehaviour
             //statusEffect.StunAbility();
             combatManager.activeCharacter.EndTurn();
             combatManager.activeCharacter.currentHeat = 200;
+        }
+        else
+        {
+            return;
         }
     }
 
