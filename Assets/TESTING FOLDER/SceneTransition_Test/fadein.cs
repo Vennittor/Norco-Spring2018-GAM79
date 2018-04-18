@@ -26,15 +26,14 @@ public class fadein : MonoBehaviour
         }
     }
 
-    void OnCollisionStay(Collision col)
+    void OnCollisionExit(Collision col)
     {
         if (col.gameObject.tag == "Player")
         {
             fadeScript.StartCoroutine(fadeScript.fadeout());
             fadeScript.anim.Play("fadeOut1");
-            fadeScript.fout = false;
-            fadeScript.fin = false; 
+            fadeScript.fout = true;
+            fadeScript.fin = false;
         }
     }
-
 }

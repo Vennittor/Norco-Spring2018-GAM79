@@ -140,10 +140,6 @@ public class LevelManager : MonoBehaviour
 			combatManager.HeatValueTaker(partyHeatIntensity);
 
             combatUI.SetActive(true);
-
-            player.transform.position = partyPosB.transform.position;
-            enemy.transform.position = enemyPosB.transform.position;
-
 			combatManager.StartCombat();
         }
         else

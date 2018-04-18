@@ -12,7 +12,7 @@ public class testFade : MonoBehaviour
 
     private void Start()
     {
-        anim = FindObjectOfType<Animator>();
+        anim.GetComponentInChildren<Animator>(); 
         im = FindObjectOfType<Image>();
         fin = false;
         fout = false; 
@@ -28,13 +28,8 @@ public class testFade : MonoBehaviour
             anim.SetBool("fadein", true);
             anim.SetBool("fadeout", false);
         }
-        yield return new WaitForEndOfFrame();
-/*
-        anim.Play("fadeOut1");
-        anim.GetComponentInChildren<Animator>();
 
-        yield return null;
-        */
+        yield return new WaitForEndOfFrame();
     }
 
     public IEnumerator fadeout()

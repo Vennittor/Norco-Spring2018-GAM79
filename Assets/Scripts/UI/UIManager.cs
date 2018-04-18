@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     public Transform partyPosA;
     public Transform enemyPosA;
     private Vector3 pPos;
-    private Vector3 ePos;
+    private Vector3 ePos; 
 	public Text splashMessageText;
 	public float splashLifeTime = .02f;
 
