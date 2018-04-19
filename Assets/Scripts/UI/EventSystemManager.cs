@@ -38,6 +38,9 @@ public class EventSystemManager : MonoBehaviour//, IPointerEnterHandler, IPointe
         }
 
         eventInstance = this;
+
+		this.gameObject.transform.SetParent (this.gameObject.transform);
+
         DontDestroyOnLoad(gameObject);
     }
 

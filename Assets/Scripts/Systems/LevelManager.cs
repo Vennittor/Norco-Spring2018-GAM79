@@ -45,6 +45,12 @@ public class LevelManager : MonoBehaviour
             playerParty = GameObject.FindGameObjectWithTag("Player");
         }
 
+		_instance = this;
+
+		this.gameObject.transform.SetParent (this.gameObject.transform);
+
+		DontDestroyOnLoad(gameObject);
+
         //SceneManager.LoadScene("OtherSceneName", LoadSceneMode.Additive);
     }
 
@@ -56,17 +62,18 @@ public class LevelManager : MonoBehaviour
 		{
 			combatUI = GameObject.Find ("Canvas Combat UI");
 		}
-		if (combatUI != null) 
-		{
-			combatUI.SetActive (false);
-		}
-		else 
+		if (combatUI == null) 
 		{
 			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
 		}
 
 
     }
+
+	void LateStart()
+	{
+
+	}
 
 
     void Update()
@@ -132,11 +139,11 @@ public class LevelManager : MonoBehaviour
 			}
 			enemy.GetComponent<Collider>().enabled = false;
 
+			combatUI.SetActive(true);
+
 			combatManager.AddCharactersToCombat(player.partyMembers);
 			combatManager.AddCharactersToCombat(enemy.partyMembers);
 			combatManager.HeatValueTaker(partyHeatIntensity);
-
-            combatUI.SetActive(true);
 
 			combatManager.StartCombat();
         }

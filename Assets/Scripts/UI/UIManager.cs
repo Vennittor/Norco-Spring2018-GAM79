@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
         {
             if (uIInstance == null)
             {
-                uIInstance = new UIManager();
+				uIInstance = new UIManager();	Debug.Log ("new UIManager created");
             }
             return uIInstance;
         }
@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
 
     public CombatManager combatManager;
     public EventSystemManager eventSystemManager;
+
+	public bool disableUIOnStart = true;
 
 	public GameObject splashMessagePanel;
 	public Text splashMessageText;
@@ -43,32 +45,48 @@ public class UIManager : MonoBehaviour
 	TargetType searchingTargetType;
 
     #region Unity Functions
-    void Awake()
+	public void Awake()
     {
         if (uIInstance != null && uIInstance != this)
         {
+			Debug.LogError ("more than one UIManager in scene.  Removing this one");
             Destroy(gameObject);
             return;
         }
 
         uIInstance = this;
+
+		this.gameObject.transform.SetParent (this.gameObject.transform);
+
         DontDestroyOnLoad(gameObject);
+
+		Debug.Log ("UIManager Awake");
     }
 
-    public void Start ()
-    {
+	public void Start()
+	{
+		SetMode_Normal ();
+		collectedTargets = new List<Character>();
+
 		Announcer.combatUIManager = UIManager.Instance;
 		Announcer.announcementDestination = splashMessageText;
-        combatManager = CombatManager.Instance;
-        eventSystemManager = EventSystemManager.Instance;
+		combatManager = CombatManager.Instance;
+		eventSystemManager = EventSystemManager.Instance;
 
-		inputMode = InputMode.NORMAL;
-        collectedTargets = new List<Character>();
-
-    }
+		if (disableUIOnStart)
+		{
+			this.gameObject.SetActive (false);
+		}
+	}
 
     public void Update()
 	{
+		//TODO TESTING		//TODO Change to inputMode may be coming from outside.
+		if (Input.GetKeyDown (KeyCode.U))
+		{
+			Debug.Log ("input = " + inputMode.ToString ());
+		}
+
 		HighlightTargets ();
 
         if (Input.GetMouseButtonDown (0)) 						//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
@@ -137,9 +155,9 @@ public class UIManager : MonoBehaviour
             }
         }
         if (length == 0)
-        {
+		{	Debug.Log (" pre AbilitySelect");
             if (inputMode == InputMode.ABILITYSELECT)               //
-            {
+			{	Debug.Log (" in AbilitySelect");
                 ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
                 if (ability == null)
                 {
@@ -169,22 +187,22 @@ public class UIManager : MonoBehaviour
 	#region Internal Mode Switches
 	private void SetMode_Normal() 
 	{
-		inputMode = InputMode.NORMAL; 
+		inputMode = InputMode.NORMAL;		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	private void SetMode_Select ()
 	{
-		inputMode = InputMode.ABILITYSELECT; 
+		inputMode = InputMode.ABILITYSELECT; 		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	private void SetMode_Targeting()
 	{
-		inputMode = InputMode.TARGETING;
+		inputMode = InputMode.TARGETING;		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	private void SetMode_Blocked()
 	{
-		inputMode = InputMode.BLOCKED;
+		inputMode = InputMode.BLOCKED;		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	public bool BlockInput()
@@ -201,7 +219,7 @@ public class UIManager : MonoBehaviour
 		SetMode_Normal ();
 	}
 	public bool AllowAbilitySelection()
-	{
+	{	Debug.Log ("Allow");
 		if (inputMode != InputMode.BLOCKED)
 		{
 			SetMode_Select ();
@@ -288,7 +306,7 @@ public class UIManager : MonoBehaviour
 			{
                 Debug.LogError(hitInfo.collider.gameObject.name);
 
-				if (hitInfo.collider.gameObject.GetComponent<Character> () == null || hitInfo.collider.gameObject.GetComponent<Character>().combatState == Character.CombatState.EXHAUSTED) 						//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
+				if (hitInfo.collider.gameObject.GetComponent<Character> () == null || hitInfo.collider.gameObject.GetComponent<Character>().combatState == Character.CombatState.EXHAUSTED) 			//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
 				{
 					previousHitCharacter = null;
                     collectedTargets.Clear();
