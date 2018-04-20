@@ -11,6 +11,7 @@ public class Ability : ScriptableObject
     [SerializeField] protected string callOutText;
 
 	// COMBAT DATA
+	[SerializeField] private int heatCost = 0;  //TODO impement heat damage to user on Ability use.
 	public TargetType targetType;
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
 	[SerializeField] protected List<StatusEffectType> statuses = new List<StatusEffectType>();
