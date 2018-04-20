@@ -267,7 +267,7 @@ public abstract class Character : MonoBehaviour
 		currentHealth = (currentHealth + healing) > maxhealth ? maxhealth : (currentHealth + healing);
 	}
 
-    void ReduceHeat(uint amount = 0)
+    public void ReduceHeat(uint amount = 0)
     {
         currentHeat -= (uint)Mathf.Clamp((float)amount, 0f, (float)currentHeat);
     }

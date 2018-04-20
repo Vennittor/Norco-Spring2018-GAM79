@@ -14,6 +14,7 @@ MonoBehaviour:
   abilityName: Carpet Bomb
   description: all enemies hit by bombs
   callOutText: 
+  heatCost: 5
   targetType:
     _who: 2
     _formation: 1
@@ -22,7 +23,7 @@ MonoBehaviour:
   - damageRanges:
     - {x: 1, y: 3}
     elementType: 0
-  statuses: []
+  statuses: 
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 4
