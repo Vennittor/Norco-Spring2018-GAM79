@@ -8,6 +8,8 @@ public class CombatManager : MonoBehaviour
 	public UIManager uiManager;
     private static Announcer announcer;
 
+    public AudioClip battleSong;
+
     public bool inCombat = false;
 
 	[SerializeField] private List<Character> characters;
@@ -73,6 +75,7 @@ public class CombatManager : MonoBehaviour
 		if(!inCombat) 
 		{
 			inCombat = true;
+            SoundManager.instance.Play(battleSong, "mxC");
 		}
 		else
 		{
@@ -180,7 +183,7 @@ public class CombatManager : MonoBehaviour
 		if (playerVictory == true)				// party wins
 		{
 			Debug.Log ("Party Wins");
-
+            
 			inCombat = false;
             //TODO Combat rewards?
             LevelManager.Instance.ReturnFromCombat();

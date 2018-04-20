@@ -8,11 +8,15 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance = null;
     public GameObject audioItemSFX;
     public GameObject audioItemVFX;
-    public GameObject audioItemMX;
+    public GameObject audioItemMXlevel;
+    public GameObject audioItemMXcombat;
+
+    //snapshots
+    public AudioMixerSnapshot noLevel;
+    public AudioMixerSnapshot noCombat;
 
     private GameObject prefabBus;
-
-    // Use this for initialization
+    private GameObject go;
     void Awake()
     {
 		if (instance == null)
@@ -39,15 +43,45 @@ public class SoundManager : MonoBehaviour
         {
             prefabBus = audioItemVFX;
         }
-        else if (bus == "mx")
+        else if (bus == "mxL")
         {
-            prefabBus = audioItemMX;
+            prefabBus = audioItemMXlevel;
+        }
+        else if (bus == "mxC")
+        {
+            prefabBus = audioItemMXcombat;
         }
 
-        GameObject go = (GameObject)Instantiate(prefabBus);
+        go = (GameObject)Instantiate(prefabBus);
         AudioSource src = go.GetComponent<AudioSource>();
         src.clip = clip;
         src.Play();
-        Destroy(go, clip.length);
+        if (go.gameObject.GetComponent<AudioSource>().loop == false)
+        {
+            Destroy(go, clip.length);
+        }
+    }
+
+    public void LevelToCombat()
+    {
+        noLevel.TransitionTo(1.0f);
+        /*if (go.name == "AudioItemMXlevel(Clone)")
+        {
+            Destroy(go);
+        } */       
+    }
+
+    public void CombatToLevel()
+    {
+        noCombat.TransitionTo(2.0f);
+        if (go.name == "AudioItemMXcombat(Clone)")
+        {
+            Destroy(go, 2.0f);
+        }
+    }
+
+    public void StopAClip()
+    {
+        Destroy(go);
     }
 }
