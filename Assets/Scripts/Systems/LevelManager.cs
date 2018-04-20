@@ -47,7 +47,22 @@ public class LevelManager : MonoBehaviour
 
 		_instance = this;
 
-		this.gameObject.transform.SetParent (this.gameObject.transform);
+		combatManager = CombatManager.Instance;
+
+		if (combatUI == null)
+		{
+			combatUI = FindObjectOfType<UIManager>().gameObject;
+		}
+		if (combatUI == null) 
+		{
+			combatUI = GameObject.Find ("Canvas Combat UI");
+		}
+		if (combatUI == null) 
+		{
+			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
+		}
+
+		this.gameObject.transform.SetParent(null);
 
 		DontDestroyOnLoad(gameObject);
 
@@ -58,6 +73,10 @@ public class LevelManager : MonoBehaviour
     {
         combatManager = CombatManager.Instance;
 
+		if (combatUI == null)
+		{
+			combatUI = FindObjectOfType<UIManager>().gameObject;
+		}
 		if (combatUI == null) 
 		{
 			combatUI = GameObject.Find ("Canvas Combat UI");

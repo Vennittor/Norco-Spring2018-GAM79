@@ -15,10 +15,17 @@ public class SoundManager : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
+		if (instance == null)
+		{
+			instance = this;
+		}
+		else if (instance != this)
+		{
+			Destroy (gameObject);
+		}
+
+		this.gameObject.transform.SetParent(null);
+
         DontDestroyOnLoad(gameObject);
     }
 

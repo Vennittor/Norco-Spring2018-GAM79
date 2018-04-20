@@ -51,7 +51,7 @@ public class CombatManager : MonoBehaviour
 
         combatInstance = this;
 
-		this.gameObject.transform.SetParent (this.gameObject.transform);
+		this.gameObject.transform.SetParent(null);
 
         DontDestroyOnLoad(gameObject);
     }
