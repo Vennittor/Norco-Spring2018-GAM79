@@ -17,6 +17,7 @@ public class SoundManager : MonoBehaviour
 
     private GameObject prefabBus;
     private GameObject go;
+
     void Awake()
     {
 		if (instance == null)
@@ -65,7 +66,7 @@ public class SoundManager : MonoBehaviour
     public void LevelToCombat()
     {
         noLevel.TransitionTo(1.0f);
-        /*if (go.name == "AudioItemMXlevel(Clone)")
+        /*if (go.name == "AudioItemMXlevel(Clone)")  //use this if we decide to destroy the level music each time a transition occurs
         {
             Destroy(go);
         } */       
@@ -73,10 +74,10 @@ public class SoundManager : MonoBehaviour
 
     public void CombatToLevel()
     {
-        noCombat.TransitionTo(2.0f);
+        noCombat.TransitionTo(3.0f);
         if (go.name == "AudioItemMXcombat(Clone)")
         {
-            Destroy(go, 2.0f);
+            Destroy(go, 3.5f);
         }
     }
 
