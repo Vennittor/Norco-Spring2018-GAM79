@@ -174,8 +174,8 @@ public class Ability : ScriptableObject
 			}
 				
 			actionsUsed = 0;
-
-			characterUser.AbilityHasCompleted();
+            ApplyAbilityHeatCost(); //applies the heat cost of the ability(positive or negative)
+            characterUser.AbilityHasCompleted();
 			characterUser = null;
 		}
 	}
@@ -186,5 +186,18 @@ public class Ability : ScriptableObject
 		Announcer.UseAbility(characterUser.gameObject.name, targetName, abilityName, callOutText);
     }
 
-    
+    public void ApplyAbilityHeatCost()
+    {
+        Debug.Log(characterUser.name + " has aquired " + heatCost + " after using their ability");
+        //characterUser.currentHeat += (uint)Mathf.Clamp(heatCost, 0, (characterUser.maxHeat - characterUser.currentHeat));
+        if(heatCost > 0)
+        {
+            characterUser.DealHeatDamage(heatCost);  //uses dealheatdamage to apply the heat cost of the ability, while still being clamped
+        }
+        else if(heatCost < 0)
+        {
+            characterUser.ReduceHeat((uint)heatCost);  //for an ability that can "cool off" the player (reduce their heat level)
+        }
+    }
+
 }
