@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 55a75d8d27260c64f9526184d280c944
-  - enabled: 1
+  - enabled: 0
     path: Assets/TESTING FOLDER/Test Scenes/Main.unity
     guid: 99c8c2b6a35dee64a998930e73cc6813
+  - enabled: 1
+    path: Assets/2017 4-20 demo.unity
+    guid: 026bd1683f2a10747a57f476f846320e
