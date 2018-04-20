@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Water", menuName = "Water Ability")]
 public class Water : Ability
 {
     [SerializeField] private uint usesLeft = 3;

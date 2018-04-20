@@ -25,7 +25,7 @@ MonoBehaviour:
   - damageRanges:
     - {x: 1, y: 1}
     elementType: 4
-  statuses: []
+  statuses: 
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 1

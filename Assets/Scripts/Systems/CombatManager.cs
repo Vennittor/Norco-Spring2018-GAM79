@@ -7,8 +7,6 @@ public class CombatManager : MonoBehaviour
     public static CombatManager combatInstance;
 	public UIManager uiManager;
     private static Announcer announcer;
-    
-    public GameObject levelManager;
 
     public bool inCombat = false;
 
@@ -52,7 +50,9 @@ public class CombatManager : MonoBehaviour
         }
 
         combatInstance = this;
-        Debug.Log("Awake: CombatManager created!");
+
+		this.gameObject.transform.SetParent (this.gameObject.transform);
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -168,20 +168,29 @@ public class CombatManager : MonoBehaviour
 
 	void EndCombat(bool playerVictory)
 	{	Debug.Log ("End Combat");
-		if (playerVictory == true) // party wins
+		partyHeatLevel = 0;
+		characters.Clear();
+
+		activeCharacter = null;
+		activePlayers.Clear();
+		activeEnemies.Clear();
+
+		currentRoundCharacters.Clear();
+
+		if (playerVictory == true)				// party wins
 		{
 			Debug.Log ("Party Wins");
 
 			inCombat = false;
-            //Combat rewards?
+            //TODO Combat rewards?
             LevelManager.Instance.ReturnFromCombat();
 		}
-		else if (playerVictory == false) // party loses
+		else if (playerVictory == false)		// party loses
 		{
 			Debug.Log ("Party Loses");
 
             inCombat = false;
-            //Goto Defeat or Gameover GameState
+
             LevelManager.Instance.ReturnFromCombat();
 		}
 	}

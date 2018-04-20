@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
         {
             if (uIInstance == null)
             {
-                uIInstance = new UIManager();
+				uIInstance = new UIManager();	Debug.Log ("new UIManager created");
             }
             return uIInstance;
         }
@@ -22,21 +22,17 @@ public class UIManager : MonoBehaviour
     public CombatManager combatManager;
     public EventSystemManager eventSystemManager;
 
+	public bool disableUIOnStart = true;
+
 	public GameObject splashMessagePanel;
 	public Text splashMessageText;
 	public float splashLifeTime = 1.0f;
-
-    public PlayerCharacter playerCharacter;
-    public EnemyCharacter enemyCharacter;
 
 	public List<Button> skillButtons = new List<Button> ();
 
     public LayerMask targetable;
 	public List<Character> collectedTargets;
     [SerializeField] private Ability ability;
-
-    public delegate void MyDelegate();
-    MyDelegate myDelegate;
 
     public float infoDelayTime = 0.5f;
 
@@ -49,51 +45,67 @@ public class UIManager : MonoBehaviour
 	TargetType searchingTargetType;
 
     #region Unity Functions
-    void Awake()
+	public void Awake()
     {
         if (uIInstance != null && uIInstance != this)
         {
+			Debug.LogError ("more than one UIManager in scene.  Removing this one");
             Destroy(gameObject);
             return;
         }
 
         uIInstance = this;
+
+		this.gameObject.transform.SetParent (this.gameObject.transform);
+
         DontDestroyOnLoad(gameObject);
+
+		Debug.Log ("UIManager Awake");
     }
 
-    public void Start ()
-    {
+	public void Start()
+	{
+		SetMode_Normal ();
+		collectedTargets = new List<Character>();
+
 		Announcer.combatUIManager = UIManager.Instance;
 		Announcer.announcementDestination = splashMessageText;
-        combatManager = CombatManager.Instance;
-        eventSystemManager = EventSystemManager.Instance;
+		combatManager = CombatManager.Instance;
+		eventSystemManager = EventSystemManager.Instance;
 
-		inputMode = InputMode.NORMAL;
-        collectedTargets = new List<Character>();
-
-    }
+		if (disableUIOnStart)
+		{
+			this.gameObject.SetActive (false);
+		}
+	}
 
     public void Update()
 	{
+		//TODO TESTING		//TODO Change to inputMode may be coming from outside.
+		if (Input.GetKeyDown (KeyCode.U))
+		{
+			Debug.Log ("input = " + inputMode.ToString ());
+		}
+
 		HighlightTargets ();
-        //TEST Debug.Log ("collectedTargets.Count = " + collectedTargets.Count.ToString() );
+
         if (Input.GetMouseButtonDown (0)) 						//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
 		{
-            if (collectedTargets.Count > 0)
-            {
-                if (inputMode == InputMode.TARGETING)
-			    {
-				    SendTargets ();
-			    }
-            }
-			else
-            {
-                Debug.Log("No targets were collected, continuing to target");
-            }
+			if (inputMode == InputMode.TARGETING) 
+			{
+				if (collectedTargets.Count > 0)
+				{
+					SendTargets ();
+				}
+				else
+				{
+					Debug.Log("No targets were collected, continuing to target");
+				}
+			}
 		}
-        if (Input.GetMouseButtonDown(1))
+		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Hello");
+			CancelInput ();
         }
     }
 	#endregion
@@ -143,9 +155,9 @@ public class UIManager : MonoBehaviour
             }
         }
         if (length == 0)
-        {
+		{	Debug.Log (" pre AbilitySelect");
             if (inputMode == InputMode.ABILITYSELECT)               //
-            {
+			{	Debug.Log (" in AbilitySelect");
                 ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
                 if (ability == null)
                 {
@@ -172,25 +184,25 @@ public class UIManager : MonoBehaviour
         }
     }
 
-	#region ModeSwitches
+	#region Internal Mode Switches
 	private void SetMode_Normal() 
 	{
-		inputMode = InputMode.NORMAL; 
+		inputMode = InputMode.NORMAL;		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	private void SetMode_Select ()
 	{
-		inputMode = InputMode.ABILITYSELECT; 
+		inputMode = InputMode.ABILITYSELECT; 		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	private void SetMode_Targeting()
 	{
-		inputMode = InputMode.TARGETING;
+		inputMode = InputMode.TARGETING;		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	private void SetMode_Blocked()
 	{
-		inputMode = InputMode.BLOCKED;
+		inputMode = InputMode.BLOCKED;		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	public bool BlockInput()
@@ -199,9 +211,15 @@ public class UIManager : MonoBehaviour
 
 		return true;
 	}
+	#endregion
 
-	public bool AllowAbilitySelection()
+	#region Exposed Mode Switches
+	public void ReturnToNormalMode()
 	{
+		SetMode_Normal ();
+	}
+	public bool AllowAbilitySelection()
+	{	Debug.Log ("Allow");
 		if (inputMode != InputMode.BLOCKED)
 		{
 			SetMode_Select ();
@@ -211,6 +229,13 @@ public class UIManager : MonoBehaviour
 		else
 		{
 			return false;
+		}
+	}
+	public void CancelInput()
+	{
+		if (inputMode == InputMode.TARGETING) 
+		{
+			SetMode_Select ();
 		}
 	}
 	#endregion
@@ -281,7 +306,7 @@ public class UIManager : MonoBehaviour
 			{
                 Debug.LogError(hitInfo.collider.gameObject.name);
 
-                if (hitInfo.collider.gameObject.GetComponent<Character> () == null) 						//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
+				if (hitInfo.collider.gameObject.GetComponent<Character> () == null || hitInfo.collider.gameObject.GetComponent<Character>().combatState == Character.CombatState.EXHAUSTED) 			//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
 				{
 					previousHitCharacter = null;
                     collectedTargets.Clear();

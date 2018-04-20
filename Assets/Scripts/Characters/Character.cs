@@ -76,7 +76,7 @@ public abstract class Character : MonoBehaviour
     {
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
-        new List<EffectStruct>();
+        effectStructList = new List<EffectStruct>();
 		if (animator == null) 
 		{
 			animator = GetComponent<Animator> ();
@@ -96,13 +96,17 @@ public abstract class Character : MonoBehaviour
 	{
 		Announcer.BeginTurn (this.characterName);
 
-        foreach (EffectStruct effect in effectStructList)
-        {
-            if (effect.checkAtStart == true)
-            {
-                //do something
-            }
-        }
+		if (effectStructList.Count > 0)
+		{
+			foreach (EffectStruct effect in effectStructList)
+			{
+				if (effect.checkAtStart == true)
+				{
+					//do something
+				}
+			}
+		}
+
 
 		if (combatState == CombatState.DISABLED || combatState == CombatState.EXHAUSTED)		//Checks if the Character is in a state that they cannot act in, and return true/false if the can/cannot;
 		{
@@ -332,6 +336,19 @@ public abstract class Character : MonoBehaviour
     {
 		Debug.Log(this.gameObject.name + " died!");
         combatState = CombatState.EXHAUSTED;
+
+		if (this is EnemyCharacter)
+		{
+			this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
+			this.gameObject.GetComponent<Collider> ().enabled = false;
+		}
+		else 
+		{
+			//Set Animation state to Dead
+			this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
+			this.gameObject.GetComponent<Collider> ().enabled = false;
+		}
+
 		if (this as Character == combatManager.activeCharacter)
 		{	Debug.Log ("Active Character died");
 			EndTurn();

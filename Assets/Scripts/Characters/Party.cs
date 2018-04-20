@@ -31,33 +31,58 @@ public class Party : MonoBehaviour
     {
         levelMan = LevelManager.Instance;
 
-        if (type == PartyType.PLAYER)
-        {
-            for (int i = partyMembers.Count-1; i > 0; i--)
-            {
-                PlayerCharacter charType = partyMembers[i].GetComponent<PlayerCharacter>();
-                if (charType == null)
-                {
-                    partyMembers.RemoveAt(i);
-                }
-            }
-        }
-        else
-        {
-            for (int i = partyMembers.Count - 1; i > 0; i--)
-            {
-                EnemyCharacter charType = partyMembers[i].GetComponent<EnemyCharacter>();
-                if (charType == null)
-                {
-                    partyMembers.RemoveAt(i);
-                }
-            }
-        }
-        foreach (Character character in partyMembers)
-        {
-            character.GetComponent<MeshRenderer>().enabled = false; // potentially not mesh renderer when sprites are imported
-            character.GetComponent<Collider>().enabled = false;
-        }
+		for (int i = partyMembers.Count - 1; i >= 0; i--) 
+		{
+			if (partyMembers [i] == null)
+			{
+				partyMembers.RemoveAt(i);
+			}
+		}
+
+		if (partyMembers.Count == 0)
+		{
+			Debug.LogError ("The " + this.gameObject.name + " has no party Memebers!");
+		}
+		else 
+		{
+			if (type == PartyType.PLAYER)
+			{
+				for (int i = partyMembers.Count-1; i > 0; i--)
+				{
+					PlayerCharacter charType = partyMembers[i].GetComponent<PlayerCharacter>();
+					if (charType == null)
+					{
+						partyMembers.RemoveAt(i);
+					}
+				}
+
+			}
+			else
+			{
+				for (int i = partyMembers.Count - 1; i > 0; i--)
+				{
+					EnemyCharacter charType = partyMembers[i].GetComponent<EnemyCharacter>();
+					if (charType == null)
+					{
+						partyMembers.RemoveAt(i);
+					}
+				}
+			}
+			foreach (Character character in partyMembers)
+			{
+				if (character.GetComponent<SpriteRenderer> () != null) 
+				{
+					character.GetComponent<SpriteRenderer>().enabled = false;
+				}
+				if (character.GetComponent<MeshRenderer> () != null) 
+				{
+					character.GetComponent<MeshRenderer>().enabled = false;
+				}
+
+				character.GetComponent<Collider>().enabled = false;
+			}
+		}
+
     }
 
 
@@ -116,14 +141,13 @@ public class Party : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+		
         if (collision.gameObject.tag != "Enemy") //TODO change the way we check for this
         {
             return;
         }
         else if (collision.gameObject.GetComponent<Party>().type == PartyType.ENEMY)
         {
-            Debug.Log("mom hes touching me");
             //List<Character> enemies = new List<Character>();
             Party enemyParty = collision.gameObject.GetComponent<Party>();
             collision.gameObject.GetComponent<Collider>().enabled = false;
