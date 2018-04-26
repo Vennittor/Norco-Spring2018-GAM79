@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
 
         uIInstance = this;
 
-		this.gameObject.transform.SetParent (this.gameObject.transform);
+		this.gameObject.transform.SetParent(null);
 
         DontDestroyOnLoad(gameObject);
 

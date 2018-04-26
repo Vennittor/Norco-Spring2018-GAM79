@@ -10,6 +10,8 @@ public class CombatManager : MonoBehaviour
     
     public GameObject levelManager;
 
+    public AudioClip battleSong;
+
     public bool inCombat = false;
 
 	[SerializeField] private List<Character> characters;
@@ -52,7 +54,9 @@ public class CombatManager : MonoBehaviour
         }
 
         combatInstance = this;
-        Debug.Log("Awake: CombatManager created!");
+
+		this.gameObject.transform.SetParent(null);
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -73,6 +77,7 @@ public class CombatManager : MonoBehaviour
 		if(!inCombat) 
 		{
 			inCombat = true;
+            SoundManager.instance.Play(battleSong, "mxC");
 		}
 		else
 		{
@@ -171,7 +176,7 @@ public class CombatManager : MonoBehaviour
 		if (playerVictory == true) // party wins
 		{
 			Debug.Log ("Party Wins");
-
+            
 			inCombat = false;
             //Combat rewards?
             LevelManager.Instance.ReturnFromCombat();

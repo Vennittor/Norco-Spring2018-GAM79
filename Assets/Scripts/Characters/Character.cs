@@ -274,14 +274,16 @@ public abstract class Character : MonoBehaviour
 		currentHealth = (currentHealth + healing) > maxhealth ? maxhealth : (currentHealth + healing);
 	}
 
-    void ReduceHeat(uint amount = 0)
+    public void ReduceHeat(uint amount = 0)
     {
         currentHeat -= (uint)Mathf.Clamp((float)amount, 0f, (float)currentHeat);
     }
 
     public void DealHeatDamage(int heatDamage)
     {
+        Debug.Log("heat +");
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
+        Debug.Log(name + " current heat is " + currentHeat);
         CheckHeatThreshold();
     }
 
@@ -303,6 +305,10 @@ public abstract class Character : MonoBehaviour
             //effectStructList.Add(statusEffect.ApplyStun());
             combatManager.activeCharacter.EndTurn();
             combatManager.activeCharacter.currentHeat = 200;
+        }
+        else
+        {
+            //return;
         }
     }
 

@@ -8,6 +8,8 @@ public class HeatZone : MonoBehaviour
     public Party _party;
     public int myHeatIntensity;
 
+	List<Party> partiesInZone = new List<Party> ();
+
 	void Start()
 	{
 
@@ -29,14 +31,19 @@ public class HeatZone : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
 	{
-        //TODO "if" statements are temporary, since the trigger enter was detecting the ground as well
 		if (other.gameObject.tag == "Player") 
 		{
 			Debug.Log ("character entered a heat zone");
 
-			_party = other.gameObject.GetComponent<Party>();
+			Party otherParty = other.gameObject.GetComponent<Party>();
             
-			_party.IncreaseHeatRate((uint)myHeatIntensity);
+			if (!partiesInZone.Contains (otherParty))
+			{
+				otherParty.IncreaseHeatRate((uint)myHeatIntensity);
+
+				partiesInZone.Add (otherParty);
+			}
+
 		}
     }
 
@@ -46,9 +53,14 @@ public class HeatZone : MonoBehaviour
 		{
 			Debug.Log("character exited a heat zone");
 
-			_party = other.gameObject.GetComponent<Party>();
+			Party otherParty = other.gameObject.GetComponent<Party>();
             
-            _party.DecreaseHeatRate((uint)myHeatIntensity);
+			if( partiesInZone.Contains(otherParty) )
+			{
+				otherParty.DecreaseHeatRate((uint)myHeatIntensity);
+
+				partiesInZone.Remove (otherParty);
+			}
 		}
     }
 }

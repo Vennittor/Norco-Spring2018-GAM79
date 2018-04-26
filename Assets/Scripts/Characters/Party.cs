@@ -9,7 +9,6 @@ public class Party : MonoBehaviour
     public HeatZone heatState;
     public List<Character> partyMembers;
     public PartyType type = PartyType.ENEMY;
-
     
     float heatInterval = 2;
     float NextTickAt = 0;
@@ -118,7 +117,8 @@ public class Party : MonoBehaviour
     public void DecreaseHeatRate(uint heatZoneIntensity)
     {
         myCurrentHeatIntensity -= heatZoneIntensity;
-        if (myCurrentHeatIntensity == 0)
+		myCurrentHeatIntensity = (uint)Mathf.Clamp (myCurrentHeatIntensity, 0, myCurrentHeatIntensity);
+        if (myCurrentHeatIntensity <= 0)
         {
             heatState = HeatZone.OutofHeat;
         }

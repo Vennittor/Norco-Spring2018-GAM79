@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a881b76f7fa71f64d9442e6ec870a658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelMusic: {fileID: 8300000, guid: b7e5d641a18751542bd395f7bbf27555, type: 3}
   combatManager: {fileID: 0}
   combatUI: {fileID: 0}
   levelUI: {fileID: 0}
@@ -207,8 +208,12 @@ MonoBehaviour:
     type: 2}
   audioItemVFX: {fileID: 1582395207870238, guid: 729e080150a9e5441bdada4e441fe9a4,
     type: 2}
-  audioItemMX: {fileID: 1777815413119570, guid: d887c49cb91360d4b81bc31b86534737,
+  audioItemMXlevel: {fileID: 1777815413119570, guid: d887c49cb91360d4b81bc31b86534737,
     type: 2}
+  audioItemMXcombat: {fileID: 1837146210559818, guid: a1a77cf021b735a43bb412deff1371c0,
+    type: 2}
+  noLevel: {fileID: 245413710244046482, guid: 37be4d28b9f00a94bb22e235794d1cca, type: 2}
+  noCombat: {fileID: 245683479899676944, guid: 37be4d28b9f00a94bb22e235794d1cca, type: 2}
 --- !u!114 &114948870175103600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,6 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
+  battleSong: {fileID: 8300000, guid: 1e516be097416a942901667d158f8fb7, type: 3}
   inCombat: 0
   characters: []
   activeCharacter: {fileID: 0}

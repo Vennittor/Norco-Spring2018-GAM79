@@ -18,7 +18,10 @@ MonoBehaviour:
     _who: 0
     _formation: 0
     _numberOfTargets: 1
-  damage: []
+  damage:
+  - damageRanges:
+    - {x: 10, y: 10}
+    elementType: 3
   statuses: 
   numberOfActions: 1
   hitsPerAction: 1

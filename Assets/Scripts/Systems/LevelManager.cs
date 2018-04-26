@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager _instance;
 
+    public AudioClip levelMusic;
+
     public CombatManager combatManager;
 
 	public GameObject combatUI;
@@ -47,7 +49,22 @@ public class LevelManager : MonoBehaviour
 
 		_instance = this;
 
-		this.gameObject.transform.SetParent (this.gameObject.transform);
+		combatManager = CombatManager.Instance;
+
+		if (combatUI == null)
+		{
+			combatUI = FindObjectOfType<UIManager>().gameObject;
+		}
+		if (combatUI == null) 
+		{
+			combatUI = GameObject.Find ("Canvas Combat UI");
+		}
+		if (combatUI == null) 
+		{
+			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
+		}
+
+		this.gameObject.transform.SetParent(null);
 
 		DontDestroyOnLoad(gameObject);
 
@@ -58,6 +75,10 @@ public class LevelManager : MonoBehaviour
     {
         combatManager = CombatManager.Instance;
 
+		if (combatUI == null)
+		{
+			combatUI = FindObjectOfType<UIManager>().gameObject;
+		}
 		if (combatUI == null) 
 		{
 			combatUI = GameObject.Find ("Canvas Combat UI");
@@ -66,7 +87,8 @@ public class LevelManager : MonoBehaviour
 		{
 			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
 		}
-
+        
+        SoundManager.instance.Play(levelMusic, "mxL"); //play the level music
 
     }
 
@@ -87,6 +109,7 @@ public class LevelManager : MonoBehaviour
 
     public void InitiateCombat(Party player, Party enemy)
 	{
+        SoundManager.instance.LevelToCombat();//transition to NoLevel snapshot
         pParty = player;
         eParty = enemy;
         if(!combatManager.inCombat)
@@ -158,11 +181,12 @@ public class LevelManager : MonoBehaviour
 		if (!playersWin)
 		{
 			Debug.LogError ("Player Lost");
-			//TODO go to gameover screen
+            //TODO go to gameover screen
+            
 		}
+        SoundManager.instance.CombatToLevel();//transition to the NoCombat audio snapshot
 
-
-		UIManager.Instance.ReturnToNormalMode ();									//return the UIManager to normal mode
+        UIManager.Instance.ReturnToNormalMode ();									//return the UIManager to normal mode
 
         foreach (Character character in pParty.partyMembers)						//Turn off the playerParty members renderers off
         {
