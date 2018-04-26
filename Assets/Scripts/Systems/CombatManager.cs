@@ -101,10 +101,9 @@ public class CombatManager : MonoBehaviour
     }
 
     void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
-	{	Debug.Log ("New Round!");
+	{
+        Debug.Log ("New Round!");
 		roundCounter++;
-		//Check time left on status effects
-		//Check cooldowns on Abilities
 		SortRoundQueue();
 
 		activeCharacter.BeginTurn ();
@@ -145,7 +144,8 @@ public class CombatManager : MonoBehaviour
 	public void NextTurn() // active player finishing their turn calls this
 	{
 		if (!VictoryCheck())
-		{	Debug.Log (activeCharacter.gameObject.name + " is removed from the queu");
+		{
+            Debug.Log (activeCharacter.gameObject.name + " is removed from the queue");
 			currentRoundCharacters.Remove(activeCharacter); // The activeCharacter is removed from the current round
             if (currentRoundCharacters.Count == 0) // if they were the last one to leave, then end the round
 			{
@@ -172,7 +172,8 @@ public class CombatManager : MonoBehaviour
 	}
 
 	void EndCombat(bool playerVictory)
-	{	Debug.Log ("End Combat");
+	{
+        Debug.Log ("End Combat");
 		if (playerVictory == true) // party wins
 		{
 			Debug.Log ("Party Wins");

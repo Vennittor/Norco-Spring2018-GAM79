@@ -304,7 +304,6 @@ public class UIManager : MonoBehaviour
 
 			if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, targetable))
 			{
-                Debug.LogError(hitInfo.collider.gameObject.name);
 
 				if (hitInfo.collider.gameObject.GetComponent<Character> () == null || hitInfo.collider.gameObject.GetComponent<Character>().combatState == Character.CombatState.EXHAUSTED) 			//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
 				{

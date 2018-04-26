@@ -14,23 +14,31 @@ public abstract class Character : MonoBehaviour
     public struct EffectStruct
     {
         public StatusEffectType statusEffectType;
+        public bool isBuff;
         public int duration;
         public bool applyImmediately;
         public bool checkAtStart;
 
-        public EffectStruct(StatusEffectType statusType, int duration, bool applyNow, bool checkStart)
+        public EffectStruct(StatusEffectType statusType, bool isBuff, int duration, bool applyNow, bool checkStart)
         {
             statusEffectType = statusType;
+            this.isBuff = isBuff;
             this.duration = duration;
             applyImmediately = applyNow;
             checkAtStart = checkStart;
         }
+
+        public static void DecCooldown(EffectStruct effectStruct)
+        {
+            effectStruct.duration--;
+        }
     }
     public List<EffectStruct> effectStructList;
+    public List<StatusEffectType> statuses;
 
     public string characterName;
 	public Animator animator;
-    public StatusEffect statusEffect;
+    protected StatusEffect statusEffect;
 
 	public uint maxhealth;
 	public uint currentHealth;
@@ -74,9 +82,11 @@ public abstract class Character : MonoBehaviour
 
     protected void Start()
     {
+        statusEffect = new StatusEffect();
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
         effectStructList = new List<EffectStruct>();
+        statuses = new List<StatusEffectType>();
 		if (animator == null) 
 		{
 			animator = GetComponent<Animator> ();
@@ -98,11 +108,11 @@ public abstract class Character : MonoBehaviour
 
 		if (effectStructList.Count > 0)
 		{
-			foreach (EffectStruct effect in effectStructList)
+			foreach (EffectStruct status in effectStructList)
 			{
-				if (effect.checkAtStart == true)
+				if (status.checkAtStart == true)
 				{
-					//do something
+                    statusEffect.Apply(this, status.statusEffectType);
 				}
 			}
 		}
@@ -195,11 +205,27 @@ public abstract class Character : MonoBehaviour
 	{	Debug.Log (this.gameObject.name + " is ending their turn.");
 		if (combatManager.activeCharacter == this)
 		{
-            foreach (EffectStruct effect in effectStructList)
+            foreach (EffectStruct status in effectStructList)
             {
-                if (effect.checkAtStart == false)
+                if (status.checkAtStart == false)
                 {
-                    //do something
+                    statusEffect.Apply(this, status.statusEffectType);
+                }
+
+                if (status.statusEffectType == StatusEffectType.Smoke)
+                {
+                    if (statusEffect.smokeTurnCounter != combatManager.roundCounter)
+                    {
+                        EffectStruct.DecCooldown(status);
+                    }
+                    else
+                    {
+                        Debug.Log("Wait one more turn");
+                    }
+                }
+                else
+                {
+                    EffectStruct.DecCooldown(status);
                 }
             }
 
@@ -326,14 +352,16 @@ public abstract class Character : MonoBehaviour
         Debug.Log("Bleed Damage is not currently implemented, Physical damage was dealt instead.");
     }
 
-    public void ApplyStatus(EffectStruct status)
+    public void ApplyStatus(StatusEffectType status)
     {                                               // Tandy: added this to work with Ability
-        if (!effectStructList.Contains(status))         // if not already affected by Status
+        EffectStruct statusStruct = statusEffect.AddStatus(status);
+        if (!effectStructList.Contains(statusStruct))         // if not already affected by Status
         {
-            effectStructList.Add(status); 					// add Status to List to show it affects Character
-            if (status.applyImmediately)
+            effectStructList.Add(statusStruct); 					// add Status to List to show it affects Character
+            statuses.Add(status);
+            if (statusStruct.applyImmediately)
             {
-                // StatusEffect.Apply(this, status.StatusEffectType)
+                statusEffect.Apply(this, status);
             }
         }
     }

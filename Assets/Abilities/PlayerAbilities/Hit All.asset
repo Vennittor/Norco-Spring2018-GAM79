@@ -14,6 +14,7 @@ MonoBehaviour:
   abilityName: Hit All
   description: 
   callOutText: 
+  heatCost: 0
   targetType:
     _who: 3
     _formation: 0
@@ -22,6 +23,7 @@ MonoBehaviour:
   - damageRanges:
     - {x: 8, y: 15}
     elementType: 0
+  statuses: 
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 0
