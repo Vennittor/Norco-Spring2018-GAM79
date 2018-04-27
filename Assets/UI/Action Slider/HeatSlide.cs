@@ -14,10 +14,14 @@ public class HeatSlide : MonoBehaviour
     public float midPoint;
     public float distanceBetweenInPoints;
 
+	public float startDelay = 0.5f;
+
     bool started = false;
+
+
     void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Z) && !started)
+    {	//This is only to start this for TEsting.  DO NOT USE inputs here, just start coroutine and started = true
+		if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) && !started)
         {
             StartCoroutine(DoTheThing());
             started = true;
@@ -38,7 +42,7 @@ public class HeatSlide : MonoBehaviour
 
         completionArea.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, distanceBetweenInPoints * 2 * (heatSlider.GetComponent<RectTransform>().sizeDelta.x * 0.01f));
 
-        yield return null;
+		yield return new WaitForSeconds (startDelay);
         
         //Do the thing
         bool going = true;
