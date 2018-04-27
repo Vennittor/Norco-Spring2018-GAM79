@@ -338,8 +338,8 @@ public class CombatManager : MonoBehaviour
 	private IEnumerator ActionSlider()
 	{
 		float modifiedEffect = 0f;
-        float midMin = 7;
-        float midMax = 90;
+        float midMin = 25;
+        float midMax = 85;
 
         //TODO add HeatSlider function here.
         //Start
