@@ -261,12 +261,13 @@ public class UIManager : MonoBehaviour
 	public void SendTargets()        						//Assign Targets back to activeCharacter.
 	{
 		combatManager.AssignTargets(collectedTargets);
-
+        actionSlider.SetActive(true);
 		TurnWhite ();
 
 		collectedTargets.Clear ();
 
 		searchingTargetType = null;
+
     }
 
 

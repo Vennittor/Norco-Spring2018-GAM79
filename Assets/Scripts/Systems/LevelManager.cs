@@ -168,6 +168,9 @@ public class LevelManager : MonoBehaviour
         SoundManager.instance.LevelToCombat();//transition to NoLevel snapshot
         pParty = player;
         eParty = enemy;
+
+		player.GetComponent<KeysToMove> ().movementAllowed = false;
+
         if(!combatManager.inCombat)
 		{
 			//Perform Enter 'swipe'
@@ -322,6 +325,8 @@ public class LevelManager : MonoBehaviour
 		Destroy (eParty.gameObject);												//remove the Enemy Party
 
         combatUI.SetActive(false);													//disable the CombatUI
+
+		pParty.GetComponent<KeysToMove> ().movementAllowed = false;
 
         camDock.RepositionCameraToOriginalPosition(); 
         camDock.targetPosition -= cameraTarget.transform.position; 
