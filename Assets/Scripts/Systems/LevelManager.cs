@@ -90,10 +90,39 @@ public class LevelManager : MonoBehaviour
 		{
 			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
 		}
+
+		if (levelUI == null) 
+		{
+			levelUI = GameObject.Find ("Canvas Level UI");
+		}
+		if (levelUI == null) 
+		{
+			Debug.LogError ("LevelManager could not find reference to the Canvas Level UI");
+		}
         
         SoundManager.instance.Play(levelMusic, "mxL"); //play the level music
 
-		swipeImage.enabled = false;
+		if (swipeImage == null)
+		{
+			if (levelUI != null)
+			{
+				swipeImage = levelUI.transform.Find ("Swipe Image").GetComponent<Image>();
+			}
+			else
+			{
+				swipeImage = GameObject.Find ("Swipe Image").GetComponent<Image>();
+			}
+
+			if (swipeImage == null)
+			{
+				Debug.LogError ("LevelManager could not find reference to the Swipe Image");
+			}
+		}
+
+		if (swipeImage != null)
+		{
+			swipeImage.enabled = false;
+		}
     }
 
 	void LateStart()

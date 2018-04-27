@@ -310,6 +310,8 @@ public class CombatManager : MonoBehaviour
 
 		finalizedTargets.AddRange (targetsToAssign);
 
+		//TODO  Handle the SLIDER here.  Once it's input is gotten (in the form of a multiplier/modifier) run the next and pass it the multiplier
+
 		activeCharacter.UseAbility (finalizedTargets);
 	}
 
