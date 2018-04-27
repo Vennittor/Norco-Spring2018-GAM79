@@ -23,22 +23,22 @@ public class HeatSlide : MonoBehaviour
     {	//This is only to start this for TEsting.  DO NOT USE inputs here, just start coroutine and started = true
 		if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) && !started)
         {
-            StartCoroutine(DoTheThing());
+            StartCoroutine(SlideNSlip());
             started = true;
         }
     }
 
-    IEnumerator DoTheThing()
+    IEnumerator SlideNSlip()
     {
         //Start
         heatSlider.value = 0;
         heatSlider.maxValue = fillTime;
 
         //Create the visual for the stopping area
-        float guh = heatSlider.GetComponent<RectTransform>().sizeDelta.x;
-        guh *= midPoint * 0.01f;
-        guh -= heatSlider.GetComponent<RectTransform>().sizeDelta.x / 2;
-        completionArea.GetComponent<RectTransform>().localPosition = Vector3.zero + (Vector3.right * guh);
+        float sliderSize = heatSlider.GetComponent<RectTransform>().sizeDelta.x;
+        sliderSize *= midPoint * 0.01f;
+        sliderSize -= heatSlider.GetComponent<RectTransform>().sizeDelta.x / 2;
+        completionArea.GetComponent<RectTransform>().localPosition = Vector3.zero + (Vector3.right * sliderSize);
 
         completionArea.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, distanceBetweenInPoints * 2 * (heatSlider.GetComponent<RectTransform>().sizeDelta.x * 0.01f));
 

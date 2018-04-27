@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
@@ -24,7 +25,22 @@ public class CombatManager : MonoBehaviour
 
     public uint partyHeatLevel;
 
-	private List<Character> finalizedTargets = new List<Character> ();
+    //for the action slider start
+    public Slider heatSlider;
+    public Image completionArea;
+
+    public float fillTime = 1;
+
+    [Range(0, 100)]
+    public float midPoint;
+    public float distanceBetweenInPoints;
+
+    public float startDelay = 0.5f;
+
+    bool started = false;
+    //for the action slider end
+
+    private List<Character> finalizedTargets = new List<Character> ();
 
     public static CombatManager Instance
     {
@@ -322,12 +338,66 @@ public class CombatManager : MonoBehaviour
 	private IEnumerator ActionSlider()
 	{
 		float modifiedEffect = 0f;
+        float midMin = 7;
+        float midMax = 90;
 
-		//TODO add HeatSlider function here.
-		Debug.Log("ACTION");
+        //TODO add HeatSlider function here.
+        //Start
+        heatSlider.value = 0;
+        heatSlider.maxValue = fillTime;
+
+        //Create the visual for the stopping area
+        float sliderSize = heatSlider.GetComponent<RectTransform>().sizeDelta.y;
+        sliderSize *= midPoint * 0.01f;
+        sliderSize -= heatSlider.GetComponent<RectTransform>().sizeDelta.y / 2;
+        completionArea.GetComponent<RectTransform>().localPosition = Vector3.zero + (Vector3.up * sliderSize);
+
+        completionArea.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, distanceBetweenInPoints * 2 * (heatSlider.GetComponent<RectTransform>().sizeDelta.y * 0.01f));
+        midPoint = Random.Range(midMin, midMax);
+        yield return new WaitForSeconds(startDelay);
+
+        //Do the thing
+        bool going = true;
+        while (going)
+        {
+            heatSlider.value += Time.deltaTime * fillTime;
+
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                float width = distanceBetweenInPoints * 2;
+
+                float minVal = midPoint - width / 2;
+                float maxVal = midPoint + width / 2;
+
+                print(minVal + ", " + maxVal);
+
+                float val = heatSlider.value * 100;
+
+                if (val >= minVal && val <= maxVal)
+                {
+                    print("you hit it!" + val);
+                }
+                else
+                {
+                    print("ya bum!" + val);
+                }
+
+                going = false;
+            }
+
+            yield return null;
+            if (heatSlider.value >= 1)
+            {
+                print("you didnt press anything");
+                going = false;
+            }
+        }
+
+        started = false;
+        Debug.Log("ACTION");
 
 		yield return null;
-
+        uiManager.actionSlider.SetActive(false);
 		UseCharacterAbility (modifiedEffect);
 	}
 
