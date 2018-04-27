@@ -364,6 +364,8 @@ public class CombatManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Z))
             {
+                StartCoroutine("TestingThe1337m0dz");
+
                 float width = distanceBetweenInPoints * 2;
 
                 float minVal = midPoint - width / 2;
@@ -423,5 +425,9 @@ public class CombatManager : MonoBehaviour
 	//Function Redirect Target
 
 	#endregion
-
+     public IEnumerator TestingThe1337m0dz()
+    {
+        //robert is working here to test the modifier for the action slider
+        yield return null;
+    }
 }
