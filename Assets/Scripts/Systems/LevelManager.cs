@@ -119,25 +119,28 @@ public class LevelManager : MonoBehaviour
         if(!combatManager.inCombat)
 		{
 			//Perform Enter 'swipe'
-			swipeImage.enabled = true;
-			Vector2 startingAnchorMin = swipeImage.rectTransform.anchorMin;
-
-			float i = startingAnchorMin.x;
-
-			while (i <= startingAnchorMin.x + 1)
+			if (swipeImage != null)
 			{
-				i += Time.deltaTime * 2.0f;
+				swipeImage.enabled = true;
+				Vector2 startingAnchorMin = swipeImage.rectTransform.anchorMin;
 
-				swipeImage.rectTransform.anchorMin = new Vector2(i, swipeImage.rectTransform.anchorMin.y);
-				swipeImage.rectTransform.anchorMax = new Vector2(i + 1, swipeImage.rectTransform.anchorMax.y);
+				float i = startingAnchorMin.x;
 
-				yield return null;
+				while (i <= startingAnchorMin.x + 1)
+				{
+					i += Time.deltaTime * 2.0f;
+
+					swipeImage.rectTransform.anchorMin = new Vector2 (i, swipeImage.rectTransform.anchorMin.y);
+					swipeImage.rectTransform.anchorMax = new Vector2 (i + 1, swipeImage.rectTransform.anchorMax.y);
+
+					yield return null;
+				}
+
+				swipeImage.rectTransform.anchorMin = new Vector2 (startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMin.y);
+				swipeImage.rectTransform.anchorMax = new Vector2 (startingAnchorMin.x + 2, swipeImage.rectTransform.anchorMax.y);
+
+				i = startingAnchorMin.x + 1;
 			}
-
-			swipeImage.rectTransform.anchorMin = new Vector2(startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMin.y);
-			swipeImage.rectTransform.anchorMax = new Vector2(startingAnchorMin.x + 2, swipeImage.rectTransform.anchorMax.y);
-
-			i = startingAnchorMin.x + 1;
 			//End Enter Swipe
 
 			//TODO should the Swipe pause for a moment?
@@ -197,20 +200,23 @@ public class LevelManager : MonoBehaviour
 			combatManager.HeatValueTaker(partyHeatIntensity);
 
 			//Perform Exit 'swipe'
-			while (i <= startingAnchorMin.x + 2)
+			if (swipeImage != null)
 			{
-				i += Time.deltaTime * 2.0f;
+				while (i <= startingAnchorMin.x + 2)
+				{
+					i += Time.deltaTime * 2.0f;
 
-				swipeImage.rectTransform.anchorMin = new Vector2(i, swipeImage.rectTransform.anchorMin.y);
-				swipeImage.rectTransform.anchorMax = new Vector2(i + 1, swipeImage.rectTransform.anchorMax.y);
+					swipeImage.rectTransform.anchorMin = new Vector2 (i, swipeImage.rectTransform.anchorMin.y);
+					swipeImage.rectTransform.anchorMax = new Vector2 (i + 1, swipeImage.rectTransform.anchorMax.y);
 
-				yield return null;
+					yield return null;
+				}
+
+				swipeImage.rectTransform.anchorMin = new Vector2 (startingAnchorMin.x, swipeImage.rectTransform.anchorMin.y);
+				swipeImage.rectTransform.anchorMax = new Vector2 (startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMax.y);
+
+				swipeImage.enabled = false;
 			}
-
-			swipeImage.rectTransform.anchorMin = new Vector2(startingAnchorMin.x, swipeImage.rectTransform.anchorMin.y);
-			swipeImage.rectTransform.anchorMax = new Vector2(startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMax.y);
-
-			swipeImage.enabled = false;
 			//Swipe Finished and reset
 
 			combatManager.StartCombat();
