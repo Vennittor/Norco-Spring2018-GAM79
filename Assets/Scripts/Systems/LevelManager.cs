@@ -119,12 +119,14 @@ public class LevelManager : MonoBehaviour
         if(!combatManager.inCombat)
 		{
 			//Perform Enter 'swipe'
+			Vector2 startingAnchorMin = Vector2.zero;
+			float i = 0f;
 			if (swipeImage != null)
 			{
 				swipeImage.enabled = true;
-				Vector2 startingAnchorMin = swipeImage.rectTransform.anchorMin;
+				startingAnchorMin = swipeImage.rectTransform.anchorMin;
 
-				float i = startingAnchorMin.x;
+				i = startingAnchorMin.x;
 
 				while (i <= startingAnchorMin.x + 1)
 				{
