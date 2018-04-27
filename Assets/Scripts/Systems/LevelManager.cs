@@ -23,6 +23,14 @@ public class LevelManager : MonoBehaviour
     private Party eParty;
     public uint partyHeatIntensity;
 
+    public Transform cameraTarget;
+    public Transform playerStartTransform;
+    public Transform playerCombatTransform;
+    public Transform enemyCombatTransform;
+
+    [SerializeField]
+    DopeCamSys camDock; 
+
     public static LevelManager Instance
     {
         get
@@ -44,6 +52,8 @@ public class LevelManager : MonoBehaviour
         }
 
         _instance = this;
+
+        camDock = FindObjectOfType<DopeCamSys>(); 
 
         if (playerParty == null)
         {
@@ -77,6 +87,9 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         combatManager = CombatManager.Instance;
+
+        playerCombatTransform = transform;
+        enemyCombatTransform = transform;
 
 		if (combatUI == null)
 		{
@@ -133,11 +146,21 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
+        camDock.cameraDock.LookAt(cameraTarget);
     }
 
     public void GetHeat(uint heat)
     {
         partyHeatIntensity = heat;
+    }
+
+    public void SetCombatPoint(Party enemyParty, Party playerParty)
+    {
+        camDock.Reposition();
+        // cameraTarget.position = new Vector3(cameraTarget.position.x + 5, cameraTarget.position.y, cameraTarget.position.z);
+        Transform partyPos = playerParty.transform.GetComponent<Transform>();
+        enemyCombatTransform.position = new Vector3(partyPos.position.x + 5, partyPos.position.y, partyPos.position.z);
+        enemyParty.GetComponent<Transform>().position = enemyCombatTransform.position;
     }
 
 	public IEnumerator InitiateCombat(Party player, Party enemy)
@@ -164,7 +187,8 @@ public class LevelManager : MonoBehaviour
 					swipeImage.rectTransform.anchorMin = new Vector2 (i, swipeImage.rectTransform.anchorMin.y);
 					swipeImage.rectTransform.anchorMax = new Vector2 (i + 1, swipeImage.rectTransform.anchorMax.y);
 
-					yield return null;
+
+                    yield return null;
 				}
 
 				swipeImage.rectTransform.anchorMin = new Vector2 (startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMin.y);
@@ -172,11 +196,13 @@ public class LevelManager : MonoBehaviour
 
 				i = startingAnchorMin.x + 1;
 			}
-			//End Enter Swipe
+            //End Enter Swipe
 
-			//TODO should the Swipe pause for a moment?
+            //TODO should the Swipe pause for a moment?
 
-			//TODO set all Character in combat stage
+            //TODO set all Character in combat stage
+
+            SetCombatPoint(enemy, player); // set combat point
 
             foreach (Character character in player.partyMembers)					//Turn on the player Party members renderers and Colliders on
 			{
@@ -263,8 +289,7 @@ public class LevelManager : MonoBehaviour
 		if (!playersWin)
 		{
 			Debug.LogError ("Player Lost");
-            //TODO go to gameover screen
-            
+            //TODO go to gameover screen          
 		}
         SoundManager.instance.CombatToLevel();//transition to the NoCombat audio snapshot
 
@@ -297,6 +322,9 @@ public class LevelManager : MonoBehaviour
 		Destroy (eParty.gameObject);												//remove the Enemy Party
 
         combatUI.SetActive(false);													//disable the CombatUI
+
+        camDock.RepositionCameraToOriginalPosition(); 
+        camDock.targetPosition -= cameraTarget.transform.position; 
         
     }
 
