@@ -27,6 +27,7 @@ public class LevelManager : MonoBehaviour
     public Transform playerStartTransform;
     public Transform playerCombatTransform;
     public Transform enemyCombatTransform;
+    public GameObject heatWavePrefab; 
 
     [SerializeField]
     DopeCamSys camDock; 
@@ -76,6 +77,8 @@ public class LevelManager : MonoBehaviour
 		{
 			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
 		}
+
+        heatWavePrefab.SetActive(false); 
 
 		this.gameObject.transform.SetParent(null);
 
@@ -152,12 +155,12 @@ public class LevelManager : MonoBehaviour
     public void GetHeat(uint heat)
     {
         partyHeatIntensity = heat;
+        heatWavePrefab.SetActive(true); 
     }
 
     public void SetCombatPoint(Party enemyParty, Party playerParty)
     {
-        camDock.Reposition();
-        // cameraTarget.position = new Vector3(cameraTarget.position.x + 5, cameraTarget.position.y, cameraTarget.position.z);
+        camDock.Reposition(); 
         Transform partyPos = playerParty.transform.GetComponent<Transform>();
         enemyCombatTransform.position = new Vector3(partyPos.position.x + 5, partyPos.position.y, partyPos.position.z);
         enemyParty.GetComponent<Transform>().position = enemyCombatTransform.position;
@@ -326,7 +329,7 @@ public class LevelManager : MonoBehaviour
 
         combatUI.SetActive(false);													//disable the CombatUI
 
-		pParty.GetComponent<KeysToMove> ().movementAllowed = false;
+		pParty.GetComponent<KeysToMove> ().movementAllowed = true;
 
         camDock.RepositionCameraToOriginalPosition(); 
         camDock.targetPosition -= cameraTarget.transform.position; 
