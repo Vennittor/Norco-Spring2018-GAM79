@@ -152,7 +152,7 @@ public class Party : MonoBehaviour
             Party enemyParty = collision.gameObject.GetComponent<Party>();
             collision.gameObject.GetComponent<Collider>().enabled = false;
 
-            levelMan.InitiateCombat(this, enemyParty);
+			StartCoroutine( levelMan.InitiateCombat(this, enemyParty) );
         }
     }
 }

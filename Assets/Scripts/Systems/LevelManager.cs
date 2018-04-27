@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -14,6 +15,8 @@ public class LevelManager : MonoBehaviour
 
 	public GameObject combatUI;
 	public GameObject levelUI;
+
+	public Image swipeImage;
 
     public GameObject playerParty;
     private Party pParty;
@@ -107,14 +110,37 @@ public class LevelManager : MonoBehaviour
         partyHeatIntensity = heat;
     }
 
-    public void InitiateCombat(Party player, Party enemy)
+	public IEnumerator InitiateCombat(Party player, Party enemy)
 	{
         SoundManager.instance.LevelToCombat();//transition to NoLevel snapshot
         pParty = player;
         eParty = enemy;
         if(!combatManager.inCombat)
 		{
-            //remove control from LevelManagement and Player.
+			//Perform Enter 'swipe'
+			Vector2 startingAnchorMin = swipeImage.rectTransform.anchorMin;
+
+			float i = startingAnchorMin.x;
+
+			while (i <= startingAnchorMin.x + 1)
+			{
+				i += Time.deltaTime * 2.0f;
+
+				swipeImage.rectTransform.anchorMin = new Vector2(i, swipeImage.rectTransform.anchorMin.y);
+				swipeImage.rectTransform.anchorMax = new Vector2(i + 1, swipeImage.rectTransform.anchorMax.y);
+
+				yield return null;
+			}
+
+			swipeImage.rectTransform.anchorMin = new Vector2(startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMin.y);
+			swipeImage.rectTransform.anchorMax = new Vector2(startingAnchorMin.x + 2, swipeImage.rectTransform.anchorMax.y);
+
+			i = startingAnchorMin.x + 1;
+			//End Enter Swipe
+
+			//TODO should the Swipe pause for a moment?
+
+			//TODO set all Character in combat stage
 
             foreach (Character character in player.partyMembers)					//Turn on the player Party members renderers and Colliders on
 			{
@@ -129,7 +155,7 @@ public class LevelManager : MonoBehaviour
 
                 character.GetComponent<Collider>().enabled = true;
             }
-			foreach (Character character in enemy.partyMembers)						//Turn on the player Enemy members renderers and Colliders on
+			foreach (Character character in enemy.partyMembers)						//Turn on the Enemy members renderers and Colliders on
             {
 				if (character.GetComponent<MeshRenderer> () != null) 
 				{
@@ -167,6 +193,21 @@ public class LevelManager : MonoBehaviour
 			combatManager.AddCharactersToCombat(player.partyMembers);
 			combatManager.AddCharactersToCombat(enemy.partyMembers);
 			combatManager.HeatValueTaker(partyHeatIntensity);
+
+			//Perform Exit 'swipe'
+			while (i <= startingAnchorMin.x + 2)
+			{
+				i += Time.deltaTime * 2.0f;
+
+				swipeImage.rectTransform.anchorMin = new Vector2(i, swipeImage.rectTransform.anchorMin.y);
+				swipeImage.rectTransform.anchorMax = new Vector2(i + 1, swipeImage.rectTransform.anchorMax.y);
+
+				yield return null;
+			}
+
+			swipeImage.rectTransform.anchorMin = new Vector2(startingAnchorMin.x, swipeImage.rectTransform.anchorMin.y);
+			swipeImage.rectTransform.anchorMax = new Vector2(startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMax.y);
+			//Swipe Finished and reset
 
 			combatManager.StartCombat();
         }

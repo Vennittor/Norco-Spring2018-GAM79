@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235d43b8a3c718a4f9bd3d9bd45cb879, type: 3}
+  m_Name: HPBoost
+  m_EditorClassIdentifier: 
+  costAtShop: 300
+  statChanges:
+    hp: 50
+    atk: -5
+    def: 0
+    spd: 0
+    heatEffectiveness: 0
+    waterEffectiveness: 0
+    numberOfCanteens: 0
