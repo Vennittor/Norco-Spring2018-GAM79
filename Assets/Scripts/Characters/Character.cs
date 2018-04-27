@@ -10,8 +10,8 @@ public abstract class Character : MonoBehaviour
     {
         ABLE, DISABLED, USINGABILITY, EXHAUSTED
     }
-
-    public struct EffectStruct
+    [System.Serializable]
+    public class EffectClass
     {
         public StatusEffectType statusEffectType;
         public bool isBuff;
@@ -19,7 +19,7 @@ public abstract class Character : MonoBehaviour
         public bool applyImmediately;
         public bool checkAtStart;
 
-        public EffectStruct(StatusEffectType statusType, bool isBuff, int duration, bool applyNow, bool checkStart)
+        public EffectClass(StatusEffectType statusType, bool isBuff, int duration, bool applyNow, bool checkStart)
         {
             statusEffectType = statusType;
             this.isBuff = isBuff;
@@ -28,13 +28,14 @@ public abstract class Character : MonoBehaviour
             checkAtStart = checkStart;
         }
 
-        public static void DecCooldown(EffectStruct effectStruct)
+        public void DecDuration()
         {
-            effectStruct.duration--;
+            duration--;
         }
     }
-    public List<EffectStruct> effectStructList;
+    public List<EffectClass> effectClassList;
     public List<StatusEffectType> statuses;
+    public List<EffectClass> removeStatus;
 
     public string characterName;
 	public Animator animator;
@@ -85,8 +86,9 @@ public abstract class Character : MonoBehaviour
         statusEffect = new StatusEffect();
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
-        effectStructList = new List<EffectStruct>();
+        effectClassList = new List<EffectClass>();
         statuses = new List<StatusEffectType>();
+        removeStatus = new List<EffectClass>();
 		if (animator == null) 
 		{
 			animator = GetComponent<Animator> ();
@@ -106,9 +108,14 @@ public abstract class Character : MonoBehaviour
 	{
 		Announcer.BeginTurn (this.characterName);
 
-		if (effectStructList.Count > 0)
+        if (statuses.Contains(StatusEffectType.Stun))
+        {
+            Debug.Log("Boi got knocked in the head");
+            this.combatState = CombatState.DISABLED;
+        }
+		if (effectClassList.Count > 0)
 		{
-			foreach (EffectStruct status in effectStructList)
+			foreach (EffectClass status in effectClassList)
 			{
 				if (status.checkAtStart == true)
 				{
@@ -205,7 +212,7 @@ public abstract class Character : MonoBehaviour
 	{	Debug.Log (this.gameObject.name + " is ending their turn.");
 		if (combatManager.activeCharacter == this)
 		{
-            foreach (EffectStruct status in effectStructList)
+            foreach (EffectClass status in effectClassList)
             {
                 if (status.checkAtStart == false)
                 {
@@ -216,7 +223,14 @@ public abstract class Character : MonoBehaviour
                 {
                     if (statusEffect.smokeTurnCounter != combatManager.roundCounter)
                     {
-                        EffectStruct.DecCooldown(status);
+                        if (status.duration != -1)
+                        {
+                            status.DecDuration();
+                        }
+                        if (status.duration == 0)
+                        {
+                            removeStatus.Add(status);
+                        }
                     }
                     else
                     {
@@ -225,9 +239,17 @@ public abstract class Character : MonoBehaviour
                 }
                 else
                 {
-                    EffectStruct.DecCooldown(status);
+                    if (status.duration != -1)
+                    {
+                        status.DecDuration();
+                    }
+                    if (status.duration == 0)
+                    {
+                        removeStatus.Add(status);
+                    }
                 }
             }
+            RemoveStatuses();
 
             ProgressCooldowns ();
 
@@ -239,6 +261,18 @@ public abstract class Character : MonoBehaviour
 			Debug.LogWarning ("Attempting to run EndTurn() on " + this.gameObject.name + " while they are not the gameManager.activeCharacter. This normally should not be done.");
 		}
 	}
+    public void RemoveStatuses()
+    {
+        foreach (EffectClass status in removeStatus)
+        {
+            if (status.statusEffectType == StatusEffectType.Stun)
+            {
+                combatState = CombatState.ABLE;
+            }
+            effectClassList.Remove(status);
+        }
+        removeStatus.Clear();
+    }
 		
 	private void StartCooldown(int i = 0)
 	{
@@ -318,17 +352,17 @@ public abstract class Character : MonoBehaviour
         if (currentHeat >= 100)
         {
             print("my heat is now 100, im a little thirsty");
-            effectStructList.Add(statusEffect.ApplyLethargy());
+            effectClassList.Add(statusEffect.ApplyLethargy());
         }
         else if (currentHeat >= 200)
         {
             print("my heat is now 200, i need AC");
-            effectStructList.Add(statusEffect.ApplyBerserk());
+            effectClassList.Add(statusEffect.ApplyBerserk());
         }
         else if (currentHeat == 300)
         {
             print("my heat has reached 300, i am now stunned"); //TODO clean up here
-            //effectStructList.Add(statusEffect.ApplyStun());
+            //effectClassList.Add(statusEffect.ApplyStun());
             combatManager.activeCharacter.EndTurn();
             combatManager.activeCharacter.currentHeat = 200;
         }
@@ -354,12 +388,12 @@ public abstract class Character : MonoBehaviour
 
     public void ApplyStatus(StatusEffectType status)
     {                                               // Tandy: added this to work with Ability
-        EffectStruct statusStruct = statusEffect.AddStatus(status);
-        if (!effectStructList.Contains(statusStruct))         // if not already affected by Status
+        if (!statuses.Contains(status))         // if not already affected by Status
         {
-            effectStructList.Add(statusStruct); 					// add Status to List to show it affects Character
+            EffectClass statusClass = statusEffect.AddStatus(status);
+            effectClassList.Add(statusClass); 					// add Status to List to show it affects Character
             statuses.Add(status);
-            if (statusStruct.applyImmediately)
+            if (statusClass.applyImmediately)
             {
                 statusEffect.Apply(this, status);
             }

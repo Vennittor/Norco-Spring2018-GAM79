@@ -12,7 +12,7 @@ public class StatusEffect
 
     StatusEffectType statusEffectType;
 
-    public Character.EffectStruct AddStatus(StatusEffectType status)
+    public Character.EffectClass AddStatus(StatusEffectType status)
     {
         if (status == StatusEffectType.Lethargy)
         {
@@ -38,9 +38,14 @@ public class StatusEffect
         {
             return ApplyBlind();
         }
-        else
+        else if (status == StatusEffectType.Bleed)
         {
             return ApplyBleed();
+        }
+        else
+        {
+            Debug.LogError("No status type was given");
+            return null;
         }
     }
     public void Apply(Character character, StatusEffectType statusType)
@@ -83,42 +88,46 @@ public class StatusEffect
     {
         character.speedMod += .5f;
     }
-    public Character.EffectStruct ApplyLethargy()
+    public Character.EffectClass ApplyLethargy()
     {
         statusEffectType = StatusEffectType.Lethargy;
         isBuff = false;
         duration = -1;
         applyImmediately = true;
         checkAtStart = true;
-        return new Character.EffectStruct(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
+        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
     public void BerserkStatus(Character character)
     {
-        //player can only use ability 1
+        Debug.Log(character.name + " is super mad!!!!!!!!!!!!!");
     }
-    public Character.EffectStruct ApplyBerserk()
+    public Character.EffectClass ApplyBerserk()
     {
         statusEffectType = StatusEffectType.Berserk;
         isBuff = false;
         duration = -1;
         applyImmediately = false;
         checkAtStart = true;
-        return new Character.EffectStruct(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
+        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
     public void StunStatus(Character character)
     {
-        //player loses 2 turns
+        Debug.Log("Talk shit get hit");
     }
-    public Character.EffectStruct ApplyStun()
+    public void RemoveStun(Character character)
+    {
+        character.combatState = Character.CombatState.ABLE;
+    }
+    public Character.EffectClass ApplyStun()
     {
         statusEffectType = StatusEffectType.Stun;
         isBuff = false;
         duration = 2;
         applyImmediately = false;
         checkAtStart = true;
-        return new Character.EffectStruct(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
+        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
     public void LegalizeGayWeed(Character character)
@@ -129,14 +138,15 @@ public class StatusEffect
     {
         character.evadeBonus -= 1000;
     }
-    public Character.EffectStruct InjectDank()
+    public Character.EffectClass InjectDank()
     {
+        smokeTurnCounter = CombatManager.Instance.roundCounter;
         statusEffectType = StatusEffectType.Smoke;
         isBuff = true;
         duration = 1;
         applyImmediately = true;
         checkAtStart = true;
-        return new Character.EffectStruct(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
+        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
     public void ScaredStatus(Character character)
@@ -147,14 +157,14 @@ public class StatusEffect
     {
         character.attackMod += .3f;
     }
-    public Character.EffectStruct ApplyScared()
+    public Character.EffectClass ApplyScared()
     {
         statusEffectType = StatusEffectType.Scared;
         isBuff = true;
         duration = 2;
         applyImmediately = true;
         checkAtStart = true;
-        return new Character.EffectStruct(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
+        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
     public void BlindStatus(Character character)
@@ -165,14 +175,14 @@ public class StatusEffect
     {
         character.accuracyMod += .3f;
     }
-    public Character.EffectStruct ApplyBlind()
+    public Character.EffectClass ApplyBlind()
     {
         statusEffectType = StatusEffectType.Blind;
         isBuff = true;
         duration = 2;
         applyImmediately = false;
         checkAtStart = true;
-        return new Character.EffectStruct(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
+        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
     public void BleedStatus(Character character)
@@ -180,13 +190,13 @@ public class StatusEffect
         uint dot = 1;
         character.ApplyDamage(dot, ElementType.BLEED);
     }
-    public Character.EffectStruct ApplyBleed()
+    public Character.EffectClass ApplyBleed()
     {
         statusEffectType = StatusEffectType.Bleed;
         isBuff = false;
         duration = 2;
         applyImmediately = false;
         checkAtStart = false;
-        return new Character.EffectStruct(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
+        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 }
