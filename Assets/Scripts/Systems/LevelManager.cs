@@ -93,6 +93,7 @@ public class LevelManager : MonoBehaviour
         
         SoundManager.instance.Play(levelMusic, "mxL"); //play the level music
 
+		swipeImage.enabled = false;
     }
 
 	void LateStart()
@@ -118,6 +119,7 @@ public class LevelManager : MonoBehaviour
         if(!combatManager.inCombat)
 		{
 			//Perform Enter 'swipe'
+			swipeImage.enabled = true;
 			Vector2 startingAnchorMin = swipeImage.rectTransform.anchorMin;
 
 			float i = startingAnchorMin.x;
@@ -207,6 +209,8 @@ public class LevelManager : MonoBehaviour
 
 			swipeImage.rectTransform.anchorMin = new Vector2(startingAnchorMin.x, swipeImage.rectTransform.anchorMin.y);
 			swipeImage.rectTransform.anchorMax = new Vector2(startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMax.y);
+
+			swipeImage.enabled = false;
 			//Swipe Finished and reset
 
 			combatManager.StartCombat();
