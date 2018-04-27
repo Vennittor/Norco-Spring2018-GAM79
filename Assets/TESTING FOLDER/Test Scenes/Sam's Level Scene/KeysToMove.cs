@@ -6,16 +6,20 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class KeysToMove : MonoBehaviour
 {
+	CombatManager combatManager;
+
+	public Animator myAnimator;
+
     NavMeshAgent agent;
     //Set the agent's angular speed in the inspector to zero
 	public float walkingSpeed = 12;
 
-    public bool walking;
-    public bool facingRight = true;
+    private bool walking;
+    private bool facingRight = true;
     public GameObject interactionPrefab;
-    CombatManager combatManager;
 
-	public Animator myAnimator;
+	public bool movementAllowed = true;
+
 
     private void Start()
     {
@@ -39,7 +43,7 @@ public class KeysToMove : MonoBehaviour
 
     void Update ()
     {
-        if (!combatManager.inCombat)
+		if (movementAllowed)
         {
             Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
@@ -79,10 +83,12 @@ public class KeysToMove : MonoBehaviour
             if (agent.velocity.x > 0)
             {
                 facingRight = true;
+				this.gameObject.GetComponent<SpriteRenderer> ().flipX = false;
             }
             else if (agent.velocity.x < 0)
             {
                 facingRight = false;
+				this.gameObject.GetComponent<SpriteRenderer> ().flipX = true;
             }
         }
 	}
