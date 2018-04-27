@@ -24,6 +24,8 @@ public class CombatManager : MonoBehaviour
 
     public uint partyHeatLevel;
 
+	private List<Character> finalizedTargets = new List<Character> ();
+
     public static CombatManager Instance
     {
         get
@@ -303,7 +305,6 @@ public class CombatManager : MonoBehaviour
 	#region Targeting and Ability Use
 	public void AssignTargets(List<Character> targetsToAssign)
 	{
-		List<Character> finalizedTargets = new List<Character> ();
 		//check if the character using the Ability (most likely activeCharacter) has any effect that would cause them to change targets, like StatusEffect confusion.
 		//check if the intended targets have any re-direction effects, (like Cover, or Reflect)
 		//Find new targets if needed.  This should be done within CombatManger and not UIManager
@@ -312,7 +313,30 @@ public class CombatManager : MonoBehaviour
 
 		//TODO  Handle the SLIDER here.  Once it's input is gotten (in the form of a multiplier/modifier) run the next and pass it the multiplier
 
+		//IF we should use the SLider,  (Check activeCharacter.selectedAbility and see if it should.  (this needs to be added to the Ability class
+			//enable actionSlider.
+
+		StartCoroutine(ActionSlider());
+	}
+
+	private IEnumerator ActionSlider()
+	{
+		float modifiedEffect = 0f;
+
+		//TODO add HeatSlider function here.
+		Debug.Log("ACTION");
+
+		yield return null;
+
+		UseCharacterAbility (modifiedEffect);
+	}
+
+	void UseCharacterAbility(float modifier)
+	{
+		//TODO change UseAbility to take in the modifier as well;
 		activeCharacter.UseAbility (finalizedTargets);
+
+		finalizedTargets.Clear ();
 	}
 
 	public void AssignTargets(Character targetToAssign)			//Overload to take in a single Character as opposed to a List

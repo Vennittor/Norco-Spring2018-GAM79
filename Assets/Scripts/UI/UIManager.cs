@@ -28,6 +28,8 @@ public class UIManager : MonoBehaviour
 	public Text splashMessageText;
 	public float splashLifeTime = 1.0f;
 
+	public GameObject actionSlider;
+
 	public List<Button> skillButtons = new List<Button> ();
 
     public LayerMask targetable;
