@@ -52,7 +52,7 @@ public abstract class Character : MonoBehaviour
 	public int selectedAbilityIndex;
 
 	[SerializeField] protected List<Ability> abilities;
-	[SerializeField] protected List<uint> cooldownTimers;
+	//[SerializeField] protected List<uint> cooldownTimers;
 
 	protected bool _canActThisTurn = true;
 
@@ -75,11 +75,11 @@ public abstract class Character : MonoBehaviour
 			animator = GetComponent<Animator> ();
 		}
 
-        cooldownTimers = new List<uint>();									//enfore size of cooldownTimers to abilities and set the timer to 0
-		foreach(Ability ability in abilities)
+      //  cooldownTimers = new List<uint>();									//enfore size of cooldownTimers to abilities and set the timer to 0
+		/*foreach(Ability ability in abilities)
 		{
 			cooldownTimers.Add(0);
-		}
+		}*/
         accuracy = 84.5f;
         evade = 10;
         selectedAbilityIndex = -1;
@@ -129,8 +129,8 @@ public abstract class Character : MonoBehaviour
 			return null;
 		}
 
-		if (cooldownTimers[abilityIndex] == 0)
-		{
+		/*if (cooldownTimers[abilityIndex] == 0)
+		{*/
 			if (animator != null)
 			{
 				animator.SetBool ("Ready", true);
@@ -146,12 +146,12 @@ public abstract class Character : MonoBehaviour
 			abilities [selectedAbilityIndex].StartAbility ();
 
 			return abilities [selectedAbilityIndex];
-		}
+		/*}
 		else
 		{
 			Debug.Log ( this.gameObject.name + "'s Ability at index " + selectedAbilityIndex.ToString()+ " is on cooldown");
 			return null;
-		}
+		}*/
 
 	}
 
@@ -175,7 +175,7 @@ public abstract class Character : MonoBehaviour
 
 	public void AbilityHasCompleted(CombatState enterNewState = CombatState.ABLE)
 	{	Debug.Log (this.gameObject.name + "'s ability has completed.");
-		cooldownTimers [selectedAbilityIndex] = abilities [selectedAbilityIndex].Cooldown;
+		//cooldownTimers [selectedAbilityIndex] = abilities [selectedAbilityIndex].Cooldown;
 
 		selectedAbilityIndex = -1;
 
@@ -196,7 +196,7 @@ public abstract class Character : MonoBehaviour
                 }
             }
 
-            ProgressCooldowns ();
+           // ProgressCooldowns ();
 
 			combatManager.NextTurn();
 			//TODO uiManager.BlockInput until next PlayerCharacter starts turn
@@ -207,12 +207,12 @@ public abstract class Character : MonoBehaviour
 		}
 	}
 		
-	private void StartCooldown(int i = 0)
+	/*private void StartCooldown(int i = 0)
 	{
 		cooldownTimers[i] = abilities[i].Cooldown;
-	}
+	}*/
 
-	public void ProgressCooldowns()
+	/*public void ProgressCooldowns()
 	{
 		for (int i = 0; i < cooldownTimers.Count; i++) 
 		{
@@ -221,7 +221,7 @@ public abstract class Character : MonoBehaviour
 				cooldownTimers[i]--;
 			}
 		}
-	}
+	}*/
 
 
     public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
