@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
 
 		this.gameObject.transform.SetParent(null);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
 		Debug.Log ("UIManager Awake");
     }
@@ -74,6 +74,8 @@ public class UIManager : MonoBehaviour
 		Announcer.announcementDestination = splashMessageText;
 		combatManager = CombatManager.Instance;
 		eventSystemManager = EventSystemManager.Instance;
+
+		actionSlider = this.gameObject.transform.Find ("Action Slider").gameObject;
 
 		if (disableUIOnStart)
 		{
@@ -265,7 +267,7 @@ public class UIManager : MonoBehaviour
 	public void SendTargets()        						//Assign Targets back to activeCharacter.
 	{
 		combatManager.AssignTargets(collectedTargets);
-        actionSlider.SetActive(true);
+
 		TurnWhite ();
 
 		collectedTargets.Clear ();

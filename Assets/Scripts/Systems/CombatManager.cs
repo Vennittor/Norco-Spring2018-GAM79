@@ -9,7 +9,7 @@ public class CombatManager : MonoBehaviour
 	public UIManager uiManager;
     private static Announcer announcer;
     
-    public GameObject levelManager;
+	public LevelManager levelManager;
 
     public AudioClip battleSong;
 
@@ -28,7 +28,8 @@ public class CombatManager : MonoBehaviour
     public uint partyHeatLevel;
 
     //for the action slider start
-    public Slider heatSlider;
+	public GameObject actionSlider;
+    public Slider slider;
     public Image completionArea;
 
     public float fillTime = 1;
@@ -80,6 +81,7 @@ public class CombatManager : MonoBehaviour
 
     void Start()
     {
+		levelManager = LevelManager.Instance;
 		uiManager = UIManager.Instance;
 
         characters = new List<Character>();
@@ -88,6 +90,28 @@ public class CombatManager : MonoBehaviour
         activeEnemies = new List<EnemyCharacter>();
 
         partyHeatLevel = 0;
+
+		if (actionSlider == null)
+		{
+			actionSlider = uiManager.actionSlider;
+
+			if (actionSlider == null)
+			{
+				actionSlider = GameObject.Find ("Action Slider");
+			}
+		}
+
+		if (actionSlider != null)
+		{
+			slider = actionSlider.GetComponent<Slider> ();
+
+			completionArea = actionSlider.transform.Find ("Completion Area").GetComponent<Image>();
+		}
+		if (actionSlider == null)
+		{
+			Debug.LogError ("CombatManager cannot find Action Slider gamObject");
+		}
+
     }
 		
 	public void StartCombat()
@@ -323,29 +347,30 @@ public class CombatManager : MonoBehaviour
 		//TODO  Handle the SLIDER here.  Once it's input is gotten (in the form of a multiplier/modifier) run the next and pass it the multiplier
 
 		//IF we should use the SLider,  (Check activeCharacter.selectedAbility and see if it should.  (this needs to be added to the Ability class
-			//enable actionSlider.
+			//enable slider.
 
 		StartCoroutine(ActionSlider());
 	}
 
 	private IEnumerator ActionSlider()
 	{
+		actionSlider.SetActive(true);
+
 		float modifiedEffect = 0f;
         float midMin = 25;
         float midMax = 85;
 
-        //TODO add HeatSlider function here.
         //Start
-        heatSlider.value = 0;
-        heatSlider.maxValue = fillTime;
+		slider.value = 0;
+		slider.maxValue = fillTime;
 
         //Create the visual for the stopping area
-        float sliderSize = heatSlider.GetComponent<RectTransform>().sizeDelta.y;
+		float sliderSize = slider.GetComponent<RectTransform>().sizeDelta.y;
         sliderSize *= midPoint * 0.01f;
-        sliderSize -= heatSlider.GetComponent<RectTransform>().sizeDelta.y / 2;
+		sliderSize -= slider.GetComponent<RectTransform>().sizeDelta.y / 2;
         completionArea.GetComponent<RectTransform>().localPosition = Vector3.zero + (Vector3.up * sliderSize);
 
-        completionArea.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, distanceBetweenInPoints * 2 * (heatSlider.GetComponent<RectTransform>().sizeDelta.y * 0.01f));
+        completionArea.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, distanceBetweenInPoints * 2 * (actionSlider.GetComponent<RectTransform>().sizeDelta.y * 0.01f));
         midPoint = Random.Range(midMin, midMax);
         yield return new WaitForSeconds(startDelay);
 
@@ -353,7 +378,7 @@ public class CombatManager : MonoBehaviour
         bool going = true;
         while (going)
         {
-            heatSlider.value += Time.deltaTime * fillTime;
+			slider.value += Time.deltaTime * fillTime;
 
             if (Input.GetKeyDown(KeyCode.Z))
             {
@@ -366,7 +391,7 @@ public class CombatManager : MonoBehaviour
 
                 print(minVal + ", " + maxVal);
 
-                float val = heatSlider.value * 100;
+				float val = slider.value * 100;
 
                 if (val >= minVal && val <= maxVal)
                 {
@@ -381,7 +406,7 @@ public class CombatManager : MonoBehaviour
             }
 
             yield return null;
-            if (heatSlider.value >= 1)
+			if (slider.value >= 1)
             {
                 print("you didnt press anything");
                 going = false;
@@ -392,7 +417,7 @@ public class CombatManager : MonoBehaviour
         Debug.Log("ACTION");
 
 		yield return null;
-        uiManager.actionSlider.SetActive(false);
+		uiManager.actionSlider.SetActive(false);
 		UseCharacterAbility (modifiedEffect);
 	}
 
