@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
@@ -25,6 +26,23 @@ public class CombatManager : MonoBehaviour
 	public uint roundCounter = 0;
 
     public uint partyHeatLevel;
+
+    //for the action slider start
+    public Slider heatSlider;
+    public Image completionArea;
+
+    public float fillTime = 1;
+
+    [Range(0, 100)]
+    public float midPoint;
+    public float distanceBetweenInPoints;
+
+    public float startDelay = 0.5f;
+
+    bool started = false;
+    //for the action slider end
+
+    private List<Character> finalizedTargets = new List<Character> ();
 
     public static CombatManager Instance
     {
@@ -296,14 +314,94 @@ public class CombatManager : MonoBehaviour
 	#region Targeting and Ability Use
 	public void AssignTargets(List<Character> targetsToAssign)
 	{
-		List<Character> finalizedTargets = new List<Character> ();
 		//check if the character using the Ability (most likely activeCharacter) has any effect that would cause them to change targets, like StatusEffect confusion.
 		//check if the intended targets have any re-direction effects, (like Cover, or Reflect)
 		//Find new targets if needed.  This should be done within CombatManger and not UIManager
 
 		finalizedTargets.AddRange (targetsToAssign);
 
+		//TODO  Handle the SLIDER here.  Once it's input is gotten (in the form of a multiplier/modifier) run the next and pass it the multiplier
+
+		//IF we should use the SLider,  (Check activeCharacter.selectedAbility and see if it should.  (this needs to be added to the Ability class
+			//enable actionSlider.
+
+		StartCoroutine(ActionSlider());
+	}
+
+	private IEnumerator ActionSlider()
+	{
+		float modifiedEffect = 0f;
+        float midMin = 25;
+        float midMax = 85;
+
+        //TODO add HeatSlider function here.
+        //Start
+        heatSlider.value = 0;
+        heatSlider.maxValue = fillTime;
+
+        //Create the visual for the stopping area
+        float sliderSize = heatSlider.GetComponent<RectTransform>().sizeDelta.y;
+        sliderSize *= midPoint * 0.01f;
+        sliderSize -= heatSlider.GetComponent<RectTransform>().sizeDelta.y / 2;
+        completionArea.GetComponent<RectTransform>().localPosition = Vector3.zero + (Vector3.up * sliderSize);
+
+        completionArea.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, distanceBetweenInPoints * 2 * (heatSlider.GetComponent<RectTransform>().sizeDelta.y * 0.01f));
+        midPoint = Random.Range(midMin, midMax);
+        yield return new WaitForSeconds(startDelay);
+
+        //Do the thing
+        bool going = true;
+        while (going)
+        {
+            heatSlider.value += Time.deltaTime * fillTime;
+
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                StartCoroutine("TestingThe1337m0dz");
+
+                float width = distanceBetweenInPoints * 2;
+
+                float minVal = midPoint - width / 2;
+                float maxVal = midPoint + width / 2;
+
+                print(minVal + ", " + maxVal);
+
+                float val = heatSlider.value * 100;
+
+                if (val >= minVal && val <= maxVal)
+                {
+                    print("you hit it!" + val);
+                }
+                else
+                {
+                    print("ya bum!" + val);
+                }
+
+                going = false;
+            }
+
+            yield return null;
+            if (heatSlider.value >= 1)
+            {
+                print("you didnt press anything");
+                going = false;
+            }
+        }
+
+        started = false;
+        Debug.Log("ACTION");
+
+		yield return null;
+        uiManager.actionSlider.SetActive(false);
+		UseCharacterAbility (modifiedEffect);
+	}
+
+	void UseCharacterAbility(float modifier)
+	{
+		//TODO change UseAbility to take in the modifier as well;
 		activeCharacter.UseAbility (finalizedTargets);
+
+		finalizedTargets.Clear ();
 	}
 
 	public void AssignTargets(Character targetToAssign)			//Overload to take in a single Character as opposed to a List
@@ -320,5 +418,9 @@ public class CombatManager : MonoBehaviour
 	//Function Redirect Target
 
 	#endregion
-
+     public IEnumerator TestingThe1337m0dz()
+    {
+        //robert is working here to test the modifier for the action slider
+        yield return null;
+    }
 }

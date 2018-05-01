@@ -28,6 +28,8 @@ public class UIManager : MonoBehaviour
 	public Text splashMessageText;
 	public float splashLifeTime = 1.0f;
 
+	public GameObject actionSlider;
+
 	public List<Button> skillButtons = new List<Button> ();
 
     public LayerMask targetable;
@@ -263,12 +265,13 @@ public class UIManager : MonoBehaviour
 	public void SendTargets()        						//Assign Targets back to activeCharacter.
 	{
 		combatManager.AssignTargets(collectedTargets);
-
+        actionSlider.SetActive(true);
 		TurnWhite ();
 
 		collectedTargets.Clear ();
 
 		searchingTargetType = null;
+
     }
 
 

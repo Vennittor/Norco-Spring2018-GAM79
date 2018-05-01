@@ -86,8 +86,8 @@ MonoBehaviour:
   characterName: 
   animator: {fileID: 0}
   maxhealth: 0
-  currentHealth: 0
-  maxHeat: 0
+  currentHealth: 35
+  maxHeat: 35
   currentHeat: 0
   attack: 0
   attackMod: 0
@@ -101,7 +101,9 @@ MonoBehaviour:
   defenseMod: 0
   combatState: 0
   selectedAbilityIndex: -1
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 0d563aff4bbddda4cb68f09fa503abfe, type: 2}
+  - {fileID: 11400000, guid: 21b52951fc411b44b8c180732029d8c3, type: 2}
   cooldownTimers: 
 --- !u!212 &212227176055161104
 SpriteRenderer:

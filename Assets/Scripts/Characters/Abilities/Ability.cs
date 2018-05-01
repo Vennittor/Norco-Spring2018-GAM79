@@ -32,13 +32,13 @@ public class Ability : ScriptableObject
 
     
 
-	public uint Cooldown 
+	/*public uint Cooldown 
 	{
 		get
 		{
 			return _cooldown;
 		}
-	}
+	}*/
 
 	public string targetName 
 	{
