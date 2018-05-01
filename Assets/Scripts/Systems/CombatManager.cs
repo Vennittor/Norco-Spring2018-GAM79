@@ -417,6 +417,7 @@ public class CombatManager : MonoBehaviour
         Debug.Log("ACTION");
 
 		yield return null;
+
 		uiManager.actionSlider.SetActive(false);
 		UseCharacterAbility (modifiedEffect);
 	}
