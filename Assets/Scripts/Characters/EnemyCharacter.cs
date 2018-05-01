@@ -21,7 +21,9 @@ public class EnemyCharacter : Character
 		Ability abilityToUse = null;
 
 		float selection = Random.Range(0, abilities.Count);
+        Debug.LogError("Enemy using selection" + selection);
 		selection = selection == (float)abilities.Count ? selection - 1f : selection;	// if the selecton is equal to 
+        Debug.LogError("Selection 2 is " + selection);
 
 		abilityToUse = ReadyAbility ((int)selection);		//Readies the selected Ability
 
