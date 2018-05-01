@@ -120,20 +120,16 @@ public class CombatManager : MonoBehaviour
 		{
 			inCombat = true;
             SoundManager.instance.Play(battleSong, "mxC");
-		}
-		else
-		{
-			return;
-		}
 
-		roundCounter = 0;
-		if (characters.Count != 0)
-		{
-			StartRound ();
-		}
-		else
-		{
-			Debug.LogError("There are no Characters in the scene");
+			roundCounter = 0;
+			if (characters.Count != 0)
+			{
+				StartRound ();
+			}
+			else
+			{
+				Debug.LogError("There are no Characters in the scene");
+			}
 		}
 	}
 
@@ -231,6 +227,17 @@ public class CombatManager : MonoBehaviour
             //Goto Defeat or Gameover GameState
             LevelManager.Instance.ReturnFromCombat();
 		}
+
+		roundCounter = 0;
+
+		activeCharacter = null;
+
+		currentRoundCharacters.Clear ();
+		activePlayers.Clear ();
+		activeEnemies.Clear ();
+
+		characters.Clear ();
+
 	}
 
 	//This ends combat, cleanup, return level/field movement, and handling player victory/defeat should be performed or started here
@@ -417,6 +424,7 @@ public class CombatManager : MonoBehaviour
         Debug.Log("ACTION");
 
 		yield return null;
+
 		uiManager.actionSlider.SetActive(false);
 		UseCharacterAbility (modifiedEffect);
 	}
