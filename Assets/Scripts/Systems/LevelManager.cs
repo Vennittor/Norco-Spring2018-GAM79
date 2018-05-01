@@ -19,8 +19,8 @@ public class LevelManager : MonoBehaviour
 	public Image swipeImage;
 
     public GameObject playerParty;
-    private Party pParty;
-    private Party eParty;
+	[SerializeField] private Party pParty;
+	[SerializeField] private Party eParty;
     public uint partyHeatIntensity;
 
     public Transform cameraTarget;
@@ -155,7 +155,7 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        camDock.cameraDock.LookAt(cameraTarget);
+
     }
 
     public void GetHeat(uint heat)
@@ -182,14 +182,14 @@ public class LevelManager : MonoBehaviour
 
 	public IEnumerator InitiateCombat(Party player, Party enemy)
 	{
-        SoundManager.instance.LevelToCombat();//transition to NoLevel snapshot
-        pParty = player;
-        eParty = enemy;
-
-		player.GetComponent<KeysToMove> ().movementAllowed = false;
-
         if(!combatManager.inCombat)
 		{
+			SoundManager.instance.LevelToCombat();//transition to NoLevel snapshot
+			pParty = player;
+			eParty = enemy;
+
+			player.GetComponent<KeysToMove> ().movementAllowed = false;
+
 			//Perform Enter 'swipe'
 			Vector2 startingAnchorMin = Vector2.zero;
 			float i = 0f;
@@ -296,7 +296,8 @@ public class LevelManager : MonoBehaviour
 			}
 			//Swipe Finished and reset
 
-			combatManager.StartCombat();
+			combatManager.StartCombat ();
+
         }
         else
         {
@@ -346,7 +347,6 @@ public class LevelManager : MonoBehaviour
 		pParty.GetComponent<KeysToMove> ().movementAllowed = true;
 
         camDock.RepositionCameraToOriginalPosition(); 
-        camDock.targetPosition -= cameraTarget.transform.position; 
         
     }
 
