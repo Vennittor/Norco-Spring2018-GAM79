@@ -30,6 +30,11 @@ public class Party : MonoBehaviour
     {
         levelMan = LevelManager.Instance;
 
+		if (levelMan == null)
+		{
+			Debug.LogError (this.gameObject.name + " could not find reference to LevelManager");
+		}
+
 		for (int i = partyMembers.Count - 1; i >= 0; i--) 
 		{
 			if (partyMembers [i] == null)
@@ -87,22 +92,26 @@ public class Party : MonoBehaviour
 
     public void Update()
     {
-        if (lastHeat != myCurrentHeatIntensity)
-        {
-            levelMan.GetHeat(myCurrentHeatIntensity);
-            lastHeat = myCurrentHeatIntensity;
-        }
-        if (levelMan.combatManager.inCombat == false)
-        {
-            if (NextTickAt <= Time.time)
-            {
-                if (heatState == HeatZone.InHeat)
-                {
-                    LevelHeatApplication();
-                    NextTickAt = Time.time + heatInterval;
-                }
-            }
-        }
+		if (levelMan != null)
+		{
+			if (lastHeat != myCurrentHeatIntensity)
+			{
+				levelMan.GetHeat(myCurrentHeatIntensity);
+				lastHeat = myCurrentHeatIntensity;
+			}
+				
+			if (levelMan.combatManager.inCombat == false)
+			{
+				if (NextTickAt <= Time.time)
+				{
+					if (heatState == HeatZone.InHeat)
+					{
+						LevelHeatApplication();
+						NextTickAt = Time.time + heatInterval;
+					}
+				}
+			}
+		}
     }
 
     public void IncreaseHeatRate(uint heatZoneIntensity)

@@ -63,8 +63,6 @@ public class LevelManager : MonoBehaviour
 
 		_instance = this;
 
-		combatManager = CombatManager.Instance;
-
 		if (combatUI == null)
 		{
 			combatUI = FindObjectOfType<UIManager>().gameObject;
@@ -77,19 +75,27 @@ public class LevelManager : MonoBehaviour
 		{
 			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
 		}
-
-        heatWavePrefab.SetActive(false); 
-
+			
 		this.gameObject.transform.SetParent(null);
 
 		DontDestroyOnLoad(gameObject);
+
+		if (heatWavePrefab != null)
+		{
+			heatWavePrefab.SetActive(false); 
+		}
 
         //SceneManager.LoadScene("OtherSceneName", LoadSceneMode.Additive);
     }
 
     void Start()
     {
-        combatManager = CombatManager.Instance;
+		combatManager = CombatManager.Instance;
+
+		if (combatManager == null)
+		{
+			Debug.LogError (this.gameObject.name + " could not find reference to LevelManager");
+		}
 
         playerCombatTransform = transform;
         enemyCombatTransform = transform;
@@ -155,7 +161,15 @@ public class LevelManager : MonoBehaviour
     public void GetHeat(uint heat)
     {
         partyHeatIntensity = heat;
-        heatWavePrefab.SetActive(true); 
+		if (heatWavePrefab != null)
+		{
+			heatWavePrefab.SetActive (true); 
+		}
+		else
+		{
+			Debug.LogError("Cannot find reference to heatWavePrefab");
+		}
+
     }
 
     public void SetCombatPoint(Party enemyParty, Party playerParty)
