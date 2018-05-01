@@ -10,25 +10,36 @@ public abstract class Character : MonoBehaviour
     {
         ABLE, DISABLED, USINGABILITY, EXHAUSTED
     }
-
-    public struct EffectStruct
+    [System.Serializable]
+    public class EffectClass
     {
         public StatusEffectType statusEffectType;
+        public bool isBuff;
         public int duration;
+        public bool applyImmediately;
         public bool checkAtStart;
 
-        public EffectStruct(StatusEffectType statusType, int duration, bool checkStart)
+        public EffectClass(StatusEffectType statusType, bool isBuff, int duration, bool applyNow, bool checkStart)
         {
             statusEffectType = statusType;
+            this.isBuff = isBuff;
             this.duration = duration;
+            applyImmediately = applyNow;
             checkAtStart = checkStart;
         }
+
+        public void DecDuration()
+        {
+            duration--;
+        }
     }
-    public List<EffectStruct> effectStructList;
+    public List<EffectClass> effectClassList;
+    public List<StatusEffectType> statuses;
+    public List<EffectClass> removeStatus;
 
     public string characterName;
 	public Animator animator;
-    public StatusEffect statusEffect;
+    protected StatusEffect statusEffect;
 
 	public uint maxhealth;
 	public uint currentHealth;
@@ -36,16 +47,21 @@ public abstract class Character : MonoBehaviour
 	public uint maxHeat;
 	public uint currentHeat;
 
-    public float attack;
+    public uint attack;
+    public float attackBonus;
     public float attackMod;
     public float accuracy;
+    public float accuracyBonus;
     public float accuracyMod;
 	public float evade;
+    public float evadeBonus;
     public float evadeMod;
-    public float speed;
+    public uint speed;
+    public float speedBonus;
     public float speedMod;
     public uint defense;
-    public uint defenseMod;
+    public float defenseBonus;
+    public float defenseMod;
 
 	public CombatState combatState;
 
@@ -67,9 +83,12 @@ public abstract class Character : MonoBehaviour
 
     protected void Start()
     {
+        statusEffect = new StatusEffect();
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
-        effectStructList = new List<EffectStruct>();
+        effectClassList = new List<EffectClass>();
+        statuses = new List<StatusEffectType>();
+        removeStatus = new List<EffectClass>();
 		if (animator == null) 
 		{
 			animator = GetComponent<Animator> ();
@@ -89,13 +108,18 @@ public abstract class Character : MonoBehaviour
 	{
 		Announcer.BeginTurn (this.characterName);
 
-		if (effectStructList.Count > 0)
+        if (statuses.Contains(StatusEffectType.Stun))
+        {
+            Debug.Log("Boi got knocked in the head");
+            this.combatState = CombatState.DISABLED;
+        }
+		if (effectClassList.Count > 0)
 		{
-			foreach (EffectStruct effect in effectStructList)
+			foreach (EffectClass status in effectClassList)
 			{
-				if (effect.checkAtStart == true)
+				if (status.checkAtStart == true)
 				{
-					//do something
+                    statusEffect.Apply(this, status.statusEffectType);
 				}
 			}
 		}
@@ -188,13 +212,44 @@ public abstract class Character : MonoBehaviour
 	{	Debug.Log (this.gameObject.name + " is ending their turn.");
 		if (combatManager.activeCharacter == this)
 		{
-            foreach (EffectStruct effect in effectStructList)
+            foreach (EffectClass status in effectClassList)
             {
-                if (effect.checkAtStart == false)
+                if (status.checkAtStart == false)
                 {
-                    //do something
+                    statusEffect.Apply(this, status.statusEffectType);
+                }
+
+                if (status.statusEffectType == StatusEffectType.Smoke)
+                {
+                    if (statusEffect.smokeTurnCounter != combatManager.roundCounter)
+                    {
+                        if (status.duration != -1)
+                        {
+                            status.DecDuration();
+                        }
+                        if (status.duration == 0)
+                        {
+                            removeStatus.Add(status);
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Wait one more turn");
+                    }
+                }
+                else
+                {
+                    if (status.duration != -1)
+                    {
+                        status.DecDuration();
+                    }
+                    if (status.duration == 0)
+                    {
+                        removeStatus.Add(status);
+                    }
                 }
             }
+            RemoveStatuses();
 
            // ProgressCooldowns ();
 
@@ -206,6 +261,18 @@ public abstract class Character : MonoBehaviour
 			Debug.LogWarning ("Attempting to run EndTurn() on " + this.gameObject.name + " while they are not the gameManager.activeCharacter. This normally should not be done.");
 		}
 	}
+    public void RemoveStatuses()
+    {
+        foreach (EffectClass status in removeStatus)
+        {
+            if (status.statusEffectType == StatusEffectType.Stun)
+            {
+                combatState = CombatState.ABLE;
+            }
+            effectClassList.Remove(status);
+        }
+        removeStatus.Clear();
+    }
 		
 	/*private void StartCooldown(int i = 0)
 	{
@@ -285,17 +352,17 @@ public abstract class Character : MonoBehaviour
         if (currentHeat >= 100)
         {
             print("my heat is now 100, im a little thirsty");
-            //statusEffect.LethargyStatus();
+            effectClassList.Add(statusEffect.ApplyLethargy());
         }
         else if (currentHeat >= 200)
         {
             print("my heat is now 200, i need AC");
-            //statusEffect.BerserkStatus();
+            effectClassList.Add(statusEffect.ApplyBerserk());
         }
         else if (currentHeat == 300)
         {
             print("my heat has reached 300, i am now stunned"); //TODO clean up here
-            //statusEffect.StunAbility();
+            //effectClassList.Add(statusEffect.ApplyStun());
             combatManager.activeCharacter.EndTurn();
             combatManager.activeCharacter.currentHeat = 200;
         }
@@ -319,13 +386,19 @@ public abstract class Character : MonoBehaviour
         Debug.Log("Bleed Damage is not currently implemented, Physical damage was dealt instead.");
     }
 
-    //public void ApplyStatus(StatusEffectType status)
-    //{                                               // Tandy: added this to work with Ability
-    //    if (effectStructList.Contains(status) == false)         // if not already affected by Status
-    //    {
-    //        effectStructList.Add(status); 					// add Status to List to show it affects Character
-    //    }
-    //}
+    public void ApplyStatus(StatusEffectType status)
+    {                                               // Tandy: added this to work with Ability
+        if (!statuses.Contains(status))         // if not already affected by Status
+        {
+            EffectClass statusClass = statusEffect.AddStatus(status);
+            effectClassList.Add(statusClass); 					// add Status to List to show it affects Character
+            statuses.Add(status);
+            if (statusClass.applyImmediately)
+            {
+                statusEffect.Apply(this, status);
+            }
+        }
+    }
 
     public void Faint()
     {

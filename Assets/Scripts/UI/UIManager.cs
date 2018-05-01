@@ -148,15 +148,15 @@ public class UIManager : MonoBehaviour
 
 	public void OutputAttack(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
 	{
-        int length = combatManager.activeCharacter.effectStructList.Count;
-        foreach(Character.EffectStruct effect in combatManager.activeCharacter.effectStructList)
+        bool stopAbility = false;
+        foreach(Character.EffectClass effect in combatManager.activeCharacter.effectClassList)
         {
-            if(effect.statusEffectType != StatusEffectType.Berserk) //TODO move out of this level
+            if(effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
             {
-                length--;                
+                stopAbility = true;                
             }
         }
-        if (length == 0)
+        if (!stopAbility || (abilityIndex == 0 || abilityIndex == 3))
 		{	Debug.Log (" pre AbilitySelect");
             if (inputMode == InputMode.ABILITYSELECT)               //
 			{	Debug.Log (" in AbilitySelect");
@@ -171,7 +171,10 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
-		
+		else
+        {
+            Debug.Log("Madboi continues");
+        }
     }
 		
     public void OutputWaterUse()
@@ -221,7 +224,8 @@ public class UIManager : MonoBehaviour
 		SetMode_Normal ();
 	}
 	public bool AllowAbilitySelection()
-	{	Debug.Log ("Allow");
+	{
+        Debug.Log ("Allow");
 		if (inputMode != InputMode.BLOCKED)
 		{
 			SetMode_Select ();
@@ -307,7 +311,6 @@ public class UIManager : MonoBehaviour
 
 			if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, targetable))
 			{
-                Debug.LogError(hitInfo.collider.gameObject.name);
 
 				if (hitInfo.collider.gameObject.GetComponent<Character> () == null || hitInfo.collider.gameObject.GetComponent<Character>().combatState == Character.CombatState.EXHAUSTED) 			//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
 				{

@@ -127,7 +127,7 @@ public class Ability : ScriptableObject
 
             AnnounceAbility();
 
-			for(int hitsDone = 0; hitsDone < hitsPerAction; hitsDone ++)
+			for(int hitsDone = 0; hitsDone < hitsPerAction; hitsDone++)
 			{
 				foreach (Character target in targets)					// Target all applicable targets
 				{ 
@@ -138,12 +138,11 @@ public class Ability : ScriptableObject
 
 					foreach (StatusEffectType status in statuses)					// Apply all Status affects
 					{ 
-						//target.ApplyStatus(status);						// TODO Greg: commenting out because Tandy's unused stuff needed it, will replace with new setup
+						target.ApplyStatus(status);
 					} 
 				}
 				//TODO Wait Between hits
 			}
-				
 		}
 
 		actionsUsed++;

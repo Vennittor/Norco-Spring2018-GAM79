@@ -8,6 +8,8 @@ public class CombatManager : MonoBehaviour
     public static CombatManager combatInstance;
 	public UIManager uiManager;
     private static Announcer announcer;
+    
+    public GameObject levelManager;
 
     public AudioClip battleSong;
 
@@ -117,10 +119,9 @@ public class CombatManager : MonoBehaviour
     }
 
     void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
-	{	Debug.Log ("New Round!");
+	{
+        Debug.Log ("New Round!");
 		roundCounter++;
-		//Check time left on status effects
-		//Check cooldowns on Abilities
 		SortRoundQueue();
 
 		activeCharacter.BeginTurn ();
@@ -147,7 +148,6 @@ public class CombatManager : MonoBehaviour
 
     void CombatHeatDealer()
     {
-        Debug.LogError(partyHeatLevel);
         if (partyHeatLevel > 0)
         {
             foreach (PlayerCharacter player in activePlayers)
@@ -161,7 +161,8 @@ public class CombatManager : MonoBehaviour
 	public void NextTurn() // active player finishing their turn calls this
 	{
 		if (!VictoryCheck())
-		{	Debug.Log (activeCharacter.gameObject.name + " is removed from the queu");
+		{
+            Debug.Log (activeCharacter.gameObject.name + " is removed from the queue");
 			currentRoundCharacters.Remove(activeCharacter); // The activeCharacter is removed from the current round
             if (currentRoundCharacters.Count == 0) // if they were the last one to leave, then end the round
 			{
@@ -188,30 +189,22 @@ public class CombatManager : MonoBehaviour
 	}
 
 	void EndCombat(bool playerVictory)
-	{	Debug.Log ("End Combat");
-		partyHeatLevel = 0;
-		characters.Clear();
-
-		activeCharacter = null;
-		activePlayers.Clear();
-		activeEnemies.Clear();
-
-		currentRoundCharacters.Clear();
-
-		if (playerVictory == true)				// party wins
+	{
+        Debug.Log ("End Combat");
+		if (playerVictory == true) // party wins
 		{
 			Debug.Log ("Party Wins");
             
 			inCombat = false;
-            //TODO Combat rewards?
+            //Combat rewards?
             LevelManager.Instance.ReturnFromCombat();
 		}
-		else if (playerVictory == false)		// party loses
+		else if (playerVictory == false) // party loses
 		{
 			Debug.Log ("Party Loses");
 
             inCombat = false;
-
+            //Goto Defeat or Gameover GameState
             LevelManager.Instance.ReturnFromCombat();
 		}
 	}
