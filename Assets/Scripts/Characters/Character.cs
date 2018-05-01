@@ -119,8 +119,15 @@ public abstract class Character : MonoBehaviour
 			{
 				if (status.checkAtStart == true)
 				{
-                    statusEffect.Apply(this, status.statusEffectType);
-				}
+                    if (!status.isBuff)
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
+                    else if (status.isBuff && !statuses.Contains(status.statusEffectType))
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
+                }
 			}
 		}
 
@@ -216,7 +223,14 @@ public abstract class Character : MonoBehaviour
             {
                 if (status.checkAtStart == false)
                 {
-                    statusEffect.Apply(this, status.statusEffectType);
+                    if (!status.isBuff)
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
+                    else if (status.isBuff && !statuses.Contains(status.statusEffectType))
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
                 }
 
                 if (status.statusEffectType == StatusEffectType.Smoke)
@@ -269,7 +283,12 @@ public abstract class Character : MonoBehaviour
             {
                 combatState = CombatState.ABLE;
             }
+            if (status.isBuff)
+            {
+                statusEffect.RemoveStatus(this, status.statusEffectType);
+            }
             effectClassList.Remove(status);
+            statuses.Remove(status.statusEffectType);
         }
         removeStatus.Clear();
     }
@@ -336,7 +355,7 @@ public abstract class Character : MonoBehaviour
 
     public void ReduceHeat(uint amount = 0)
     {
-        currentHeat -= (uint)Mathf.Clamp((float)amount, 0f, (float)currentHeat);
+        currentHeat -= (uint)Mathf.Clamp(amount, 0, currentHeat);
     }
 
     public void DealHeatDamage(int heatDamage)
@@ -352,18 +371,18 @@ public abstract class Character : MonoBehaviour
         if (currentHeat >= 100)
         {
             print("my heat is now 100, im a little thirsty");
-            effectClassList.Add(statusEffect.ApplyLethargy());
+            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Lethargy));
         }
         else if (currentHeat >= 200)
         {
             print("my heat is now 200, i need AC");
-            effectClassList.Add(statusEffect.ApplyBerserk());
+            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Berserk));
         }
         else if (currentHeat == 300)
         {
             print("my heat has reached 300, i am now stunned"); //TODO clean up here
-            //effectClassList.Add(statusEffect.ApplyStun());
-            combatManager.activeCharacter.EndTurn();
+            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Stun));
+            //combatManager.activeCharacter.EndTurn();
             combatManager.activeCharacter.currentHeat = 200;
         }
         else

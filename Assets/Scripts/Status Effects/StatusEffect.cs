@@ -78,17 +78,44 @@ public class StatusEffect
         {
             BleedStatus(character);
         }
+        else
+        {
+            Debug.Log("Didn't give me a status you dingo");
+        }
+    }
+    public void RemoveStatus(Character character, StatusEffectType status)
+    {
+        if (statusEffectType == StatusEffectType.Lethargy)
+        {
+            RemoveLethargy(character);
+        }
+        else if (statusEffectType == StatusEffectType.Smoke)
+        {
+            Rehab(character);
+        }
+        else if (statusEffectType == StatusEffectType.Scared)
+        {
+            RemoveScared(character);
+        }
+        else if (statusEffectType == StatusEffectType.Blind)
+        {
+            RemoveBlind(character);
+        }
+        else
+        {
+            Debug.Log("Didn't give me a status you dingo");
+        }
     }
 
-    public void LethargyStatus(Character character)
+    private void LethargyStatus(Character character)
     {
         character.speedMod -= .5f;
     }
-    public void RemoveLethargy(Character character)
+    private void RemoveLethargy(Character character)
     {
         character.speedMod += .5f;
     }
-    public Character.EffectClass ApplyLethargy()
+    private Character.EffectClass ApplyLethargy()
     {
         statusEffectType = StatusEffectType.Lethargy;
         isBuff = false;
@@ -98,11 +125,11 @@ public class StatusEffect
         return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
-    public void BerserkStatus(Character character)
+    private void BerserkStatus(Character character)
     {
         Debug.Log(character.name + " is super mad!!!!!!!!!!!!!");
     }
-    public Character.EffectClass ApplyBerserk()
+    private Character.EffectClass ApplyBerserk()
     {
         statusEffectType = StatusEffectType.Berserk;
         isBuff = false;
@@ -112,15 +139,11 @@ public class StatusEffect
         return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
-    public void StunStatus(Character character)
+    private void StunStatus(Character character)
     {
         Debug.Log("Talk shit get hit");
     }
-    public void RemoveStun(Character character)
-    {
-        character.combatState = Character.CombatState.ABLE;
-    }
-    public Character.EffectClass ApplyStun()
+    private Character.EffectClass ApplyStun()
     {
         statusEffectType = StatusEffectType.Stun;
         isBuff = false;
@@ -130,15 +153,15 @@ public class StatusEffect
         return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
-    public void LegalizeGayWeed(Character character)
+    private void LegalizeGayWeed(Character character)
     {
         character.evadeBonus += 1000;
     }
-    public void Rehab(Character character)
+    private void Rehab(Character character)
     {
         character.evadeBonus -= 1000;
     }
-    public Character.EffectClass InjectDank()
+    private Character.EffectClass InjectDank()
     {
         smokeTurnCounter = CombatManager.Instance.roundCounter;
         statusEffectType = StatusEffectType.Smoke;
@@ -149,15 +172,15 @@ public class StatusEffect
         return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
-    public void ScaredStatus(Character character)
+    private void ScaredStatus(Character character)
     {
         character.attackMod -= .3f; // 70% damage output
     }
-    public void RemoveScared(Character character)
+    private void RemoveScared(Character character)
     {
         character.attackMod += .3f;
     }
-    public Character.EffectClass ApplyScared()
+    private Character.EffectClass ApplyScared()
     {
         statusEffectType = StatusEffectType.Scared;
         isBuff = true;
@@ -167,15 +190,15 @@ public class StatusEffect
         return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
-    public void BlindStatus(Character character)
+    private void BlindStatus(Character character)
     {
         character.accuracyMod -= .3f;
     }
-    public void RemoveBlind(Character character)
+    private void RemoveBlind(Character character)
     {
         character.accuracyMod += .3f;
     }
-    public Character.EffectClass ApplyBlind()
+    private Character.EffectClass ApplyBlind()
     {
         statusEffectType = StatusEffectType.Blind;
         isBuff = true;
@@ -185,12 +208,12 @@ public class StatusEffect
         return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
-    public void BleedStatus(Character character)
+    private void BleedStatus(Character character)
     {
         uint dot = 1;
         character.ApplyDamage(dot, ElementType.BLEED);
     }
-    public Character.EffectClass ApplyBleed()
+    private Character.EffectClass ApplyBleed()
     {
         statusEffectType = StatusEffectType.Bleed;
         isBuff = false;
