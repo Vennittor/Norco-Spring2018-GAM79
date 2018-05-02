@@ -182,6 +182,7 @@ public class LevelManager : MonoBehaviour
 
 	public IEnumerator InitiateCombat(Party player, Party enemy)
 	{
+		Debug.Log ("Initiate Combat");
         if(!combatManager.inCombat)
 		{
 			SoundManager.instance.LevelToCombat();//transition to NoLevel snapshot
@@ -293,8 +294,11 @@ public class LevelManager : MonoBehaviour
 
 				swipeImage.enabled = false;
 			}
+
+			levelUI.SetActive (false);
 			//Swipe Finished and reset
 
+			Debug.Log ("LevelManager StartCombat");
 			combatManager.StartCombat ();
 
         }
@@ -306,14 +310,19 @@ public class LevelManager : MonoBehaviour
 
 	public void ReturnFromCombat(bool playersWin = true)
     {
+		Debug.Log ("Return from combat");
 		if (!playersWin)
 		{
 			Debug.LogError ("Player Lost");
             //TODO go to gameover screen          
 		}
+
         SoundManager.instance.CombatToLevel();//transition to the NoCombat audio snapshot
 
         UIManager.Instance.ReturnToNormalMode ();									//return the UIManager to normal mode
+
+		levelUI.SetActive (true);
+		//TODO start return transition
 
         foreach (Character character in pParty.partyMembers)						//Turn off the playerParty members renderers off
         {
@@ -349,7 +358,9 @@ public class LevelManager : MonoBehaviour
 
 		eParty = null;
 		pParty = null;
-        
+
+		//TODO complete return transition
+
     }
 
     public void LoadScene(int sceneANumber)

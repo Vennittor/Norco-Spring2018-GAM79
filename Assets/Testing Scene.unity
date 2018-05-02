@@ -627,6 +627,26 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114784021664711690, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InputAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114130227571889426, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InputAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114644425891992496, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InputAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114066793574027156, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InputAbility
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
   m_IsPrefabParent: 0

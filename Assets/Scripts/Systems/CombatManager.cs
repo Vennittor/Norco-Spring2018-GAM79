@@ -113,9 +113,22 @@ public class CombatManager : MonoBehaviour
 		}
 
     }
-		
+
+
+	public void AddCharactersToCombat(List<Character> charactersToAdd)
+	{
+		foreach(Character characterToAdd in charactersToAdd)
+		{
+			if (!characters.Contains (characterToAdd))
+			{
+				characters.Add (characterToAdd);
+			}
+		}
+	}
+
 	public void StartCombat()
 	{
+		Debug.Log ("Start Combat");
 		if(!inCombat) 
 		{
 			inCombat = true;
@@ -132,18 +145,7 @@ public class CombatManager : MonoBehaviour
 			}
 		}
 	}
-
-    public void AddCharactersToCombat(List<Character> charactersToAdd)
-    {
-		foreach(Character characterToAdd in charactersToAdd)
-		{
-			if (!characters.Contains (characterToAdd))
-			{
-				characters.Add (characterToAdd);
-			}
-		}
-    }
-
+		
     void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
 	{
         Debug.Log ("New Round!");

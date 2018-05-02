@@ -150,18 +150,21 @@ public class Party : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-		
-        if (collision.gameObject.tag != "Enemy") //TODO change the way we check for this
-        {
-            return;
-        }
-        else if (collision.gameObject.GetComponent<Party>().type == PartyType.ENEMY)
-        {
-            //List<Character> enemies = new List<Character>();
-            Party enemyParty = collision.gameObject.GetComponent<Party>();
-            collision.gameObject.GetComponent<Collider>().enabled = false;
+		if (this.type == PartyType.PLAYER)
+		{
+			if (collision.gameObject.tag != "Enemy") //TODO change the way we check for this
+			{
+				return;
+			}
+			else if (collision.gameObject.GetComponent<Party>().type == PartyType.ENEMY)
+			{
+				//List<Character> enemies = new List<Character>();
+				Party enemyParty = collision.gameObject.GetComponent<Party>();
+				collision.gameObject.GetComponent<Collider>().enabled = false;
 
-			StartCoroutine( levelMan.InitiateCombat(this, enemyParty) );
-        }
+				StartCoroutine( levelMan.InitiateCombat(this, enemyParty) );
+			}
+		}
+
     }
 }

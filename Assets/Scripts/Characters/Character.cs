@@ -47,6 +47,8 @@ public abstract class Character : MonoBehaviour
 	public uint maxHeat;
 	public uint currentHeat;
 
+	[SerializeField] protected List<Ability> abilities;
+
     public uint attack;
     public float attackBonus;
     public float attackMod;
@@ -67,7 +69,7 @@ public abstract class Character : MonoBehaviour
 
 	public int selectedAbilityIndex;
 
-	[SerializeField] protected List<Ability> abilities;
+
 	//[SerializeField] protected List<uint> cooldownTimers;
 
 	protected bool _canActThisTurn = true;
@@ -79,6 +81,11 @@ public abstract class Character : MonoBehaviour
 		{
 			return _canActThisTurn;
 		}
+	}
+
+	public int abilityCount
+	{
+		get{ return abilities.Count; }
 	}
 
     protected void Start()

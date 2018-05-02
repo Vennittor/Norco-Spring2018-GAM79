@@ -148,35 +148,44 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-	public void OutputAttack(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
+	public void InputAbility(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
 	{
-        bool stopAbility = false;
-        foreach(Character.EffectClass effect in combatManager.activeCharacter.effectClassList)
-        {
-            if(effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
-            {
-                stopAbility = true;                
-            }
-        }
-        if (!stopAbility || (abilityIndex == 0 || abilityIndex == 3))
-		{	Debug.Log (" pre AbilitySelect");
-            if (inputMode == InputMode.ABILITYSELECT)               //
-			{	Debug.Log (" in AbilitySelect");
-                ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
-                if (ability == null)
-                {
-                    Debug.LogWarning("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
-                }
-                else
-                {
-                    GetTargets(ability.targetType);
-                }
-            }
-        }
-		else
-        {
-            Debug.Log("Madboi continues");
-        }
+		if (inputMode == InputMode.ABILITYSELECT)
+		{
+			bool stopAbility = false;
+			foreach(Character.EffectClass effect in combatManager.activeCharacter.effectClassList)
+			{
+				if(effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
+				{
+					stopAbility = true;                
+				}
+			}
+
+			if (!stopAbility)
+			{	
+				if (abilityIndex >= 0 && abilityIndex < combatManager.activeCharacter.abilityCount)
+				{
+					ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility (abilityIndex);
+
+					if (ability == null)
+					{
+						Debug.LogWarning ("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
+					}
+					else
+					{
+						GetTargets (ability.targetType);
+					}
+				}
+				else
+				{
+					Debug.LogError ("InputAbility(): abilityIndex is out of range of activeCharacters Ability list");
+				}
+			}
+			else
+			{
+				Debug.Log("Active Character ability use is blocked. ");
+			}
+		}
     }
 		
     public void OutputWaterUse()
