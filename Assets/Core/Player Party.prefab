@@ -140,7 +140,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242139476785792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.348522, y: 2.14, z: 1.9540448}
+  m_LocalPosition: {x: -11.56, y: 2.125, z: 0.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4891253443211064}
@@ -275,7 +275,7 @@ Animator:
   m_GameObject: {fileID: 1620286995922844}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f8e61d549db3d34d9a7e41f08deaff8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -349,7 +349,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   maxhealth: 50
   currentHealth: 50
-  maxHeat: 0
+  maxHeat: 300
   currentHeat: 0
   attack: 0
   attackMod: 0
@@ -367,6 +367,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 77b8dc76e800dad479da8130990b2e3a, type: 2}
   - {fileID: 11400000, guid: b43badaefcb4377408de247f9062ce8e, type: 2}
+  - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   cooldownTimers: 
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
@@ -385,7 +386,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   maxhealth: 50
   currentHealth: 50
-  maxHeat: 0
+  maxHeat: 300
   currentHeat: 0
   attack: 0
   attackMod: 0
@@ -403,6 +404,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: a04b570ddc5a93040ad129b7d1cf8541, type: 2}
   - {fileID: 11400000, guid: bd6287438c74e4c4783c3a0b6374f0c7, type: 2}
+  - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   cooldownTimers: 
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
@@ -457,7 +459,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   maxhealth: 50
   currentHealth: 50
-  maxHeat: 0
+  maxHeat: 300
   currentHeat: 0
   attack: 0
   attackMod: 0
@@ -475,6 +477,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: a04b570ddc5a93040ad129b7d1cf8541, type: 2}
+  - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   cooldownTimers: 
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3

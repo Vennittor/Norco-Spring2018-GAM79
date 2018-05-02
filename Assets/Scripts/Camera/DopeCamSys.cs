@@ -14,10 +14,13 @@ public class DopeCamSys : MonoBehaviour
     public float cameraSnapSpeed = 1.0f;
 
     public Transform cameraDock = null;
+    public new Camera camera; 
+
 
 	// Use this for initialization
 	void Start ()
     {
+        camera = FindObjectOfType<Camera>(); 
 		if (target == null) 
 		{
 			target = GameObject.FindGameObjectWithTag ("Player");
@@ -31,8 +34,26 @@ public class DopeCamSys : MonoBehaviour
 		transform.rotation = Quaternion.Euler(Vector3.zero);
         transform.position = cameraDock.transform.position;
         transform.LookAt(target.transform.position);
-
     }
+
+    public void Reposition()
+    {
+		//TODO change camera positoin to encompass all characters in within frustum
+        camera.fieldOfView += 10;
+        cameraDock = target.transform.Find("CamDock");
+    }
+
+    public void RepositionCameraToOriginalPosition()
+    {
+		//TODO set to default position
+        camera.fieldOfView -= 10;
+        cameraDock = target.transform.Find("CamDock"); 
+    }
+
+	public void SetTargetPosition(Vector3 newTargetPosition)
+	{
+		targetPosition = newTargetPosition;
+	}
 	
 	// Update is called once per frame
 	void Update ()

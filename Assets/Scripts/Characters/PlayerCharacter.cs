@@ -28,7 +28,7 @@ public class PlayerCharacter : Character
     }
 
 	protected override void ChooseAbility()					//tells UIManger to enter into an ability selection mode. It returns true if it switched modes.That script will then call ReadyAbility() based on the input given
-    {
+	{	Debug.Log("PlayerChooseAbility");
 		if (!combatManager.uiManager.AllowAbilitySelection ()) 
 		{
 			Debug.LogWarning ("UIManager cannot enter into AbilitySelect mode at the moment");

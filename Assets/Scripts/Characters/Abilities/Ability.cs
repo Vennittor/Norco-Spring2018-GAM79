@@ -11,6 +11,7 @@ public class Ability : ScriptableObject
     [SerializeField] protected string callOutText;
 
 	// COMBAT DATA
+	[SerializeField] private int heatCost = 0;  //TODO impement heat damage to user on Ability use.
 	public TargetType targetType;
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
 	[SerializeField] protected List<StatusEffectType> statuses = new List<StatusEffectType>();
@@ -31,13 +32,13 @@ public class Ability : ScriptableObject
 
     
 
-	public uint Cooldown 
+	/*public uint Cooldown 
 	{
 		get
 		{
 			return _cooldown;
 		}
-	}
+	}*/
 
 	public string targetName 
 	{
@@ -91,7 +92,7 @@ public class Ability : ScriptableObject
 	public void SetTargets(List<Character> targetsToSet)	
 	{
 		targets.Clear ();
-		targets = targetsToSet;
+		targets.AddRange(targetsToSet);
 	}
 	public void SetTargets(Character targetToSet)			//Overload method for SetTargets to accept only a single Character instead of needing a list
 	{
@@ -105,8 +106,8 @@ public class Ability : ScriptableObject
     }
 
 	public void UseAbility()
-    {
-		if (targets.Count == 0) 
+	{
+		if (targets.Count == 0)
 		{
 			Debug.LogWarning ("There are no targets for Abiility " + name);
 		} 
@@ -126,23 +127,22 @@ public class Ability : ScriptableObject
 
             AnnounceAbility();
 
-			for(int hitsDone = 0; hitsDone < hitsPerAction; hitsDone ++)
+			for(int hitsDone = 0; hitsDone < hitsPerAction; hitsDone++)
 			{
 				foreach (Character target in targets)					// Target all applicable targets
 				{ 
 					foreach (Damage range in damage)					// Deal all types of Damage in List
-					{ 
+					{
 						target.ApplyDamage ( (uint)range.RollDamage(), range.element);
 					} 
 
 					foreach (StatusEffectType status in statuses)					// Apply all Status affects
 					{ 
-						//target.ApplyStatus(status);						// TODO Greg: commenting out because Tandy's unused stuff needed it, will replace with new setup
+						target.ApplyStatus(status);
 					} 
 				}
 				//TODO Wait Between hits
 			}
-				
 		}
 
 		actionsUsed++;
@@ -173,8 +173,8 @@ public class Ability : ScriptableObject
 			}
 				
 			actionsUsed = 0;
-
-			characterUser.AbilityHasCompleted();
+            ApplyAbilityHeatCost(); //applies the heat cost of the ability(positive or negative)
+            characterUser.AbilityHasCompleted();
 			characterUser = null;
 		}
 	}
@@ -185,5 +185,18 @@ public class Ability : ScriptableObject
 		Announcer.UseAbility(characterUser.gameObject.name, targetName, abilityName, callOutText);
     }
 
-    
+    public void ApplyAbilityHeatCost()
+    {
+        Debug.Log(characterUser.name + " has aquired " + heatCost + " after using their ability");
+        //characterUser.currentHeat += (uint)Mathf.Clamp(heatCost, 0, (characterUser.maxHeat - characterUser.currentHeat));
+        if(heatCost > 0)
+        {
+            characterUser.DealHeatDamage(heatCost);  //uses dealheatdamage to apply the heat cost of the ability, while still being clamped
+        }
+        else if(heatCost < 0)
+        {
+            characterUser.ReduceHeat((uint)heatCost);  //for an ability that can "cool off" the player (reduce their heat level)
+        }
+    }
+
 }

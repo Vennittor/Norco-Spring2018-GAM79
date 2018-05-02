@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
         {
             if (uIInstance == null)
             {
-                uIInstance = new UIManager();
+				uIInstance = new UIManager();	Debug.Log ("new UIManager created");
             }
             return uIInstance;
         }
@@ -22,9 +22,13 @@ public class UIManager : MonoBehaviour
     public CombatManager combatManager;
     public EventSystemManager eventSystemManager;
 
+	public bool disableUIOnStart = true;
+
 	public GameObject splashMessagePanel;
 	public Text splashMessageText;
 	public float splashLifeTime = 1.0f;
+
+	public GameObject actionSlider;
 
 	public List<Button> skillButtons = new List<Button> ();
 
@@ -43,32 +47,50 @@ public class UIManager : MonoBehaviour
 	TargetType searchingTargetType;
 
     #region Unity Functions
-    void Awake()
+	public void Awake()
     {
         if (uIInstance != null && uIInstance != this)
         {
+			Debug.LogError ("more than one UIManager in scene.  Removing this one");
             Destroy(gameObject);
             return;
         }
 
         uIInstance = this;
+
+		this.gameObject.transform.SetParent(null);
+
         DontDestroyOnLoad(gameObject);
+
+		Debug.Log ("UIManager Awake");
     }
 
-    public void Start ()
-    {
+	public void Start()
+	{
+		SetMode_Normal ();
+		collectedTargets = new List<Character>();
+
 		Announcer.combatUIManager = UIManager.Instance;
 		Announcer.announcementDestination = splashMessageText;
-        combatManager = CombatManager.Instance;
-        eventSystemManager = EventSystemManager.Instance;
+		combatManager = CombatManager.Instance;
+		eventSystemManager = EventSystemManager.Instance;
 
-		inputMode = InputMode.NORMAL;
-        collectedTargets = new List<Character>();
+		actionSlider = this.gameObject.transform.Find ("Action Slider").gameObject;
 
-    }
+		if (disableUIOnStart)
+		{
+			this.gameObject.SetActive (false);
+		}
+	}
 
     public void Update()
 	{
+		//TODO TESTING		//TODO Change to inputMode may be coming from outside.
+		if (Input.GetKeyDown (KeyCode.U))
+		{
+			Debug.Log ("input = " + inputMode.ToString ());
+		}
+
 		HighlightTargets ();
 
         if (Input.GetMouseButtonDown (0)) 						//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
@@ -126,32 +148,44 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-	public void OutputAttack(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
+	public void InputAbility(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
 	{
-        int length = combatManager.activeCharacter.effectStructList.Count;
-        foreach(Character.EffectStruct effect in combatManager.activeCharacter.effectStructList)
-        {
-            if(effect.statusEffectType != StatusEffectType.Berserk) //TODO move out of this level
-            {
-                length--;                
-            }
-        }
-        if (length == 0)
-        {
-            if (inputMode == InputMode.ABILITYSELECT)               //
-            {
-                ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
-                if (ability == null)
-                {
-                    Debug.LogWarning("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
-                }
-                else
-                {
-                    GetTargets(ability.targetType);
-                }
-            }
-        }
-		
+		if (inputMode == InputMode.ABILITYSELECT)
+		{
+			bool stopAbility = false;
+			foreach(Character.EffectClass effect in combatManager.activeCharacter.effectClassList)
+			{
+				if(effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
+				{
+					stopAbility = true;                
+				}
+			}
+
+			if (!stopAbility)
+			{	
+				if (abilityIndex >= 0 && abilityIndex < combatManager.activeCharacter.abilityCount)
+				{
+					ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility (abilityIndex);
+
+					if (ability == null)
+					{
+						Debug.LogWarning ("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
+					}
+					else
+					{
+						GetTargets (ability.targetType);
+					}
+				}
+				else
+				{
+					Debug.LogError ("InputAbility(): abilityIndex is out of range of activeCharacters Ability list");
+				}
+			}
+			else
+			{
+				Debug.Log("Active Character ability use is blocked. ");
+			}
+		}
     }
 		
     public void OutputWaterUse()
@@ -169,22 +203,22 @@ public class UIManager : MonoBehaviour
 	#region Internal Mode Switches
 	private void SetMode_Normal() 
 	{
-		inputMode = InputMode.NORMAL; 
+		inputMode = InputMode.NORMAL;		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	private void SetMode_Select ()
 	{
-		inputMode = InputMode.ABILITYSELECT; 
+		inputMode = InputMode.ABILITYSELECT; 		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	private void SetMode_Targeting()
 	{
-		inputMode = InputMode.TARGETING;
+		inputMode = InputMode.TARGETING;		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	private void SetMode_Blocked()
 	{
-		inputMode = InputMode.BLOCKED;
+		inputMode = InputMode.BLOCKED;		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
 	public bool BlockInput()
@@ -247,6 +281,7 @@ public class UIManager : MonoBehaviour
 		collectedTargets.Clear ();
 
 		searchingTargetType = null;
+
     }
 
 
@@ -286,9 +321,8 @@ public class UIManager : MonoBehaviour
 
 			if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, targetable))
 			{
-                Debug.LogError(hitInfo.collider.gameObject.name);
 
-				if (hitInfo.collider.gameObject.GetComponent<Character> () == null || hitInfo.collider.gameObject.GetComponent<Character>().combatState == Character.CombatState.EXHAUSTED) 						//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
+				if (hitInfo.collider.gameObject.GetComponent<Character> () == null || hitInfo.collider.gameObject.GetComponent<Character>().combatState == Character.CombatState.EXHAUSTED) 			//if we did not hit a Character then the previousCharater becomes null, and we don't do anything
 				{
 					previousHitCharacter = null;
                     collectedTargets.Clear();

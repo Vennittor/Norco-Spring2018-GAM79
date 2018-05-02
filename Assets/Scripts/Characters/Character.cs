@@ -10,25 +10,36 @@ public abstract class Character : MonoBehaviour
     {
         ABLE, DISABLED, USINGABILITY, EXHAUSTED
     }
-
-    public struct EffectStruct
+    [System.Serializable]
+    public class EffectClass
     {
         public StatusEffectType statusEffectType;
+        public bool isBuff;
         public int duration;
+        public bool applyImmediately;
         public bool checkAtStart;
 
-        public EffectStruct(StatusEffectType statusType, int duration, bool checkStart)
+        public EffectClass(StatusEffectType statusType, bool isBuff, int duration, bool applyNow, bool checkStart)
         {
             statusEffectType = statusType;
+            this.isBuff = isBuff;
             this.duration = duration;
+            applyImmediately = applyNow;
             checkAtStart = checkStart;
         }
+
+        public void DecDuration()
+        {
+            duration--;
+        }
     }
-    public List<EffectStruct> effectStructList;
+    public List<EffectClass> effectClassList;
+    public List<StatusEffectType> statuses;
+    public List<EffectClass> removeStatus;
 
     public string characterName;
 	public Animator animator;
-    public StatusEffect statusEffect;
+    protected StatusEffect statusEffect;
 
 	public uint maxhealth;
 	public uint currentHealth;
@@ -36,23 +47,30 @@ public abstract class Character : MonoBehaviour
 	public uint maxHeat;
 	public uint currentHeat;
 
-    public float attack;
+	[SerializeField] protected List<Ability> abilities;
+
+    public uint attack;
+    public float attackBonus;
     public float attackMod;
     public float accuracy;
+    public float accuracyBonus;
     public float accuracyMod;
 	public float evade;
+    public float evadeBonus;
     public float evadeMod;
-    public float speed;
+    public uint speed;
+    public float speedBonus;
     public float speedMod;
     public uint defense;
-    public uint defenseMod;
+    public float defenseBonus;
+    public float defenseMod;
 
 	public CombatState combatState;
 
 	public int selectedAbilityIndex;
 
-	[SerializeField] protected List<Ability> abilities;
-	[SerializeField] protected List<uint> cooldownTimers;
+
+	//[SerializeField] protected List<uint> cooldownTimers;
 
 	protected bool _canActThisTurn = true;
 
@@ -65,21 +83,29 @@ public abstract class Character : MonoBehaviour
 		}
 	}
 
+	public int abilityCount
+	{
+		get{ return abilities.Count; }
+	}
+
     protected void Start()
     {
+        statusEffect = new StatusEffect();
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
-        effectStructList = new List<EffectStruct>();
+        effectClassList = new List<EffectClass>();
+        statuses = new List<StatusEffectType>();
+        removeStatus = new List<EffectClass>();
 		if (animator == null) 
 		{
 			animator = GetComponent<Animator> ();
 		}
 
-        cooldownTimers = new List<uint>();									//enfore size of cooldownTimers to abilities and set the timer to 0
-		foreach(Ability ability in abilities)
+      //  cooldownTimers = new List<uint>();									//enfore size of cooldownTimers to abilities and set the timer to 0
+		/*foreach(Ability ability in abilities)
 		{
 			cooldownTimers.Add(0);
-		}
+		}*/
         accuracy = 84.5f;
         evade = 10;
         selectedAbilityIndex = -1;
@@ -89,14 +115,26 @@ public abstract class Character : MonoBehaviour
 	{
 		Announcer.BeginTurn (this.characterName);
 
-		if (effectStructList.Count > 0)
+        if (statuses.Contains(StatusEffectType.Stun))
+        {
+            Debug.Log("Boi got knocked in the head");
+            this.combatState = CombatState.DISABLED;
+        }
+		if (effectClassList.Count > 0)
 		{
-			foreach (EffectStruct effect in effectStructList)
+			foreach (EffectClass status in effectClassList)
 			{
-				if (effect.checkAtStart == true)
+				if (status.checkAtStart == true)
 				{
-					//do something
-				}
+                    if (!status.isBuff)
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
+                    else if (status.isBuff && !statuses.Contains(status.statusEffectType))
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
+                }
 			}
 		}
 
@@ -129,8 +167,8 @@ public abstract class Character : MonoBehaviour
 			return null;
 		}
 
-		if (cooldownTimers[abilityIndex] == 0)
-		{
+		/*if (cooldownTimers[abilityIndex] == 0)
+		{*/
 			if (animator != null)
 			{
 				animator.SetBool ("Ready", true);
@@ -146,16 +184,16 @@ public abstract class Character : MonoBehaviour
 			abilities [selectedAbilityIndex].StartAbility ();
 
 			return abilities [selectedAbilityIndex];
-		}
+		/*}
 		else
 		{
 			Debug.Log ( this.gameObject.name + "'s Ability at index " + selectedAbilityIndex.ToString()+ " is on cooldown");
 			return null;
-		}
+		}*/
 
 	}
 
-	public void UseAbility(List<Character> targets)
+	public void UseAbility(List<Character> targets, float modifier = 0.0f)
 	{
 		if (selectedAbilityIndex < 0 || selectedAbilityIndex >= abilities.Count) 
 		{
@@ -175,7 +213,7 @@ public abstract class Character : MonoBehaviour
 
 	public void AbilityHasCompleted(CombatState enterNewState = CombatState.ABLE)
 	{	Debug.Log (this.gameObject.name + "'s ability has completed.");
-		cooldownTimers [selectedAbilityIndex] = abilities [selectedAbilityIndex].Cooldown;
+		//cooldownTimers [selectedAbilityIndex] = abilities [selectedAbilityIndex].Cooldown;
 
 		selectedAbilityIndex = -1;
 
@@ -188,15 +226,53 @@ public abstract class Character : MonoBehaviour
 	{	Debug.Log (this.gameObject.name + " is ending their turn.");
 		if (combatManager.activeCharacter == this)
 		{
-            foreach (EffectStruct effect in effectStructList)
+            foreach (EffectClass status in effectClassList)
             {
-                if (effect.checkAtStart == false)
+                if (status.checkAtStart == false)
                 {
-                    //do something
+                    if (!status.isBuff)
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
+                    else if (status.isBuff && !statuses.Contains(status.statusEffectType))
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
+                }
+
+                if (status.statusEffectType == StatusEffectType.Smoke)
+                {
+                    if (statusEffect.smokeTurnCounter != combatManager.roundCounter)
+                    {
+                        if (status.duration != -1)
+                        {
+                            status.DecDuration();
+                        }
+                        if (status.duration == 0)
+                        {
+                            removeStatus.Add(status);
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Wait one more turn");
+                    }
+                }
+                else
+                {
+                    if (status.duration != -1)
+                    {
+                        status.DecDuration();
+                    }
+                    if (status.duration == 0)
+                    {
+                        removeStatus.Add(status);
+                    }
                 }
             }
+            RemoveStatuses();
 
-            ProgressCooldowns ();
+           // ProgressCooldowns ();
 
 			combatManager.NextTurn();
 			//TODO uiManager.BlockInput until next PlayerCharacter starts turn
@@ -206,13 +282,30 @@ public abstract class Character : MonoBehaviour
 			Debug.LogWarning ("Attempting to run EndTurn() on " + this.gameObject.name + " while they are not the gameManager.activeCharacter. This normally should not be done.");
 		}
 	}
+    public void RemoveStatuses()
+    {
+        foreach (EffectClass status in removeStatus)
+        {
+            if (status.statusEffectType == StatusEffectType.Stun)
+            {
+                combatState = CombatState.ABLE;
+            }
+            if (status.isBuff)
+            {
+                statusEffect.RemoveStatus(this, status.statusEffectType);
+            }
+            effectClassList.Remove(status);
+            statuses.Remove(status.statusEffectType);
+        }
+        removeStatus.Clear();
+    }
 		
-	private void StartCooldown(int i = 0)
+	/*private void StartCooldown(int i = 0)
 	{
 		cooldownTimers[i] = abilities[i].Cooldown;
-	}
+	}*/
 
-	public void ProgressCooldowns()
+	/*public void ProgressCooldowns()
 	{
 		for (int i = 0; i < cooldownTimers.Count; i++) 
 		{
@@ -221,7 +314,7 @@ public abstract class Character : MonoBehaviour
 				cooldownTimers[i]--;
 			}
 		}
-	}
+	}*/
 
 
     public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
@@ -267,14 +360,15 @@ public abstract class Character : MonoBehaviour
 		currentHealth = (currentHealth + healing) > maxhealth ? maxhealth : (currentHealth + healing);
 	}
 
-    void ReduceHeat(uint amount = 0)
+    public void ReduceHeat(uint amount = 0)
     {
-        currentHeat -= (uint)Mathf.Clamp((float)amount, 0f, (float)currentHeat);
+        currentHeat -= (uint)Mathf.Clamp(amount, 0, currentHeat);
     }
 
     public void DealHeatDamage(int heatDamage)
     {
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
+        Debug.Log(name + " current heat is " + currentHeat);
         CheckHeatThreshold();
     }
 
@@ -283,19 +377,23 @@ public abstract class Character : MonoBehaviour
         if (currentHeat >= 100)
         {
             print("my heat is now 100, im a little thirsty");
-            statusEffect.LethargyStatus();
+            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Lethargy));
         }
         else if (currentHeat >= 200)
         {
             print("my heat is now 200, i need AC");
-            statusEffect.BerserkStatus();
+            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Berserk));
         }
         else if (currentHeat == 300)
         {
             print("my heat has reached 300, i am now stunned"); //TODO clean up here
-            //statusEffect.StunAbility();
-            combatManager.activeCharacter.EndTurn();
+            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Stun));
+            //combatManager.activeCharacter.EndTurn();
             combatManager.activeCharacter.currentHeat = 200;
+        }
+        else
+        {
+            //return;
         }
     }
 
@@ -313,13 +411,19 @@ public abstract class Character : MonoBehaviour
         Debug.Log("Bleed Damage is not currently implemented, Physical damage was dealt instead.");
     }
 
-    //public void ApplyStatus(StatusEffectType status)
-    //{                                               // Tandy: added this to work with Ability
-    //    if (effectStructList.Contains(status) == false)         // if not already affected by Status
-    //    {
-    //        effectStructList.Add(status); 					// add Status to List to show it affects Character
-    //    }
-    //}
+    public void ApplyStatus(StatusEffectType status)
+    {                                               // Tandy: added this to work with Ability
+        if (!statuses.Contains(status))         // if not already affected by Status
+        {
+            EffectClass statusClass = statusEffect.AddStatus(status);
+            effectClassList.Add(statusClass); 					// add Status to List to show it affects Character
+            statuses.Add(status);
+            if (statusClass.applyImmediately)
+            {
+                statusEffect.Apply(this, status);
+            }
+        }
+    }
 
     public void Faint()
     {

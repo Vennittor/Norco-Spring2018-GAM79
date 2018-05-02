@@ -14,6 +14,7 @@ MonoBehaviour:
   abilityName: Smash Attack
   description: 
   callOutText: 
+  heatCost: 0
   targetType:
     _who: 2
     _formation: 1
@@ -24,6 +25,7 @@ MonoBehaviour:
     - {x: 1, y: 6}
     - {x: 1, y: 6}
     elementType: 0
+  statuses: 
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 0

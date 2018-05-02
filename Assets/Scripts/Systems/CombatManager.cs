@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
     public static CombatManager combatInstance;
 	public UIManager uiManager;
     private static Announcer announcer;
+    
+	public LevelManager levelManager;
+
+    public AudioClip battleSong;
 
     public bool inCombat = false;
 
@@ -21,6 +26,24 @@ public class CombatManager : MonoBehaviour
 	public uint roundCounter = 0;
 
     public uint partyHeatLevel;
+
+    //for the action slider start
+	public GameObject actionSlider;
+    public Slider slider;
+    public Image completionArea;
+
+    public float fillTime = 1;
+
+    [Range(0, 100)]
+    public float midPoint;
+    public float distanceBetweenInPoints;
+
+    public float startDelay = 0.5f;
+
+    bool started = false;
+    //for the action slider end
+
+    private List<Character> finalizedTargets = new List<Character> ();
 
     public static CombatManager Instance
     {
@@ -51,11 +74,14 @@ public class CombatManager : MonoBehaviour
 
         combatInstance = this;
 
+		this.gameObject.transform.SetParent(null);
+
         DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
+		levelManager = LevelManager.Instance;
 		uiManager = UIManager.Instance;
 
         characters = new List<Character>();
@@ -64,40 +90,66 @@ public class CombatManager : MonoBehaviour
         activeEnemies = new List<EnemyCharacter>();
 
         partyHeatLevel = 0;
-    }
-		
-	public void StartCombat()
-	{
-		if(!inCombat) 
+
+		if (actionSlider == null)
 		{
-			inCombat = true;
-		}
-		else
-		{
-			return;
+			actionSlider = uiManager.actionSlider;
+
+			if (actionSlider == null)
+			{
+				actionSlider = GameObject.Find ("Action Slider");
+			}
 		}
 
-		roundCounter = 0;
-		if (characters.Count != 0)
+		if (actionSlider != null)
 		{
-			StartRound ();
+			slider = actionSlider.GetComponent<Slider> ();
+
+			completionArea = actionSlider.transform.Find ("Completion Area").GetComponent<Image>();
 		}
-		else
+		if (actionSlider == null)
 		{
-			Debug.LogError("There are no Characters in the scene");
+			Debug.LogError ("CombatManager cannot find Action Slider gamObject");
+		}
+
+    }
+
+
+	public void AddCharactersToCombat(List<Character> charactersToAdd)
+	{
+		foreach(Character characterToAdd in charactersToAdd)
+		{
+			if (!characters.Contains (characterToAdd))
+			{
+				characters.Add (characterToAdd);
+			}
 		}
 	}
 
-    public void AddCharactersToCombat(List<Character> charactersToAdd)
-    {
-        characters.AddRange(charactersToAdd);
-    }
+	public void StartCombat()
+	{
+		Debug.Log ("Start Combat");
+		if(!inCombat) 
+		{
+			inCombat = true;
+            SoundManager.instance.Play(battleSong, "mxC");
 
+			roundCounter = 0;
+			if (characters.Count != 0)
+			{
+				StartRound ();
+			}
+			else
+			{
+				Debug.LogError("There are no Characters in the scene");
+			}
+		}
+	}
+		
     void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
-	{	Debug.Log ("New Round!");
+	{
+        Debug.Log ("New Round!");
 		roundCounter++;
-		//Check time left on status effects
-		//Check cooldowns on Abilities
 		SortRoundQueue();
 
 		activeCharacter.BeginTurn ();
@@ -124,7 +176,6 @@ public class CombatManager : MonoBehaviour
 
     void CombatHeatDealer()
     {
-        Debug.LogError(partyHeatLevel);
         if (partyHeatLevel > 0)
         {
             foreach (PlayerCharacter player in activePlayers)
@@ -138,7 +189,8 @@ public class CombatManager : MonoBehaviour
 	public void NextTurn() // active player finishing their turn calls this
 	{
 		if (!VictoryCheck())
-		{	Debug.Log (activeCharacter.gameObject.name + " is removed from the queu");
+		{
+            Debug.Log (activeCharacter.gameObject.name + " is removed from the queue");
 			currentRoundCharacters.Remove(activeCharacter); // The activeCharacter is removed from the current round
             if (currentRoundCharacters.Count == 0) // if they were the last one to leave, then end the round
 			{
@@ -165,32 +217,40 @@ public class CombatManager : MonoBehaviour
 	}
 
 	void EndCombat(bool playerVictory)
-	{	Debug.Log ("End Combat");
-		partyHeatLevel = 0;
-		characters.Clear();
+	{
+		ClearCombatManager ();
 
-		activeCharacter = null;
-		activePlayers.Clear();
-		activeEnemies.Clear();
+		inCombat = false;
 
-		currentRoundCharacters.Clear();
-
-		if (playerVictory == true)				// party wins
+        Debug.Log ("End Combat");
+		if (playerVictory == true) // party wins
 		{
 			Debug.Log ("Party Wins");
-
-			inCombat = false;
-            //TODO Combat rewards?
+            
+            //Combat rewards?
             LevelManager.Instance.ReturnFromCombat();
 		}
-		else if (playerVictory == false)		// party loses
+		else if (playerVictory == false) // party loses
 		{
 			Debug.Log ("Party Loses");
 
-            inCombat = false;
-
-            LevelManager.Instance.ReturnFromCombat();
+            //Goto Defeat or Gameover GameState
+            LevelManager.Instance.ReturnFromCombat(false);
 		}
+	}
+
+	//reset values and character list back to 0/null
+	void ClearCombatManager()
+	{
+		roundCounter = 0;
+
+		activeCharacter = null;
+
+		currentRoundCharacters.Clear ();
+		activePlayers.Clear ();
+		activeEnemies.Clear ();
+
+		characters.Clear ();
 	}
 
 	//This ends combat, cleanup, return level/field movement, and handling player victory/defeat should be performed or started here
@@ -298,14 +358,103 @@ public class CombatManager : MonoBehaviour
 	#region Targeting and Ability Use
 	public void AssignTargets(List<Character> targetsToAssign)
 	{
-		List<Character> finalizedTargets = new List<Character> ();
 		//check if the character using the Ability (most likely activeCharacter) has any effect that would cause them to change targets, like StatusEffect confusion.
 		//check if the intended targets have any re-direction effects, (like Cover, or Reflect)
 		//Find new targets if needed.  This should be done within CombatManger and not UIManager
 
 		finalizedTargets.AddRange (targetsToAssign);
 
-		activeCharacter.UseAbility (finalizedTargets);
+		//TODO  Handle the SLIDER here.  Once it's input is gotten (in the form of a multiplier/modifier) run the next and pass it the multiplier
+
+		//IF we should use the SLider,  (Check activeCharacter.selectedAbility and see if it should.  (this needs to be added to the Ability class
+			//enable slider.
+
+		if (activeCharacter is PlayerCharacter)
+		{
+			StartCoroutine(ActionSlider());
+		}
+		else
+		{
+			UseCharacterAbility ();
+		}
+
+	}
+
+	private IEnumerator ActionSlider()
+	{
+		actionSlider.SetActive(true);
+
+		float modifiedEffect = 0f;
+        float midMin = 25;
+        float midMax = 85;
+
+        //Start
+		slider.value = 0;
+		slider.maxValue = fillTime;
+
+        //Create the visual for the stopping area
+		float sliderSize = slider.GetComponent<RectTransform>().sizeDelta.y;
+        sliderSize *= midPoint * 0.01f;
+		sliderSize -= slider.GetComponent<RectTransform>().sizeDelta.y / 2;
+        completionArea.GetComponent<RectTransform>().localPosition = Vector3.zero + (Vector3.up * sliderSize);
+
+        completionArea.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, distanceBetweenInPoints * 2 * (actionSlider.GetComponent<RectTransform>().sizeDelta.y * 0.01f));
+        midPoint = Random.Range(midMin, midMax);
+        yield return new WaitForSeconds(startDelay);
+
+        //Do the thing
+        bool going = true;
+        while (going)
+        {
+			slider.value += Time.deltaTime * fillTime;
+
+			if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine("TestingThe1337m0dz");
+
+                float width = distanceBetweenInPoints * 2;
+
+                float minVal = midPoint - width / 2;
+                float maxVal = midPoint + width / 2;
+
+                print(minVal + ", " + maxVal);
+
+				float val = slider.value * 100;
+
+                if (val >= minVal && val <= maxVal)
+                {
+                    print("you hit it!" + val);
+                }
+                else
+                {
+                    print("ya bum!" + val);
+                }
+
+                going = false;
+            }
+
+            yield return null;
+			if (slider.value >= 1)
+            {
+                print("you didnt press anything");
+                going = false;
+            }
+        }
+
+        started = false;
+        Debug.Log("ACTION");
+
+		yield return null;
+
+		uiManager.actionSlider.SetActive(false);
+		UseCharacterAbility (modifiedEffect);
+	}
+
+	void UseCharacterAbility(float modifier = 0.0f)
+	{
+		activeCharacter.UseAbility (finalizedTargets, modifier);
+
+		finalizedTargets.Clear ();
 	}
 
 	public void AssignTargets(Character targetToAssign)			//Overload to take in a single Character as opposed to a List
@@ -322,5 +471,9 @@ public class CombatManager : MonoBehaviour
 	//Function Redirect Target
 
 	#endregion
-
+     public IEnumerator TestingThe1337m0dz()
+    {
+        //robert is working here to test the modifier for the action slider
+        yield return null;
+    }
 }
