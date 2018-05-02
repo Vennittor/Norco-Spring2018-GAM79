@@ -135,7 +135,13 @@ public class CombatManager : MonoBehaviour
 
     public void AddCharactersToCombat(List<Character> charactersToAdd)
     {
-        characters.AddRange(charactersToAdd);
+		foreach(Character characterToAdd in charactersToAdd)
+		{
+			if (!characters.Contains (characterToAdd))
+			{
+				characters.Add (characterToAdd);
+			}
+		}
     }
 
     void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
@@ -210,12 +216,15 @@ public class CombatManager : MonoBehaviour
 
 	void EndCombat(bool playerVictory)
 	{
+		ClearCombatManager ();
+
+		inCombat = false;
+
         Debug.Log ("End Combat");
 		if (playerVictory == true) // party wins
 		{
 			Debug.Log ("Party Wins");
             
-			inCombat = false;
             //Combat rewards?
             LevelManager.Instance.ReturnFromCombat();
 		}
@@ -223,11 +232,14 @@ public class CombatManager : MonoBehaviour
 		{
 			Debug.Log ("Party Loses");
 
-            inCombat = false;
             //Goto Defeat or Gameover GameState
-            LevelManager.Instance.ReturnFromCombat();
+            LevelManager.Instance.ReturnFromCombat(false);
 		}
+	}
 
+	//reset values and character list back to 0/null
+	void ClearCombatManager()
+	{
 		roundCounter = 0;
 
 		activeCharacter = null;
@@ -237,7 +249,6 @@ public class CombatManager : MonoBehaviour
 		activeEnemies.Clear ();
 
 		characters.Clear ();
-
 	}
 
 	//This ends combat, cleanup, return level/field movement, and handling player victory/defeat should be performed or started here

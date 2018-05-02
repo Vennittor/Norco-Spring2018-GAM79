@@ -220,8 +220,7 @@ public class LevelManager : MonoBehaviour
 
             //TODO should the Swipe pause for a moment?
 
-            //TODO set all Character in combat stage
-
+            //set all Character in combat stage/positions
             SetCombatPoint(enemy, player); // set combat point
 
             foreach (Character character in player.partyMembers)					//Turn on the player Party members renderers and Colliders on
@@ -347,6 +346,9 @@ public class LevelManager : MonoBehaviour
 		pParty.GetComponent<KeysToMove> ().movementAllowed = true;
 
         camDock.RepositionCameraToOriginalPosition(); 
+
+		eParty = null;
+		pParty = null;
         
     }
 
