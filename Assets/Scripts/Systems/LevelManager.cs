@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -27,10 +27,16 @@ public class LevelManager : MonoBehaviour
     public Transform playerStartTransform;
     public Transform playerCombatTransform;
     public Transform enemyCombatTransform;
+
     public GameObject heatWavePrefab; 
 
     [SerializeField]
-    DopeCamSys camDock; 
+    DopeCamSys camDock;
+    public float x;
+    public float y;
+    public float z;
+    public Transform startCombatTransform;
+    public Transform endCombatPosition;
 
     public static LevelManager Instance
     {
@@ -155,7 +161,7 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-
+        
     }
 
     public void GetHeat(uint heat)
@@ -172,12 +178,40 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    public IEnumerator SetNewCombatPosition(float x, float y, float z, Transform startCombatTransform, Transform endCombatPosition)
+    {
+        Vector3 startPosition = new Vector3(startCombatTransform.position.x, startCombatTransform.position.y, startCombatTransform.position.z);
+        Vector3 endPosition = new Vector3(endCombatPosition.position.x, endCombatPosition.position.y, endCombatPosition.position.z);
+        
+        while(playerCombatTransform.transform.transform.position.x < x)
+        {
+            playerCombatTransform.transform.position = new Vector3(startCombatTransform.position.x + 1, startCombatTransform.position.y, startCombatTransform.position.z);
+            break; 
+        }
+
+        if(enemyCombatTransform.transform.transform.position.x < x)
+        enemyCombatTransform.transform.position = new Vector3(endCombatPosition.position.x - 2, endCombatPosition.position.y, endCombatPosition.position.z + 1);
+
+        Debug.Log(startCombatTransform.position);
+        Debug.Log(endCombatPosition.position);
+        camDock.Reposition();
+
+        playerParty.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.1f);
+
+        if(Time.time > 0)
+
+        playerParty.gameObject.SetActive(true);
+    }
+
     public void SetCombatPoint(Party enemyParty, Party playerParty)
     {
-        camDock.Reposition(); 
+       /* camDock.Reposition(); 
         Transform partyPos = playerParty.transform.GetComponent<Transform>();
         enemyCombatTransform.position = new Vector3(partyPos.position.x + 5, partyPos.position.y, partyPos.position.z);
         enemyParty.GetComponent<Transform>().position = enemyCombatTransform.position;
+        */
     }
 
 	public IEnumerator InitiateCombat(Party player, Party enemy)
@@ -188,7 +222,8 @@ public class LevelManager : MonoBehaviour
 			pParty = player;
 			eParty = enemy;
 
-			player.GetComponent<KeysToMove> ().movementAllowed = false;
+            playerParty.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            player.GetComponent<KeysToMove> ().movementAllowed = false;
 
 			//Perform Enter 'swipe'
 			Vector2 startingAnchorMin = Vector2.zero;
@@ -221,7 +256,13 @@ public class LevelManager : MonoBehaviour
             //TODO should the Swipe pause for a moment?
 
             //set all Character in combat stage/positions
-            SetCombatPoint(enemy, player); // set combat point
+            yield return new WaitForSeconds(2.0f);
+            Debug.Log(Time.time); 
+            StartCoroutine(SetNewCombatPosition(x,y,z, startCombatTransform, endCombatPosition));
+            StopCoroutine(SetNewCombatPosition(x, y, z, startCombatTransform, endCombatPosition));
+
+           // playerParty.gameObject.SetActive(false);
+            //  SetCombatPoint(enemy, player); // set combat point
 
             foreach (Character character in player.partyMembers)					//Turn on the player Party members renderers and Colliders on
 			{
@@ -270,8 +311,9 @@ public class LevelManager : MonoBehaviour
 			enemy.GetComponent<Collider>().enabled = false;
 
 			combatUI.SetActive(true);
+            playerParty.gameObject.SetActive(true);
 
-			combatManager.AddCharactersToCombat(player.partyMembers);
+            combatManager.AddCharactersToCombat(player.partyMembers);
 			combatManager.AddCharactersToCombat(enemy.partyMembers);
 			combatManager.HeatValueTaker(partyHeatIntensity);
 
@@ -302,11 +344,18 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("CombatManger is currently running combat, collision and Initiate Combat calls should no longer be called.");
+           // Debug.LogError("CombatManger is currently running combat, collision and Initiate Combat calls should no longer be called.");
         }
     }
 
-	public void ReturnFromCombat(bool playersWin = true)
+    /*
+    private IEnumerator SetNewCombatPosition(float x, object y, float z, object startCombatTransform, object endCombatPosition)
+    {
+        throw new NotImplementedException();
+    }
+    */
+
+    public void ReturnFromCombat(bool playersWin = true)
     {
 		Debug.Log ("Return from combat");
 		if (!playersWin)
