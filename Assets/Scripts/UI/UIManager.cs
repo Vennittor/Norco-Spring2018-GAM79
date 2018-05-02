@@ -236,7 +236,6 @@ public class UIManager : MonoBehaviour
 	}
 	public bool AllowAbilitySelection()
 	{
-        Debug.Log ("Allow");
 		if (inputMode != InputMode.BLOCKED)
 		{
 			SetMode_Select ();

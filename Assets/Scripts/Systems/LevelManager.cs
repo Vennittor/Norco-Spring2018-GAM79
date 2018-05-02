@@ -182,7 +182,6 @@ public class LevelManager : MonoBehaviour
 
 	public IEnumerator InitiateCombat(Party player, Party enemy)
 	{
-		Debug.Log ("Initiate Combat");
         if(!combatManager.inCombat)
 		{
 			SoundManager.instance.LevelToCombat();//transition to NoLevel snapshot
@@ -298,7 +297,6 @@ public class LevelManager : MonoBehaviour
 			levelUI.SetActive (false);
 			//Swipe Finished and reset
 
-			Debug.Log ("LevelManager StartCombat");
 			combatManager.StartCombat ();
 
         }
