@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager _instance;
+	private static LevelManager _instance;
 
     public AudioClip levelMusic;
 
-    public CombatManager combatManager;
+	public CombatManager combatManager;
 
 	public GameObject combatUI;
 	public GameObject levelUI;
@@ -19,8 +19,8 @@ public class LevelManager : MonoBehaviour
 	public Image swipeImage;
 
     public GameObject playerParty;
-	[SerializeField] private Party pParty;
-	[SerializeField] private Party eParty;
+	private Party pParty;
+	private Party eParty;
     public uint partyHeatIntensity;
 
     public Transform cameraTarget;
