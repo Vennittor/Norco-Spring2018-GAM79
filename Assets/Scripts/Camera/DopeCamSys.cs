@@ -14,7 +14,7 @@ public class DopeCamSys : MonoBehaviour
     public float cameraSnapSpeed = 1.0f;
 
     public Transform cameraDock = null;
-    public Camera camera; 
+    public new Camera camera; 
 
 
 	// Use this for initialization

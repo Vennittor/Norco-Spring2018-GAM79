@@ -47,6 +47,8 @@ public abstract class Character : MonoBehaviour
 	public uint maxHeat;
 	public uint currentHeat;
 
+	[SerializeField] protected List<Ability> abilities;
+
     public uint attack;
     public float attackBonus;
     public float attackMod;
@@ -67,7 +69,7 @@ public abstract class Character : MonoBehaviour
 
 	public int selectedAbilityIndex;
 
-	[SerializeField] protected List<Ability> abilities;
+
 	//[SerializeField] protected List<uint> cooldownTimers;
 
 	protected bool _canActThisTurn = true;
@@ -79,6 +81,11 @@ public abstract class Character : MonoBehaviour
 		{
 			return _canActThisTurn;
 		}
+	}
+
+	public int abilityCount
+	{
+		get{ return abilities.Count; }
 	}
 
     protected void Start()
@@ -119,8 +126,15 @@ public abstract class Character : MonoBehaviour
 			{
 				if (status.checkAtStart == true)
 				{
-                    statusEffect.Apply(this, status.statusEffectType);
-				}
+                    if (!status.isBuff)
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
+                    else if (status.isBuff && !statuses.Contains(status.statusEffectType))
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
+                }
 			}
 		}
 
@@ -179,7 +193,7 @@ public abstract class Character : MonoBehaviour
 
 	}
 
-	public void UseAbility(List<Character> targets)
+	public void UseAbility(List<Character> targets, float modifier = 0.0f)
 	{
 		if (selectedAbilityIndex < 0 || selectedAbilityIndex >= abilities.Count) 
 		{
@@ -216,7 +230,14 @@ public abstract class Character : MonoBehaviour
             {
                 if (status.checkAtStart == false)
                 {
-                    statusEffect.Apply(this, status.statusEffectType);
+                    if (!status.isBuff)
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
+                    else if (status.isBuff && !statuses.Contains(status.statusEffectType))
+                    {
+                        statusEffect.Apply(this, status.statusEffectType);
+                    }
                 }
 
                 if (status.statusEffectType == StatusEffectType.Smoke)
@@ -269,7 +290,12 @@ public abstract class Character : MonoBehaviour
             {
                 combatState = CombatState.ABLE;
             }
+            if (status.isBuff)
+            {
+                statusEffect.RemoveStatus(this, status.statusEffectType);
+            }
             effectClassList.Remove(status);
+            statuses.Remove(status.statusEffectType);
         }
         removeStatus.Clear();
     }
@@ -336,12 +362,11 @@ public abstract class Character : MonoBehaviour
 
     public void ReduceHeat(uint amount = 0)
     {
-        currentHeat -= (uint)Mathf.Clamp((float)amount, 0f, (float)currentHeat);
+        currentHeat -= (uint)Mathf.Clamp(amount, 0, currentHeat);
     }
 
     public void DealHeatDamage(int heatDamage)
     {
-        Debug.Log("heat +");
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
         Debug.Log(name + " current heat is " + currentHeat);
         CheckHeatThreshold();
@@ -352,18 +377,18 @@ public abstract class Character : MonoBehaviour
         if (currentHeat >= 100)
         {
             print("my heat is now 100, im a little thirsty");
-            effectClassList.Add(statusEffect.ApplyLethargy());
+            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Lethargy));
         }
         else if (currentHeat >= 200)
         {
             print("my heat is now 200, i need AC");
-            effectClassList.Add(statusEffect.ApplyBerserk());
+            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Berserk));
         }
         else if (currentHeat == 300)
         {
             print("my heat has reached 300, i am now stunned"); //TODO clean up here
-            //effectClassList.Add(statusEffect.ApplyStun());
-            combatManager.activeCharacter.EndTurn();
+            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Stun));
+            //combatManager.activeCharacter.EndTurn();
             combatManager.activeCharacter.currentHeat = 200;
         }
         else

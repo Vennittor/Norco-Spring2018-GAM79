@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager _instance;
+	private static LevelManager _instance;
 
     public AudioClip levelMusic;
 
-    public CombatManager combatManager;
+	public CombatManager combatManager;
 
 	public GameObject combatUI;
 	public GameObject levelUI;
@@ -19,8 +19,8 @@ public class LevelManager : MonoBehaviour
 	public Image swipeImage;
 
     public GameObject playerParty;
-	[SerializeField] private Party pParty;
-	[SerializeField] private Party eParty;
+	private Party pParty;
+	private Party eParty;
     public uint partyHeatIntensity;
 
     public Transform cameraTarget;
@@ -220,8 +220,7 @@ public class LevelManager : MonoBehaviour
 
             //TODO should the Swipe pause for a moment?
 
-            //TODO set all Character in combat stage
-
+            //set all Character in combat stage/positions
             SetCombatPoint(enemy, player); // set combat point
 
             foreach (Character character in player.partyMembers)					//Turn on the player Party members renderers and Colliders on
@@ -294,6 +293,8 @@ public class LevelManager : MonoBehaviour
 
 				swipeImage.enabled = false;
 			}
+
+			levelUI.SetActive (false);
 			//Swipe Finished and reset
 
 			combatManager.StartCombat ();
@@ -307,14 +308,19 @@ public class LevelManager : MonoBehaviour
 
 	public void ReturnFromCombat(bool playersWin = true)
     {
+		Debug.Log ("Return from combat");
 		if (!playersWin)
 		{
 			Debug.LogError ("Player Lost");
             //TODO go to gameover screen          
 		}
+
         SoundManager.instance.CombatToLevel();//transition to the NoCombat audio snapshot
 
         UIManager.Instance.ReturnToNormalMode ();									//return the UIManager to normal mode
+
+		levelUI.SetActive (true);
+		//TODO start return transition
 
         foreach (Character character in pParty.partyMembers)						//Turn off the playerParty members renderers off
         {
@@ -347,7 +353,12 @@ public class LevelManager : MonoBehaviour
 		pParty.GetComponent<KeysToMove> ().movementAllowed = true;
 
         camDock.RepositionCameraToOriginalPosition(); 
-        
+
+		eParty = null;
+		pParty = null;
+
+		//TODO complete return transition
+
     }
 
     public void LoadScene(int sceneANumber)
