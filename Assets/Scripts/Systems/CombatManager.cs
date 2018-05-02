@@ -369,9 +369,15 @@ public class CombatManager : MonoBehaviour
 		//IF we should use the SLider,  (Check activeCharacter.selectedAbility and see if it should.  (this needs to be added to the Ability class
 			//enable slider.
 
-		StartCoroutine(ActionSlider());
+		if (activeCharacter is PlayerCharacter)
+		{
+			StartCoroutine(ActionSlider());
+		}
+		else
+		{
+			UseCharacterAbility ();
+		}
 
-		UseCharacterAbility();
 	}
 
 	private IEnumerator ActionSlider()
