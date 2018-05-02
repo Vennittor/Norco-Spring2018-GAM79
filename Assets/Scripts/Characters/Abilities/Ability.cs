@@ -92,7 +92,7 @@ public class Ability : ScriptableObject
 	public void SetTargets(List<Character> targetsToSet)	
 	{
 		targets.Clear ();
-		targets = targetsToSet;
+		targets.AddRange(targetsToSet);
 	}
 	public void SetTargets(Character targetToSet)			//Overload method for SetTargets to accept only a single Character instead of needing a list
 	{
@@ -106,8 +106,8 @@ public class Ability : ScriptableObject
     }
 
 	public void UseAbility()
-    {
-		if (targets.Count == 0) 
+	{
+		if (targets.Count == 0)
 		{
 			Debug.LogWarning ("There are no targets for Abiility " + name);
 		} 
@@ -132,7 +132,7 @@ public class Ability : ScriptableObject
 				foreach (Character target in targets)					// Target all applicable targets
 				{ 
 					foreach (Damage range in damage)					// Deal all types of Damage in List
-					{ 
+					{
 						target.ApplyDamage ( (uint)range.RollDamage(), range.element);
 					} 
 

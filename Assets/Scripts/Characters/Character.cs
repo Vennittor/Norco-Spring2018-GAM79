@@ -193,7 +193,7 @@ public abstract class Character : MonoBehaviour
 
 	}
 
-	public void UseAbility(List<Character> targets)
+	public void UseAbility(List<Character> targets, float modifier = 0.0f)
 	{
 		if (selectedAbilityIndex < 0 || selectedAbilityIndex >= abilities.Count) 
 		{
@@ -367,7 +367,6 @@ public abstract class Character : MonoBehaviour
 
     public void DealHeatDamage(int heatDamage)
     {
-        Debug.Log("heat +");
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
         Debug.Log(name + " current heat is " + currentHeat);
         CheckHeatThreshold();

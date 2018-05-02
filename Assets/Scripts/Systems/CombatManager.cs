@@ -370,6 +370,8 @@ public class CombatManager : MonoBehaviour
 			//enable slider.
 
 		StartCoroutine(ActionSlider());
+
+		UseCharacterAbility();
 	}
 
 	private IEnumerator ActionSlider()
@@ -400,7 +402,7 @@ public class CombatManager : MonoBehaviour
         {
 			slider.value += Time.deltaTime * fillTime;
 
-            if (Input.GetKeyDown(KeyCode.Z))
+			if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 StartCoroutine("TestingThe1337m0dz");
 
@@ -442,10 +444,9 @@ public class CombatManager : MonoBehaviour
 		UseCharacterAbility (modifiedEffect);
 	}
 
-	void UseCharacterAbility(float modifier)
+	void UseCharacterAbility(float modifier = 0.0f)
 	{
-		//TODO change UseAbility to take in the modifier as well;
-		activeCharacter.UseAbility (finalizedTargets);
+		activeCharacter.UseAbility (finalizedTargets, modifier);
 
 		finalizedTargets.Clear ();
 	}
