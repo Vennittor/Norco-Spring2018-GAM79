@@ -32,11 +32,12 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField]
     DopeCamSys camDock;
-    public float x;
-    public float y;
-    public float z;
+    private float x;
+    private float y;
+    private float z;
     public Transform startCombatTransform;
     public Transform endCombatPosition;
+    private testFade fade; 
 
     public static LevelManager Instance
     {
@@ -52,6 +53,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        fade = FindObjectOfType<testFade>(); 
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
@@ -178,40 +180,12 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    public IEnumerator SetNewCombatPosition(float x, float y, float z, Transform startCombatTransform, Transform endCombatPosition)
-    {
-        Vector3 startPosition = new Vector3(startCombatTransform.position.x, startCombatTransform.position.y, startCombatTransform.position.z);
-        Vector3 endPosition = new Vector3(endCombatPosition.position.x, endCombatPosition.position.y, endCombatPosition.position.z);
-        
-        while(playerCombatTransform.transform.transform.position.x < x)
-        {
-            playerCombatTransform.transform.position = new Vector3(startCombatTransform.position.x + 1, startCombatTransform.position.y, startCombatTransform.position.z);
-            break; 
-        }
-
-        if(enemyCombatTransform.transform.transform.position.x < x)
-        enemyCombatTransform.transform.position = new Vector3(endCombatPosition.position.x - 2, endCombatPosition.position.y, endCombatPosition.position.z + 1);
-
-        Debug.Log(startCombatTransform.position);
-        Debug.Log(endCombatPosition.position);
-        camDock.Reposition();
-
-        playerParty.gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(0.1f);
-
-        if(Time.time > 0)
-
-        playerParty.gameObject.SetActive(true);
-    }
-
     public void SetCombatPoint(Party enemyParty, Party playerParty)
     {
-       /* camDock.Reposition(); 
+        camDock.Reposition(); 
         Transform partyPos = playerParty.transform.GetComponent<Transform>();
         enemyCombatTransform.position = new Vector3(partyPos.position.x + 5, partyPos.position.y, partyPos.position.z);
         enemyParty.GetComponent<Transform>().position = enemyCombatTransform.position;
-        */
     }
 
 	public IEnumerator InitiateCombat(Party player, Party enemy)
@@ -222,7 +196,6 @@ public class LevelManager : MonoBehaviour
 			pParty = player;
 			eParty = enemy;
 
-            playerParty.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             player.GetComponent<KeysToMove> ().movementAllowed = false;
 
 			//Perform Enter 'swipe'
@@ -242,27 +215,21 @@ public class LevelManager : MonoBehaviour
 					swipeImage.rectTransform.anchorMin = new Vector2 (i, swipeImage.rectTransform.anchorMin.y);
 					swipeImage.rectTransform.anchorMax = new Vector2 (i + 1, swipeImage.rectTransform.anchorMax.y);
 
-
                     yield return null;
 				}
 
-				swipeImage.rectTransform.anchorMin = new Vector2 (startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMin.y);
+                swipeImage.rectTransform.anchorMin = new Vector2 (startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMin.y);
 				swipeImage.rectTransform.anchorMax = new Vector2 (startingAnchorMin.x + 2, swipeImage.rectTransform.anchorMax.y);
 
 				i = startingAnchorMin.x + 1;
-			}
+            }
             //End Enter Swipe
 
             //TODO should the Swipe pause for a moment?
 
             //set all Character in combat stage/positions
-            yield return new WaitForSeconds(2.0f);
-            Debug.Log(Time.time); 
-            StartCoroutine(SetNewCombatPosition(x,y,z, startCombatTransform, endCombatPosition));
-            StopCoroutine(SetNewCombatPosition(x, y, z, startCombatTransform, endCombatPosition));
 
-           // playerParty.gameObject.SetActive(false);
-            //  SetCombatPoint(enemy, player); // set combat point
+            SetCombatPoint(enemy, player);  
 
             foreach (Character character in player.partyMembers)					//Turn on the player Party members renderers and Colliders on
 			{
@@ -290,7 +257,7 @@ public class LevelManager : MonoBehaviour
                 character.GetComponent<Collider>().enabled = true;
             }
 
-			if (player.GetComponent<MeshRenderer> () != null)						//Turn off the player and enemy Party's renderers off
+            if (player.GetComponent<MeshRenderer> () != null)						//Turn off the player and enemy Party's renderers off
 			{
 				player.GetComponent<MeshRenderer>().enabled = false;
 			}
@@ -311,7 +278,8 @@ public class LevelManager : MonoBehaviour
 			enemy.GetComponent<Collider>().enabled = false;
 
 			combatUI.SetActive(true);
-            playerParty.gameObject.SetActive(true);
+
+          //  playerParty.gameObject.SetActive(true);
 
             combatManager.AddCharactersToCombat(player.partyMembers);
 			combatManager.AddCharactersToCombat(enemy.partyMembers);
@@ -337,23 +305,15 @@ public class LevelManager : MonoBehaviour
 			}
 
 			levelUI.SetActive (false);
-			//Swipe Finished and reset
+            //Swipe Finished and reset
 
-			combatManager.StartCombat ();
-
+            combatManager.StartCombat(); 
         }
         else
         {
            // Debug.LogError("CombatManger is currently running combat, collision and Initiate Combat calls should no longer be called.");
         }
     }
-
-    /*
-    private IEnumerator SetNewCombatPosition(float x, object y, float z, object startCombatTransform, object endCombatPosition)
-    {
-        throw new NotImplementedException();
-    }
-    */
 
     public void ReturnFromCombat(bool playersWin = true)
     {
@@ -393,7 +353,7 @@ public class LevelManager : MonoBehaviour
 		{
 			playerParty.GetComponent<SpriteRenderer>().enabled = true;
 		}
-		playerParty.GetComponent<Collider>().enabled = true;
+		//playerParty.GetComponent<Collider>().enabled = true;
 
 		Destroy (eParty.gameObject);												//remove the Enemy Party
 

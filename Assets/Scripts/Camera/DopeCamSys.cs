@@ -38,14 +38,15 @@ public class DopeCamSys : MonoBehaviour
 
     public void Reposition()
     {
-		//TODO change camera positoin to encompass all characters in within frustum
-        camera.fieldOfView += 10;
+        //TODO change camera positoin to encompass all characters in within frustum
+        camera.fieldOfView = 70;
         cameraDock = target.transform.Find("CamDock");
     }
 
     public void RepositionCameraToOriginalPosition()
     {
-		//TODO set to default position
+        //TODO set to default position
+        camera.transform.position = cameraDock.transform.position;
         camera.fieldOfView -= 10;
         cameraDock = target.transform.Find("CamDock"); 
     }
