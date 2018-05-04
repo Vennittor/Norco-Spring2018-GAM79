@@ -517,7 +517,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224387569597954068, guid: e03dca6beca68564faf2ea6cc1517ca3,
     type: 2}
   m_PrefabInternal: {fileID: 385672481}
---- !u!1001 &680178768
+--- !u!1001 &1308967175
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -623,19 +623,6 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.x
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114510117941555128, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
-        type: 2}
-      propertyPath: disableUIOnStart
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652697792873652, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801896836886908, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
@@ -842,4 +829,4 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 1251396336860512, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
     type: 2}
-  m_PrefabInternal: {fileID: 680178768}
+  m_PrefabInternal: {fileID: 1308967175}
