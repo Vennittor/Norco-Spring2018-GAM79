@@ -48,6 +48,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1450683089547592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4754519315193280}
+  m_Layer: 0
+  m_Name: PlayerCombatPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1478921361251130
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +135,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1830008474916192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4726491345292344}
+  m_Layer: 0
+  m_Name: StartCombatPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1869288884709008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4495802295253166}
+  m_Layer: 0
+  m_Name: EndCombatPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4260610743123326
 Transform:
   m_ObjectHideFlags: 1
@@ -140,10 +185,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242139476785792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.56, y: 2.125, z: 0.34}
+  m_LocalPosition: {x: -193.44, y: 2.125, z: -59.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4891253443211064}
+  - {fileID: 4754519315193280}
+  - {fileID: 4726491345292344}
+  - {fileID: 4495802295253166}
   - {fileID: 4328175354246864}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -162,6 +210,45 @@ Transform:
   - {fileID: 4839105417037650}
   - {fileID: 4755381381122110}
   m_Father: {fileID: 4274544609537054}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4495802295253166
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1869288884709008}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.42, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4274544609537054}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4726491345292344
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1830008474916192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.54, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4274544609537054}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4754519315193280
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450683089547592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4274544609537054}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4755381381122110
@@ -171,8 +258,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614851838758744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.85, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: -7.2, y: 0, z: 0}
+  m_LocalScale: {x: 0.43923217, y: 0.43923217, z: 2.1961608}
   m_Children: []
   m_Father: {fileID: 4328175354246864}
   m_RootOrder: 2
@@ -184,8 +271,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1620286995922844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.33, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: -3.4799938, y: 0, z: 0}
+  m_LocalScale: {x: 0.43923217, y: 0.43923217, z: 2.1961608}
   m_Children: []
   m_Father: {fileID: 4328175354246864}
   m_RootOrder: 1
@@ -216,7 +303,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!65 &65200964925320454
 BoxCollider:
@@ -228,7 +315,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.7, y: 9.31, z: 1}
+  m_Size: {x: 5.7, y: 9.31, z: 0.5}
   m_Center: {x: 1.09, y: 0, z: 0}
 --- !u!65 &65289608248838786
 BoxCollider:
@@ -240,7 +327,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.5, y: 5, z: 1}
+  m_Size: {x: 3.5, y: 5, z: 0.5}
   m_Center: {x: 0, y: 0.27, z: 0}
 --- !u!65 &65420527894554182
 BoxCollider:
@@ -252,7 +339,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 4.25, z: 1}
+  m_Size: {x: 1, y: 4, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65973163623362570
 BoxCollider:
@@ -264,7 +351,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.7, y: 9.31, z: 1}
+  m_Size: {x: 5.7, y: 9.31, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95016072947047236
 Animator:
@@ -345,30 +432,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectClassList: []
+  statuses: 
+  removeStatus: []
   characterName: Alchemist
   animator: {fileID: 0}
   maxhealth: 50
   currentHealth: 50
   maxHeat: 300
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 20
-  speedMod: 0
-  defense: 1
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 77b8dc76e800dad479da8130990b2e3a, type: 2}
   - {fileID: 11400000, guid: b43badaefcb4377408de247f9062ce8e, type: 2}
   - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 20
+  speedBonus: 0
+  speedMod: 0
+  defense: 1
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
 --- !u!114 &114327966433383426
@@ -382,30 +476,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectClassList: []
+  statuses: 
+  removeStatus: []
   characterName: Crusader
   animator: {fileID: 0}
   maxhealth: 50
   currentHealth: 50
   maxHeat: 300
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 8
-  speedMod: 0
-  defense: 1
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: a04b570ddc5a93040ad129b7d1cf8541, type: 2}
   - {fileID: 11400000, guid: bd6287438c74e4c4783c3a0b6374f0c7, type: 2}
   - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 8
+  speedBonus: 0
+  speedMod: 0
+  defense: 1
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
 --- !u!114 &114695205217747764
@@ -419,11 +520,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cec7f7bf7b7cde49969b6beb94e50ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 12
-  walking: 0
-  facingRight: 1
-  interactionPrefab: {fileID: 0}
   myAnimator: {fileID: 0}
+  walkingSpeed: 18
+  interactionPrefab: {fileID: 0}
+  movementAllowed: 1
 --- !u!114 &114700916010415158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -455,30 +555,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectClassList: []
+  statuses: 
+  removeStatus: []
   characterName: Hunter
   animator: {fileID: 0}
   maxhealth: 50
   currentHealth: 50
   maxHeat: 300
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 20
-  speedMod: 0
-  defense: 1
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: a04b570ddc5a93040ad129b7d1cf8541, type: 2}
   - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 20
+  speedBonus: 0
+  speedMod: 0
+  defense: 1
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
 --- !u!195 &195532744613621432

@@ -11,6 +11,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1714910973632844}
   m_IsPrefabParent: 1
+--- !u!1 &1355380170707390
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4776775557227138}
+  m_Layer: 0
+  m_Name: EnemyCombatPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1359553901263630
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +155,7 @@ Transform:
   - {fileID: 4795896376934742}
   - {fileID: 4206588892228006}
   - {fileID: 4393131478895468}
+  - {fileID: 4776775557227138}
   m_Father: {fileID: 4021768903109988}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -155,6 +171,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4207230089771016}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4776775557227138
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355380170707390}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.2140627, y: 1.9653352, z: -2.0311635}
+  m_LocalScale: {x: 1.8807037, y: 1.8807037, z: 1.8807037}
+  m_Children: []
+  m_Father: {fileID: 4207230089771016}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4795896376934742
 Transform:
@@ -263,28 +292,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectClassList: []
+  statuses: 
+  removeStatus: []
   characterName: 
   animator: {fileID: 0}
   maxhealth: 25
-  currentHealth: 25
+  currentHealth: 1
   maxHeat: 0
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 4
-  speedMod: 0
-  defense: 0
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: 069d305244086f24ea00e53a5bf5d364, type: 2}
   - {fileID: 11400000, guid: 563c7c84c92e9904395fff25d5892131, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 4
+  speedBonus: 0
+  speedMod: 0
+  defense: 0
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
 --- !u!114 &114922007562896438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,28 +332,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectClassList: []
+  statuses: 
+  removeStatus: []
   characterName: 
   animator: {fileID: 0}
   maxhealth: 25
-  currentHealth: 25
+  currentHealth: 1
   maxHeat: 0
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 4
-  speedMod: 0
-  defense: 0
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: 069d305244086f24ea00e53a5bf5d364, type: 2}
   - {fileID: 11400000, guid: 563c7c84c92e9904395fff25d5892131, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 4
+  speedBonus: 0
+  speedMod: 0
+  defense: 0
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
 --- !u!114 &114978566135768638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,28 +372,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectClassList: []
+  statuses: 
+  removeStatus: []
   characterName: 
   animator: {fileID: 0}
   maxhealth: 25
-  currentHealth: 25
+  currentHealth: 1
   maxHeat: 0
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 4
-  speedMod: 0
-  defense: 0
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: 069d305244086f24ea00e53a5bf5d364, type: 2}
   - {fileID: 11400000, guid: 563c7c84c92e9904395fff25d5892131, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 4
+  speedBonus: 0
+  speedMod: 0
+  defense: 0
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
 --- !u!195 &195257259066113972
 NavMeshAgent:
   m_ObjectHideFlags: 1
