@@ -14,33 +14,41 @@ public class StatusEffect
 
     public Character.EffectClass AddStatus(StatusEffectType status)
     {
-        if (status == StatusEffectType.Lethargy)
+        if (status == StatusEffectType.Battlecry)
         {
-            return ApplyLethargy();
+            return ApplyBattlecry();
         }
         else if (status == StatusEffectType.Berserk)
         {
             return ApplyBerserk();
         }
-        else if (status == StatusEffectType.Stun)
+        else if (status == StatusEffectType.Bleed)
         {
-            return ApplyStun();
+            return ApplyBleed();
         }
-        else if (status == StatusEffectType.Smoke)
+        else if (status == StatusEffectType.Crippled)
         {
-            return InjectDank();
+            return ApplyCrippled();
+        }
+        else if (status == StatusEffectType.Dizzy)
+        {
+            return ApplyDizzy();
+        }
+        else if (status == StatusEffectType.Hobbled)
+        {
+            return ApplyHobbled();
         }
         else if (status == StatusEffectType.Scared)
         {
             return ApplyScared();
         }
-        else if (status == StatusEffectType.Blind)
+        else if (status == StatusEffectType.Smoke)
         {
-            return ApplyBlind();
+            return InjectDank();
         }
-        else if (status == StatusEffectType.Bleed)
+        else if (status == StatusEffectType.Stun)
         {
-            return ApplyBleed();
+            return ApplyStun();
         }
         else
         {
@@ -48,35 +56,43 @@ public class StatusEffect
             return null;
         }
     }
-    public void Apply(Character character, StatusEffectType statusType)
+    public void Apply(Character character, Character.EffectClass status)
     {
-        if (statusType == StatusEffectType.Lethargy)
+        if (status.statusEffectType == StatusEffectType.Battlecry)
         {
-            LethargyStatus(character);
+            BattlecryStatus(character);
         }
-        else if (statusType == StatusEffectType.Berserk)
+        else if (status.statusEffectType == StatusEffectType.Berserk)
         {
             BerserkStatus(character);
         }
-        else if (statusType == StatusEffectType.Stun)
+        else if (status.statusEffectType == StatusEffectType.Bleed)
         {
-            StunStatus(character);
+            BleedStatus(character);
         }
-        else if (statusType == StatusEffectType.Smoke)
+        else if (status.statusEffectType == StatusEffectType.Crippled)
         {
-            LegalizeGayWeed(character);
+            CrippledStatus(character);
         }
-        else if (statusType == StatusEffectType.Scared)
+        else if (status.statusEffectType == StatusEffectType.Dizzy)
+        {
+            DizzyStatus(character, status);
+        }
+        else if (status.statusEffectType == StatusEffectType.Hobbled)
+        {
+            HobbledStatus(character, status);
+        }
+        else if (status.statusEffectType == StatusEffectType.Scared)
         {
             ScaredStatus(character);
         }
-        else if (statusType == StatusEffectType.Blind)
+        else if (status.statusEffectType == StatusEffectType.Smoke)
         {
-            BlindStatus(character);
+            LegalizeGayWeed(character);
         }
-        else if (statusType == StatusEffectType.Bleed)
+        else if (status.statusEffectType == StatusEffectType.Stun)
         {
-            BleedStatus(character);
+            StunStatus(character);
         }
         else
         {
@@ -85,21 +101,21 @@ public class StatusEffect
     }
     public void RemoveStatus(Character character, StatusEffectType status)
     {
-        if (statusEffectType == StatusEffectType.Lethargy)
+        if (statusEffectType == StatusEffectType.Battlecry)
         {
-            RemoveLethargy(character);
+            RemoveBattlecry(character);
         }
-        else if (statusEffectType == StatusEffectType.Smoke)
+        else if (statusEffectType == StatusEffectType.Crippled)
         {
-            Rehab(character);
+            RemoveCrippled(character);
         }
         else if (statusEffectType == StatusEffectType.Scared)
         {
             RemoveScared(character);
         }
-        else if (statusEffectType == StatusEffectType.Blind)
+        else if (statusEffectType == StatusEffectType.Smoke)
         {
-            RemoveBlind(character);
+            Rehab(character);
         }
         else
         {
@@ -107,21 +123,21 @@ public class StatusEffect
         }
     }
 
-    private void LethargyStatus(Character character)
+    private void BattlecryStatus(Character character)
     {
-        character.speedMod -= .5f;
+        // increase attack bonus
     }
-    private void RemoveLethargy(Character character)
+    private void RemoveBattlecry(Character character)
     {
-        character.speedMod += .5f;
+        // remove attack bonus
     }
-    private Character.EffectClass ApplyLethargy()
+    private Character.EffectClass ApplyBattlecry()
     {
-        statusEffectType = StatusEffectType.Lethargy;
-        isBuff = false;
-        duration = -1;
+        statusEffectType = StatusEffectType.Battlecry;
+        isBuff = true;
+        duration = 2;
         applyImmediately = true;
-        checkAtStart = true;
+        checkAtStart = false;
         return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
@@ -139,16 +155,104 @@ public class StatusEffect
         return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
-    private void StunStatus(Character character)
+    private void BleedStatus(Character character)
     {
-        Debug.Log("Talk shit get hit");
+        uint dot = 1;
+        character.ApplyDamage(dot, ElementType.BLEED);
     }
-    private Character.EffectClass ApplyStun()
+    private Character.EffectClass ApplyBleed()
     {
-        statusEffectType = StatusEffectType.Stun;
+        statusEffectType = StatusEffectType.Bleed;
+        isBuff = false;
+        duration = 3;
+        applyImmediately = false;
+        checkAtStart = false;
+        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
+    }
+
+    private void CrippledStatus(Character character)
+    {
+        // reduce speed bonus
+        // reduce accuracy bonus
+    }
+    private void RemoveCrippled(Character character)
+    {
+        // increase speed bonus
+        // increase accuracy bonus
+    }
+    private Character.EffectClass ApplyCrippled()
+    {
+        statusEffectType = StatusEffectType.Crippled;
+        isBuff = true;
+        duration = 2;
+        applyImmediately = true;
+        checkAtStart = false;
+        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
+    }
+
+    private void DizzyStatus(Character character, Character.EffectClass status)
+    {
+        uint dot = 1;
+        character.ApplyDamage(dot, ElementType.BLEED);
+        if (!status.buffTicked)
+        {
+            //attack down
+            status.buffTicked = true;
+        }
+    }
+    private void RemoveDizzy(Character character)
+    {
+        //attack up
+    }
+    private Character.EffectClass ApplyDizzy()
+    {
+        statusEffectType = StatusEffectType.Dizzy;
         isBuff = false;
         duration = 2;
         applyImmediately = false;
+        checkAtStart = true;
+        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart, true);
+    }
+
+    private void HobbledStatus(Character character, Character.EffectClass status)
+    {
+        uint dot = 1;
+        character.ApplyDamage(dot, ElementType.BLEED);
+        if (!status.buffTicked)
+        {
+            character.speedMod -= .5f;
+            //evasion down
+            status.buffTicked = true;
+        }
+    }
+    private Character.EffectClass ApplyHobbled()
+    {
+        statusEffectType = StatusEffectType.Hobbled;
+        isBuff = false;
+        duration = -1;
+        applyImmediately = true;
+        checkAtStart = true;
+        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart, true);
+    }
+    private void HobbledBuffStatus(Character character)
+    {
+        character.speedMod -= .5f;
+    }
+
+    private void ScaredStatus(Character character)
+    {
+        character.attackMod -= .3f; // 70% damage output
+    }
+    private void RemoveScared(Character character)
+    {
+        character.attackMod += .3f;
+    }
+    private Character.EffectClass ApplyScared()
+    {
+        statusEffectType = StatusEffectType.Scared;
+        isBuff = true;
+        duration = 2;
+        applyImmediately = true;
         checkAtStart = true;
         return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
@@ -172,54 +276,17 @@ public class StatusEffect
         return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 
-    private void ScaredStatus(Character character)
+    private void StunStatus(Character character)
     {
-        character.attackMod -= .3f; // 70% damage output
+        Debug.Log("Talk shit get hit");
     }
-    private void RemoveScared(Character character)
+    private Character.EffectClass ApplyStun()
     {
-        character.attackMod += .3f;
-    }
-    private Character.EffectClass ApplyScared()
-    {
-        statusEffectType = StatusEffectType.Scared;
-        isBuff = true;
-        duration = 2;
-        applyImmediately = true;
-        checkAtStart = true;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
-    }
-
-    private void BlindStatus(Character character)
-    {
-        character.accuracyMod -= .3f;
-    }
-    private void RemoveBlind(Character character)
-    {
-        character.accuracyMod += .3f;
-    }
-    private Character.EffectClass ApplyBlind()
-    {
-        statusEffectType = StatusEffectType.Blind;
-        isBuff = true;
-        duration = 2;
-        applyImmediately = false;
-        checkAtStart = true;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
-    }
-
-    private void BleedStatus(Character character)
-    {
-        uint dot = 1;
-        character.ApplyDamage(dot, ElementType.BLEED);
-    }
-    private Character.EffectClass ApplyBleed()
-    {
-        statusEffectType = StatusEffectType.Bleed;
+        statusEffectType = StatusEffectType.Stun;
         isBuff = false;
-        duration = 2;
+        duration = 1;
         applyImmediately = false;
-        checkAtStart = false;
+        checkAtStart = true;
         return new Character.EffectClass(statusEffectType, isBuff, duration, applyImmediately, checkAtStart);
     }
 }

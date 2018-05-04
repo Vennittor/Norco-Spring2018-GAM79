@@ -18,14 +18,18 @@ public abstract class Character : MonoBehaviour
         public int duration;
         public bool applyImmediately;
         public bool checkAtStart;
+        public bool isBoth;
+        public bool buffTicked;
 
-        public EffectClass(StatusEffectType statusType, bool isBuff, int duration, bool applyNow, bool checkStart)
+        public EffectClass(StatusEffectType statusType, bool isBuff, int duration, bool applyNow, bool checkStart, bool isBoth = false, bool buffTicked = false)
         {
             statusEffectType = statusType;
             this.isBuff = isBuff;
             this.duration = duration;
             applyImmediately = applyNow;
             checkAtStart = checkStart;
+            this.isBoth = isBoth;
+            this.buffTicked = buffTicked;
         }
 
         public void DecDuration()
@@ -128,11 +132,11 @@ public abstract class Character : MonoBehaviour
 				{
                     if (!status.isBuff)
                     {
-                        statusEffect.Apply(this, status.statusEffectType);
+                        statusEffect.Apply(this, status);
                     }
                     else if (status.isBuff && !statuses.Contains(status.statusEffectType))
                     {
-                        statusEffect.Apply(this, status.statusEffectType);
+                        statusEffect.Apply(this, status);
                     }
                 }
 			}
@@ -232,11 +236,11 @@ public abstract class Character : MonoBehaviour
                 {
                     if (!status.isBuff)
                     {
-                        statusEffect.Apply(this, status.statusEffectType);
+                        statusEffect.Apply(this, status);
                     }
                     else if (status.isBuff && !statuses.Contains(status.statusEffectType))
                     {
-                        statusEffect.Apply(this, status.statusEffectType);
+                        statusEffect.Apply(this, status);
                     }
                 }
 
@@ -377,7 +381,7 @@ public abstract class Character : MonoBehaviour
         if (currentHeat >= 100)
         {
             print("my heat is now 100, im a little thirsty");
-            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Lethargy));
+            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Hobbled));
         }
         else if (currentHeat >= 200)
         {
@@ -420,7 +424,7 @@ public abstract class Character : MonoBehaviour
             statuses.Add(status);
             if (statusClass.applyImmediately)
             {
-                statusEffect.Apply(this, status);
+                statusEffect.Apply(this, statusClass);
             }
         }
     }
