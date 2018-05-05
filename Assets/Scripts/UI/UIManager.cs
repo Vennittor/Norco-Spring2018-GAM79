@@ -21,6 +21,9 @@ public class UIManager : MonoBehaviour
 
     public CombatManager combatManager;
     public EventSystemManager eventSystemManager;
+    private Character character;
+
+    public Image healthBar;
 
 	public bool disableUIOnStart = true;
 
@@ -284,8 +287,12 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void UpdateHealthBar()
+    {
+        healthBar.fillAmount = character.currentHealth / character.maxhealth;
+    }
 
-	#region HighlightTargets
+    #region HighlightTargets
     public void TurnRed(List<Character> targets) 			// highlight in Red on Mouse-over
     {
         foreach(Character target in targets)

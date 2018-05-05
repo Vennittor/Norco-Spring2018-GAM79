@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 {   
 	protected CombatManager combatManager;
+    public UIManager UIManager;
 
     public enum CombatState
     {
@@ -340,6 +341,9 @@ public abstract class Character : MonoBehaviour
         {
             DealPoisonDamage(damage);
         }
+
+        UIManager.UpdateHealthBar();
+
     }
 
 	void DealPhysicalDamage(uint physicalDamage = 0)
@@ -347,7 +351,7 @@ public abstract class Character : MonoBehaviour
 		physicalDamage -= defense;
 		if (physicalDamage >= 1)
 		{
-			currentHealth -= (uint)Mathf.Clamp(physicalDamage, 0, currentHealth);
+			currentHealth -= (uint)Mathf.Clamp(physicalDamage, 0, currentHealth);          
 			if (currentHealth <= 0)
 			{
 				Faint();
