@@ -21,6 +21,16 @@ public class DopeCamSys : MonoBehaviour
 	void Start ()
     {
         camera = FindObjectOfType<Camera>(); 
+
+        if(camera == null)
+        {
+            camera = Camera.FindObjectOfType<Camera>();
+        }
+        else if(!camera)
+        {
+            Debug.LogError("Null Reference On Load");
+        }
+
 		if (target == null) 
 		{
 			target = GameObject.FindGameObjectWithTag ("Player");
@@ -39,15 +49,21 @@ public class DopeCamSys : MonoBehaviour
     public void Reposition()
     {
 		//TODO change camera positoin to encompass all characters in within frustum
-        camera.fieldOfView += 10;
-        cameraDock = target.transform.Find("CamDock");
+        if(camera != null)
+        {
+            camera.fieldOfView += 10;
+            cameraDock = target.transform.Find("CamDock");
+        }
     }
 
     public void RepositionCameraToOriginalPosition()
     {
 		//TODO set to default position
-        camera.fieldOfView -= 10;
-        cameraDock = target.transform.Find("CamDock"); 
+        if(camera != null)
+        {
+            camera.fieldOfView -= 10;
+            cameraDock = target.transform.Find("CamDock");
+        }
     }
 
 	public void SetTargetPosition(Vector3 newTargetPosition)

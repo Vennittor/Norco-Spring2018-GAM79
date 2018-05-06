@@ -29,7 +29,8 @@ public class LevelManager : MonoBehaviour
     public Transform enemyCombatTransform;
     public GameObject heatWavePrefab;
 
-    public Transform playerTransform; 
+    public Transform playerTransform;
+    public Transform partyPos; 
 
     private TransitionManager transitionMan; 
 
@@ -56,6 +57,13 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        if (partyPos == null)
+        {
+            partyPos = playerParty.GetComponent<Transform>();
+        }
+
+        partyPos = FindObjectOfType<Transform>().transform;
+        playerParty = FindObjectOfType<GameObject>();
         _instance = this;
 
         transitionMan = FindObjectOfType<TransitionManager>(); 
@@ -83,8 +91,6 @@ public class LevelManager : MonoBehaviour
 		}
 			
 		this.gameObject.transform.SetParent(null);
-
-		DontDestroyOnLoad(gameObject);
 
 		if (heatWavePrefab != null)
 		{
@@ -151,6 +157,18 @@ public class LevelManager : MonoBehaviour
 		{
 			swipeImage.enabled = false;
 		}
+
+        if (levelUI == null)
+        {
+            if(levelUI != null)
+            levelUI = FindObjectOfType<GameObject>();
+            levelUI = GameObject.Find("Canvas Level UI").GetComponent<GameObject>(); 
+        }
+        else
+        {
+            Debug.Log("No Level UI");
+           // Debug.LogError(levelUI);
+        }
     }
 
 	void LateStart()
@@ -386,43 +404,21 @@ public class LevelManager : MonoBehaviour
 
     public void SetEntrancePosition(Party playerParty)
     {
-        Transform partyPos = playerParty.transform.GetComponent<Transform>();
-        playerTransform = playerParty.transform; 
-        playerTransform.position = transitionMan.entranceTransform.position;
-        transitionMan.entrancePos =  new Vector3(transitionMan.entranceTransform.position.x, transitionMan.entranceTransform.position.y, transitionMan.entranceTransform.position.z);
+        // Debug.LogError("Null Reference"); 
+        if (partyPos != null)
+        {
+            partyPos = playerParty.transform.GetComponent<Transform>();
+            partyPos.transform.position = transitionMan.entranceTransform.position;
+            transitionMan.entrancePos = new Vector3(transitionMan.entranceTransform.position.x, transitionMan.entranceTransform.position.y, transitionMan.entranceTransform.position.z);
+
+        }
     }
 
     public void SetExitPosition(Party playerParty)
     {
-        Transform partyPos = playerParty.transform.GetComponent<Transform>();
+        partyPos = playerParty.transform.GetComponent<Transform>();
         playerTransform = playerParty.transform;
         playerTransform.position = transitionMan.exitTransform.position; 
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if(col.gameObject.name == "Entrance")
-        {
-            transitionMan.TransitionIn(); 
-        }
-
-        if(col.gameObject.name == "Exit")
-        {
-            transitionMan.TransitionOut(); 
-        }
-    }
-
-    private void OnTriggerExit(Collider col)
-    {
-        if (col.gameObject.name == "Entrance")
-        {
-            col.gameObject.SetActive(false); 
-        }
-
-        if (col.gameObject.name == "Exit")
-        {
-            col.gameObject.SetActive(false); 
-        }
     }
 
     public void LoadScene(int sceneANumber)
@@ -438,7 +434,7 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator LoadYourAsyncScene()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Scene2");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Scene 2");
 
         while (!asyncLoad.isDone)
         {

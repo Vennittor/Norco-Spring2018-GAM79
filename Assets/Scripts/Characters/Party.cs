@@ -5,6 +5,7 @@ using UnityEngine;
 public class Party : MonoBehaviour
 {
     public LevelManager levelMan;
+    private TransitionManager transitionMan; 
 
     public HeatZone heatState;
     public List<Character> partyMembers;
@@ -28,12 +29,15 @@ public class Party : MonoBehaviour
 
     void Start()
     {
+        transitionMan = FindObjectOfType<TransitionManager>(); 
         levelMan = LevelManager.Instance;
 
 		if (levelMan == null)
 		{
 			Debug.LogError (this.gameObject.name + " could not find reference to LevelManager");
 		}
+
+        DontDestroyOnLoad(levelMan);
 
 		for (int i = partyMembers.Count - 1; i >= 0; i--) 
 		{
@@ -166,5 +170,44 @@ public class Party : MonoBehaviour
 			}
 		}
 
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Entrance")
+        {
+            transitionMan.StartCoroutine(transitionMan.TransitionIn());
+            transitionMan.StartIAnim();
+            levelMan.LoadScene(0);  
+        }
+    }
+
+    private void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.tag == "Entrance" || col.gameObject.name == "Exit")
+        {
+            transitionMan.transitionImage.enabled = true;
+
+            transitionMan.StartCoroutine(transitionMan.TransitionIn());
+            transitionMan.StartIAnim();
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.name == "Entrance" || col.gameObject.name == "Exit")
+        {
+            transitionMan.StartCoroutine(transitionMan.TransitionOut());
+            levelMan.LoadScene(1);
+
+            while (true)
+            {
+                transitionMan.StopIAnim();
+                col.gameObject.SetActive(false);
+                break;
+            }
+
+            transitionMan.StopCoroutine(transitionMan.TransitionOut());
+        }
     }
 }

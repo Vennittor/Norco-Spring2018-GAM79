@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour
     {
         if (uIInstance != null && uIInstance != this)
         {
-			Debug.LogError ("more than one UIManager in scene.  Removing this one");
+			//Debug.LogError ("more than one UIManager in scene.  Removing this one");
             Destroy(gameObject);
             return;
         }
