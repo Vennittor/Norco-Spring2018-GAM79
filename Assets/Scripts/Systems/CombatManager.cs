@@ -40,7 +40,7 @@ public class CombatManager : MonoBehaviour
 
     public float startDelay = 0.5f;
 
-    bool started = false;
+    bool actionBarRunning = false;
     //for the action slider end
 
     private List<Character> finalizedTargets = new List<Character> ();
@@ -364,14 +364,19 @@ public class CombatManager : MonoBehaviour
 
 		finalizedTargets.AddRange (targetsToAssign);
 
-		//TODO  Handle the SLIDER here.  Once it's input is gotten (in the form of a multiplier/modifier) run the next and pass it the multiplier
-
 		//IF we should use the SLider,  (Check activeCharacter.selectedAbility and see if it should.  (this needs to be added to the Ability class
 			//enable slider.
 
 		if (activeCharacter is PlayerCharacter)
 		{
-			StartCoroutine(ActionSlider());
+			if (!actionBarRunning)
+			{
+				StartCoroutine (ActionSlider ());
+			}
+			else
+			{
+				Debug.LogError ("ActionSlider is currently running and has been attempted to start again");
+			}
 		}
 		else
 		{
@@ -382,6 +387,8 @@ public class CombatManager : MonoBehaviour
 
 	private IEnumerator ActionSlider()
 	{
+		actionBarRunning = true;
+
 		actionSlider.SetActive(true);
 
 		float modifiedEffect = 0f;
@@ -440,11 +447,12 @@ public class CombatManager : MonoBehaviour
                 going = false;
             }
         }
-
-        started = false;
+			
         Debug.Log("ACTION");
 
 		yield return null;
+
+		actionBarRunning = false;
 
 		uiManager.actionSlider.SetActive(false);
 		UseCharacterAbility (modifiedEffect);

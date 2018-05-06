@@ -156,7 +156,7 @@ public class UIManager : MonoBehaviour
 		if (inputMode == InputMode.ABILITYSELECT)
 		{
 			bool stopAbility = false;
-			foreach(Character.EffectClass effect in combatManager.activeCharacter.effectClassList)
+			foreach(EffectClass effect in combatManager.activeCharacter.effectClassList)
 			{
 				if(effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
 				{

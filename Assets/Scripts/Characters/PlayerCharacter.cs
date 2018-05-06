@@ -7,8 +7,10 @@ public class PlayerCharacter : Character
 	[SerializeField] private Water water;
     [SerializeField] private int waterUses = 3;
 
-    void Awake()
+    private new void Awake()
     {
+		base.Awake ();
+
         animator = gameObject.GetComponent<Animator>();
     }
 
