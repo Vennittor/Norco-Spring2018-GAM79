@@ -6,8 +6,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class KeysToMove : MonoBehaviour
 {
-	CombatManager combatManager;
-
 	public Animator myAnimator;
 
     NavMeshAgent agent;
@@ -31,7 +29,6 @@ public class KeysToMove : MonoBehaviour
         //TEST
         LevelManager levMan = LevelManager.Instance;
         levMan.playerParty = this.gameObject;
-        combatManager = CombatManager.Instance;
 
 		if (myAnimator == null) 
 		{
