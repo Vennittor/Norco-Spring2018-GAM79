@@ -27,7 +27,11 @@ public class LevelManager : MonoBehaviour
     public Transform playerStartTransform;
     public Transform playerCombatTransform;
     public Transform enemyCombatTransform;
-    public GameObject heatWavePrefab; 
+    public GameObject heatWavePrefab;
+
+    public Transform playerTransform; 
+
+    private TransitionManager transitionMan; 
 
     [SerializeField]
     DopeCamSys camDock; 
@@ -53,6 +57,8 @@ public class LevelManager : MonoBehaviour
         }
 
         _instance = this;
+
+        transitionMan = FindObjectOfType<TransitionManager>(); 
 
         camDock = FindObjectOfType<DopeCamSys>(); 
 
@@ -149,8 +155,24 @@ public class LevelManager : MonoBehaviour
 
 	void LateStart()
 	{
+        // TODO: Fade in transition image, place player party at start of level where Entrance gameobject transform is assigned, 
+        // when the player exits the transform trigger, disable the entrance gameobject, 
+        // when the player enters the exit gameobject play Fade out in transition image, load new scene async... 
 
-	}
+        playerParty.transform.position = transitionMan.entrancePos;
+        transitionMan.entrancePos = new Vector3(11.5f, 9, -12); 
+     //   transitionMan.entrancePos = transitionMan.entranceTransform.position;
+      //  playerParty.transform.position = transitionMan.entranceTransform.position;
+        Debug.Log(playerParty.gameObject.transform.position);
+
+      /*  if (playerParty != null)
+        {
+            playerParty.transform.position = transitionMan.entrancePos.normalized;
+            transitionMan.entrancePos = new Vector3(transitionMan.entranceTransform.position.x, transitionMan.entranceTransform.position.y, transitionMan.entranceTransform.position.z);
+        }
+        */
+
+    }
 
 
     void Update()
@@ -358,7 +380,49 @@ public class LevelManager : MonoBehaviour
 		pParty = null;
 
 		//TODO complete return transition
+    }
 
+    // Transition Levels
+
+    public void SetEntrancePosition(Party playerParty)
+    {
+        Transform partyPos = playerParty.transform.GetComponent<Transform>();
+        playerTransform = playerParty.transform; 
+        playerTransform.position = transitionMan.entranceTransform.position;
+        transitionMan.entrancePos =  new Vector3(transitionMan.entranceTransform.position.x, transitionMan.entranceTransform.position.y, transitionMan.entranceTransform.position.z);
+    }
+
+    public void SetExitPosition(Party playerParty)
+    {
+        Transform partyPos = playerParty.transform.GetComponent<Transform>();
+        playerTransform = playerParty.transform;
+        playerTransform.position = transitionMan.exitTransform.position; 
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if(col.gameObject.name == "Entrance")
+        {
+            transitionMan.TransitionIn(); 
+        }
+
+        if(col.gameObject.name == "Exit")
+        {
+            transitionMan.TransitionOut(); 
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.name == "Entrance")
+        {
+            col.gameObject.SetActive(false); 
+        }
+
+        if (col.gameObject.name == "Exit")
+        {
+            col.gameObject.SetActive(false); 
+        }
     }
 
     public void LoadScene(int sceneANumber)
@@ -380,7 +444,7 @@ public class LevelManager : MonoBehaviour
         {
             yield return null;
         }
-    }
+    } 
 
-    
+    // End Transition Levels 
 }
