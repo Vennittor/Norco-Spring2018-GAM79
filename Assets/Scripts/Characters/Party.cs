@@ -174,16 +174,16 @@ public class Party : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
+        if(col.gameObject.tag == "Exit")
+        {
+            levelMan.StartCoroutine(levelMan.Transition());
 
-    }
-
-    private void OnTriggerStay(Collider col)
-    {
-
+            levelMan.LoadScene(0);
+        }
     }
 
     private void OnTriggerExit(Collider col)
     {
-
+        levelMan.StopCoroutine(levelMan.Transition());
     }
 }

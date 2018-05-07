@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
 	public GameObject levelUI;
 
 	public Image swipeImage;
+    public Image transitionImage; 
 
     public GameObject playerParty;
 	private Party pParty;
@@ -160,6 +161,24 @@ public class LevelManager : MonoBehaviour
 			swipeImage.enabled = false;
 		}
 
+        if(transitionImage == null)
+        {
+            if(levelUI != null)
+            {
+                transitionImage = levelUI.transform.Find("Transition Image").GetComponent<Image>();
+            }
+            else
+            {
+                transitionImage = GameObject.Find("Transition Image").GetComponent<Image>(); 
+            }
+        }
+
+        if(transitionImage != null)
+        {
+            transitionImage.enabled = false;
+        }
+
+        /*
         if (levelUI == null)
         {
             if(levelUI != null)
@@ -171,26 +190,11 @@ public class LevelManager : MonoBehaviour
             Debug.Log("No Level UI");
            // Debug.LogError(levelUI);
         }
+        */
     }
 
 	void LateStart()
 	{
-        // TODO: Fade in transition image, place player party at start of level where Entrance gameobject transform is assigned, 
-        // when the player exits the transform trigger, disable the entrance gameobject, 
-        // when the player enters the exit gameobject play Fade out in transition image, load new scene async... 
-
-        playerParty.transform.position = transitionMan.entrancePos;
-        transitionMan.entrancePos = new Vector3(11.5f, 9, -12); 
-     //   transitionMan.entrancePos = transitionMan.entranceTransform.position;
-      //  playerParty.transform.position = transitionMan.entranceTransform.position;
-        Debug.Log(playerParty.gameObject.transform.position);
-
-      /*  if (playerParty != null)
-        {
-            playerParty.transform.position = transitionMan.entrancePos.normalized;
-            transitionMan.entrancePos = new Vector3(transitionMan.entranceTransform.position.x, transitionMan.entranceTransform.position.y, transitionMan.entranceTransform.position.z);
-        }
-        */
 
     }
 
@@ -405,8 +409,7 @@ public class LevelManager : MonoBehaviour
     // Transition Levels
 
     public void SetEntrancePosition(Party playerParty)
-    {
-        // Debug.LogError("Null Reference"); 
+    { 
         if (partyPos != null)
         {
             partyPos = transitionMan.entranceTransform.position;
@@ -421,6 +424,41 @@ public class LevelManager : MonoBehaviour
 		partyPos = transitionMan.exitTransform.position; 
 
 		playerParty.transform.position = partyPos;
+    }
+
+   public IEnumerator Transition()
+    {
+        float i = 0;
+        i = transitionImage.fillAmount;  
+        if(transitionImage != null)
+        {
+            transitionImage.enabled = true; 
+        }
+
+        while(i < transitionImage.fillAmount)
+        {
+            transitionImage.CrossFadeColor(Color.black, 3.0f, false, true); 
+            i += Time.deltaTime * 0.1f;
+            transitionMan.In();
+        }
+
+        yield return null;
+
+        float o = 0;
+        o = transitionImage.fillAmount; 
+
+        while(i < transitionImage.fillAmount)
+        {
+            transitionImage.CrossFadeColor(Color.black, 3.0f, false, true);
+            i -= Time.deltaTime * 0.1f;
+            transitionMan.Out();
+        }
+
+        if (transitionImage != null)
+        {
+            transitionMan.TransitionComplete();
+            transitionImage.enabled = false;
+        }
     }
 
     public void LoadScene(int sceneANumber)

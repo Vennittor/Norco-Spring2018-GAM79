@@ -530,6 +530,11 @@ Prefab:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1135152737}
+    - target: {fileID: 114504153135432616, guid: 73d29a0cd6f435d49a3b27e4358d7512,
+        type: 2}
+      propertyPath: transitionImage
+      value: 
+      objectReference: {fileID: 1063939884}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 73d29a0cd6f435d49a3b27e4358d7512, type: 2}
   m_IsPrefabParent: 0
@@ -820,11 +825,6 @@ Camera:
   m_PrefabParentObject: {fileID: 20219404222052996, guid: d59a9ee4b1fc442448e4ebd0f21e5756,
     type: 2}
   m_PrefabInternal: {fileID: 175447112}
---- !u!1 &1135152729 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1242139476785792, guid: 010f16499a948b2468a1e4766f5d3205,
-    type: 2}
-  m_PrefabInternal: {fileID: 735391752}
 --- !u!4 &1135152737 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4274544609537054, guid: 010f16499a948b2468a1e4766f5d3205,
@@ -953,15 +953,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionImage: {fileID: 1063939884}
-  In: 0
-  Out: 0
-  settingUp: 0
-  entrancePos: {x: 0, y: 0, z: 0}
-  exitPos: {x: 0, y: 0, z: 0}
   entranceTransform: {fileID: 329160673}
   exitTransform: {fileID: 1707179376}
   levelMan: {fileID: 1747083095}
-  player: {fileID: 1135152729}
 --- !u!1001 &1598905595
 Prefab:
   m_ObjectHideFlags: 0
@@ -1173,6 +1167,10 @@ Prefab:
         type: 2}
       propertyPath: m_CullingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358440024566300, guid: 0969befb22450c44ea055a3dc5b422c7, type: 2}
+      propertyPath: m_Name
+      value: Transition Image
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0969befb22450c44ea055a3dc5b422c7, type: 2}
