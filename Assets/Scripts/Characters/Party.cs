@@ -16,6 +16,8 @@ public class Party : MonoBehaviour
     public uint myCurrentHeatIntensity;
     public uint lastHeat;
 
+    public Party playerParty { get; private set; }
+
     public enum PartyType
     {
         PLAYER,
@@ -176,14 +178,14 @@ public class Party : MonoBehaviour
     {
         if(col.gameObject.tag == "Exit")
         {
-            levelMan.StartCoroutine(levelMan.Transition());
+           // levelMan.StartCoroutine(levelMan.Transition());
 
-            levelMan.LoadScene(0);
+            levelMan.LoadSceneAsync();
         }
     }
 
     private void OnTriggerExit(Collider col)
     {
-        levelMan.StopCoroutine(levelMan.Transition());
+       // levelMan.StartCoroutine(levelMan.DoneWithTransition(playerParty)); 
     }
 }

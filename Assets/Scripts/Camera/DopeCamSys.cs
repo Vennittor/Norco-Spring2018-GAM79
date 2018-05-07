@@ -51,7 +51,7 @@ public class DopeCamSys : MonoBehaviour
 		//TODO change camera positoin to encompass all characters in within frustum
         if(camera != null)
         {
-            camera.fieldOfView += 10;
+            camera.fieldOfView = 80;
             cameraDock = target.transform.Find("CamDock");
         }
     }
@@ -61,7 +61,7 @@ public class DopeCamSys : MonoBehaviour
 		//TODO set to default position
         if(camera != null)
         {
-            camera.fieldOfView -= 10;
+            camera.fieldOfView = 70;
             cameraDock = target.transform.Find("CamDock");
         }
     }

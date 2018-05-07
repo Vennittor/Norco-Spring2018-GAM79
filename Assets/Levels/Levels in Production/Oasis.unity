@@ -205,6 +205,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1640302024087162, guid: e03dca6beca68564faf2ea6cc1517ca3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e03dca6beca68564faf2ea6cc1517ca3, type: 2}
   m_IsPrefabParent: 0
@@ -1161,16 +1165,21 @@ Prefab:
     - target: {fileID: 114781136937982474, guid: 0969befb22450c44ea055a3dc5b422c7,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 95619574065820644, guid: 0969befb22450c44ea055a3dc5b422c7,
         type: 2}
       propertyPath: m_CullingMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1358440024566300, guid: 0969befb22450c44ea055a3dc5b422c7, type: 2}
       propertyPath: m_Name
       value: Transition Image
+      objectReference: {fileID: 0}
+    - target: {fileID: 114781136937982474, guid: 0969befb22450c44ea055a3dc5b422c7,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0969befb22450c44ea055a3dc5b422c7, type: 2}

@@ -16,10 +16,22 @@ public class TransitionManager : MonoBehaviour
 
     void Awake()
     {
-        iAnim = FindObjectOfType<Animator>();
-        levelMan = FindObjectOfType<LevelManager>();
-        DontDestroyOnLoad(playerParty);
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(playerParty); 
         transitionImage.enabled = true;
+    }
+
+    void Start()
+    {
+        if(iAnim == null)
+        {
+            iAnim = GameObject.FindObjectOfType<Animator>().GetComponent<Animator>();
+        }
+
+        if(levelMan == null)
+        {
+            levelMan = GameObject.FindObjectOfType<LevelManager>(); 
+        }
     }
 
     public void TransitionTo(int sceneIndex)
@@ -28,17 +40,19 @@ public class TransitionManager : MonoBehaviour
     }
 
     public void In()
-    { 
+    {
+        iAnim.Play("fadeIn1");
         iAnim.CrossFade("fadeIn1", 2.0f); 
     }
 
     public void Out()
     {
-        iAnim.CrossFade("fadeOut1", 3.0f); 
+        iAnim.Play("fadeOut1");
+        iAnim.CrossFade("fadeOut1", 3.0f);
     }
 
     public void TransitionComplete()
     {
-        iAnim.enabled = false; 
+        Out();
     }
 }
