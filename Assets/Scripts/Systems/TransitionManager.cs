@@ -44,29 +44,29 @@ public class TransitionManager : MonoBehaviour
                 DontDestroyOnLoad(this.gameObject);
             }
         }
-
-        playerParty.transform.position = entrancePos; 
+			
         entrancePos = new Vector3(11.5f, 9, -12);
         exitPos = new Vector3(58, 9, -12); 
+		playerParty.transform.position = entrancePos; 
     }
 
-    public void StopIAnim()
-    {
-        iAnim.gameObject.GetComponentInChildren<Image>().enabled = false;
-        iAnim.StopPlayback();
-        Debug.Log(transitionImage);
-    }
-
-    public void StartIAnim()
-    {
-        iAnim.gameObject.GetComponentInChildren<Image>().enabled = true;
-        iAnim.StartPlayback();
-        In = true;
-        Out = false;
-        settingUp = true; 
-        StartCoroutine(TransitionIn());
-        Debug.Log(transitionImage);
-    }
+//    public void StopIAnim()
+//    {
+//        iAnim.gameObject.GetComponentInChildren<Image>().enabled = false;
+//        iAnim.StopPlayback();
+//        Debug.Log(transitionImage);
+//    }
+//
+//    public void StartIAnim()
+//    {
+//        iAnim.gameObject.GetComponentInChildren<Image>().enabled = true;
+//        iAnim.StartPlayback();
+//        In = true;
+//        Out = false;
+//        settingUp = true; 
+//        StartCoroutine(TransitionIn());
+//        Debug.Log(transitionImage);
+//    }
 
     private void OnLevelWasLoaded(int index)
     {
@@ -89,10 +89,17 @@ public class TransitionManager : MonoBehaviour
         Out = false; 
     }
     
-    public IEnumerator TransitionIn()
+	public void TransitionTo(int sceneIndex)
+	{
+		TransitionOut ();
+
+		levelMan.LoadScene (sceneIndex);
+	}
+
+	public IEnumerator TransitionIn()
     {
         Initialize();
-        transitionImage.GetComponentInChildren<Image>().enabled = true;
+
         transitionImage.enabled = true; 
 
         if (In == true && Out == false)
@@ -105,7 +112,7 @@ public class TransitionManager : MonoBehaviour
         yield return null;
     }
 
-    public IEnumerator TransitionOut()
+	public IEnumerator TransitionOut()
     {
         In = false;
         Out = true; 
@@ -116,10 +123,10 @@ public class TransitionManager : MonoBehaviour
             iAnim.SetBool("In", false);
             iAnim.SetBool("Out", true);
         }
-
-        transitionImage.GetComponentInChildren<Image>().enabled = false;
+			
         transitionImage.enabled = false;
 
         yield return null; 
+
     }
 }

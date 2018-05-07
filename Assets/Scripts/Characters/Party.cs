@@ -174,40 +174,16 @@ public class Party : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Entrance")
-        {
-            transitionMan.StartCoroutine(transitionMan.TransitionIn());
-            transitionMan.StartIAnim();
-            levelMan.LoadScene(0);  
-        }
+
     }
 
     private void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Entrance" || col.gameObject.name == "Exit")
-        {
-            transitionMan.transitionImage.enabled = true;
 
-            transitionMan.StartCoroutine(transitionMan.TransitionIn());
-            transitionMan.StartIAnim();
-        }
     }
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.name == "Entrance" || col.gameObject.name == "Exit")
-        {
-            transitionMan.StartCoroutine(transitionMan.TransitionOut());
-            levelMan.LoadScene(1);
 
-            while (true)
-            {
-                transitionMan.StopIAnim();
-                col.gameObject.SetActive(false);
-                break;
-            }
-
-            transitionMan.StopCoroutine(transitionMan.TransitionOut());
-        }
     }
 }

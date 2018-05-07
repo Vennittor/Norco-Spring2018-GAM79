@@ -29,10 +29,10 @@ public class LevelManager : MonoBehaviour
     public Transform enemyCombatTransform;
     public GameObject heatWavePrefab;
 
-    public Transform playerTransform;
-    public Transform partyPos; 
 
-    private TransitionManager transitionMan; 
+    public Vector3 partyPos; 
+
+	[SerializeField] private TransitionManager transitionMan; 
 
     [SerializeField]
     DopeCamSys camDock; 
@@ -57,24 +57,6 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        if (partyPos == null)
-        {
-            partyPos = playerParty.GetComponent<Transform>();
-        }
-
-        partyPos = FindObjectOfType<Transform>().transform;
-        playerParty = FindObjectOfType<GameObject>();
-        _instance = this;
-
-        transitionMan = FindObjectOfType<TransitionManager>(); 
-
-        camDock = FindObjectOfType<DopeCamSys>(); 
-
-        if (playerParty == null)
-        {
-            playerParty = GameObject.FindGameObjectWithTag("Player");
-        }
-
 		_instance = this;
 
 		if (combatUI == null)
@@ -89,14 +71,34 @@ public class LevelManager : MonoBehaviour
 		{
 			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
 		}
-			
+
 		this.gameObject.transform.SetParent(null);
+
+		if (playerParty == null)
+		{
+			playerParty = GameObject.FindGameObjectWithTag("Player");
+
+			if (playerParty == null)
+			{
+				Debug.LogError ("Can't find player Party");
+			}
+		}
+			
+		if (partyPos == null)
+		{
+			partyPos = playerParty.transform.position;
+		}
+
+
+		transitionMan = FindObjectOfType<TransitionManager>(); 
+
+		camDock = FindObjectOfType<DopeCamSys>(); 
 
 		if (heatWavePrefab != null)
 		{
 			heatWavePrefab.SetActive(false); 
 		}
-
+			
         //SceneManager.LoadScene("OtherSceneName", LoadSceneMode.Additive);
     }
 
@@ -407,18 +409,18 @@ public class LevelManager : MonoBehaviour
         // Debug.LogError("Null Reference"); 
         if (partyPos != null)
         {
-            partyPos = playerParty.transform.GetComponent<Transform>();
-            partyPos.transform.position = transitionMan.entranceTransform.position;
-            transitionMan.entrancePos = new Vector3(transitionMan.entranceTransform.position.x, transitionMan.entranceTransform.position.y, transitionMan.entranceTransform.position.z);
+            partyPos = transitionMan.entranceTransform.position;
+
+			playerParty.transform.position = partyPos;
 
         }
     }
 
     public void SetExitPosition(Party playerParty)
     {
-        partyPos = playerParty.transform.GetComponent<Transform>();
-        playerTransform = playerParty.transform;
-        playerTransform.position = transitionMan.exitTransform.position; 
+		partyPos = transitionMan.exitTransform.position; 
+
+		playerParty.transform.position = partyPos;
     }
 
     public void LoadScene(int sceneANumber)
