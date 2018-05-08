@@ -178,14 +178,16 @@ public class Party : MonoBehaviour
     {
         if(col.gameObject.tag == "Exit")
         {
-           // levelMan.StartCoroutine(levelMan.Transition());
-
+            levelMan.StartCoroutine(levelMan.Transition());
             levelMan.LoadSceneAsync();
         }
     }
 
     private void OnTriggerExit(Collider col)
     {
-       // levelMan.StartCoroutine(levelMan.DoneWithTransition(playerParty)); 
+        if(col.gameObject.tag == "Exit")
+        {
+            levelMan.StartCoroutine(levelMan.DoneWithTransition(playerParty));
+        }
     }
 }

@@ -18,7 +18,7 @@ TagManager:
   - 
   - 
   - Targeting
-  - 
+  - Transition
   - 
   - 
   - 
@@ -47,4 +47,7 @@ TagManager:
     locked: 0
   - name: Layer_01
     uniqueID: 988169311
+    locked: 0
+  - name: Layer_02
+    uniqueID: 591113631
     locked: 0

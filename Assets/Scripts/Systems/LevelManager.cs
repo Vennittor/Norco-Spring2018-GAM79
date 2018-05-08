@@ -160,7 +160,7 @@ public class LevelManager : MonoBehaviour
 		{
 			swipeImage.enabled = true;
 		}
-        /*
+    
         if(transitionImage == null)
         {
             if(levelUI != null)
@@ -177,7 +177,7 @@ public class LevelManager : MonoBehaviour
                 Debug.LogError("Level UI is null"); 
             }
         }
-        */
+     
 
         if(transitionImage != null)
         {
@@ -231,11 +231,11 @@ public class LevelManager : MonoBehaviour
 			Vector2 startingAnchorMin = Vector2.zero;
 			float i = 0f;
 
-          /*  if(swipeImage == null)
+          if(swipeImage == null)
             {
                 swipeImage = GameObject.Find("Swipe Image").GetComponent<Image>();
             }
-            */
+        
 
 			if (swipeImage != null)
 			{
@@ -439,55 +439,76 @@ public class LevelManager : MonoBehaviour
         partyPos = exit.gameObject.transform.position; 
     }
 
-    /*
-
    public IEnumerator Transition()
     {
         Debug.Log("Transition");
 
-        if (transitionImage != null)
-        {
-            if (transitionImage == null)
-            {
-                transitionImage.enabled = true;
-            }
-        }
+        /* if (transitionImage != null)
+         {
+             if (transitionImage == null)
+             {
+                 transitionImage.enabled = true;
+             }
+         }
+         */
+        transitionImage.enabled = true;
 
         float i = 0;
-        i = transitionImage.fillAmount;
+        transitionImage.GetComponent<Image>().color = Color.black;
+        var tempColor = transitionImage.color;
+        tempColor.a = 1;
+      //  transitionImage.color = tempColor; 
+         
+        i = transitionImage.color.a;
 
-        while (i < transitionImage.fillAmount)
+        while (i <= transitionImage.color.a + 1)
         {
-            transitionImage.enabled = true; 
             Debug.Log("Transition In ");
             i += Time.deltaTime * 0.1f;
-            Debug.Log(Time.time); 
+            Debug.Log(Time.time);
+
+            if (i == 1)
+            {
+                Debug.Log("Full");
+                transitionImage.enabled = false;
+            }
+
             transitionImage.CrossFadeColor(Color.black, 3.0f, false, true);
-            transitionMan.In();
-            Debug.Log(transitionImage);
 
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.1f);  
-
-        float o = 0;
-        o = transitionImage.fillAmount;
-
-        while (o < transitionImage.fillAmount)
+        while (i < transitionImage.color.a)
         {
-            transitionImage.enabled = true; 
-            Debug.Log("Transition Out ");
-            o += Time.deltaTime * 0.1f;
-            transitionImage.CrossFadeColor(Color.black, 3.0f, false, true);
-            transitionMan.Out();
+            if(i == 1)
+            {
+                transitionMan.Out();
+            }
 
-            yield return null;
-
-            transitionImage.enabled = false; 
+            yield return null; 
         }
+
+        transitionImage.enabled = false;
+
+        //  Debug.Log("Wait");  
+        /*
+        float o = 1;
+        o = transitionImage.color.a;
+        tempColor.a = 0;
+        transitionImage.color = tempColor;
+
+        while (o > transitionImage.color.a)
+        {
+            Debug.Log("Transition Out ");
+            o -= Time.deltaTime * 0.1f;
+            transitionImage.CrossFadeColor(Color.black, 3.0f, false, true);
+             yield return null;
+            transitionImage.enabled = false;
+        }
+        */
+
+        //  yield break; 
     }
-    */
 
     public void LoadScene(int sceneANumber)
     {
@@ -499,14 +520,14 @@ public class LevelManager : MonoBehaviour
     {
         StartCoroutine(LoadYourAsyncScene());
     }
-    /*
+
     public IEnumerator DoneWithTransition(Party playerParty)
     {
         if (transitionMan != null)
         {
             if (transitionMan == null)
             {
-                yield return new WaitForSeconds(3.0f); 
+                yield return new WaitForSeconds(0.5f); 
                 transitionMan.Out();
 
                 SetEntrancePosition(playerParty); 
@@ -515,7 +536,6 @@ public class LevelManager : MonoBehaviour
 
         yield return null; 
     }
-    */
 
     IEnumerator LoadYourAsyncScene()
     {

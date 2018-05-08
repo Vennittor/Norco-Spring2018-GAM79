@@ -42,13 +42,11 @@ public class TransitionManager : MonoBehaviour
     public void In()
     {
         iAnim.Play("fadeIn1");
-        iAnim.CrossFade("fadeIn1", 2.0f); 
     }
 
     public void Out()
     {
         iAnim.Play("fadeOut1");
-        iAnim.CrossFade("fadeOut1", 3.0f);
     }
 
     public void TransitionComplete()
