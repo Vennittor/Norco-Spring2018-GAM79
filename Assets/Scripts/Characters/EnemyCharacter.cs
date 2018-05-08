@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class EnemyCharacter : Character
 {
-    void Awake()
+	public MonoBehaviour externalAI = null;
+
+    private new void Awake()
     {
+		base.Awake ();
+
+		externalAI = baseStats.externalAI;
+
         animator = gameObject.GetComponent<Animator>();
     }
 

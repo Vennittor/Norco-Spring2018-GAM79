@@ -345,30 +345,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIManager: {fileID: 0}
   characterName: Alchemist
-  animator: {fileID: 0}
+  baseStats: {fileID: 11400000, guid: f85d9673a64a61f4797d00d2cf7e863c, type: 2}
   maxhealth: 50
   currentHealth: 50
   maxHeat: 300
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 20
-  speedMod: 0
-  defense: 1
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 77b8dc76e800dad479da8130990b2e3a, type: 2}
   - {fileID: 11400000, guid: b43badaefcb4377408de247f9062ce8e, type: 2}
   - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 20
+  speedBonus: 0
+  speedMod: 0
+  defense: 1
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
+  effectClassList: []
+  statuses: 
+  removeStatus: []
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
 --- !u!114 &114327966433383426
@@ -382,30 +390,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIManager: {fileID: 0}
   characterName: Crusader
-  animator: {fileID: 0}
+  baseStats: {fileID: 11400000, guid: f85d9673a64a61f4797d00d2cf7e863c, type: 2}
   maxhealth: 50
   currentHealth: 50
   maxHeat: 300
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 8
-  speedMod: 0
-  defense: 1
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: a04b570ddc5a93040ad129b7d1cf8541, type: 2}
   - {fileID: 11400000, guid: bd6287438c74e4c4783c3a0b6374f0c7, type: 2}
   - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 8
+  speedBonus: 0
+  speedMod: 0
+  defense: 1
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
+  effectClassList: []
+  statuses: 
+  removeStatus: []
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
 --- !u!114 &114695205217747764
@@ -419,11 +435,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cec7f7bf7b7cde49969b6beb94e50ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 12
-  walking: 0
-  facingRight: 1
-  interactionPrefab: {fileID: 0}
   myAnimator: {fileID: 0}
+  walkingSpeed: 12
+  interactionPrefab: {fileID: 0}
+  movementAllowed: 1
 --- !u!114 &114700916010415158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -455,30 +470,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIManager: {fileID: 0}
   characterName: Hunter
-  animator: {fileID: 0}
+  baseStats: {fileID: 11400000, guid: ca197f66a86c09d4ca5ecaa6ba1532d3, type: 2}
   maxhealth: 50
   currentHealth: 50
   maxHeat: 300
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 20
-  speedMod: 0
-  defense: 1
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: 25d847904d39e3748bd5bc910f0764b6, type: 2}
   - {fileID: 11400000, guid: a04b570ddc5a93040ad129b7d1cf8541, type: 2}
   - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 20
+  speedBonus: 0
+  speedMod: 0
+  defense: 1
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
+  effectClassList: []
+  statuses: 
+  removeStatus: []
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
 --- !u!195 &195532744613621432
