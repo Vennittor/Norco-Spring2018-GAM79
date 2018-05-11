@@ -390,6 +390,7 @@ public class CombatManager : MonoBehaviour
 
 	private IEnumerator ActionSlider()
 	{
+        UIManager.InputMode oldMode = uiManager.inputMode;
 		actionBarRunning = true;
 
 		actionSlider.SetActive(true);
@@ -416,9 +417,10 @@ public class CombatManager : MonoBehaviour
         bool going = true;
         while (going)
         {
+            uiManager.inputMode = UIManager.InputMode.BLOCKED;
 			slider.value += Time.deltaTime * fillTime;
 
-			if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+			if (Input.GetKeyDown(KeyCode.Space) /*|| Input.GetMouseButtonDown(0)*/)
             {
                 StartCoroutine("TestingThe1337m0dz");
 
@@ -450,7 +452,7 @@ public class CombatManager : MonoBehaviour
                 going = false;
             }
         }
-			
+        uiManager.inputMode = oldMode;
         Debug.Log("ACTION");
 
 		yield return null;
