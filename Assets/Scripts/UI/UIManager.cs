@@ -183,7 +183,22 @@ public class UIManager : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log("Active Character ability use is blocked. ");
+                if (abilityIndex == 0 || abilityIndex == 3)
+                {
+                    ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
+                    if (ability == null)
+                    {
+                        Debug.LogWarning("Mad cuz bad");
+                    }
+                    else
+                    {
+                        GetTargets(ability.targetType);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Still mad, try another ability");
+                }
 			}
 		}
     }

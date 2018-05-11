@@ -15,6 +15,8 @@ public class Ability : ScriptableObject
 	public TargetType targetType;
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
 	[SerializeField] protected List<StatusEffectType> statuses = new List<StatusEffectType>();
+    [SerializeField] private float statusChance;
+    [SerializeField] private uint stunDuration;
 
 	[SerializeField] protected uint numberOfActions = 1;			//When the Ability is done, instead of telling the player AbilityHasCompleted, it can accept another targeting input
 	protected uint actionsUsed = 0;
@@ -137,9 +139,17 @@ public class Ability : ScriptableObject
 					} 
 
 					foreach (StatusEffectType status in statuses)					// Apply all Status affects
-					{ 
-						target.ApplyStatus(status);
-					} 
+					{
+                        float rand = Random.Range(0f, 100f);
+                        if (rand < statusChance)
+                        {
+                            target.ApplyStatus(status, stunDuration);
+                        }
+                        else
+                        {
+                            Debug.Log("Status missed");
+                        }
+                    } 
 				}
 				//TODO Wait Between hits
 			}

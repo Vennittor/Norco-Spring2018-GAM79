@@ -24,6 +24,8 @@ MonoBehaviour:
     - {x: 1, y: 3}
     elementType: 0
   statuses: 
+  statusChance: 0
+  stunDuration: 0
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 4

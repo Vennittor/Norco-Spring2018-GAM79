@@ -647,6 +647,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: InputAbility
       objectReference: {fileID: 0}
+    - target: {fileID: 224749806326020298, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00036621094
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
   m_IsPrefabParent: 0
@@ -976,6 +981,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
+        type: 2}
+      propertyPath: t1Statuses.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
+        type: 2}
+      propertyPath: t2Statuses.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4827483341692670, guid: 73d29a0cd6f435d49a3b27e4358d7512, type: 2}
       propertyPath: m_LocalPosition.x
       value: -10.348522
@@ -1012,6 +1027,21 @@ Prefab:
         type: 2}
       propertyPath: distanceBetweenInPoints
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
+        type: 2}
+      propertyPath: t1Statuses.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
+        type: 2}
+      propertyPath: t1Statuses.Array.data[1]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
+        type: 2}
+      propertyPath: t2Statuses.Array.data[0]
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 73d29a0cd6f435d49a3b27e4358d7512, type: 2}

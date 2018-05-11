@@ -26,9 +26,12 @@ public class CombatManager : MonoBehaviour
 	public uint roundCounter = 0;
 
     public uint partyHeatLevel;
+    public List<StatusEffectType> t1Statuses;
+    public List<StatusEffectType> t2Statuses;
+
 
     //for the action slider start
-	public GameObject actionSlider;
+    public GameObject actionSlider;
     public Slider slider;
     public Image completionArea;
 
