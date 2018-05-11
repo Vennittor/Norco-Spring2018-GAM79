@@ -3607,7 +3607,7 @@ MonoBehaviour:
   combatManager: {fileID: 0}
   eventSystemManager: {fileID: 0}
   healthBar: {fileID: 0}
-  disableUIOnStart: 0
+  disableUIOnStart: 1
   splashMessagePanel: {fileID: 1367261415709302}
   splashMessageText: {fileID: 114329499611013138}
   splashLifeTime: 1

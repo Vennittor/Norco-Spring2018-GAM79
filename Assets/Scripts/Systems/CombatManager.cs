@@ -81,6 +81,7 @@ public class CombatManager : MonoBehaviour
 
     void Start()
     {
+        
 		levelManager = LevelManager.Instance;
 		uiManager = UIManager.Instance;
 
@@ -111,7 +112,6 @@ public class CombatManager : MonoBehaviour
 		{
 			Debug.LogError ("CombatManager cannot find Action Slider gamObject");
 		}
-
     }
 
 
