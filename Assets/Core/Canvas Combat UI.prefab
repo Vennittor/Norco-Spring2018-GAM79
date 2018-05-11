@@ -2075,8 +2075,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OutputAttack
+      - m_Target: {fileID: 114510117941555128}
+        m_MethodName: InputAbility
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2427,8 +2427,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OutputAttack
+      - m_Target: {fileID: 114510117941555128}
+        m_MethodName: InputAbility
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2775,8 +2775,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OutputAttack
+      - m_Target: {fileID: 114510117941555128}
+        m_MethodName: InputAbility
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2860,8 +2860,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OutputAttack
+      - m_Target: {fileID: 114510117941555128}
+        m_MethodName: InputAbility
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
