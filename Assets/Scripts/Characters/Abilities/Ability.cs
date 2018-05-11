@@ -26,6 +26,7 @@ public class Ability : ScriptableObject
 
     protected List<Character> targets = new List<Character>();
 
+
     // EFFECTS DATA
     //public Sprite image; // for effects
     //Animators & Parameters
@@ -107,7 +108,8 @@ public class Ability : ScriptableObject
 
 	public void UseAbility()
 	{
-		if (targets.Count == 0)
+        float randAccuracy;
+        if (targets.Count == 0)
 		{
 			Debug.LogWarning ("There are no targets for Abiility " + name);
 		} 
@@ -126,23 +128,38 @@ public class Ability : ScriptableObject
 			}
 
             AnnounceAbility();
+            
+            for (int hitsDone = 0; hitsDone < hitsPerAction; hitsDone++)
+            {
+                foreach (Character target in targets)                   // Target all applicable targets
+                {
+                    if(target.evade >= characterUser.accuracy)
+                    {
+                        Debug.Log("you suck");
+                    }
+                    else
+                    {
+                        randAccuracy = Random.Range(0, 100);
+                        if (randAccuracy <= characterUser.accuracy - target.evade)
+                        {
+                            foreach (Damage range in damage)                    // Deal all types of Damage in List
+                            {
+                                target.ApplyDamage((uint)range.RollDamage(), range.element);
+                            }
 
-			for(int hitsDone = 0; hitsDone < hitsPerAction; hitsDone++)
-			{
-				foreach (Character target in targets)					// Target all applicable targets
-				{ 
-					foreach (Damage range in damage)					// Deal all types of Damage in List
-					{
-						target.ApplyDamage ( (uint)range.RollDamage(), range.element);
-					} 
-
-					foreach (StatusEffectType status in statuses)					// Apply all Status affects
-					{ 
-						target.ApplyStatus(status);
-					} 
-				}
-				//TODO Wait Between hits
-			}
+                            foreach (StatusEffectType status in statuses)                   // Apply all Status affects
+                            {
+                                target.ApplyStatus(status);
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("they could dodge a wrench");
+                        }
+                    }
+                }
+                //TODO Wait Between hits
+            }
 		}
 
 		actionsUsed++;

@@ -35,7 +35,7 @@ public class CombatManager : MonoBehaviour
     public float fillTime = 1;
 
     [Range(0, 100)]
-    public float midPoint;
+    private float midPoint;
     public float distanceBetweenInPoints;
 
     public float startDelay = 0.5f;
@@ -398,15 +398,15 @@ public class CombatManager : MonoBehaviour
         //Start
 		slider.value = 0;
 		slider.maxValue = fillTime;
-
+        midPoint = Random.Range(midMin, midMax);
         //Create the visual for the stopping area
-		float sliderSize = slider.GetComponent<RectTransform>().sizeDelta.y;
+        float sliderSize = slider.GetComponent<RectTransform>().sizeDelta.y;
         sliderSize *= midPoint * 0.01f;
 		sliderSize -= slider.GetComponent<RectTransform>().sizeDelta.y / 2;
         completionArea.GetComponent<RectTransform>().localPosition = Vector3.zero + (Vector3.up * sliderSize);
 
         completionArea.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, distanceBetweenInPoints * 2 * (actionSlider.GetComponent<RectTransform>().sizeDelta.y * 0.01f));
-        midPoint = Random.Range(midMin, midMax);
+        
         yield return new WaitForSeconds(startDelay);
 
         //Do the thing

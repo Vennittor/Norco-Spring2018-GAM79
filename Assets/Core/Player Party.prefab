@@ -140,7 +140,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242139476785792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.56, y: 2.125, z: 0.34}
+  m_LocalPosition: {x: 7.05, y: 1.62, z: 20.206972}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4891253443211064}
@@ -345,9 +345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIManager: {fileID: 0}
+  uiManager: {fileID: 0}
   characterName: Alchemist
-  baseStats: {fileID: 11400000, guid: f85d9673a64a61f4797d00d2cf7e863c, type: 2}
+  baseStats: {fileID: 11400000, guid: 981bd179054471042a37f34d83caf34b, type: 2}
   maxhealth: 50
   currentHealth: 50
   maxHeat: 300
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIManager: {fileID: 0}
+  uiManager: {fileID: 0}
   characterName: Crusader
   baseStats: {fileID: 11400000, guid: f85d9673a64a61f4797d00d2cf7e863c, type: 2}
   maxhealth: 50
@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a682e3522d6e74091a4e7689093db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIManager: {fileID: 0}
+  uiManager: {fileID: 0}
   characterName: Hunter
   baseStats: {fileID: 11400000, guid: ca197f66a86c09d4ca5ecaa6ba1532d3, type: 2}
   maxhealth: 50
