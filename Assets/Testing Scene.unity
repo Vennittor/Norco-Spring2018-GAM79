@@ -108,6 +108,12 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 23800000, guid: 9e61ca86eb055b04da002dc1e575a535, type: 2}
+--- !u!114 &26958996 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114946907771113516, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
+    type: 2}
+  m_PrefabInternal: {fileID: 1315385436}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &116500293
 Prefab:
   m_ObjectHideFlags: 0
@@ -614,7 +620,13 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114979488222555170, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114979488222555170, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1902346775
@@ -882,6 +894,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &2060067259 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1529916558906148, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
+    type: 2}
+  m_PrefabInternal: {fileID: 1315385436}
+--- !u!114 &2060067261 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114385908341717456, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
+    type: 2}
+  m_PrefabInternal: {fileID: 1315385436}
+  m_Script: {fileID: -113659843, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &2068051070
 Prefab:
   m_ObjectHideFlags: 0
@@ -968,6 +991,21 @@ Prefab:
       propertyPath: distanceBetweenInPoints
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
+        type: 2}
+      propertyPath: actionSlider
+      value: 
+      objectReference: {fileID: 2060067259}
+    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
+        type: 2}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 2060067261}
+    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
+        type: 2}
+      propertyPath: completionArea
+      value: 
+      objectReference: {fileID: 26958996}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 73d29a0cd6f435d49a3b27e4358d7512, type: 2}
   m_IsPrefabParent: 0
