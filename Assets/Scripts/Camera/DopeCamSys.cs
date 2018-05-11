@@ -33,13 +33,15 @@ public class DopeCamSys : MonoBehaviour
 
 		if (target == null) 
 		{
-			target = GameObject.FindGameObjectWithTag ("Player");
+			target = GameObject.FindGameObjectWithTag ("Player"); 
 		}
 
 		if (cameraDock == null && target != null) 
 		{
 			cameraDock = target.transform.Find ("CamDock");
 		}
+
+        Debug.Log(cameraDock); 
 
 		transform.rotation = Quaternion.Euler(Vector3.zero);
         transform.position = cameraDock.transform.position;

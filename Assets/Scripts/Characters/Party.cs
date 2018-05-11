@@ -33,6 +33,7 @@ public class Party : MonoBehaviour
     {
         transitionMan = FindObjectOfType<TransitionManager>(); 
         levelMan = LevelManager.Instance;
+        
 
 		if (levelMan == null)
 		{

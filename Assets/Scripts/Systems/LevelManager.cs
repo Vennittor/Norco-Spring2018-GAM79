@@ -92,9 +92,7 @@ public class LevelManager : MonoBehaviour
 		}
 
 
-		transitionMan = FindObjectOfType<TransitionManager>(); 
-
-		camDock = FindObjectOfType<DopeCamSys>(); 
+		transitionMan = FindObjectOfType<TransitionManager>();
 
 		if (heatWavePrefab != null)
 		{
@@ -106,8 +104,8 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-
-		combatManager = CombatManager.Instance;
+        Debug.Log("CamDockLoadsStart?");
+        combatManager = CombatManager.Instance;
 
 		if (combatManager == null)
 		{
@@ -135,7 +133,15 @@ public class LevelManager : MonoBehaviour
 		{
 			Debug.LogError ("LevelManager could not find reference to the Canvas Level UI");
 		}
-        
+
+        /*
+        if (camDock == null)
+        {
+            camDock = FindObjectOfType<DopeCamSys>();
+         //   Debug.Log("Discovered CamDock" + camDock.ToString());
+        }
+        */
+
         SoundManager.instance.Play(levelMusic, "mxL"); //play the level music
         // check if null onload
 
@@ -169,7 +175,7 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
-                transitionImage = GameObject.Find("Transition Image").GetComponent<Image>(); 
+                transitionImage = GameObject.Find("Transition Image").GetComponent<Image>();
             }
 
             if(levelUI == null)
@@ -178,8 +184,7 @@ public class LevelManager : MonoBehaviour
             }
         }
      
-
-        if(transitionImage != null)
+        if(transitionImage != null && levelUI != null)
         {
             transitionImage.enabled = true;
         }
@@ -230,16 +235,16 @@ public class LevelManager : MonoBehaviour
 			//Perform Enter 'swipe'
 			Vector2 startingAnchorMin = Vector2.zero;
 			float i = 0f;
-
-          if(swipeImage == null)
+            /*
+           if(swipeImage == null)
             {
+                Debug.Log("Find Swipe Image"); 
                 swipeImage = GameObject.Find("Swipe Image").GetComponent<Image>();
             }
-        
+            */
 
 			if (swipeImage != null)
 			{
-                Debug.Log("Swipe");
                 swipeImage.enabled = true;
 				startingAnchorMin = swipeImage.rectTransform.anchorMin;
 
@@ -339,11 +344,6 @@ public class LevelManager : MonoBehaviour
                 swipeImage.enabled = false;
             }
 
-            if (levelUI == null)
-            {
-                levelUI = GameObject.Find("Canvas Level UI");
-            }
-
             levelUI.SetActive(false);
 
             //Swipe Finished and reset
@@ -441,77 +441,30 @@ public class LevelManager : MonoBehaviour
 
    public IEnumerator Transition()
     {
-      //  Debug.Log("Transition");
-
-      /* if (transitionImage != null)
-         {
-             if (transitionImage == null)
-             {
-                 transitionImage.enabled = true;
-             }
-         }
-         */
-
         transitionImage.enabled = true;
-     //   transitionMan.Load.gameObject.GetComponentInChildren<GameObject>().SetActive(true); 
 
         float i = 0;
         transitionImage.GetComponent<Image>().color = Color.black;
         var tempColor = transitionImage.color;
         tempColor.a = 1;
-      //  transitionImage.color = tempColor; 
          
         i = transitionImage.color.a;
 
         while (i <= transitionImage.color.a + 1)
         {
-          //  Debug.Log("Transition In ");
             i += Time.deltaTime * 0.1f;
-           // Debug.Log(Time.time);
 
-            if (i == 1)
+            if (i == 1.0f)
             {
-              //  Debug.Log("Full");
                 transitionImage.enabled = false;
             }
 
-            transitionImage.CrossFadeColor(Color.black, 3.0f, false, true);
+            transitionImage.CrossFadeColor(Color.black, 1.0f, false, true);
 
             yield return null;
         }
 
-        while (i < transitionImage.color.a)
-        {
-            if(i == 1)
-            {
-                transitionMan.Out();
-            }
-
-            yield return null; 
-        }
-
-        transitionImage.enabled = false;
-      //  transitionMan.Load.gameObject.GetComponentInChildren<GameObject>().SetActive(false);
-
-        //  Debug.Log("Wait");  
-        /*
-        float o = 1;
-        o = transitionImage.color.a;
-        tempColor.a = 0;
-        transitionImage.color = tempColor;
-
-        while (o > transitionImage.color.a)
-        {
-            Debug.Log("Transition Out ");
-            o -= Time.deltaTime * 0.1f;
-            transitionImage.CrossFadeColor(Color.black, 3.0f, false, true);
-             yield return null;
-            transitionImage.enabled = false;
-        }
-        */
-   
-
-        //  yield break; 
+       transitionImage.enabled = false;
     }
 
     
@@ -531,11 +484,13 @@ public class LevelManager : MonoBehaviour
         if (transitionMan != null)
         {
             transitionMan.Out();
-
-            Debug.Log("sound???"); 
             SoundManager sound = GetComponent<SoundManager>();
-
             DontDestroyOnLoad(sound.audioItemMXlevel);
+            if(camDock != null)
+            {
+              //  DontDestroyOnLoad(camDock.GetComponentInChildren<DopeCamSys>().gameObject);
+              //  camDock.GetComponentsInChildren<Camera>();
+            }
 
             SetEntrancePosition(playerParty);
         }
@@ -545,14 +500,38 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void SetUpNewScene()
+    {
+        if(combatUI == null)
+        {
+           combatUI = GetComponent<CombatManager>().gameObject; 
+            
+        }
+        if(camDock == null)
+        {
+            Debug.Log("Find Camdock");
+            camDock = FindObjectOfType<DopeCamSys>(); 
+        }
+        if(swipeImage == null)
+        {
+            swipeImage = GameObject.Find("Swipe Image").GetComponent<Image>();
+        }
+        if (levelUI == null)
+        {
+            levelUI = GameObject.Find("Canvas Level UI");
+        }
+    }
+
     IEnumerator LoadYourAsyncScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1);
-
+     
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
+
+        SetUpNewScene();
     } 
 
     // End Transition Levels 
