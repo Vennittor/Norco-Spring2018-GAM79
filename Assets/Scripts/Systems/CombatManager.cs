@@ -38,12 +38,12 @@ public class CombatManager : MonoBehaviour
     public float fillTime = 1;
 
     [Range(0, 100)]
-    public float midPoint;
+    private float midPoint;
     public float distanceBetweenInPoints;
 
     public float startDelay = 0.5f;
 
-    bool started = false;
+    bool actionBarRunning = false;
     //for the action slider end
 
     private List<Character> finalizedTargets = new List<Character> ();
@@ -84,6 +84,7 @@ public class CombatManager : MonoBehaviour
 
     void Start()
     {
+        
 		levelManager = LevelManager.Instance;
 		uiManager = UIManager.Instance;
 
@@ -114,7 +115,6 @@ public class CombatManager : MonoBehaviour
 		{
 			Debug.LogError ("CombatManager cannot find Action Slider gamObject");
 		}
-
     }
 
 
@@ -367,14 +367,19 @@ public class CombatManager : MonoBehaviour
 
 		finalizedTargets.AddRange (targetsToAssign);
 
-		//TODO  Handle the SLIDER here.  Once it's input is gotten (in the form of a multiplier/modifier) run the next and pass it the multiplier
-
 		//IF we should use the SLider,  (Check activeCharacter.selectedAbility and see if it should.  (this needs to be added to the Ability class
 			//enable slider.
 
 		if (activeCharacter is PlayerCharacter)
 		{
-			StartCoroutine(ActionSlider());
+			if (!actionBarRunning)
+			{
+				StartCoroutine (ActionSlider ());
+			}
+			else
+			{
+				Debug.LogError ("ActionSlider is currently running and has been attempted to start again");
+			}
 		}
 		else
 		{
@@ -385,6 +390,8 @@ public class CombatManager : MonoBehaviour
 
 	private IEnumerator ActionSlider()
 	{
+		actionBarRunning = true;
+
 		actionSlider.SetActive(true);
 
 		float modifiedEffect = 0f;
@@ -394,15 +401,15 @@ public class CombatManager : MonoBehaviour
         //Start
 		slider.value = 0;
 		slider.maxValue = fillTime;
-
+        midPoint = Random.Range(midMin, midMax);
         //Create the visual for the stopping area
-		float sliderSize = slider.GetComponent<RectTransform>().sizeDelta.y;
+        float sliderSize = slider.GetComponent<RectTransform>().sizeDelta.y;
         sliderSize *= midPoint * 0.01f;
 		sliderSize -= slider.GetComponent<RectTransform>().sizeDelta.y / 2;
         completionArea.GetComponent<RectTransform>().localPosition = Vector3.zero + (Vector3.up * sliderSize);
 
         completionArea.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, distanceBetweenInPoints * 2 * (actionSlider.GetComponent<RectTransform>().sizeDelta.y * 0.01f));
-        midPoint = Random.Range(midMin, midMax);
+        
         yield return new WaitForSeconds(startDelay);
 
         //Do the thing
@@ -443,11 +450,12 @@ public class CombatManager : MonoBehaviour
                 going = false;
             }
         }
-
-        started = false;
+			
         Debug.Log("ACTION");
 
 		yield return null;
+
+		actionBarRunning = false;
 
 		uiManager.actionSlider.SetActive(false);
 		UseCharacterAbility (modifiedEffect);

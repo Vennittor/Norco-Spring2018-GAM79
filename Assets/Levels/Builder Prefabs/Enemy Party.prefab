@@ -20,8 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4231856281294646}
   - component: {fileID: 65602139751134954}
-  - component: {fileID: 114023803128865534}
   - component: {fileID: 212202839329558756}
+  - component: {fileID: 95451601630553956}
+  - component: {fileID: 114133190423154650}
   m_Layer: 8
   m_Name: Enemy Combat Object 3
   m_TagString: Untagged
@@ -58,8 +59,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4810520891303386}
   - component: {fileID: 65989415978467796}
-  - component: {fileID: 114719346004352292}
   - component: {fileID: 212206965655283480}
+  - component: {fileID: 95463473891962814}
+  - component: {fileID: 114122319933937724}
   m_Layer: 8
   m_Name: Enemy Combat Object 2
   m_TagString: Untagged
@@ -91,8 +93,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4007259431005854}
   - component: {fileID: 65172035583631062}
-  - component: {fileID: 114301185819822392}
   - component: {fileID: 212257160482806548}
+  - component: {fileID: 95058759689176172}
+  - component: {fileID: 114226079845511084}
   m_Layer: 8
   m_Name: Enemy Combat Object 1
   m_TagString: Untagged
@@ -232,7 +235,98 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114023803128865534
+--- !u!95 &95058759689176172
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911335302392956}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95451601630553956
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1615339709382334}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95463473891962814
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1689371450491852}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114122319933937724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1689371450491852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
+  characterName: 
+  baseStats: {fileID: 0}
+  maxhealth: 0
+  currentHealth: 0
+  maxHeat: 0
+  currentHeat: 0
+  abilities: []
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 0
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 0
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 0
+  speedBonus: 0
+  speedMod: 0
+  defense: 0
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: 0
+  effectClassList: []
+  statuses: 
+  removeStatus: []
+  externalAI: {fileID: 0}
+--- !u!114 &114133190423154650
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -243,28 +337,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   characterName: 
-  animator: {fileID: 0}
-  maxhealth: 100
-  currentHealth: 100
+  baseStats: {fileID: 0}
+  maxhealth: 0
+  currentHealth: 0
   maxHeat: 0
   currentHeat: 0
+  abilities: []
   attack: 0
+  attackBonus: 0
   attackMod: 0
-  accuracy: 84.5
+  accuracy: 0
+  accuracyBonus: 0
   accuracyMod: 0
-  evade: 10
+  evade: 0
+  evadeBonus: 0
   evadeMod: 0
-  speed: 4
+  speed: 0
+  speedBonus: 0
   speedMod: 0
   defense: 0
+  defenseBonus: 0
   defenseMod: 0
   combatState: 0
-  selectedAbilityIndex: -1
-  abilities:
-  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
-  cooldownTimers: 
---- !u!114 &114301185819822392
+  selectedAbilityIndex: 0
+  effectClassList: []
+  statuses: 
+  removeStatus: []
+  externalAI: {fileID: 0}
+--- !u!114 &114226079845511084
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -275,27 +377,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   characterName: 
-  animator: {fileID: 0}
-  maxhealth: 100
-  currentHealth: 100
+  baseStats: {fileID: 0}
+  maxhealth: 0
+  currentHealth: 0
   maxHeat: 0
   currentHeat: 0
+  abilities: []
   attack: 0
+  attackBonus: 0
   attackMod: 0
-  accuracy: 84.5
+  accuracy: 0
+  accuracyBonus: 0
   accuracyMod: 0
-  evade: 10
+  evade: 0
+  evadeBonus: 0
   evadeMod: 0
-  speed: 4
+  speed: 0
+  speedBonus: 0
   speedMod: 0
   defense: 0
+  defenseBonus: 0
   defenseMod: 0
   combatState: 0
-  selectedAbilityIndex: -1
-  abilities:
-  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
-  cooldownTimers: 
+  selectedAbilityIndex: 0
+  effectClassList: []
+  statuses: 
+  removeStatus: []
+  externalAI: {fileID: 0}
 --- !u!114 &114426346510637944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,44 +420,12 @@ MonoBehaviour:
   levelMan: {fileID: 0}
   heatState: 0
   partyMembers:
-  - {fileID: 114301185819822392}
-  - {fileID: 114719346004352292}
-  - {fileID: 114023803128865534}
+  - {fileID: 114226079845511084}
+  - {fileID: 114122319933937724}
+  - {fileID: 114133190423154650}
   type: 1
   myCurrentHeatIntensity: 0
   lastHeat: 0
---- !u!114 &114719346004352292
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1689371450491852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: 
-  animator: {fileID: 0}
-  maxhealth: 100
-  currentHealth: 100
-  maxHeat: 0
-  currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 4
-  speedMod: 0
-  defense: 0
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
-  abilities:
-  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
-  cooldownTimers: 
 --- !u!195 &195878955378310724
 NavMeshAgent:
   m_ObjectHideFlags: 1

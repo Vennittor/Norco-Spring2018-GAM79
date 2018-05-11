@@ -21,6 +21,9 @@ public class UIManager : MonoBehaviour
 
     public CombatManager combatManager;
     public EventSystemManager eventSystemManager;
+    private Character character;
+
+    public Image healthBar;
 
 	public bool disableUIOnStart = true;
 
@@ -153,7 +156,7 @@ public class UIManager : MonoBehaviour
 		if (inputMode == InputMode.ABILITYSELECT)
 		{
 			bool stopAbility = false;
-			foreach(Character.EffectClass effect in combatManager.activeCharacter.effectClassList)
+			foreach(EffectClass effect in combatManager.activeCharacter.effectClassList)
 			{
 				if(effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
 				{
@@ -299,8 +302,19 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void UpdateHealthBar()
+    {
+		if (healthBar != null)
+		{
+			healthBar.fillAmount = character.currentHealth / character.maxhealth;
+		}
+		else
+		{
+			Debug.LogError ("No refrence to Health Bar");
+		}
+    }
 
-	#region HighlightTargets
+    #region HighlightTargets
     public void TurnRed(List<Character> targets) 			// highlight in Red on Mouse-over
     {
         foreach(Character target in targets)

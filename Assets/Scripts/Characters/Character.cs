@@ -1,55 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent (typeof(Animator))]
 public abstract class Character : MonoBehaviour
 {   
 	protected CombatManager combatManager;
+    public UIManager uiManager;
 
     public enum CombatState
     {
         ABLE, DISABLED, USINGABILITY, EXHAUSTED
     }
-    [System.Serializable]
-    public class EffectClass
-    {
-        public StatusEffectType statusEffectType;
-        public bool isBuff;
-        public int initDuration;
-        public int duration;
-        public bool applyImmediately;
-        public bool checkAtStart;
-        public bool isBoth;
-        public bool buffTicked;
-        public int poisonDuration;
-
-        public EffectClass(StatusEffectType statusEffectType, bool isBuff, int initDuration, int duration, bool applyImmediately, bool checkAtStart, bool isBoth = false, bool buffTicked = false, int poisonDuration = 0)
-        {
-            this.statusEffectType = statusEffectType;
-            this.isBuff = isBuff;
-            this.initDuration = initDuration;
-            this.duration = duration;
-            this.applyImmediately = applyImmediately;
-            this.checkAtStart = checkAtStart;
-            this.isBoth = isBoth;
-            this.buffTicked = buffTicked;
-            this.poisonDuration = poisonDuration;
-        }
-
-        public void DecDuration()
-        {
-            duration--;
-        }
-    }
-    public List<EffectClass> effectClassList;
-    public List<StatusEffectType> statuses;
-    public List<EffectClass> removeStatus;
-    public bool hasT1Status;
-    public bool hasT2Status;
-
+		
     public string characterName;
-	public Animator animator;
-    protected StatusEffect statusEffect;
+	private Animator _animator; 
+
+	[SerializeField] protected CharacterBaseStats baseStats = null;
+	private Image _currentQueueImage = null;
 
 	public uint maxhealth;
 	public uint currentHealth;
@@ -59,31 +28,47 @@ public abstract class Character : MonoBehaviour
 
 	[SerializeField] protected List<Ability> abilities;
 
-    public uint attack;
-    public float attackBonus;
-    public float attackMod;
+	public uint attack;				//base Stats ('attack', 'defense', 'speed' are derived from CharacterBaseStats
+    public int attackBonus;			//stat bonuses are direct additions or substractions to a base stat.  thescould be applied by StatusEffects or Equipment or any other effect.
+	public float attackMod;			//stat mods are percentage adjustments to a stat (which includes the base stat and the attackBonus)
     public float accuracy;
-    public float accuracyBonus;
+    public int accuracyBonus;
     public float accuracyMod;
 	public float evade;
-    public float evadeBonus;
+	public int evadeBonus;
     public float evadeMod;
     public uint speed;
-    public float speedBonus;
+	public int speedBonus;
     public float speedMod;
     public uint defense;
-    public float defenseBonus;
+	public int defenseBonus;
     public float defenseMod;
 
 	public CombatState combatState;
 
 	public int selectedAbilityIndex;
 
+	protected StatusEffect statusEffect;
+
+	public List<EffectClass> effectClassList;
+	public List<StatusEffectType> statuses;
+	public List<EffectClass> removeStatus;
 
 	//[SerializeField] protected List<uint> cooldownTimers;
 
 	protected bool _canActThisTurn = true;
 
+	public Animator animator
+	{
+		protected set { _animator = value; }
+		get { return _animator; }
+	}
+
+	public Image queueImage
+	{
+		set { _currentQueueImage = value; }
+		get { return _currentQueueImage; }
+	}
 
 	public bool canAct
 	{
@@ -98,26 +83,35 @@ public abstract class Character : MonoBehaviour
 		get{ return abilities.Count; }
 	}
 
-    protected void Start()
-    {
-        statusEffect = new StatusEffect();
+	protected void Awake()
+	{
+
+	}
+
+    protected virtual void Start()
+	{
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
+
+		uiManager = UIManager.Instance;
+
+		statusEffect = new StatusEffect();
         effectClassList = new List<EffectClass>();
         statuses = new List<StatusEffectType>();
         removeStatus = new List<EffectClass>();
+
 		if (animator == null) 
 		{
 			animator = GetComponent<Animator> ();
 		}
+
+		SetDefaultStats ();
 
       //  cooldownTimers = new List<uint>();									//enfore size of cooldownTimers to abilities and set the timer to 0
 		/*foreach(Ability ability in abilities)
 		{
 			cooldownTimers.Add(0);
 		}*/
-        accuracy = 84.5f;
-        evade = 10;
         selectedAbilityIndex = -1;
     }
 
@@ -179,14 +173,14 @@ public abstract class Character : MonoBehaviour
 
 		/*if (cooldownTimers[abilityIndex] == 0)
 		{*/
-			if (animator != null)
+		if (animator != null)
 			{
-				animator.SetBool ("Ready", true);
-				animator.SetBool ("Idle", false);
+			animator.SetBool ("Ready", true);
+			animator.SetBool ("Idle", false);
 			}
 			else
 			{
-				Debug.LogWarning (this.gameObject.name + " is trying to call it's animator in AbilityOne(), and does not have reference to it");
+			Debug.LogWarning (this.gameObject.name + " is trying to call it's animator in AbilityOne(), and does not have reference to it");
 			}
 
 			selectedAbilityIndex = abilityIndex;
@@ -354,6 +348,9 @@ public abstract class Character : MonoBehaviour
         {
             DealPoisonDamage(damage);
         }
+
+        uiManager.UpdateHealthBar();
+
     }
 
 	void DealPhysicalDamage(uint physicalDamage = 0)
@@ -361,7 +358,7 @@ public abstract class Character : MonoBehaviour
 		physicalDamage -= defense;
 		if (physicalDamage >= 1)
 		{
-			currentHealth -= (uint)Mathf.Clamp(physicalDamage, 0, currentHealth);
+			currentHealth -= (uint)Mathf.Clamp(physicalDamage, 0, currentHealth);          
 			if (currentHealth <= 0)
 			{
 				Faint();
@@ -526,5 +523,41 @@ public abstract class Character : MonoBehaviour
 		}
 
     }
+
+	private void SetDefaultStats()
+	{
+		if (baseStats == null)
+		{
+			Debug.LogError (this.gameObject.name + " does not have a CharacterBaseStats attached.  Assign one through the Inspector.");
+		}
+		else
+		{
+			characterName = baseStats.name;
+			this.gameObject.name = characterName;
+
+			//TODO set up connection from CharacterBaseStats material to this objects material
+
+			animator.runtimeAnimatorController = baseStats.animatorController;
+
+			queueImage = baseStats.queueImage;
+
+			maxhealth = baseStats.maxHealth;
+			maxHeat = baseStats.maxHeat;
+
+			if (baseStats.abilities.Count > 0)
+			{
+				abilities.AddRange (baseStats.abilities);
+			}
+
+			attack = baseStats.attack;
+			accuracy = baseStats.accuracy;
+			evade = baseStats.evade;
+			speed = baseStats.speed;
+			defense = baseStats.defense;
+		}
+
+
+
+	}
 
 }

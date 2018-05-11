@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class EnemyCharacter : Character
 {
-    void Awake()
+	public MonoBehaviour externalAI = null;
+
+    private new void Awake()
     {
-        animator = gameObject.GetComponent<Animator>();
+		base.Awake ();
     }
 
-    private new void Start()
+    protected override void Start()
     {
         base.Start();
+
+		if (baseStats.externalAI != null)
+		{
+			externalAI = baseStats.externalAI;
+		}
     }
 
 	protected override void ChooseAbility()

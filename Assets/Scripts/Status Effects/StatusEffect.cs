@@ -180,7 +180,7 @@ public class StatusEffect
     {
         Debug.Log(character.name + " is super mad!!!!!!!!!!!!!");
     }
-    private Character.EffectClass ApplyBerserk()
+    private EffectClass ApplyBerserk()
     {
         statusEffectType = StatusEffectType.Berserk;
         isBuff = false;
@@ -300,7 +300,7 @@ public class StatusEffect
     {
         character.attackMod += .3f;
     }
-    private Character.EffectClass ApplyScared()
+    private EffectClass ApplyScared()
     {
         statusEffectType = StatusEffectType.Scared;
         isBuff = true;

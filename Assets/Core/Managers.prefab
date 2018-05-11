@@ -191,8 +191,15 @@ MonoBehaviour:
   combatManager: {fileID: 0}
   combatUI: {fileID: 0}
   levelUI: {fileID: 0}
+  swipeImage: {fileID: 0}
   playerParty: {fileID: 0}
   partyHeatIntensity: 0
+  cameraTarget: {fileID: 0}
+  playerStartTransform: {fileID: 0}
+  playerCombatTransform: {fileID: 0}
+  enemyCombatTransform: {fileID: 0}
+  heatWavePrefab: {fileID: 0}
+  camDock: {fileID: 0}
 --- !u!114 &114576668493167548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -258,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
+  levelManager: {fileID: 0}
   battleSong: {fileID: 8300000, guid: 1e516be097416a942901667d158f8fb7, type: 3}
   inCombat: 0
   characters: []
@@ -267,3 +275,9 @@ MonoBehaviour:
   currentRoundCharacters: []
   roundCounter: 0
   partyHeatLevel: 0
+  actionSlider: {fileID: 0}
+  slider: {fileID: 0}
+  completionArea: {fileID: 0}
+  fillTime: 1
+  distanceBetweenInPoints: 15
+  startDelay: 0.5
