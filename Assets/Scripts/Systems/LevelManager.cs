@@ -441,9 +441,9 @@ public class LevelManager : MonoBehaviour
 
    public IEnumerator Transition()
     {
-        Debug.Log("Transition");
+      //  Debug.Log("Transition");
 
-        /* if (transitionImage != null)
+      /* if (transitionImage != null)
          {
              if (transitionImage == null)
              {
@@ -451,7 +451,9 @@ public class LevelManager : MonoBehaviour
              }
          }
          */
+
         transitionImage.enabled = true;
+     //   transitionMan.Load.gameObject.GetComponentInChildren<GameObject>().SetActive(true); 
 
         float i = 0;
         transitionImage.GetComponent<Image>().color = Color.black;
@@ -463,13 +465,13 @@ public class LevelManager : MonoBehaviour
 
         while (i <= transitionImage.color.a + 1)
         {
-            Debug.Log("Transition In ");
+          //  Debug.Log("Transition In ");
             i += Time.deltaTime * 0.1f;
-            Debug.Log(Time.time);
+           // Debug.Log(Time.time);
 
             if (i == 1)
             {
-                Debug.Log("Full");
+              //  Debug.Log("Full");
                 transitionImage.enabled = false;
             }
 
@@ -489,6 +491,7 @@ public class LevelManager : MonoBehaviour
         }
 
         transitionImage.enabled = false;
+      //  transitionMan.Load.gameObject.GetComponentInChildren<GameObject>().SetActive(false);
 
         //  Debug.Log("Wait");  
         /*
@@ -506,10 +509,12 @@ public class LevelManager : MonoBehaviour
             transitionImage.enabled = false;
         }
         */
+   
 
         //  yield break; 
     }
 
+    
     public void LoadScene(int sceneANumber)
     {
         Debug.Log("sceneBuildIndex to load: " + sceneANumber);
@@ -525,16 +530,19 @@ public class LevelManager : MonoBehaviour
     {
         if (transitionMan != null)
         {
-            if (transitionMan == null)
-            {
-                yield return new WaitForSeconds(0.5f); 
-                transitionMan.Out();
+            transitionMan.Out();
 
-                SetEntrancePosition(playerParty); 
-            }
+            Debug.Log("sound???"); 
+            SoundManager sound = GetComponent<SoundManager>();
+
+            DontDestroyOnLoad(sound.audioItemMXlevel);
+
+            SetEntrancePosition(playerParty);
         }
-
-        yield return null; 
+        else
+        {
+            yield return null;
+        }
     }
 
     IEnumerator LoadYourAsyncScene()

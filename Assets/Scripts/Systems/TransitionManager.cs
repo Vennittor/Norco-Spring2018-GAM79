@@ -13,16 +13,23 @@ public class TransitionManager : MonoBehaviour
     [SerializeField]
     private LevelManager levelMan;
     private Party playerParty;
+    public GameObject Load; 
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(playerParty); 
+        DontDestroyOnLoad(playerParty);
+      //  Load = FindObjectOfType<GameObject>();
         transitionImage.enabled = true;
     }
 
     void Start()
     {
+        if(Load != null)
+        {
+           // Load.SetActive(false);
+        }
+
         if(iAnim == null)
         {
             iAnim = GameObject.FindObjectOfType<Animator>().GetComponent<Animator>();
