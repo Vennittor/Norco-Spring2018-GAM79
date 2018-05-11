@@ -122,7 +122,14 @@ public abstract class Character : MonoBehaviour
 	public virtual void BeginTurn()
 	{
 		Announcer.BeginTurn (this.characterName);
-
+        if (combatManager.activeCharacter is EnemyCharacter)
+        {
+            uiManager.GetComponentInChildren<CanvasGroup>().interactable = false;
+        }
+        else
+        {
+            uiManager.GetComponentInChildren<CanvasGroup>().interactable = true;
+        }
         if (statuses.Contains(StatusEffectType.Stun))
         {
             Debug.Log("Boi got knocked in the head");

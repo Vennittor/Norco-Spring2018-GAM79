@@ -205,7 +205,7 @@ public class CombatManager : MonoBehaviour
 				Debug.Log (activeCharacter.gameObject.name + " is now the activeCharacter");
 				//TEST
 				StartCoroutine( "DelayNextTurn" );
-			}
+			}            
 		}
 	}
 
@@ -392,8 +392,9 @@ public class CombatManager : MonoBehaviour
 	{
         UIManager.InputMode oldMode = uiManager.inputMode;
 		actionBarRunning = true;
-
-		actionSlider.SetActive(true);
+        uiManager.inputMode = UIManager.InputMode.BLOCKED;
+        uiManager.GetComponentInChildren<CanvasGroup>().interactable = false;
+        actionSlider.SetActive(true);
 
 		float modifiedEffect = 0f;
         float midMin = 25;
@@ -417,12 +418,11 @@ public class CombatManager : MonoBehaviour
         bool going = true;
         while (going)
         {
-            uiManager.inputMode = UIManager.InputMode.BLOCKED;
-			slider.value += Time.deltaTime * fillTime;
+            
+            slider.value += Time.deltaTime * fillTime;
 
 			if (Input.GetKeyDown(KeyCode.Space) /*|| Input.GetMouseButtonDown(0)*/)
             {
-                StartCoroutine("TestingThe1337m0dz");
 
                 float width = distanceBetweenInPoints * 2;
 
@@ -453,6 +453,7 @@ public class CombatManager : MonoBehaviour
             }
         }
         uiManager.inputMode = oldMode;
+        uiManager.GetComponentInChildren<CanvasGroup>().interactable = true;
         Debug.Log("ACTION");
 
 		yield return null;
@@ -484,9 +485,4 @@ public class CombatManager : MonoBehaviour
 	//Function Redirect Target
 
 	#endregion
-     public IEnumerator TestingThe1337m0dz()
-    {
-        //robert is working here to test the modifier for the action slider
-        yield return null;
-    }
 }
