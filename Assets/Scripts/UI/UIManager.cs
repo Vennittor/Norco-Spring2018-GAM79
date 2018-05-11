@@ -95,20 +95,20 @@ public class UIManager : MonoBehaviour
 		}
 
 		HighlightTargets ();
-
-        if (Input.GetMouseButtonDown (0)) 						//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
-		{
-			if (inputMode == InputMode.TARGETING) 
-			{
-				if (collectedTargets.Count > 0)
-				{
-					SendTargets ();
-				}
-				else
-				{
-					Debug.Log("No targets were collected, continuing to target");
-				}
-			}
+        
+        if (Input.GetMouseButtonDown (0))                //when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
+		{            
+            if (inputMode == InputMode.TARGETING)
+            {
+                if (collectedTargets.Count > 0)
+                {
+                    SendTargets();
+                }
+                else
+                {
+                    Debug.Log("No targets were collected, continuing to target");
+                }
+            }            
 		}
 		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
         {
@@ -186,7 +186,22 @@ public class UIManager : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log("Active Character ability use is blocked. ");
+                if (abilityIndex == 0 || abilityIndex == 3)
+                {
+                    ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
+                    if (ability == null)
+                    {
+                        Debug.LogWarning("Mad cuz bad");
+                    }
+                    else
+                    {
+                        GetTargets(ability.targetType);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Still mad, try another ability");
+                }
 			}
 		}
     }

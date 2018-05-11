@@ -53,6 +53,8 @@ public abstract class Character : MonoBehaviour
 	public List<EffectClass> effectClassList;
 	public List<StatusEffectType> statuses;
 	public List<EffectClass> removeStatus;
+    public bool hasT1Status;
+    public bool hasT2Status;
 
 	//[SerializeField] protected List<uint> cooldownTimers;
 
@@ -99,6 +101,8 @@ public abstract class Character : MonoBehaviour
         effectClassList = new List<EffectClass>();
         statuses = new List<StatusEffectType>();
         removeStatus = new List<EffectClass>();
+        hasT1Status = false;
+        hasT2Status = false;
 
 		if (animator == null) 
 		{
@@ -123,7 +127,14 @@ public abstract class Character : MonoBehaviour
 	public virtual void BeginTurn()
 	{
 		Announcer.BeginTurn (this.characterName);
-
+        if (combatManager.activeCharacter is EnemyCharacter)
+        {
+            uiManager.GetComponentInChildren<CanvasGroup>().interactable = false;
+        }
+        else
+        {
+            uiManager.GetComponentInChildren<CanvasGroup>().interactable = true;
+        }
         if (statuses.Contains(StatusEffectType.Stun))
         {
             Debug.Log("Boi got knocked in the head");
@@ -137,11 +148,11 @@ public abstract class Character : MonoBehaviour
 				{
                     if (!status.isBuff)
                     {
-                        statusEffect.Apply(this, status.statusEffectType);
+                        statusEffect.Apply(this, status);
                     }
                     else if (status.isBuff && !statuses.Contains(status.statusEffectType))
                     {
-                        statusEffect.Apply(this, status.statusEffectType);
+                        statusEffect.Apply(this, status);
                     }
                 }
 			}
@@ -241,11 +252,11 @@ public abstract class Character : MonoBehaviour
                 {
                     if (!status.isBuff)
                     {
-                        statusEffect.Apply(this, status.statusEffectType);
+                        statusEffect.Apply(this, status);
                     }
                     else if (status.isBuff && !statuses.Contains(status.statusEffectType))
                     {
-                        statusEffect.Apply(this, status.statusEffectType);
+                        statusEffect.Apply(this, status);
                     }
                 }
 
@@ -345,6 +356,10 @@ public abstract class Character : MonoBehaviour
         {
 			ReduceHeat(damage);
         }
+        else if (damageType == ElementType.BLEED)
+        {
+            DealBleedDamage(damage);
+        }
         else if (damageType == ElementType.POISON)
         {
             DealPoisonDamage(damage);
@@ -375,6 +390,7 @@ public abstract class Character : MonoBehaviour
     public void ReduceHeat(uint amount = 0)
     {
         currentHeat -= (uint)Mathf.Clamp(amount, 0, currentHeat);
+        HeatReduceThreshold();
     }
 
     public void DealHeatDamage(int heatDamage)
@@ -386,53 +402,116 @@ public abstract class Character : MonoBehaviour
 
     public void CheckHeatThreshold()
     {
-        if (currentHeat >= 100)
+        if (!hasT1Status && currentHeat >= 100)
         {
             print("my heat is now 100, im a little thirsty");
-            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Lethargy));
+            int rand = Random.Range(0, combatManager.t1Statuses.Count);
+            hasT1Status = true;
+            effectClassList.Add(statusEffect.AddStatus(combatManager.t1Statuses[rand]));
+            statuses.Add(combatManager.t1Statuses[rand]);
         }
-        else if (currentHeat >= 200)
+        if (!hasT2Status && currentHeat >= 200)
         {
             print("my heat is now 200, i need AC");
-            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Berserk));
+            int rand = Random.Range(0, combatManager.t2Statuses.Count);
+            hasT2Status = true;
+            effectClassList.Add(statusEffect.AddStatus(combatManager.t2Statuses[rand]));
+            statuses.Add(combatManager.t2Statuses[rand]);
         }
-        else if (currentHeat == 300)
+        if (currentHeat == 300)
         {
             print("my heat has reached 300, i am now stunned"); //TODO clean up here
-            effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Stun));
-            //combatManager.activeCharacter.EndTurn();
-            combatManager.activeCharacter.currentHeat = 200;
+            if (!statuses.Contains(StatusEffectType.Stun))
+            {
+                effectClassList.Add(statusEffect.AddStatus(StatusEffectType.Stun, 1));
+                statuses.Add(StatusEffectType.Stun);
+            }
+            currentHeat = 200;
         }
-        else
+    }
+    public void HeatReduceThreshold()
+    {
+        if (hasT1Status && currentHeat <= 80)
         {
-            //return;
+            foreach (EffectClass status in effectClassList)
+            {
+                if (combatManager.t1Statuses.Contains(status.statusEffectType))
+                {
+                    statusEffect.RemoveStatus(this, status.statusEffectType);
+                    statuses.Remove(status.statusEffectType);
+                }
+            }
+            hasT1Status = false;
+        }
+        if (hasT2Status && currentHeat <= 180)
+        {
+            foreach (EffectClass status in effectClassList)
+            {
+                if (combatManager.t2Statuses.Contains(status.statusEffectType))
+                {
+                    statusEffect.RemoveStatus(this, status.statusEffectType);
+                    statuses.Remove(status.statusEffectType);
+                }
+            }
+            hasT2Status = false;
         }
     }
 
 	void DealPoisonDamage(uint poisonDamage)
 	{
-		//reduce poisonDamage here.
-		DealPhysicalDamage (poisonDamage);
-		Debug.Log ("Poison Damage is not currently implemented, Physical damage was dealt instead.");
+        if (poisonDamage >= 1)
+        {
+            currentHealth -= (uint)Mathf.Clamp(poisonDamage, 0, currentHealth);
+            if (currentHealth <= 0)
+            {
+                Faint();
+            }
+        }
 	}
 
     void DealBleedDamage(uint bleedDamage)
     {
-        //reduce poisonDamage here.
-        DealPhysicalDamage(bleedDamage);
-        Debug.Log("Bleed Damage is not currently implemented, Physical damage was dealt instead.");
+        if (bleedDamage >= 1)
+        {
+            currentHealth -= (uint)Mathf.Clamp(bleedDamage, 0, currentHealth);
+            if (currentHealth <= 0)
+            {
+                Faint();
+            }
+        }
     }
 
-    public void ApplyStatus(StatusEffectType status)
+    public void ApplyStatus(StatusEffectType status, uint duration = 0)
     {                                               // Tandy: added this to work with Ability
-        if (!statuses.Contains(status))         // if not already affected by Status
+        if (!statuses.Contains(status) || status == StatusEffectType.Poison)         // if not already affected by Status
         {
-            EffectClass statusClass = statusEffect.AddStatus(status);
-            effectClassList.Add(statusClass); 					// add Status to List to show it affects Character
-            statuses.Add(status);
-            if (statusClass.applyImmediately)
+            if (status != StatusEffectType.Poison || !statuses.Contains(StatusEffectType.Poison))
             {
-                statusEffect.Apply(this, status);
+                EffectClass statusClass;
+                if (status == StatusEffectType.Stun)
+                {
+                    statusClass = statusEffect.AddStatus(status, duration);
+                }
+                else
+                {
+                    statusClass = statusEffect.AddStatus(status);
+                }
+                effectClassList.Add(statusClass);                   // add Status to List to show it affects Character
+                statuses.Add(status);
+                if (statusClass.applyImmediately)
+                {
+                    statusEffect.Apply(this, statusClass);
+                }
+            }
+            else
+            {
+                foreach (EffectClass maybePoison in effectClassList)
+                {
+                    if (maybePoison.statusEffectType == StatusEffectType.Poison)
+                    {
+                        maybePoison.duration = maybePoison.initDuration;
+                    }
+                }
             }
         }
     }
@@ -456,7 +535,7 @@ public abstract class Character : MonoBehaviour
 
 		if (this as Character == combatManager.activeCharacter)
 		{	Debug.Log ("Active Character died");
-			EndTurn();
+			//EndTurn();
 		}
 
     }

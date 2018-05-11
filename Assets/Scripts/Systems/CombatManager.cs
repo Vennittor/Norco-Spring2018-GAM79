@@ -26,16 +26,19 @@ public class CombatManager : MonoBehaviour
 	public uint roundCounter = 0;
 
     public uint partyHeatLevel;
+    public List<StatusEffectType> t1Statuses;
+    public List<StatusEffectType> t2Statuses;
+
 
     //for the action slider start
-	public GameObject actionSlider;
+    public GameObject actionSlider;
     public Slider slider;
     public Image completionArea;
 
     public float fillTime = 1;
 
     [Range(0, 100)]
-    public float midPoint;
+    private float midPoint;
     public float distanceBetweenInPoints;
 
     public float startDelay = 0.5f;
@@ -81,6 +84,7 @@ public class CombatManager : MonoBehaviour
 
     void Start()
     {
+        
 		levelManager = LevelManager.Instance;
 		uiManager = UIManager.Instance;
 
@@ -111,7 +115,6 @@ public class CombatManager : MonoBehaviour
 		{
 			Debug.LogError ("CombatManager cannot find Action Slider gamObject");
 		}
-
     }
 
 
@@ -202,7 +205,7 @@ public class CombatManager : MonoBehaviour
 				Debug.Log (activeCharacter.gameObject.name + " is now the activeCharacter");
 				//TEST
 				StartCoroutine( "DelayNextTurn" );
-			}
+			}            
 		}
 	}
 
@@ -387,9 +390,11 @@ public class CombatManager : MonoBehaviour
 
 	private IEnumerator ActionSlider()
 	{
+        UIManager.InputMode oldMode = uiManager.inputMode;
 		actionBarRunning = true;
-
-		actionSlider.SetActive(true);
+        uiManager.inputMode = UIManager.InputMode.BLOCKED;
+        uiManager.GetComponentInChildren<CanvasGroup>().interactable = false;
+        actionSlider.SetActive(true);
 
 		float modifiedEffect = 0f;
         float midMin = 25;
@@ -398,26 +403,26 @@ public class CombatManager : MonoBehaviour
         //Start
 		slider.value = 0;
 		slider.maxValue = fillTime;
-
+        midPoint = Random.Range(midMin, midMax);
         //Create the visual for the stopping area
-		float sliderSize = slider.GetComponent<RectTransform>().sizeDelta.y;
+        float sliderSize = slider.GetComponent<RectTransform>().sizeDelta.y;
         sliderSize *= midPoint * 0.01f;
 		sliderSize -= slider.GetComponent<RectTransform>().sizeDelta.y / 2;
         completionArea.GetComponent<RectTransform>().localPosition = Vector3.zero + (Vector3.up * sliderSize);
 
         completionArea.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, distanceBetweenInPoints * 2 * (actionSlider.GetComponent<RectTransform>().sizeDelta.y * 0.01f));
-        midPoint = Random.Range(midMin, midMax);
+        
         yield return new WaitForSeconds(startDelay);
 
         //Do the thing
         bool going = true;
         while (going)
         {
-			slider.value += Time.deltaTime * fillTime;
+            
+            slider.value += Time.deltaTime * fillTime;
 
-			if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+			if (Input.GetKeyDown(KeyCode.Space) /*|| Input.GetMouseButtonDown(0)*/)
             {
-                StartCoroutine("TestingThe1337m0dz");
 
                 float width = distanceBetweenInPoints * 2;
 
@@ -447,7 +452,8 @@ public class CombatManager : MonoBehaviour
                 going = false;
             }
         }
-			
+        uiManager.inputMode = oldMode;
+        uiManager.GetComponentInChildren<CanvasGroup>().interactable = true;
         Debug.Log("ACTION");
 
 		yield return null;
@@ -479,9 +485,4 @@ public class CombatManager : MonoBehaviour
 	//Function Redirect Target
 
 	#endregion
-     public IEnumerator TestingThe1337m0dz()
-    {
-        //robert is working here to test the modifier for the action slider
-        yield return null;
-    }
 }

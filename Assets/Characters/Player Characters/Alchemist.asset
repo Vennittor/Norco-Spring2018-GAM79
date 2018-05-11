@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b43badaefcb4377408de247f9062ce8e, type: 2}
   - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   _attack: 0
-  _accuracy: 84.5
+  _accuracy: 84
   _evade: 10
   _speed: 20
   _defense: 1
