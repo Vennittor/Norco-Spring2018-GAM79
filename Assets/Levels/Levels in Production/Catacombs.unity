@@ -31163,11 +31163,12 @@ MonoBehaviour:
   currentRoundCharacters: []
   roundCounter: 0
   partyHeatLevel: 0
+  t1Statuses: 
+  t2Statuses: 
   actionSlider: {fileID: 0}
   slider: {fileID: 0}
   completionArea: {fileID: 1390767528}
   fillTime: 1
-  midPoint: 93.1
   distanceBetweenInPoints: 10
   startDelay: 0.5
 --- !u!4 &418226326
@@ -31626,6 +31627,10 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474561212174400, guid: e03dca6beca68564faf2ea6cc1517ca3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e03dca6beca68564faf2ea6cc1517ca3, type: 2}
@@ -56959,7 +56964,7 @@ Prefab:
     - target: {fileID: 224121050689901084, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -34.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224742441922785322, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
@@ -56979,7 +56984,7 @@ Prefab:
     - target: {fileID: 224742441922785322, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -79.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224300945313260406, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
@@ -56999,7 +57004,7 @@ Prefab:
     - target: {fileID: 224300945313260406, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -125.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224328256091235300, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
@@ -57019,7 +57024,7 @@ Prefab:
     - target: {fileID: 224328256091235300, guid: 015e4fd9fcdf46945bc44a95f39af6f6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -170.75
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 015e4fd9fcdf46945bc44a95f39af6f6, type: 2}

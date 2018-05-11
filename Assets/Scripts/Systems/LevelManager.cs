@@ -149,12 +149,13 @@ public class LevelManager : MonoBehaviour
 		{
 			if (levelUI != null)
 			{
-				swipeImage = levelUI.transform.Find ("Swipe Image").GetComponent<Image>();
+                Debug.Log("Hi");
+                swipeImage = LevelUIManager.Instance.swipeImage;
 			}
-			else
+			/*else
 			{
 				swipeImage = GameObject.Find ("Swipe Image").GetComponent<Image>();
-			}
+			}*/
 
 			if (swipeImage == null)
 			{

@@ -39,13 +39,14 @@ GameObject:
   - component: {fileID: 223175456268209220}
   - component: {fileID: 114066116330461158}
   - component: {fileID: 114495828752393450}
+  - component: {fileID: 114349866990206498}
   m_Layer: 5
   m_Name: Canvas Level UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &114066116330461158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,6 +68,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114349866990206498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1474561212174400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3cff71100475c448aa7c8ea86c4322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swipeImage: {fileID: 114697407839323950}
 --- !u!114 &114495828752393450
 MonoBehaviour:
   m_ObjectHideFlags: 1
