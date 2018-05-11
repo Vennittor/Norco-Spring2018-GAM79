@@ -377,6 +377,8 @@ MonoBehaviour:
   effectClassList: []
   statuses: 
   removeStatus: []
+  hasT1Status: 0
+  hasT2Status: 0
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
 --- !u!114 &114327966433383426
@@ -422,6 +424,8 @@ MonoBehaviour:
   effectClassList: []
   statuses: 
   removeStatus: []
+  hasT1Status: 0
+  hasT2Status: 0
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
 --- !u!114 &114695205217747764
@@ -502,6 +506,8 @@ MonoBehaviour:
   effectClassList: []
   statuses: 
   removeStatus: []
+  hasT1Status: 0
+  hasT2Status: 0
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
 --- !u!195 &195532744613621432

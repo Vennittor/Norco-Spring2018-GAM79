@@ -12,7 +12,7 @@ public class StatusEffect
 
     StatusEffectType statusEffectType;
 
-    public Character.EffectClass AddStatus(StatusEffectType status, uint stunDuration = 0)
+    public EffectClass AddStatus(StatusEffectType status, uint stunDuration = 0)
     {
         if (status == StatusEffectType.Anemia)
         {
@@ -64,7 +64,7 @@ public class StatusEffect
             return null;
         }
     }
-    public void Apply(Character character, Character.EffectClass status)
+    public void Apply(Character character, EffectClass status)
     {
         if (status.statusEffectType == StatusEffectType.Battlecry)
         {
@@ -148,14 +148,14 @@ public class StatusEffect
     {
         Debug.Log("Dealing double dot damage dawg");
     }
-    private Character.EffectClass ApplyAnemia()
+    private EffectClass ApplyAnemia()
     {
         statusEffectType = StatusEffectType.Anemia;
         isBuff = false;
         duration = 2;
         applyImmediately = true;
         checkAtStart = false;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
+        return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
     }
 
     private void BattlecryStatus(Character character)
@@ -166,14 +166,14 @@ public class StatusEffect
     {
         // remove attack bonus
     }
-    private Character.EffectClass ApplyBattlecry()
+    private EffectClass ApplyBattlecry()
     {
         statusEffectType = StatusEffectType.Battlecry;
         isBuff = true;
         duration = 2;
         applyImmediately = true;
         checkAtStart = false;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
+        return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
     }
 
     private void BerserkStatus(Character character)
@@ -187,7 +187,7 @@ public class StatusEffect
         duration = -1;
         applyImmediately = false;
         checkAtStart = true;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
+        return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
     }
 
     private void BleedStatus(Character character)
@@ -195,14 +195,14 @@ public class StatusEffect
         uint dot = 1;
         character.ApplyDamage(dot, ElementType.BLEED);
     }
-    private Character.EffectClass ApplyBleed()
+    private EffectClass ApplyBleed()
     {
         statusEffectType = StatusEffectType.Bleed;
         isBuff = false;
         duration = 3;
         applyImmediately = false;
         checkAtStart = false;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
+        return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
     }
 
     private void CrippledStatus(Character character)
@@ -215,17 +215,17 @@ public class StatusEffect
         // increase speed bonus
         // increase accuracy bonus
     }
-    private Character.EffectClass ApplyCrippled()
+    private EffectClass ApplyCrippled()
     {
         statusEffectType = StatusEffectType.Crippled;
         isBuff = true;
         duration = 2;
         applyImmediately = true;
         checkAtStart = false;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
+        return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
     }
 
-    private void DizzyStatus(Character character, Character.EffectClass status)
+    private void DizzyStatus(Character character, EffectClass status)
     {
         uint dot = 1;
         character.ApplyDamage(dot, ElementType.BLEED);
@@ -239,17 +239,17 @@ public class StatusEffect
     {
         //attack up
     }
-    private Character.EffectClass ApplyDizzy()
+    private EffectClass ApplyDizzy()
     {
         statusEffectType = StatusEffectType.Dizzy;
         isBuff = false;
         duration = 2;
         applyImmediately = false;
         checkAtStart = true;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart, true);
+        return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart, true);
     }
 
-    private void HobbledStatus(Character character, Character.EffectClass status)
+    private void HobbledStatus(Character character, EffectClass status)
     {
         uint dot = 1;
         character.ApplyDamage(dot, ElementType.BLEED);
@@ -265,31 +265,31 @@ public class StatusEffect
         character.speedMod += .5f;
         //evasion up
     }
-    private Character.EffectClass ApplyHobbled()
+    private EffectClass ApplyHobbled()
     {
         statusEffectType = StatusEffectType.Hobbled;
         isBuff = false;
         duration = -1;
         applyImmediately = true;
         checkAtStart = true;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart, true);
+        return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart, true);
     }
 
-    private void PoisonStatus(Character character, Character.EffectClass status)
+    private void PoisonStatus(Character character, EffectClass status)
     {
         status.poisonDuration++;
         uint dot = (uint)status.poisonDuration;
         Debug.LogWarning("Poison: duration = " + status.poisonDuration + " damage = " + dot);
         character.ApplyDamage(dot, ElementType.POISON);
     }
-    private Character.EffectClass ApplyPoison()
+    private EffectClass ApplyPoison()
     {
         statusEffectType = StatusEffectType.Poison;
         isBuff = false;
         duration = 4;
         applyImmediately = false;
         checkAtStart = false;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
+        return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
     }
 
     private void ScaredStatus(Character character)
@@ -307,7 +307,7 @@ public class StatusEffect
         duration = 2;
         applyImmediately = true;
         checkAtStart = true;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
+        return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
     }
 
     private void LegalizeGayWeed(Character character)
@@ -318,7 +318,7 @@ public class StatusEffect
     {
         character.evadeBonus -= 1000;
     }
-    private Character.EffectClass InjectDank()
+    private EffectClass InjectDank()
     {
         smokeTurnCounter = CombatManager.Instance.roundCounter;
         statusEffectType = StatusEffectType.Smoke;
@@ -326,20 +326,20 @@ public class StatusEffect
         duration = 1;
         applyImmediately = true;
         checkAtStart = true;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
+        return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
     }
 
     private void StunStatus(Character character)
     {
         Debug.Log("Talk shit get hit");
     }
-    private Character.EffectClass ApplyStun(uint stunDuration)
+    private EffectClass ApplyStun(uint stunDuration)
     {
         statusEffectType = StatusEffectType.Stun;
         isBuff = false;
         duration = (int)stunDuration;
         applyImmediately = false;
         checkAtStart = true;
-        return new Character.EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
+        return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
     }
 }

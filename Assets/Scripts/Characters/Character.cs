@@ -53,6 +53,8 @@ public abstract class Character : MonoBehaviour
 	public List<EffectClass> effectClassList;
 	public List<StatusEffectType> statuses;
 	public List<EffectClass> removeStatus;
+    public bool hasT1Status;
+    public bool hasT2Status;
 
 	//[SerializeField] protected List<uint> cooldownTimers;
 
@@ -99,6 +101,8 @@ public abstract class Character : MonoBehaviour
         effectClassList = new List<EffectClass>();
         statuses = new List<StatusEffectType>();
         removeStatus = new List<EffectClass>();
+        hasT1Status = false;
+        hasT2Status = false;
 
 		if (animator == null) 
 		{
