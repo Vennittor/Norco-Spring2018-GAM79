@@ -14,8 +14,8 @@ public class PlayerCharacter : Character
         animator = gameObject.GetComponent<Animator>();
     }
 
-    private new void Start()
-    {
+    protected override void Start()
+	{
         base.Start();
     }
 

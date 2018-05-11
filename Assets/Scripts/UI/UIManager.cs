@@ -289,7 +289,14 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealthBar()
     {
-        healthBar.fillAmount = character.currentHealth / character.maxhealth;
+		if (healthBar != null)
+		{
+			healthBar.fillAmount = character.currentHealth / character.maxhealth;
+		}
+		else
+		{
+			Debug.LogError ("No refrence to Health Bar");
+		}
     }
 
     #region HighlightTargets

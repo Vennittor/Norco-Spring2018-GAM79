@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 95954369823072784}
   - component: {fileID: 212991611566484654}
   m_Layer: 8
-  m_Name: Snake
+  m_Name: Cobra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,28 +83,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: 
-  animator: {fileID: 0}
+  uiManager: {fileID: 0}
+  characterName: Cobra
+  baseStats: {fileID: 11400000, guid: 9a9823ef1e0929c4887b62f9a9884c83, type: 2}
   maxhealth: 45
   currentHealth: 45
   maxHeat: 0
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 0
-  speedMod: 0
-  defense: 0
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: ed6314696bf62e340841bec148e58213, type: 2}
   - {fileID: 11400000, guid: 1c1060b5783de6343b01cfacb88f4171, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 0
+  speedBonus: 0
+  speedMod: 0
+  defense: 0
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
+  effectClassList: []
+  statuses: 
+  removeStatus: []
+  externalAI: {fileID: 0}
 --- !u!212 &212991611566484654
 SpriteRenderer:
   m_ObjectHideFlags: 1

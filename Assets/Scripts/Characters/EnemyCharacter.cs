@@ -9,15 +9,16 @@ public class EnemyCharacter : Character
     private new void Awake()
     {
 		base.Awake ();
-
-		externalAI = baseStats.externalAI;
-
-        animator = gameObject.GetComponent<Animator>();
     }
 
-    private new void Start()
+    protected override void Start()
     {
         base.Start();
+
+		if (baseStats.externalAI != null)
+		{
+			externalAI = baseStats.externalAI;
+		}
     }
 
 	protected override void ChooseAbility()

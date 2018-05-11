@@ -85,10 +85,10 @@ public abstract class Character : MonoBehaviour
 
 	protected void Awake()
 	{
-		SetDefaultStats ();
+
 	}
 
-    protected void Start()
+    protected virtual void Start()
 	{
         combatManager = CombatManager.Instance;
 		combatState = CombatState.ABLE;
@@ -104,6 +104,8 @@ public abstract class Character : MonoBehaviour
 		{
 			animator = GetComponent<Animator> ();
 		}
+
+		SetDefaultStats ();
 
       //  cooldownTimers = new List<uint>();									//enfore size of cooldownTimers to abilities and set the timer to 0
 		/*foreach(Ability ability in abilities)
@@ -466,6 +468,7 @@ public abstract class Character : MonoBehaviour
 			this.gameObject.name = characterName;
 
 			//TODO set up connection from CharacterBaseStats material to this objects material
+
 			animator.runtimeAnimatorController = baseStats.animatorController;
 
 			queueImage = baseStats.queueImage;
