@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; 
 using UnityEngine.SceneManagement;
 
 
@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
 	public GameObject levelUI;
 
 	public Image swipeImage;
+    public Image transitionImage; 
 
     public GameObject playerParty;
 	private Party pParty;
@@ -24,13 +25,19 @@ public class LevelManager : MonoBehaviour
     public uint partyHeatIntensity;
 
     public Transform cameraTarget;
-    public Transform playerStartTransform;
-    public Transform playerCombatTransform;
-    public Transform enemyCombatTransform;
-    public GameObject heatWavePrefab; 
+   // public Transform playerCombatTransform = null;
+   // public Transform enemyCombatTransform = null;
+    public GameObject heatWavePrefab;
+
+    public Vector3 partyPos; 
+
+	[SerializeField] private TransitionManager transitionMan; 
 
     [SerializeField]
-    DopeCamSys camDock; 
+    DopeCamSys camDock;
+
+    public GameObject entrance;
+    public GameObject exit; 
 
     public static LevelManager Instance
     {
@@ -52,15 +59,6 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        _instance = this;
-
-        camDock = FindObjectOfType<DopeCamSys>(); 
-
-        if (playerParty == null)
-        {
-            playerParty = GameObject.FindGameObjectWithTag("Player");
-        }
-
 		_instance = this;
 
 		if (combatUI == null)
@@ -75,30 +73,44 @@ public class LevelManager : MonoBehaviour
 		{
 			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
 		}
-			
+
 		this.gameObject.transform.SetParent(null);
 
-		DontDestroyOnLoad(gameObject);
+		if (playerParty == null)
+		{
+			playerParty = GameObject.FindGameObjectWithTag("Player");
+
+			if (playerParty == null)
+			{
+				Debug.LogError ("Can't find player Party");
+			}
+		}
+			
+		if (partyPos == null)
+		{
+			partyPos = playerParty.transform.position;
+		}
+
+
+		transitionMan = FindObjectOfType<TransitionManager>();
 
 		if (heatWavePrefab != null)
 		{
 			heatWavePrefab.SetActive(false); 
 		}
-
+			
         //SceneManager.LoadScene("OtherSceneName", LoadSceneMode.Additive);
     }
 
     void Start()
     {
-		combatManager = CombatManager.Instance;
+        Debug.Log("CamDockLoadsStart?");
+        combatManager = CombatManager.Instance;
 
 		if (combatManager == null)
 		{
 			Debug.LogError (this.gameObject.name + " could not find reference to LevelManager");
 		}
-
-        playerCombatTransform = transform;
-        enemyCombatTransform = transform;
 
 		if (combatUI == null)
 		{
@@ -108,10 +120,10 @@ public class LevelManager : MonoBehaviour
 		{
 			combatUI = GameObject.Find ("Canvas Combat UI");
 		}
-		if (combatUI == null) 
-		{
-			Debug.LogError ("LevelManager could not find reference to the Canvas Combat UI");
-		}
+        if (combatUI == null)
+        {
+            Debug.LogError("LevelManager could not find reference to the Canvas Combat UI");
+        }
 
 		if (levelUI == null) 
 		{
@@ -121,19 +133,29 @@ public class LevelManager : MonoBehaviour
 		{
 			Debug.LogError ("LevelManager could not find reference to the Canvas Level UI");
 		}
-        
+
+        /*
+        if (camDock == null)
+        {
+            camDock = FindObjectOfType<DopeCamSys>();
+         //   Debug.Log("Discovered CamDock" + camDock.ToString());
+        }
+        */
+
         SoundManager.instance.Play(levelMusic, "mxL"); //play the level music
+        // check if null onload
 
 		if (swipeImage == null)
 		{
 			if (levelUI != null)
 			{
-				swipeImage = levelUI.transform.Find ("Swipe Image").GetComponent<Image>();
+                Debug.Log("Hi");
+                swipeImage = LevelUIManager.Instance.swipeImage;
 			}
-			else
+			/*else
 			{
 				swipeImage = GameObject.Find ("Swipe Image").GetComponent<Image>();
-			}
+			}*/
 
 			if (swipeImage == null)
 			{
@@ -143,15 +165,36 @@ public class LevelManager : MonoBehaviour
 
 		if (swipeImage != null)
 		{
-			swipeImage.enabled = false;
+			swipeImage.enabled = true;
 		}
+    
+        if(transitionImage == null)
+        {
+            if(levelUI != null)
+            {
+                transitionImage = levelUI.transform.Find("Transition Image").GetComponent<Image>();
+            }
+            else
+            {
+                transitionImage = GameObject.Find("Transition Image").GetComponent<Image>();
+            }
+
+            if(levelUI == null)
+            {
+                Debug.LogError("Level UI is null"); 
+            }
+        }
+     
+        if(transitionImage != null && levelUI != null)
+        {
+            transitionImage.enabled = true;
+        }
     }
 
 	void LateStart()
 	{
 
-	}
-
+    }
 
     void Update()
     {
@@ -176,8 +219,8 @@ public class LevelManager : MonoBehaviour
     {
         camDock.Reposition(); 
         Transform partyPos = playerParty.transform.GetComponent<Transform>();
-        enemyCombatTransform.position = new Vector3(partyPos.position.x + 5, partyPos.position.y, partyPos.position.z);
-        enemyParty.GetComponent<Transform>().position = enemyCombatTransform.position;
+        enemyParty.transform.position = new Vector3(eParty.transform.position.x + 5, eParty.transform.position.y, eParty.transform.position.z);
+        enemyParty.GetComponent<Transform>().position = eParty.transform.position; 
     }
 
 	public IEnumerator InitiateCombat(Party player, Party enemy)
@@ -193,9 +236,17 @@ public class LevelManager : MonoBehaviour
 			//Perform Enter 'swipe'
 			Vector2 startingAnchorMin = Vector2.zero;
 			float i = 0f;
+            /*
+           if(swipeImage == null)
+            {
+                Debug.Log("Find Swipe Image"); 
+                swipeImage = GameObject.Find("Swipe Image").GetComponent<Image>();
+            }
+            */
+
 			if (swipeImage != null)
 			{
-				swipeImage.enabled = true;
+                swipeImage.enabled = true;
 				startingAnchorMin = swipeImage.rectTransform.anchorMin;
 
 				i = startingAnchorMin.x;
@@ -275,34 +326,34 @@ public class LevelManager : MonoBehaviour
 			combatManager.AddCharactersToCombat(enemy.partyMembers);
 			combatManager.HeatValueTaker(partyHeatIntensity);
 
-			//Perform Exit 'swipe'
-			if (swipeImage != null)
-			{
-				while (i <= startingAnchorMin.x + 2)
-				{
-					i += Time.deltaTime * 2.0f;
+            //Perform Exit 'swipe'
+            if (swipeImage != null)
+            {
+                while (i <= startingAnchorMin.x + 2)
+                {
+                    i += Time.deltaTime * 2.0f;
 
-					swipeImage.rectTransform.anchorMin = new Vector2 (i, swipeImage.rectTransform.anchorMin.y);
-					swipeImage.rectTransform.anchorMax = new Vector2 (i + 1, swipeImage.rectTransform.anchorMax.y);
+                    swipeImage.rectTransform.anchorMin = new Vector2(i, swipeImage.rectTransform.anchorMin.y);
+                    swipeImage.rectTransform.anchorMax = new Vector2(i + 1, swipeImage.rectTransform.anchorMax.y);
 
-					yield return null;
-				}
+                    yield return null;
+                }
 
-				swipeImage.rectTransform.anchorMin = new Vector2 (startingAnchorMin.x, swipeImage.rectTransform.anchorMin.y);
-				swipeImage.rectTransform.anchorMax = new Vector2 (startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMax.y);
+                swipeImage.rectTransform.anchorMin = new Vector2(startingAnchorMin.x, swipeImage.rectTransform.anchorMin.y);
+                swipeImage.rectTransform.anchorMax = new Vector2(startingAnchorMin.x + 1, swipeImage.rectTransform.anchorMax.y);
 
-				swipeImage.enabled = false;
-			}
+                swipeImage.enabled = false;
+            }
 
-			levelUI.SetActive (false);
-			//Swipe Finished and reset
+            levelUI.SetActive(false);
 
-			combatManager.StartCombat ();
+            //Swipe Finished and reset
 
+            combatManager.StartCombat();
         }
         else
         {
-            Debug.LogError("CombatManger is currently running combat, collision and Initiate Combat calls should no longer be called.");
+          //  Debug.LogError("CombatManger is currently running combat, collision and Initiate Combat calls should no longer be called.");
         }
     }
 
@@ -361,6 +412,63 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    // Transition Levels
+
+    public void SetEntrancePosition(Party playerParty)
+    { 
+        if (partyPos != null)
+        {
+            partyPos = transitionMan.entranceTransform.position;
+
+			playerParty.transform.position = partyPos;
+
+           if(entrance.gameObject == null)
+            {
+                partyPos = transitionMan.entranceTransform.position;
+                Instantiate(entrance.gameObject, entrance.transform.position, entrance.transform.rotation);
+                entrance.transform.position = partyPos; 
+            }
+        }
+    }
+
+    public void SetExitPosition(Party playerParty)
+    {
+		partyPos = transitionMan.exitTransform.position; 
+
+		playerParty.transform.position = partyPos;
+
+        partyPos = exit.gameObject.transform.position; 
+    }
+
+   public IEnumerator Transition()
+    {
+        transitionImage.enabled = true;
+
+        float i = 0;
+        transitionImage.GetComponent<Image>().color = Color.black;
+        var tempColor = transitionImage.color;
+        tempColor.a = 1;
+         
+        i = transitionImage.color.a;
+
+        while (i <= transitionImage.color.a + 1)
+        {
+            i += Time.deltaTime * 0.1f;
+
+            if (i == 1.0f)
+            {
+                transitionImage.enabled = false;
+            }
+
+            transitionImage.CrossFadeColor(Color.black, 1.0f, false, true);
+
+            yield return null;
+        }
+
+       transitionImage.enabled = false;
+    }
+
+    
     public void LoadScene(int sceneANumber)
     {
         Debug.Log("sceneBuildIndex to load: " + sceneANumber);
@@ -372,15 +480,60 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(LoadYourAsyncScene());
     }
 
-    IEnumerator LoadYourAsyncScene()
+    public IEnumerator DoneWithTransition(Party playerParty)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Scene2");
+        if (transitionMan != null)
+        {
+            transitionMan.Out();
+            SoundManager sound = GetComponent<SoundManager>();
+            DontDestroyOnLoad(sound.audioItemMXlevel);
+            if(camDock != null)
+            {
+              //  DontDestroyOnLoad(camDock.GetComponentInChildren<DopeCamSys>().gameObject);
+              //  camDock.GetComponentsInChildren<Camera>();
+            }
 
-        while (!asyncLoad.isDone)
+            SetEntrancePosition(playerParty);
+        }
+        else
         {
             yield return null;
         }
     }
 
-    
+    public void SetUpNewScene()
+    {
+        if(combatUI == null)
+        {
+           combatUI = GetComponent<CombatManager>().gameObject; 
+            
+        }
+        if(camDock == null)
+        {
+            Debug.Log("Find Camdock");
+            camDock = FindObjectOfType<DopeCamSys>(); 
+        }
+        if(swipeImage == null)
+        {
+            swipeImage = GameObject.Find("Swipe Image").GetComponent<Image>();
+        }
+        if (levelUI == null)
+        {
+            levelUI = GameObject.Find("Canvas Level UI");
+        }
+    }
+
+    IEnumerator LoadYourAsyncScene()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1);
+     
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        SetUpNewScene();
+    } 
+
+    // End Transition Levels 
 }

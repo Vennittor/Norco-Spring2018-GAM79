@@ -57,6 +57,9 @@ public class SoundManager : MonoBehaviour
         AudioSource src = go.GetComponent<AudioSource>();
         src.clip = clip;
         src.Play();
+
+        DontDestroyOnLoad(go); 
+
         if (go.gameObject.GetComponent<AudioSource>().loop == false)
         {
             Destroy(go, clip.length);

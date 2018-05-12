@@ -5,6 +5,7 @@ using UnityEngine;
 public class Party : MonoBehaviour
 {
     public LevelManager levelMan;
+    private TransitionManager transitionMan; 
 
     public HeatZone heatState;
     public List<Character> partyMembers;
@@ -14,6 +15,8 @@ public class Party : MonoBehaviour
     float NextTickAt = 0;
     public uint myCurrentHeatIntensity;
     public uint lastHeat;
+
+    public Party playerParty { get; private set; }
 
     public enum PartyType
     {
@@ -28,12 +31,16 @@ public class Party : MonoBehaviour
 
     void Start()
     {
+        transitionMan = FindObjectOfType<TransitionManager>(); 
         levelMan = LevelManager.Instance;
+        
 
 		if (levelMan == null)
 		{
 			Debug.LogError (this.gameObject.name + " could not find reference to LevelManager");
 		}
+
+        DontDestroyOnLoad(levelMan);
 
 		for (int i = partyMembers.Count - 1; i >= 0; i--) 
 		{
@@ -166,5 +173,22 @@ public class Party : MonoBehaviour
 			}
 		}
 
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if(col.gameObject.tag == "Exit")
+        {
+            levelMan.StartCoroutine(levelMan.Transition());
+            levelMan.LoadSceneAsync();
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if(col.gameObject.tag == "Exit")
+        {
+            levelMan.StartCoroutine(levelMan.DoneWithTransition(playerParty));
+        }
     }
 }

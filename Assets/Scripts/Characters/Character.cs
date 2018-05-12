@@ -111,6 +111,11 @@ public abstract class Character : MonoBehaviour
 
 		SetDefaultStats ();
 
+        if(baseStats == null)
+        {
+            baseStats = FindObjectOfType<CharacterBaseStats>();
+        }
+
       //  cooldownTimers = new List<uint>();									//enfore size of cooldownTimers to abilities and set the timer to 0
 		/*foreach(Ability ability in abilities)
 		{
