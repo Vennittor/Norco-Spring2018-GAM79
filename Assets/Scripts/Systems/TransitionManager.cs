@@ -7,38 +7,53 @@ using UnityEngine;
 public class TransitionManager : MonoBehaviour
 {
     public Image transitionImage;
-    private Animator iAnim;
+    public Animator iAnim;
     public Transform entranceTransform;
     public Transform exitTransform;
     [SerializeField]
     private LevelManager levelMan;
     private Party playerParty;
-    public GameObject Load; 
+    public GameObject Load;
+    public GameObject transitionOpen;
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(playerParty);
-      //  Load = FindObjectOfType<GameObject>();
         transitionImage.enabled = true;
+        if(transitionOpen != null)
+        {
+            transitionOpen.gameObject.SetActive(false); 
+        }
     }
 
     void Start()
     {
-        if(Load != null)
-        {
-           // Load.SetActive(false);
-        }
-
         if(iAnim == null)
         {
-            iAnim = GameObject.FindObjectOfType<Animator>().GetComponent<Animator>();
+           // iAnim = GameObject.Find("Transition Image").GetComponentInChildren<Animator>();
         }
 
         if(levelMan == null)
         {
             levelMan = GameObject.FindObjectOfType<LevelManager>(); 
         }
+
+        if(transitionOpen.gameObject == null)
+        {
+            transitionOpen = GameObject.Find("AfterEffects_TransitionOpen");
+            if (transitionOpen.GetComponentInChildren<GameObject>() != null)
+            {
+                Debug.Log("tO");
+                transitionOpen.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void TransitionOpen()
+    {
+        StartCoroutine(In()); 
+       // transitionOpen.gameObject.SetActive(true);  
     }
 
     public void TransitionTo(int sceneIndex)
@@ -46,18 +61,29 @@ public class TransitionManager : MonoBehaviour
         levelMan.LoadScene(sceneIndex);
     }
 
-    public void In()
+    public IEnumerator In()
     {
+        yield return new WaitForSeconds(3.0f); 
+
+        Debug.Log("Go"); 
         iAnim.Play("fadeIn1");
+        iAnim.SetBool("In", true);
+        iAnim.SetBool("Out", false);
+        yield return new WaitForSeconds(3.0f);
+
+        yield return null; 
     }
 
-    public void Out()
+    public IEnumerator Out()
     {
         iAnim.Play("fadeOut1");
+
+        yield return null; 
     }
 
     public void TransitionComplete()
     {
-        Out();
+        // Out();
+        Debug.Log("Complete"); 
     }
 }

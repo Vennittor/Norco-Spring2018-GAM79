@@ -484,14 +484,10 @@ public class LevelManager : MonoBehaviour
     {
         if (transitionMan != null)
         {
-            transitionMan.Out();
+            // transitionMan.Out();
+            transitionMan.TransitionOpen(); 
             SoundManager sound = GetComponent<SoundManager>();
             DontDestroyOnLoad(sound.audioItemMXlevel);
-            if(camDock != null)
-            {
-              //  DontDestroyOnLoad(camDock.GetComponentInChildren<DopeCamSys>().gameObject);
-              //  camDock.GetComponentsInChildren<Camera>();
-            }
 
             SetEntrancePosition(playerParty);
         }
