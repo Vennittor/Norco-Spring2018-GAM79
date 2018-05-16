@@ -219,8 +219,8 @@ public class LevelManager : MonoBehaviour
     {
         camDock.Reposition(); 
         Transform partyPos = playerParty.transform.GetComponent<Transform>();
-        enemyParty.transform.position = new Vector3(eParty.transform.position.x + 5, eParty.transform.position.y, eParty.transform.position.z);
-        enemyParty.GetComponent<Transform>().position = eParty.transform.position; 
+        enemyParty.transform.position = new Vector3(eParty.transform.position.x + 5, eParty.transform.position.y, eParty.transform.position.z); // was eParty;
+        enemyParty.GetComponent<Transform>().position = eParty.transform.position; // was eParty.transform.position
     }
 
 	public IEnumerator InitiateCombat(Party player, Party enemy)
