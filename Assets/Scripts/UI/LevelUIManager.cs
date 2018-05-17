@@ -24,14 +24,12 @@ public class LevelUIManager : MonoBehaviour
         {
             if (_instance != null && _instance != this)
             {
-            Debug.Log("Whats up visual studio"); 
                 Destroy(gameObject);
                 return;
             }
 
         _instance = this;
 
-        // swipeImage = GetComponent<Image>();
         DontDestroyOnLoad(gameObject);
      }
 }

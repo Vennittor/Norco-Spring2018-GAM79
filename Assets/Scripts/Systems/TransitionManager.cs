@@ -9,56 +9,69 @@ public class TransitionManager : MonoBehaviour
     public Image transitionImage;
     public Animator iAnim;
     public Transform entranceTransform;
-    public Transform exitTransform;
+   public Transform exitTransform;
     [SerializeField]
     private LevelManager levelMan;
+    private FadeManager fadeMan; 
     private Party playerParty;
-    public GameObject Load;
-    public GameObject transitionOpen;
+    public bool InT = false;
+    public bool OutT = false; 
+
+   public GameObject Load;
+  public GameObject transitionOpen;
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(playerParty);
+     
         transitionImage.enabled = true;
+  
         if(transitionOpen != null)
         {
+            DontDestroyOnLoad(transitionOpen); 
             transitionOpen.gameObject.SetActive(false); 
         }
     }
 
     void Start()
     {
-        if(iAnim == null)
+        if (iAnim == null)
         {
-           // iAnim = GameObject.Find("Transition Image").GetComponentInChildren<Animator>();
+           iAnim = GameObject.Find("Transition Image").GetComponentInChildren<Animator>();
         }
-
-        if(levelMan == null)
+        if (levelMan == null)
         {
-            levelMan = GameObject.FindObjectOfType<LevelManager>(); 
+            levelMan = GameObject.FindObjectOfType<LevelManager>();
         }
 
         if(transitionOpen.gameObject == null)
         {
             transitionOpen = GameObject.Find("AfterEffects_TransitionOpen");
+      
             if (transitionOpen.GetComponentInChildren<GameObject>() != null)
             {
                 Debug.Log("tO");
                 transitionOpen.gameObject.SetActive(false);
             }
         }
+        else
+        {
+            transitionOpen.gameObject.SetActive(true);
+        }
+
     }
 
     public void TransitionOpen()
     {
-        StartCoroutine(In()); 
-       // transitionOpen.gameObject.SetActive(true);  
+        InT = false; OutT = false;
+        StartCoroutine(TransitionComplete()); // was In(); 
+        transitionOpen.gameObject.SetActive(true);  
     }
 
     public void TransitionTo(int sceneIndex)
     {
-        levelMan.LoadScene(sceneIndex);
+      //  levelMan.LoadScene(sceneIndex);
     }
 
     public IEnumerator In()
@@ -76,14 +89,27 @@ public class TransitionManager : MonoBehaviour
 
     public IEnumerator Out()
     {
-        iAnim.Play("fadeOut1");
+        if (InT == false && OutT == false)
+        {
+            iAnim.GetComponentInChildren<Animator>().Play("fadeOut1");
+            iAnim.GetComponentInChildren<Animator>().SetBool("In", false);
 
+            yield return new WaitForEndOfFrame();
+            iAnim.GetComponentInChildren<Animator>().SetBool("Out", true);
+        }      
         yield return null; 
     }
 
-    public void TransitionComplete()
+    public IEnumerator TransitionComplete()
     {
-        // Out();
-        Debug.Log("Complete"); 
+        // Fade Out();
+        StartCoroutine(Out()); 
+        Debug.Log("TransitionOut");
+        yield return null; 
+    }
+
+    public void BeginTransitionSequence()
+    {
+        fadeMan.TransitionOutFromMenu(); 
     }
 }

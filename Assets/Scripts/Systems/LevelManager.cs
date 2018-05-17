@@ -59,6 +59,8 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        DontDestroyOnLoad(transitionImage.gameObject); 
+
 		_instance = this;
 
 		if (combatUI == null)
@@ -219,8 +221,8 @@ public class LevelManager : MonoBehaviour
     {
         camDock.Reposition(); 
         Transform partyPos = playerParty.transform.GetComponent<Transform>();
-        enemyParty.transform.position = new Vector3(eParty.transform.position.x + 5, eParty.transform.position.y, eParty.transform.position.z); // was eParty;
-        enemyParty.GetComponent<Transform>().position = eParty.transform.position; // was eParty.transform.position
+        enemyParty.transform.position = new Vector3(eParty.transform.position.x + 5, eParty.transform.position.y, eParty.transform.position.z); 
+        enemyParty.GetComponent<Transform>().position = eParty.transform.position; 
     }
 
 	public IEnumerator InitiateCombat(Party player, Party enemy)
@@ -442,6 +444,7 @@ public class LevelManager : MonoBehaviour
 
    public IEnumerator Transition()
     {
+        DontDestroyOnLoad(transitionImage); 
         transitionImage.enabled = true;
 
         float i = 0;
@@ -451,21 +454,27 @@ public class LevelManager : MonoBehaviour
          
         i = transitionImage.color.a;
 
-        while (i <= transitionImage.color.a + 1)
+        while (i < transitionImage.color.a + 1)
         {
             i += Time.deltaTime * 0.1f;
 
             if (i == 1.0f)
             {
+                transitionImage.CrossFadeColor(Color.black, 1.0f, false, true);
                 transitionImage.enabled = false;
             }
-
-            transitionImage.CrossFadeColor(Color.black, 1.0f, false, true);
-
             yield return null;
         }
 
-       transitionImage.enabled = false;
+        if(transitionImage == null)
+        {
+            transitionImage.enabled = false;
+        }
+        else
+        {
+            Debug.Log("I am en");  
+        }
+      
     }
 
     
@@ -485,7 +494,7 @@ public class LevelManager : MonoBehaviour
         if (transitionMan != null)
         {
             // transitionMan.Out();
-            transitionMan.TransitionOpen(); 
+          //  transitionMan.TransitionOpen(); 
             SoundManager sound = GetComponent<SoundManager>();
             DontDestroyOnLoad(sound.audioItemMXlevel);
 

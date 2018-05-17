@@ -14,9 +14,21 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Levels/Demos/2017 4-20 demo/2017 4-20 demo.unity
     guid: 026bd1683f2a10747a57f476f846320e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/Levels in Production/Oasis.unity
     guid: f29a89d114d0c1548bcfb6dbd8fc3620
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/Levels in Production/Catacombs.unity
     guid: 63c7e2bc19881ed4c9f0b313f0ab4c21
+  - enabled: 0
+    path: Assets/TESTING FOLDER/Test Scenes/MainMenu 1.unity
+    guid: 4903ad852dfc2e64faae13c23b956629
+  - enabled: 1
+    path: Assets/TESTING FOLDER/Test Scenes/MainMenu.unity
+    guid: efe7a7be52b0009499de11424b6d62d6
+  - enabled: 1
+    path: Assets/Levels/Imported Levels/Scenes/LVL_Oasis.unity
+    guid: 94e6ec05202b5224bb61aa5da7806b28
+  - enabled: 1
+    path: Assets/Levels/Imported Levels/Scenes/LVL_Catacombs.unity
+    guid: 1284a423979dbf242bbe8cffd5a17cc5
