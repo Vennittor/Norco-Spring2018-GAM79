@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
 
     public CombatManager combatManager;
     public EventSystemManager eventSystemManager;
+    public TargetingManager targetingManager;   //Added
     private Character character;
 
     public Image healthBar;
@@ -47,7 +48,7 @@ public class UIManager : MonoBehaviour
 
 
 	public Character previousHitCharacter = null;
-	TargetType searchingTargetType;
+	public TargetType searchingTargetType;
 
     #region Unity Functions
 	public void Awake()
@@ -77,8 +78,9 @@ public class UIManager : MonoBehaviour
 		Announcer.announcementDestination = splashMessageText;
 		combatManager = CombatManager.Instance;
 		eventSystemManager = EventSystemManager.Instance;
+        targetingManager = TargetingManager.targetingInstance;
 
-		actionSlider = this.gameObject.transform.Find ("Action Slider").gameObject;
+        actionSlider = this.gameObject.transform.Find ("Action Slider").gameObject;
 
 		if (disableUIOnStart)
 		{
@@ -86,7 +88,7 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-    public void Update()
+    public void Update()  //Adjust inputs here 
 	{
 		//TODO TESTING		//TODO Change to inputMode may be coming from outside.
 		if (Input.GetKeyDown (KeyCode.U))
@@ -94,9 +96,9 @@ public class UIManager : MonoBehaviour
 			Debug.Log ("input = " + inputMode.ToString ());
 		}
 
-		HighlightTargets ();
-        
-        if (Input.GetMouseButtonDown (0))                //when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
+		//targetingManager.HighlightTargets ();  //Modded
+
+        /*if (Input.GetMouseButtonDown (0))                //when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
 		{            
             if (inputMode == InputMode.TARGETING)
             {
@@ -113,7 +115,7 @@ public class UIManager : MonoBehaviour
 		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
         {
 			CancelInput ();
-        }
+        }*/
     }
 	#endregion
 
@@ -176,7 +178,7 @@ public class UIManager : MonoBehaviour
 					}
 					else
 					{
-						GetTargets (ability.targetType);
+                        GetTargets(ability.targetType);
 					}
 				}
 				else
@@ -229,7 +231,7 @@ public class UIManager : MonoBehaviour
 		inputMode = InputMode.ABILITYSELECT; 		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
-	private void SetMode_Targeting()
+	private void SetMode_Targeting()  //
 	{
 		inputMode = InputMode.TARGETING;		Debug.Log ("input = " + inputMode.ToString ());
 	}
@@ -294,7 +296,7 @@ public class UIManager : MonoBehaviour
 	{
 		combatManager.AssignTargets(collectedTargets);
 
-		TurnWhite ();
+        //targetingManager.TurnWhite();  //Modded
 
 		collectedTargets.Clear ();
 
@@ -302,9 +304,9 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpdateHealthBar()
+    /*public void UpdateHealthBar()
     {
-		if (healthBar != null)
+	 if (healthBar != null)
 		{
 			healthBar.fillAmount = character.currentHealth / character.maxhealth;
 		}
@@ -313,7 +315,7 @@ public class UIManager : MonoBehaviour
 			Debug.LogError ("No refrence to Health Bar");
 		}
     }
-
+    
     #region HighlightTargets
     public void TurnRed(List<Character> targets) 			// highlight in Red on Mouse-over
     {
@@ -455,5 +457,5 @@ public class UIManager : MonoBehaviour
 
 		Debug.DrawRay(ray.origin, ray.direction, debugColor);
 	}
-    #endregion
+    #endregion*/
 }

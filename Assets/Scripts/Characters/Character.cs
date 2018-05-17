@@ -365,7 +365,7 @@ public abstract class Character : MonoBehaviour
             DealPoisonDamage(damage);
         }
 
-        uiManager.UpdateHealthBar();
+        //uiManager.UpdateHealthBar();
 
     }
 
