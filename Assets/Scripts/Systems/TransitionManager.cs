@@ -15,7 +15,8 @@ public class TransitionManager : MonoBehaviour
     private FadeManager fadeMan; 
     private Party playerParty;
     public bool InT = false;
-    public bool OutT = false; 
+    public bool OutT = false;
+    public Animation anim; 
 
    public GameObject Load;
   public GameObject transitionOpen;
@@ -60,6 +61,13 @@ public class TransitionManager : MonoBehaviour
             transitionOpen.gameObject.SetActive(true);
         }
 
+        anim = GetComponentInChildren<Animation>();
+        foreach(AnimationState state in anim)
+        {
+            state.speed = 0.5f;
+            state.wrapMode = WrapMode.Once;
+            state.clip.name = "fadeIn1"; 
+        }
     }
 
     public void TransitionOpen()
@@ -82,6 +90,7 @@ public class TransitionManager : MonoBehaviour
         iAnim.Play("fadeIn1");
         iAnim.SetBool("In", true);
         iAnim.SetBool("Out", false);
+        anim["fadeIn1"].wrapMode = WrapMode.Once; 
         yield return new WaitForSeconds(3.0f);
 
         yield return null; 
@@ -89,13 +98,18 @@ public class TransitionManager : MonoBehaviour
 
     public IEnumerator Out()
     {
-        if (InT == false && OutT == false)
+        InT = false; 
+        OutT = true; 
+        if (InT == false && OutT == true)
         {
             iAnim.GetComponentInChildren<Animator>().Play("fadeOut1");
             iAnim.GetComponentInChildren<Animator>().SetBool("In", false);
+            
 
             yield return new WaitForEndOfFrame();
             iAnim.GetComponentInChildren<Animator>().SetBool("Out", true);
+            anim.Play(PlayMode.StopAll);
+            anim["fadeOut1"].wrapMode = WrapMode.Once;
         }      
         yield return null; 
     }
