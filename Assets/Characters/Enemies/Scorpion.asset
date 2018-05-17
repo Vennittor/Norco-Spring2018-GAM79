@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterName: Scorpion
   _characterImage: {fileID: 0}
-  _animatorController: {fileID: 9100000, guid: 12195765a93793949bd8f5eb1254f6c5, type: 2}
+  _animatorController: {fileID: 9100000, guid: c2355e8bcd8e5f346ad69335d5e714c5, type: 2}
   _maxHealth: 35
   _maxHeat: 0
   _abilities:

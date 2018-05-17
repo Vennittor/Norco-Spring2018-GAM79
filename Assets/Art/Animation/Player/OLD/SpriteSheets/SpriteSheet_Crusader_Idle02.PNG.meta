@@ -1,0 +1,982 @@
+fileFormatVersion: 2
+guid: 3d72ebd1965ee494eb2bc309a02ace0b
+timeCreated: 1523031434
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SpriteSheet_Crusader_Idle02_0
+    21300002: SpriteSheet_Crusader_Idle02_1
+    21300004: SpriteSheet_Crusader_Idle02_2
+    21300006: SpriteSheet_Crusader_Idle02_3
+    21300008: SpriteSheet_Crusader_Idle02_4
+    21300010: SpriteSheet_Crusader_Idle02_5
+    21300012: SpriteSheet_Crusader_Idle02_6
+    21300014: SpriteSheet_Crusader_Idle02_7
+    21300016: SpriteSheet_Crusader_Idle02_8
+    21300018: SpriteSheet_Crusader_Idle02_9
+    21300020: SpriteSheet_Crusader_Idle02_10
+    21300022: SpriteSheet_Crusader_Idle02_11
+    21300024: SpriteSheet_Crusader_Idle02_12
+    21300026: SpriteSheet_Crusader_Idle02_13
+    21300028: SpriteSheet_Crusader_Idle02_14
+    21300030: SpriteSheet_Crusader_Idle02_15
+    21300032: SpriteSheet_Crusader_Idle02_16
+    21300034: SpriteSheet_Crusader_Idle02_17
+    21300036: SpriteSheet_Crusader_Idle02_18
+    21300038: SpriteSheet_Crusader_Idle02_19
+    21300040: SpriteSheet_Crusader_Idle02_20
+    21300042: SpriteSheet_Crusader_Idle02_21
+    21300044: SpriteSheet_Crusader_Idle02_22
+    21300046: SpriteSheet_Crusader_Idle02_23
+    21300048: SpriteSheet_Crusader_Idle02_24
+    21300050: SpriteSheet_Crusader_Idle02_25
+    21300052: SpriteSheet_Crusader_Idle02_26
+    21300054: SpriteSheet_Crusader_Idle02_27
+    21300056: SpriteSheet_Crusader_Idle02_28
+    21300058: SpriteSheet_Crusader_Idle02_29
+    21300060: SpriteSheet_Crusader_Idle02_30
+    21300062: SpriteSheet_Crusader_Idle02_31
+    21300064: SpriteSheet_Crusader_Idle02_32
+    21300066: SpriteSheet_Crusader_Idle02_33
+    21300068: SpriteSheet_Crusader_Idle02_34
+    21300070: SpriteSheet_Crusader_Idle02_35
+    21300072: SpriteSheet_Crusader_Idle02_36
+    21300074: SpriteSheet_Crusader_Idle02_37
+    21300076: SpriteSheet_Crusader_Idle02_38
+    21300078: SpriteSheet_Crusader_Idle02_39
+    21300080: SpriteSheet_Crusader_Idle02_40
+    21300082: SpriteSheet_Crusader_Idle02_41
+    21300084: SpriteSheet_Crusader_Idle02_42
+    21300086: SpriteSheet_Crusader_Idle02_43
+    21300088: SpriteSheet_Crusader_Idle02_44
+    21300090: SpriteSheet_Crusader_Idle02_45
+    21300092: SpriteSheet_Crusader_Idle02_46
+    21300094: SpriteSheet_Crusader_Idle02_47
+    21300096: SpriteSheet_Crusader_Idle02_48
+    21300098: SpriteSheet_Crusader_Idle02_49
+    21300100: SpriteSheet_Crusader_Idle02_50
+    21300102: SpriteSheet_Crusader_Idle02_51
+    21300104: SpriteSheet_Crusader_Idle02_52
+    21300106: SpriteSheet_Crusader_Idle02_53
+    21300108: SpriteSheet_Crusader_Idle02_54
+    21300110: SpriteSheet_Crusader_Idle02_55
+    21300112: SpriteSheet_Crusader_Idle02_56
+    21300114: SpriteSheet_Crusader_Idle02_57
+    21300116: SpriteSheet_Crusader_Idle02_58
+    21300118: SpriteSheet_Crusader_Idle02_59
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: -1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 300
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_0
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 10432
+        width: 1043
+        height: 1247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_1
+      rect:
+        serializedVersion: 2
+        x: 2014
+        y: 10426
+        width: 1059
+        height: 1253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_2
+      rect:
+        serializedVersion: 2
+        x: 3724
+        y: 10425
+        width: 1072
+        height: 1254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_3
+      rect:
+        serializedVersion: 2
+        x: 5435
+        y: 10417
+        width: 1083
+        height: 1262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_4
+      rect:
+        serializedVersion: 2
+        x: 7139
+        y: 10410
+        width: 1104
+        height: 1269
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_5
+      rect:
+        serializedVersion: 2
+        x: 8849
+        y: 10410
+        width: 1113
+        height: 1269
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_6
+      rect:
+        serializedVersion: 2
+        x: 10560
+        y: 10402
+        width: 1120
+        height: 1277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_7
+      rect:
+        serializedVersion: 2
+        x: 12271
+        y: 10395
+        width: 1128
+        height: 1280
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_8
+      rect:
+        serializedVersion: 2
+        x: 13982
+        y: 10395
+        width: 1135
+        height: 1277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_9
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 8692
+        width: 1143
+        height: 1284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_10
+      rect:
+        serializedVersion: 2
+        x: 2103
+        y: 8684
+        width: 1150
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_11
+      rect:
+        serializedVersion: 2
+        x: 3814
+        y: 8684
+        width: 1150
+        height: 1291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_12
+      rect:
+        serializedVersion: 2
+        x: 5525
+        y: 8677
+        width: 1150
+        height: 1297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_13
+      rect:
+        serializedVersion: 2
+        x: 7236
+        y: 8677
+        width: 1156
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_14
+      rect:
+        serializedVersion: 2
+        x: 8947
+        y: 8677
+        width: 1156
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_15
+      rect:
+        serializedVersion: 2
+        x: 10664
+        y: 8670
+        width: 1147
+        height: 1299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_16
+      rect:
+        serializedVersion: 2
+        x: 12376
+        y: 8670
+        width: 1142
+        height: 1299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_17
+      rect:
+        serializedVersion: 2
+        x: 14094
+        y: 8670
+        width: 1135
+        height: 1299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_18
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 6973
+        width: 1120
+        height: 1300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_19
+      rect:
+        serializedVersion: 2
+        x: 2215
+        y: 6973
+        width: 1120
+        height: 1300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_20
+      rect:
+        serializedVersion: 2
+        x: 3911
+        y: 6974
+        width: 1120
+        height: 1299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_21
+      rect:
+        serializedVersion: 2
+        x: 5614
+        y: 6974
+        width: 1113
+        height: 1299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_22
+      rect:
+        serializedVersion: 2
+        x: 7318
+        y: 6974
+        width: 1105
+        height: 1299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_23
+      rect:
+        serializedVersion: 2
+        x: 9021
+        y: 6981
+        width: 1091
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_24
+      rect:
+        serializedVersion: 2
+        x: 10724
+        y: 6981
+        width: 1076
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_25
+      rect:
+        serializedVersion: 2
+        x: 12428
+        y: 6981
+        width: 1060
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_26
+      rect:
+        serializedVersion: 2
+        x: 14123
+        y: 6981
+        width: 1072
+        height: 1295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_27
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 5285
+        width: 1083
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_28
+      rect:
+        serializedVersion: 2
+        x: 2215
+        y: 5285
+        width: 1091
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_29
+      rect:
+        serializedVersion: 2
+        x: 3918
+        y: 5285
+        width: 1094
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_30
+      rect:
+        serializedVersion: 2
+        x: 5614
+        y: 5285
+        width: 1105
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_31
+      rect:
+        serializedVersion: 2
+        x: 7310
+        y: 5285
+        width: 1113
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_32
+      rect:
+        serializedVersion: 2
+        x: 9007
+        y: 5285
+        width: 1118
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_33
+      rect:
+        serializedVersion: 2
+        x: 10709
+        y: 5285
+        width: 1113
+        height: 1292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_34
+      rect:
+        serializedVersion: 2
+        x: 12405
+        y: 5287
+        width: 1121
+        height: 1290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_35
+      rect:
+        serializedVersion: 2
+        x: 14105
+        y: 5293
+        width: 1124
+        height: 1284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_36
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 3590
+        width: 1121
+        height: 1290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_37
+      rect:
+        serializedVersion: 2
+        x: 2200
+        y: 3597
+        width: 1127
+        height: 1283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_38
+      rect:
+        serializedVersion: 2
+        x: 3897
+        y: 3597
+        width: 1127
+        height: 1284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_39
+      rect:
+        serializedVersion: 2
+        x: 5592
+        y: 3597
+        width: 1128
+        height: 1284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_40
+      rect:
+        serializedVersion: 2
+        x: 7280
+        y: 3598
+        width: 1136
+        height: 1283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_41
+      rect:
+        serializedVersion: 2
+        x: 8969
+        y: 3604
+        width: 1142
+        height: 1277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_42
+      rect:
+        serializedVersion: 2
+        x: 10664
+        y: 3605
+        width: 1143
+        height: 1276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_43
+      rect:
+        serializedVersion: 2
+        x: 12353
+        y: 3609
+        width: 1148
+        height: 1272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_44
+      rect:
+        serializedVersion: 2
+        x: 14041
+        y: 3612
+        width: 1151
+        height: 1269
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_45
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 1916
+        width: 1156
+        height: 1262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_46
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 1916
+        width: 1157
+        height: 1262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_47
+      rect:
+        serializedVersion: 2
+        x: 3814
+        y: 1916
+        width: 1150
+        height: 1262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_48
+      rect:
+        serializedVersion: 2
+        x: 5502
+        y: 1916
+        width: 1150
+        height: 1262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_49
+      rect:
+        serializedVersion: 2
+        x: 7191
+        y: 1916
+        width: 1149
+        height: 1262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_50
+      rect:
+        serializedVersion: 2
+        x: 8879
+        y: 1916
+        width: 1143
+        height: 1262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_51
+      rect:
+        serializedVersion: 2
+        x: 10575
+        y: 1916
+        width: 1135
+        height: 1262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_52
+      rect:
+        serializedVersion: 2
+        x: 12263
+        y: 1916
+        width: 1128
+        height: 1262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_53
+      rect:
+        serializedVersion: 2
+        x: 13952
+        y: 1917
+        width: 1120
+        height: 1261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_54
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 220
+        width: 1106
+        height: 1255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_55
+      rect:
+        serializedVersion: 2
+        x: 2036
+        y: 221
+        width: 1098
+        height: 1254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_56
+      rect:
+        serializedVersion: 2
+        x: 3732
+        y: 228
+        width: 1083
+        height: 1247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_57
+      rect:
+        serializedVersion: 2
+        x: 5420
+        y: 228
+        width: 1075
+        height: 1247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_58
+      rect:
+        serializedVersion: 2
+        x: 7116
+        y: 229
+        width: 1053
+        height: 1246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SpriteSheet_Crusader_Idle02_59
+      rect:
+        serializedVersion: 2
+        x: 8805
+        y: 235
+        width: 1044
+        height: 1240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
