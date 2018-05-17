@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterName: Female
   _characterImage: {fileID: 0}
-  _animatorController: {fileID: 9100000, guid: 0f8e61d549db3d34d9a7e41f08deaff8, type: 2}
+  _animatorController: {fileID: 9100000, guid: 393bfd19517ce8842b846ddcf03b4473, type: 2}
   _maxHealth: 50
   _maxHeat: 300
   _abilities:
