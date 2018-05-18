@@ -30,4 +30,4 @@ MonoBehaviour:
   hitsPerAction: 1
   _cooldown: 4
   characterUser: {fileID: 0}
-  abilitySound: {fileID: 8300000, guid: 208ac2b975628b14fa12a7cf2b263526, type: 3}
+  abilitySound: {fileID: 8300000, guid: 29cf98eef5362ec47879a1374710b48b, type: 3}
