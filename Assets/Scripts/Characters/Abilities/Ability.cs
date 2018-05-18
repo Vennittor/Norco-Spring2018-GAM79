@@ -14,6 +14,7 @@ public class Ability : ScriptableObject
 	[SerializeField] private int heatCost = 0;  //TODO impement heat damage to user on Ability use.
 	public TargetType targetType;
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
+    [SerializeField] protected ActionType actionType = ActionType.NORMAL;
 	[SerializeField] protected List<StatusEffectType> statuses = new List<StatusEffectType>();
     [SerializeField] private float statusChance;
     [SerializeField] private uint stunDuration;
@@ -30,7 +31,13 @@ public class Ability : ScriptableObject
 
     public AudioClip abilitySound;
 
-
+    public ActionType type
+    {
+        get
+        {
+            return actionType;
+        }
+    }
     // EFFECTS DATA
     //public Sprite image; // for effects
     //Animators & Parameters
@@ -100,7 +107,7 @@ public class Ability : ScriptableObject
 		//TODO Ready an special effects that may happen when a Character is preparing to use the Ability
     }
 
-	public void UseAbility()
+	public void UseAbility(float modifier = 0.0f)
 	{
         float randAccuracy;
         if (targets.Count == 0)
@@ -138,22 +145,22 @@ public class Ability : ScriptableObject
                         {
                             foreach (Damage range in damage)                    // Deal all types of Damage in List
                             {
-                                target.ApplyDamage((uint)range.RollDamage(), range.element);
+                                target.ApplyDamage((uint)range.RollDamage(modifier), range.element);
                             }
 
-					foreach (StatusEffectType status in statuses)					// Apply all Status affects
-					{
-                        float rand = Random.Range(0f, 100f);
-                        if (rand < statusChance)
-                        {
-                            target.ApplyStatus(status, stunDuration);
-                        }
-                        else
-                        {
-                            Debug.Log("Status missed");
-                        }
-                    } 
-				}
+					        foreach (StatusEffectType status in statuses)					// Apply all Status affects
+					        {
+                                float rand = Random.Range(0f, 100f);
+                                if (rand < statusChance)
+                                {
+                                    target.ApplyStatus(status, stunDuration);
+                                }
+                                else
+                                {
+                                    Debug.Log("Status missed");
+                                }
+                            } 
+				        }
                         else
                         {
                             Debug.Log("they could dodge a wrench");

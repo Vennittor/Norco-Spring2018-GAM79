@@ -374,7 +374,7 @@ public class CombatManager : MonoBehaviour
 		{
 			if (!actionBarRunning)
 			{
-				StartCoroutine (ActionSlider ());
+                StartCoroutine(ActionSlider());
 			}
 			else
 			{

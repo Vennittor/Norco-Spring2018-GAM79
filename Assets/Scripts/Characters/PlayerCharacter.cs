@@ -45,6 +45,7 @@ public class PlayerCharacter : Character
     //call to water class   
     public Ability ReadyUseWater()
     {
+        Debug.Log("buttface");
 		if (water == null) 
 		{
 			Debug.Log ("There is no Water Ability for " + this.characterName);

@@ -16,10 +16,12 @@ public class Water : Ability
 
     public new void UseAbility()
     {
+        Debug.Log("kill me please");
         if (usesLeft > 0)
         {
 			characterUser.ApplyDamage(amount, ElementType.WATER);
             usesLeft--;
+            Debug.Log(usesLeft + " this much water is left");
         }
         
         EndAbility();
