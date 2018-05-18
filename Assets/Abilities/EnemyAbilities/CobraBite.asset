@@ -14,6 +14,7 @@ MonoBehaviour:
   abilityName: Bite
   description: bite player, chance of poison
   callOutText: 
+  heatCost: 0
   targetType:
     _who: 2
     _formation: 0
@@ -26,7 +27,10 @@ MonoBehaviour:
     - {x: 1, y: 1}
     elementType: 4
   statuses: 
+  statusChance: 0
+  stunDuration: 0
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 1
   characterUser: {fileID: 0}
+  abilitySound: {fileID: 8300000, guid: a5bbb69365fd3b74fabb92c35e6ec8b3, type: 3}
