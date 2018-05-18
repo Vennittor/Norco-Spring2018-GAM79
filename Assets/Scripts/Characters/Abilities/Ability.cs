@@ -35,16 +35,6 @@ public class Ability : ScriptableObject
     //public Sprite image; // for effects
     //Animators & Parameters
 
-    
-
-	/*public uint Cooldown 
-	{
-		get
-		{
-			return _cooldown;
-		}
-	}*/
-
 	public string targetName 
 	{
 		get
