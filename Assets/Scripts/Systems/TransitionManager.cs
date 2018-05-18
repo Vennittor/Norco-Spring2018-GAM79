@@ -9,7 +9,7 @@ public class TransitionManager : MonoBehaviour
     public Image transitionImage;
     public Animator iAnim;
     public Transform entranceTransform;
-   public Transform exitTransform;
+    public Transform exitTransform;
     [SerializeField]
     private LevelManager levelMan;
     private FadeManager fadeMan; 
@@ -17,9 +17,8 @@ public class TransitionManager : MonoBehaviour
     public bool InT = false;
     public bool OutT = false;
     public Animation anim; 
-
-   public GameObject Load;
-  public GameObject transitionOpen;
+    public GameObject Load;
+    public GameObject transitionOpen;
 
     void Awake()
     {

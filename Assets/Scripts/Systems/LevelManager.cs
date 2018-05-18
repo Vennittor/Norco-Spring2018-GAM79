@@ -530,9 +530,10 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator LoadYourAsyncScene()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1);
-     
-        while (!asyncLoad.isDone)
+        AsyncOperation target = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+       // AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1); 
+
+        while (!target.isDone)
         {
             yield return null;
         }
