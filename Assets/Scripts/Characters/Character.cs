@@ -227,7 +227,7 @@ public abstract class Character : MonoBehaviour
 			}
 			Debug.Log (this.gameObject.name + " is using " + abilities [selectedAbilityIndex].abilityName);
 			abilities [selectedAbilityIndex].SetTargets (targets);
-			abilities [selectedAbilityIndex].UseAbility ();
+			abilities [selectedAbilityIndex].UseAbility (modifier);
 		}
 	}
 
@@ -391,6 +391,7 @@ public abstract class Character : MonoBehaviour
 
     public void ReduceHeat(uint amount = 0)
     {
+        Debug.Log(amount + " amount of water used");
         currentHeat -= (uint)Mathf.Clamp(amount, 0, currentHeat);
         HeatReduceThreshold();
     }

@@ -69,10 +69,6 @@ public class SoundManager : MonoBehaviour
     public void LevelToCombat()
     {
         noLevel.TransitionTo(1.0f);
-        /*if (go.name == "AudioItemMXlevel(Clone)")  //use this if we decide to destroy the level music each time a transition occurs
-        {
-            Destroy(go);
-        } */
     }
 
     public void CombatToLevel()
