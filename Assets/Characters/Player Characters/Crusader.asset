@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Crusader
   m_EditorClassIdentifier: 
   _characterName: Crusader
-  _characterImage: {fileID: 0}
-  _animatorController: {fileID: 9100000, guid: 6af08727e6d20aa42a983e0f09918a24, type: 2}
+  _characterImage: {fileID: 2100000, guid: a2afce8baca3c804191432df4d7357c3, type: 2}
+  _animatorController: {fileID: 9100000, guid: bd5e0137f6de0694d853d25a20609ce2, type: 2}
   _maxHealth: 50
   _maxHeat: 300
   _abilities:
