@@ -157,54 +157,60 @@ public class UIManager : MonoBehaviour
 	{
 		if (inputMode == InputMode.ABILITYSELECT)
 		{
-			bool stopAbility = false;
-			foreach(EffectClass effect in combatManager.activeCharacter.effectClassList)
-			{
-				if(effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
-				{
-					stopAbility = true;                
-				}
-			}
 
-			if (!stopAbility)
-			{	
-				if (abilityIndex >= 0 && abilityIndex < combatManager.activeCharacter.abilityCount)
-				{
-					ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility (abilityIndex);
-
-					if (ability == null)
-					{
-						Debug.LogWarning ("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
-					}
-					else
-					{
-                        GetTargets(ability.targetType);
-					}
-				}
-				else
-				{
-					Debug.LogError ("InputAbility(): abilityIndex is out of range of activeCharacters Ability list");
-				}
-			}
-			else
-			{
-                if (abilityIndex == 0 || abilityIndex == 3)
+            if (collectedTargets.Count > 0)  //
+            {
+                bool stopAbility = false;
+                foreach (EffectClass effect in combatManager.activeCharacter.effectClassList)
                 {
-                    ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
-                    if (ability == null)
+                    if (effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
                     {
-                        Debug.LogWarning("Mad cuz bad");
+                        stopAbility = true;
+                    }
+                }
+
+                if (!stopAbility)
+                {
+                    if (abilityIndex >= 0 && abilityIndex < combatManager.activeCharacter.abilityCount)
+                    {
+                        ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
+
+                        if (ability == null)
+                        {
+                            Debug.LogWarning("UIManager: OutputAttackOne(): activeCharacter has no AbilityOne");
+                        }
+                        else
+                        {
+                            GetTargets(ability.targetType);
+                        }
                     }
                     else
                     {
-                        GetTargets(ability.targetType);
+                        Debug.LogError("InputAbility(): abilityIndex is out of range of activeCharacters Ability list");
                     }
                 }
                 else
                 {
-                    Debug.LogWarning("Still mad, try another ability");
+                    if (abilityIndex == 0 || abilityIndex == 3)
+                    {
+                        ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
+                        if (ability == null)
+                        {
+                            Debug.LogWarning("Mad cuz bad");
+                        }
+                        else
+                        {
+                            GetTargets(ability.targetType);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Still mad, try another ability");
+                    }
                 }
-			}
+            }
+
+            
 		}
     }
 		
@@ -254,13 +260,16 @@ public class UIManager : MonoBehaviour
 	{
 		SetMode_Normal ();
 	}
-	public bool AllowAbilitySelection()
+	public bool AllowAbilitySelection() //
 	{
 		if (inputMode != InputMode.BLOCKED)
 		{
-			SetMode_Select ();
+            if (collectedTargets.Count > 0)
+            {
+                SetMode_Select();  //
+            }
 
-			return true;
+            return true;
 		}
 		else
 		{
@@ -271,7 +280,7 @@ public class UIManager : MonoBehaviour
 	{
 		if (inputMode == InputMode.TARGETING) 
 		{
-			SetMode_Select ();
+			SetMode_Select ();   //
 		}
 	}
 	#endregion
@@ -292,7 +301,7 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-	public void SendTargets()        						//Assign Targets back to activeCharacter.
+	public void SendTargets() //        						//Assign Targets back to activeCharacter.
 	{
 		combatManager.AssignTargets(collectedTargets);
 

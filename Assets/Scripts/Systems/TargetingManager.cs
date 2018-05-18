@@ -21,7 +21,7 @@ public class TargetingManager : MonoBehaviour
             {
                 if (uIManager.collectedTargets.Count > 0)
                 {
-                    uIManager.SendTargets();
+                    uIManager.SendTargets(); //
                 }
                 else
                 {
@@ -29,7 +29,12 @@ public class TargetingManager : MonoBehaviour
                 }
             }
         }
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(1))  //Cycle targets
+        {
+            uIManager.CancelInput();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             uIManager.CancelInput();
         }

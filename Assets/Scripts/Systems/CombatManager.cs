@@ -147,6 +147,8 @@ public class CombatManager : MonoBehaviour
 				Debug.LogError("There are no Characters in the scene");
 			}
 		}
+
+        uiManager.inputMode = UIManager.InputMode.TARGETING;
 	}
 		
     void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
@@ -359,32 +361,38 @@ public class CombatManager : MonoBehaviour
 
 
 	#region Targeting and Ability Use
-	public void AssignTargets(List<Character> targetsToAssign)
+	public void AssignTargets(List<Character> targetsToAssign) //
 	{
-		//check if the character using the Ability (most likely activeCharacter) has any effect that would cause them to change targets, like StatusEffect confusion.
-		//check if the intended targets have any re-direction effects, (like Cover, or Reflect)
-		//Find new targets if needed.  This should be done within CombatManger and not UIManager
+        //check if the character using the Ability (most likely activeCharacter) has any effect that would cause them to change targets, like StatusEffect confusion.
+        //check if the intended targets have any re-direction effects, (like Cover, or Reflect)
+        //Find new targets if needed.  This should be done within CombatManger and not UIManager
 
-		finalizedTargets.AddRange (targetsToAssign);
+            finalizedTargets.AddRange(targetsToAssign);
 
 		//IF we should use the SLider,  (Check activeCharacter.selectedAbility and see if it should.  (this needs to be added to the Ability class
 			//enable slider.
+        
 
-		if (activeCharacter is PlayerCharacter)
-		{
-			if (!actionBarRunning)
-			{
-				StartCoroutine (ActionSlider ());
-			}
-			else
-			{
-				Debug.LogError ("ActionSlider is currently running and has been attempted to start again");
-			}
-		}
-		else
-		{
-			UseCharacterAbility ();
-		}
+        if(uiManager.inputMode == UIManager.InputMode.ABILITYSELECT)  //
+        {
+            if (activeCharacter is PlayerCharacter)
+            {
+                if (!actionBarRunning)
+                {
+                    StartCoroutine(ActionSlider());
+                }
+                else
+                {
+                    Debug.LogError("ActionSlider is currently running and has been attempted to start again");
+                }
+            }
+            else
+            {
+                UseCharacterAbility();
+            }
+        }
+
+        
 
 	}
 
