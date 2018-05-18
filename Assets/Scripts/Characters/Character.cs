@@ -191,8 +191,8 @@ public abstract class Character : MonoBehaviour
 		{*/
 		if (animator != null)
 			{
-			animator.SetBool ("Ready", true);
-			animator.SetBool ("Idle", false);
+//			animator.SetBool ("Ready", true);
+//			animator.SetBool ("Idle", false);
 			}
 			else
 			{
