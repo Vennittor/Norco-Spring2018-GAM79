@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
 
     public float infoDelayTime = 0.5f;
 
-    public enum InputMode { NORMAL, ABILITYSELECT, TARGETING, BLOCKED }
+    public enum InputMode { NORMAL, ABILITYSELECT, /*TARGETING,*/ BLOCKED }
     public InputMode inputMode;
     #endregion
 
@@ -237,10 +237,10 @@ public class UIManager : MonoBehaviour
 		inputMode = InputMode.ABILITYSELECT; 		Debug.Log ("input = " + inputMode.ToString ());
 	}
 
-	private void SetMode_Targeting()  //
+	/*private void SetMode_Targeting()  //
 	{
 		inputMode = InputMode.TARGETING;		Debug.Log ("input = " + inputMode.ToString ());
-	}
+	}*/
 
 	private void SetMode_Blocked()
 	{
@@ -278,10 +278,8 @@ public class UIManager : MonoBehaviour
 	}
 	public void CancelInput()
 	{
-		if (inputMode == InputMode.TARGETING) 
-		{
+		
 			SetMode_Select ();   //
-		}
 	}
 	#endregion
 
@@ -289,7 +287,7 @@ public class UIManager : MonoBehaviour
 	{
 		if (inputMode != InputMode.BLOCKED)
 		{
-			SetMode_Targeting ();
+			//SetMode_Targeting ();
 
 			searchingTargetType = targetType;
 

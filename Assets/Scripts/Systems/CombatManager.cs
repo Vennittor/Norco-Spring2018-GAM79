@@ -148,7 +148,7 @@ public class CombatManager : MonoBehaviour
 			}
 		}
 
-        uiManager.inputMode = UIManager.InputMode.TARGETING;
+        //uiManager.inputMode = UIManager.InputMode.TARGETING;  //
 	}
 		
     void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.

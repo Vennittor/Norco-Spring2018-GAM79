@@ -8,7 +8,10 @@ public class TargetingManager : MonoBehaviour
     public static TargetingManager targetingInstance;
     public UIManager uIManager;
 
-	void Start ()
+    public PlayerCharacter selectedPlayer;
+    public EnemyCharacter selectedEnemy;
+
+    void Start ()
     {
 		
 	}
@@ -17,8 +20,7 @@ public class TargetingManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))                //when left click is performed, set the abilites targets and use the ability, then go back into Ability Select
         {
-            if (uIManager.inputMode == UIManager.InputMode.TARGETING)
-            {
+            
                 if (uIManager.collectedTargets.Count > 0)
                 {
                     uIManager.SendTargets(); //
@@ -27,8 +29,8 @@ public class TargetingManager : MonoBehaviour
                 {
                     Debug.Log("No targets were collected, continuing to target");
                 }
-            }
         }
+
         if (Input.GetMouseButtonDown(1))  //Cycle targets
         {
             uIManager.CancelInput();
@@ -50,26 +52,29 @@ public class TargetingManager : MonoBehaviour
         }
     }
 
-    public void TurnRed(List<Character> targets) 			// highlight in Red on Mouse-over
+    public void TurnRed(Character character) 			// highlight in Red on Mouse-over
     {
-        foreach (Character target in targets)
+        if (character is PlayerCharacter)
         {
-            if (target.transform.GetComponentInChildren<SpriteRenderer>() != null)
+            TurnWhite(selectedPlayer);
+
+            if (character.GetComponent<SpriteRenderer>() != null)
             {
-                target.transform.GetComponentInChildren<SpriteRenderer>().material.color = Color.red;
+                character.GetComponent<SpriteRenderer>().material.color = Color.red;
             }
-        }
+        }     
+
+            
+       
     }
 
-    public void TurnWhite() // de-highlight red, return to white after not moused-over
+    public void TurnWhite(Character character) // de-highlight red, return to white after not moused-over
     {
-        foreach (Character character in uIManager.combatManager.charactersInCombat)
-        {
-            if (character.transform.GetComponentInChildren<SpriteRenderer>() != null)
+ 
+            if (character.GetComponent<SpriteRenderer>() != null)
             {
-                character.transform.GetComponentInChildren<SpriteRenderer>().material.color = Color.white;
+                character.GetComponent<SpriteRenderer>().material.color = Color.white;
             }
-        }
     }
 
     public void HighlightTargets()
@@ -79,8 +84,7 @@ public class TargetingManager : MonoBehaviour
         Color debugColor = Color.blue;
 
         RaycastHit hitInfo;
-        if (uIManager.inputMode == UIManager.InputMode.TARGETING && uIManager.searchingTargetType != null)
-        {
+
             debugColor = Color.green;
 
             if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, uIManager.targetable))
@@ -88,9 +92,9 @@ public class TargetingManager : MonoBehaviour
                 
                 if (hitInfo.collider.gameObject.GetComponent<Character>() == null || hitInfo.collider.gameObject.GetComponent<Character>().combatState == Character.CombatState.EXHAUSTED)          //if we did not hit a Character then the previousCharater becomes null, and we don't do anything
                 {
-                    uIManager.previousHitCharacter = null;
+                    //uIManager.previousHitCharacter = null;
                     uIManager.collectedTargets.Clear();
-                    TurnWhite();
+                    //TurnWhite();
                 }
                 else                                                                                            //else if we did, Start doing stuff
                 {
@@ -99,11 +103,11 @@ public class TargetingManager : MonoBehaviour
                     if (hitCharacter != uIManager.previousHitCharacter)
                     {
                         uIManager.collectedTargets.Clear();
-                        TurnWhite();
-                        uIManager.previousHitCharacter = hitCharacter;
+                        //TurnWhite();
+                        //uIManager.previousHitCharacter = hitCharacter;
                     }                   
 
-                    if (uIManager.searchingTargetType.who == TargetType.Who.SELF && hitCharacter == uIManager.combatManager.activeCharacter)    // if targeting SELF
+                    /*if (uIManager.searchingTargetType.who == TargetType.Who.SELF && hitCharacter == uIManager.combatManager.activeCharacter)    // if targeting SELF
                     {
                         if (!uIManager.collectedTargets.Contains(hitCharacter))
                         {
@@ -175,7 +179,7 @@ public class TargetingManager : MonoBehaviour
                             }
                         }
                         TurnRed(uIManager.collectedTargets);
-                    }
+                    } */
 
                 }
 
@@ -183,10 +187,10 @@ public class TargetingManager : MonoBehaviour
             else
             {
                 uIManager.collectedTargets.Clear();
-                TurnWhite();
+                //TurnWhite();
             }
 
-        }
+  
 
         Debug.DrawRay(ray.origin, ray.direction, debugColor);
     }
