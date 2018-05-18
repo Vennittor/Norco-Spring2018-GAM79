@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Alchemist
   m_EditorClassIdentifier: 
   _characterName: Alchemist
-  _characterImage: {fileID: 0}
+  _characterImage: {fileID: 2100000, guid: 28c7d22069335b14ea6ac2bf6738c55c, type: 2}
   _animatorController: {fileID: 9100000, guid: eaeeee5c7b6b35646a02bfc71a4229be, type: 2}
   _maxHealth: 50
   _maxHeat: 300
