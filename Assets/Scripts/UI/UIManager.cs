@@ -306,7 +306,8 @@ public class UIManager : MonoBehaviour
     {
 		if (healthBar != null)
 		{
-			healthBar.fillAmount = character.currentHealth / character.maxhealth;
+            Debug.Log("i have a health bar i guess");
+			//healthBar.fillAmount = character.currentHealth / character.maxhealth;
 		}
 		else
 		{

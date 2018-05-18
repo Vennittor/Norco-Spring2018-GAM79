@@ -14,13 +14,17 @@ MonoBehaviour:
   abilityName: Smoke Bomb
   description: make self or ally invulnerable for 1 turn
   callOutText: 
+  heatCost: 0
   targetType:
     _who: 1
     _formation: 0
     _numberOfTargets: 1
   damage: []
-  statuses: []
+  statuses: 
+  statusChance: 0
+  stunDuration: 0
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 3
   characterUser: {fileID: 0}
+  abilitySound: {fileID: 8300000, guid: 9b7c917e936a2fa478f3da8be05f4aac, type: 3}

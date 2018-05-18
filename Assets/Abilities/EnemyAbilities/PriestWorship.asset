@@ -14,6 +14,7 @@ MonoBehaviour:
   abilityName: Worship
   description: god smites player for dmg+heat
   callOutText: 
+  heatCost: 0
   targetType:
     _who: 2
     _formation: 0
@@ -25,8 +26,11 @@ MonoBehaviour:
   - damageRanges:
     - {x: 2, y: 2}
     elementType: 1
-  statuses: []
+  statuses: 
+  statusChance: 0
+  stunDuration: 0
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 4
   characterUser: {fileID: 0}
+  abilitySound: {fileID: 8300000, guid: 6ab51c1f54e543a46a6c30cc0fad455b, type: 3}

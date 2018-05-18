@@ -28,6 +28,8 @@ public class Ability : ScriptableObject
 
     protected List<Character> targets = new List<Character>();
 
+    public AudioClip abilitySound;
+
 
     // EFFECTS DATA
     //public Sprite image; // for effects
@@ -130,7 +132,7 @@ public class Ability : ScriptableObject
 			}
 
             AnnounceAbility();
-            
+            SoundCaller();
             for (int hitsDone = 0; hitsDone < hitsPerAction; hitsDone++)
             {
                 foreach (Character target in targets)                   // Target all applicable targets
@@ -226,4 +228,8 @@ public class Ability : ScriptableObject
         }
     }
 
+    public void SoundCaller()
+    {
+        SoundManager.instance.Play(abilitySound, "sfx");
+    }
 }
