@@ -16,7 +16,8 @@ public class TransitionManager : MonoBehaviour
     private Party playerParty;
     public bool InT = false;
     public bool OutT = false;
-    public Animation anim; 
+    public Animation anim;
+    public Animation animOut;
     public GameObject Load;
     public GameObject transitionOpen;
 
@@ -67,46 +68,63 @@ public class TransitionManager : MonoBehaviour
             state.wrapMode = WrapMode.Once;
             state.clip.name = "fadeIn1"; 
         }
+
+        animOut = GetComponentInChildren<Animation>();
+        foreach(AnimationState state in animOut)
+        {
+            state.speed = 0.5f;
+            // Fades in FadeIn1 animation
+            state.wrapMode = WrapMode.Once;
+            state.clip.name = "fadeOut1";
+           // Debug.LogError("Not FadeOut animation?"); 
+        }
     }
 
     public void TransitionOpen()
     {
-        InT = false; OutT = false;
+        InT = false; OutT = true;
         StartCoroutine(TransitionComplete()); // was In(); 
         transitionOpen.gameObject.SetActive(true);  
     }
 
-    public void TransitionTo(int sceneIndex)
+    public void TransitionOut()
     {
-      //  levelMan.LoadScene(sceneIndex);
+        InT = true; OutT = false;
+        Debug.Log("Fadeed Out");
+        StartCoroutine(In()); 
     }
 
     public IEnumerator In()
     {
-        yield return new WaitForSeconds(3.0f); 
+        if (InT == true && OutT == false)
+        {
+            // yield return new WaitForSeconds(3.0f); 
+            iAnim.GetComponentInChildren<Animator>().Play("fadeIn1");
+            Debug.Log("Go");
+            //   iAnim.GetComponentInChildren<Animator>().SetBool("In", false);
+            yield return new WaitForEndOfFrame();
+            //   iAnim.GetComponentInChildren<Animator>().SetBool("Out", true);
+            /*
+            iAnim.Play("fadeIn1");
+            iAnim.SetBool("In", true);
+            iAnim.SetBool("Out", false);*/
+            anim["fadeIn1"].wrapMode = WrapMode.Once;
+            // yield return new WaitForSeconds(3.0f);
 
-        Debug.Log("Go"); 
-        iAnim.Play("fadeIn1");
-        iAnim.SetBool("In", true);
-        iAnim.SetBool("Out", false);
-        anim["fadeIn1"].wrapMode = WrapMode.Once; 
-        yield return new WaitForSeconds(3.0f);
-
-        yield return null; 
+            yield return null;
+        }
     }
 
     public IEnumerator Out()
     {
-        InT = false; 
-        OutT = true; 
+    //    InT = false; 
+      //  OutT = true; 
         if (InT == false && OutT == true)
         {
             iAnim.GetComponentInChildren<Animator>().Play("fadeOut1");
-            iAnim.GetComponentInChildren<Animator>().SetBool("In", false);
-            
-
+         //   iAnim.GetComponentInChildren<Animator>().SetBool("In", false);
             yield return new WaitForEndOfFrame();
-            iAnim.GetComponentInChildren<Animator>().SetBool("Out", true);
+          //  iAnim.GetComponentInChildren<Animator>().SetBool("Out", true);
             anim.Play(PlayMode.StopAll);
             anim["fadeOut1"].wrapMode = WrapMode.Once;
         }      

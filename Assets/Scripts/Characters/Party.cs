@@ -179,9 +179,11 @@ public class Party : MonoBehaviour
     {
         if(col.gameObject.tag == "Exit")
         {
-          //  transitionMan.TransitionOpen();
+            //transitionMan.TransitionOpen();
+            transitionMan.TransitionOut(); 
             levelMan.StartCoroutine(levelMan.Transition());
             levelMan.LoadSceneAsync();
+            transitionMan.TransitionOpen(); 
         }
     }
 
