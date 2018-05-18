@@ -217,17 +217,7 @@ public class LevelManager : MonoBehaviour
             transitionImage.enabled = true;
         }
     }
-
-	void LateStart()
-	{
-
-    }
-
-    void Update()
-    {
-
-    }
-
+		
     public void GetHeat(uint heat)
     {
         partyHeatIntensity = heat;
