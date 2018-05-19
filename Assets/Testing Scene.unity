@@ -364,6 +364,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1474561212174400, guid: e03dca6beca68564faf2ea6cc1517ca3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e03dca6beca68564faf2ea6cc1517ca3, type: 2}
   m_IsPrefabParent: 0
@@ -560,6 +564,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f666e98f44c35304cb9cdd3213c3caa8, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1109655332 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114040377677338270, guid: f1e2f122d39664ef184fb875a1963969,
+    type: 2}
+  m_PrefabInternal: {fileID: 1991386504}
+  m_Script: {fileID: 11500000, guid: a27d651435597ee429edcbe2b79fcea1, type: 3}
 --- !u!1001 &1902346775
 Prefab:
   m_ObjectHideFlags: 0
@@ -974,16 +984,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
-        type: 2}
-      propertyPath: t1Statuses.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
-        type: 2}
-      propertyPath: t2Statuses.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4827483341692670, guid: 73d29a0cd6f435d49a3b27e4358d7512, type: 2}
       propertyPath: m_LocalPosition.x
       value: -10.348522
@@ -1016,26 +1016,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
+    - target: {fileID: 114504153135432616, guid: 73d29a0cd6f435d49a3b27e4358d7512,
         type: 2}
-      propertyPath: distanceBetweenInPoints
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
-        type: 2}
-      propertyPath: t1Statuses.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
-        type: 2}
-      propertyPath: t1Statuses.Array.data[1]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114990850912347042, guid: 73d29a0cd6f435d49a3b27e4358d7512,
-        type: 2}
-      propertyPath: t2Statuses.Array.data[0]
-      value: 5
-      objectReference: {fileID: 0}
+      propertyPath: camDock
+      value: 
+      objectReference: {fileID: 1109655332}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 73d29a0cd6f435d49a3b27e4358d7512, type: 2}
   m_IsPrefabParent: 0
