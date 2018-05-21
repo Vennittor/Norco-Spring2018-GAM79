@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 195532744613621432}
   - component: {fileID: 54418240753708314}
   - component: {fileID: 114700916010415158}
+  - component: {fileID: 114041133796419684}
   - component: {fileID: 114695205217747764}
   - component: {fileID: 212373121419091354}
   - component: {fileID: 95429566619419478}
@@ -43,6 +44,21 @@ GameObject:
   - component: {fileID: 4891253443211064}
   m_Layer: 0
   m_Name: CamDock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1370193036645382
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4851914945967108}
+  m_Layer: 8
+  m_Name: Slot3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,6 +136,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1649869304182286
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4104018511356816}
+  m_Layer: 8
+  m_Name: Slot1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1825269483629728
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,18 +167,46 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1968856077002858
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4363910873288046}
+  m_Layer: 8
+  m_Name: Slot2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4104018511356816
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1649869304182286}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4328175354246864}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4260610743123326
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1637437295010486}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4328175354246864}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4274544609537054
 Transform:
@@ -156,7 +215,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242139476785792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -802.0916, y: 1.923, z: -29.004944}
+  m_LocalPosition: {x: 7.05, y: 1.62, z: 20.206972}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4891253443211064}
@@ -175,11 +234,27 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4104018511356816}
+  - {fileID: 4363910873288046}
+  - {fileID: 4851914945967108}
   - {fileID: 4260610743123326}
-  - {fileID: 4839105417037650}
   - {fileID: 4755381381122110}
+  - {fileID: 4839105417037650}
   m_Father: {fileID: 4274544609537054}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4363910873288046
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1968856077002858}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.98, y: -0.051, z: 1.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4328175354246864}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4696224935475314
 Transform:
@@ -200,12 +275,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614851838758744}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.98, y: -0.051, z: 1.75}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4328175354246864}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4839105417037650
 Transform:
@@ -213,12 +288,25 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1620286995922844}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.05, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.0500002, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4328175354246864}
-  m_RootOrder: 1
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4851914945967108
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1370193036645382}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.0500002, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4328175354246864}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4891253443211064
 Transform:
@@ -414,6 +502,23 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114041133796419684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242139476785792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475999dbc0ddf5a44bd619e94f8ec29b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slot1: {fileID: 4104018511356816}
+  slot2: {fileID: 4363910873288046}
+  slot3: {fileID: 4851914945967108}
+  crusader: {fileID: 114327966433383426}
+  alchemist: {fileID: 114088530641808946}
+  hunter: {fileID: 114793818753576468}
 --- !u!114 &114088530641808946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -446,7 +551,7 @@ MonoBehaviour:
   evade: 10
   evadeBonus: 0
   evadeMod: 0
-  speed: 20
+  speed: 4
   speedBonus: 0
   speedMod: 0
   defense: 1
@@ -461,6 +566,8 @@ MonoBehaviour:
   hasT2Status: 0
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
+  isLeader: 0
+  leaderAbilities: []
 --- !u!114 &114327966433383426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -475,28 +582,24 @@ MonoBehaviour:
   uiManager: {fileID: 0}
   characterName: Crusader
   baseStats: {fileID: 11400000, guid: f85d9673a64a61f4797d00d2cf7e863c, type: 2}
-  maxhealth: 50
-  currentHealth: 50
-  maxHeat: 300
+  maxhealth: 0
+  currentHealth: 0
+  maxHeat: 0
   currentHeat: 0
-  abilities:
-  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
-  - {fileID: 11400000, guid: a04b570ddc5a93040ad129b7d1cf8541, type: 2}
-  - {fileID: 11400000, guid: bd6287438c74e4c4783c3a0b6374f0c7, type: 2}
-  - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
+  abilities: []
   attack: 0
   attackBonus: 0
   attackMod: 0
-  accuracy: 84.5
+  accuracy: 0
   accuracyBonus: 0
   accuracyMod: 0
-  evade: 10
+  evade: 0
   evadeBonus: 0
   evadeMod: 0
-  speed: 8
+  speed: 0
   speedBonus: 0
   speedMod: 0
-  defense: 1
+  defense: 0
   defenseBonus: 0
   defenseMod: 0
   combatState: 0
@@ -508,6 +611,8 @@ MonoBehaviour:
   hasT2Status: 0
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
+  isLeader: 1
+  leaderAbilities: []
 --- !u!114 &114695205217747764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -575,7 +680,7 @@ MonoBehaviour:
   evade: 10
   evadeBonus: 0
   evadeMod: 0
-  speed: 20
+  speed: 6
   speedBonus: 0
   speedMod: 0
   defense: 1
@@ -590,6 +695,8 @@ MonoBehaviour:
   hasT2Status: 0
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
+  isLeader: 0
+  leaderAbilities: []
 --- !u!195 &195532744613621432
 NavMeshAgent:
   m_ObjectHideFlags: 1

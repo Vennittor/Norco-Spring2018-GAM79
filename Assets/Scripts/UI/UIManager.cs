@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
 
     public CombatManager combatManager;
     public EventSystemManager eventSystemManager;
-    private Character character;
+    //private Character character;
 
     public Image healthBar;
 
@@ -302,12 +302,13 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpdateHealthBar()
+    public void UpdateHealthBar(Character character)
     {
 		if (healthBar != null)
 		{
-			healthBar.fillAmount = character.currentHealth / character.maxhealth;
-		}
+            // healthBar is a Dias, but doesn't seem to be attached to anyone or doing anything?
+            healthBar.fillAmount = character.currentHealth / character.maxhealth;
+        }
 		else
 		{
 			Debug.LogError ("No refrence to Health Bar");

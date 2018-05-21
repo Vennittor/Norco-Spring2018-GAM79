@@ -18,6 +18,7 @@ public class CombatManager : MonoBehaviour
 	[SerializeField] private List<Character> characters;
 
     public Character activeCharacter;
+    public PlayerCharacter activeLeader;
 	public List<PlayerCharacter> activePlayers;
 	public List<EnemyCharacter> activeEnemies;
 
@@ -117,8 +118,7 @@ public class CombatManager : MonoBehaviour
 		}
     }
 
-
-	public void AddCharactersToCombat(List<Character> charactersToAdd)
+    public void AddCharactersToCombat(List<Character> charactersToAdd)
 	{
 		foreach(Character characterToAdd in charactersToAdd)
 		{
@@ -357,6 +357,18 @@ public class CombatManager : MonoBehaviour
         return -char1.CompareTo(char2);
     }
 
+    public void SortLeader()
+    {
+        PartySort sort = levelManager.playerParty.GetComponent<PartySort>();
+        if (sort != null)
+        {
+            sort.SortParty();
+        }
+        else
+        {
+            Debug.LogError("PartySort not found, cannot sort leader");
+        }
+    }
 
 	#region Targeting and Ability Use
 	public void AssignTargets(List<Character> targetsToAssign)

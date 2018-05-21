@@ -28,6 +28,6 @@ public class Torch : MonoBehaviour
         
         light.intensity = Mathf.Lerp(light.intensity, Random.Range(minBrightness, maxBrightness), Time.deltaTime * flickerSpeed);
 
-        light.color = Color.Lerp(light.color, Color.Lerp(color1, color2, Random.RandomRange(0.0f, 1.0f)), Time.deltaTime * flickerSpeed);
+        light.color = Color.Lerp(light.color, Color.Lerp(color1, color2, Random.Range(0.0f, 1.0f)), Time.deltaTime * flickerSpeed);
 	}
 }

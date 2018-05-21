@@ -6,6 +6,8 @@ public class PlayerCharacter : Character
 {
 	[SerializeField] private Water water;
     [SerializeField] private int waterUses = 3;
+    public bool isLeader;
+    [SerializeField] private List<Ability> leaderAbilities;
 
     private new void Awake()
     {
@@ -17,12 +19,41 @@ public class PlayerCharacter : Character
     protected override void Start()
 	{
         base.Start();
+        leaderAbilities = new List<Ability>();
+
+        if (baseStats == null)
+        {
+            Debug.LogError("No Base Stats on " + name);
+        }
+        else if (baseStats.leaderAbilities.Count > 0)
+        {
+            leaderAbilities.AddRange(baseStats.leaderAbilities);
+        }
+        else
+        {
+            Debug.LogWarning("No LeaderAbilities on " + name);
+        }
+    }
+
+    private void UpdateAbilities()
+    {
+        if (isLeader)
+        {
+            abilities.Clear();
+            abilities.AddRange(leaderAbilities);
+        }
+        else
+        {
+            abilities.Clear();
+            abilities.AddRange(baseStats.baseAbilities);
+        }
     }
 
     public override void BeginTurn()
     {
         base.BeginTurn();
 
+        UpdateAbilities();
         if (canAct)
         {
             combatManager.uiManager.UpdateAbilityButtons(abilities);

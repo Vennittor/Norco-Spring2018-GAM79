@@ -134,13 +134,13 @@ public class LevelManager : MonoBehaviour
 			Debug.LogError ("LevelManager could not find reference to the Canvas Level UI");
 		}
 
-        /*
+        
         if (camDock == null)
         {
             camDock = FindObjectOfType<DopeCamSys>();
          //   Debug.Log("Discovered CamDock" + camDock.ToString());
         }
-        */
+        
 
         SoundManager.instance.Play(levelMusic, "mxL"); //play the level music
         // check if null onload
@@ -167,38 +167,61 @@ public class LevelManager : MonoBehaviour
 		{
 			swipeImage.enabled = true;
 		}
-    
-        if(transitionImage == null)
+
+        if (transitionImage == null)
         {
-            if(levelUI != null)
+            if (levelUI != null)
             {
-                transitionImage = levelUI.transform.Find("Transition Image").GetComponent<Image>();
+                Transform transitionTransform = levelUI.transform.Find("Transition Image");
+
+                if (transitionTransform != null)
+                {
+                    transitionImage = transitionTransform.GetComponent<Image>();
+                }
+                else
+                {
+                    Debug.LogWarning("Could not find transition object on levelUI");
+                }
             }
             else
             {
-                transitionImage = GameObject.Find("Transition Image").GetComponent<Image>();
+                GameObject transitionObject = GameObject.Find("Transition Image");
+
+                if (transitionObject != null)
+                {
+                    transitionImage = transitionObject.GetComponent<Image>();
+
+                    if (transitionImage == null)
+                    {
+                        Debug.Log("Transition Object does have have an Image component");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Cannot find 'Transstion Image' Gameobject");
+                }
             }
 
-            if(levelUI == null)
+            if (levelUI == null)
             {
-                Debug.LogError("Level UI is null"); 
+                Debug.LogError("Level UI is null");
+            }
+
+            if (transitionImage == null)
+            {
+                Debug.LogError("Cannot find Transition Image");
             }
         }
-     
-        if(transitionImage != null && levelUI != null)
+
+        if (transitionImage != null && levelUI != null)
         {
             transitionImage.enabled = true;
         }
-    }
 
-	void LateStart()
-	{
-
-    }
-
-    void Update()
-    {
-
+        if (transitionImage != null && levelUI != null)
+        {
+            transitionImage.enabled = true;
+        }
     }
 
     public void GetHeat(uint heat)
