@@ -61,6 +61,7 @@ public class LevelManager : MonoBehaviour
 
         if(transitionImage != null)
         {
+            transitionImage.transform.SetParent(null);
             DontDestroyOnLoad(transitionImage);
         }
         else
@@ -460,18 +461,15 @@ public class LevelManager : MonoBehaviour
             transitionImage = GetComponentInChildren<Image>();
         }
 
-        SetUpNewScene(); 
-
+        SetUpNewScene();
+        transitionImage.transform.SetParent(null);
         DontDestroyOnLoad(transitionImage); // gets destroyed onLoad? 
       //  DontDestroyOnLoad(transitionMan.gameObject); // says transition manager is destroyed? 
-      /*
+    
         if(transitionImage == null)
         {
             transitionImage.enabled = true;
-        }*/
-
-        transitionMan.StartCoroutine(transitionMan.Out(transitionImage, 1));//TransitionOut(transitionImage, 1));
-        yield return new WaitUntil(() => transitionImage.color.a == 0);
+        }
 
         float i = 0;
         transitionImage.GetComponent<Image>().color = Color.black;
@@ -494,12 +492,16 @@ public class LevelManager : MonoBehaviour
             yield return null;
         }
 
-        transitionImage.enabled = false; 
+        transitionImage.enabled = false;
 
-        yield return new WaitForSeconds(5.0f);
-        transitionMan.StartCoroutine("In");
+        // yield return new WaitForSeconds(5.0f);
+        /*
+        transitionMan.StartCoroutine(transitionMan.FadeOut()); 
 
-        /*  if(transitionImage == null)
+        transitionMan.StartCoroutine(transitionMan.Out(transitionImage, 0));//TransitionOut(transitionImage, 1));
+        yield return new WaitUntil(() => transitionImage.color.a == 0);*/
+
+        if (transitionImage == null)
           {
               transitionImage = GameObject.Find("Transition Image").GetComponentInChildren<Image>();
               transitionImage.enabled = false;
@@ -507,9 +509,9 @@ public class LevelManager : MonoBehaviour
           else
           {
               Debug.Log("I am en"); // when transition is enabled
-          }*/
+          }
 
-        yield return null;
+    //    yield return null;
     }
 
     

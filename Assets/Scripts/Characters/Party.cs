@@ -191,8 +191,9 @@ public class Party : MonoBehaviour
         if(col.gameObject.tag == "ExitToMainMenu")
         {
             levelMan.StartCoroutine(levelMan.Transition());
-            Debug.Log("Loading Back to Main Menu"); 
-            levelMan.LoadScene(0); 
+            Debug.Log("Loading Back to Main Menu");
+            levelMan.LoadScene(0);
+            Destroy(transitionMan.gameObject);
         }
     }
 

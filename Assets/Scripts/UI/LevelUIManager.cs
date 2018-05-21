@@ -30,6 +30,7 @@ public class LevelUIManager : MonoBehaviour
 
         _instance = this;
 
+        _instance.transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
      }
 }

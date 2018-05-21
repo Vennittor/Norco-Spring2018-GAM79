@@ -88,9 +88,10 @@ public class TransitionManager : MonoBehaviour
     {
         state = AnimationState.neutral;
         animState = 0;
-
-       DontDestroyOnLoad(TransitionManager.FindObjectOfType<TransitionManager>().gameObject);
-       DontDestroyOnLoad(playerParty);
+        TransitionManager.FindObjectOfType<TransitionManager>().gameObject.transform.SetParent(null); 
+        DontDestroyOnLoad(TransitionManager.FindObjectOfType<TransitionManager>().gameObject);
+        Party.FindObjectOfType<Party>().transform.SetParent(null); 
+        DontDestroyOnLoad(playerParty);
 
         if (fadeOutObj == null)
         {
@@ -244,7 +245,12 @@ public class TransitionManager : MonoBehaviour
     }
     public IEnumerator Out(Image transitionImage, float transparency)
     {
-        transitionImage.GetComponentInChildren<Image>().GetComponentInChildren<Animator>().Play("FadeOut");
+        if(transitionImage == null)
+        {
+            transitionImage = GameObject.Find("Transition Image").GetComponentInChildren<Image>(); 
+        }
+
+     //   transitionImage.GetComponentInChildren<Image>().GetComponentInChildren<Animator>().Play("FadeOut");
         StartCoroutine(FadeOut()); 
 
         // Debug.LogError(state); reaches here when called in FadeOut function
