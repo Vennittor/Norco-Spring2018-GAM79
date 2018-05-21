@@ -46,7 +46,6 @@ public class FadeManager : AnimationEvents
         {
             if (fadeUI != null)
             {
-                Debug.Log("Hi");
                 transitionImage = FadeUIManager.Instance.fadeImage;
             }
             else
@@ -100,7 +99,7 @@ public class FadeManager : AnimationEvents
         transitionImage.enabled = true;
 
         float i = 0;
-        transitionImage.GetComponentInChildren<Image>().color = Color.black;
+        transitionImage.GetComponentInChildren<Image>().color = Color.black; 
         var tempColor = transitionImage.color;
         tempColor.a = 0;
 
@@ -121,6 +120,7 @@ public class FadeManager : AnimationEvents
         }
 
         transitionImage.enabled = false;
+        Destroy(this.gameObject); 
     }
 
     public IEnumerator LoadSceneAsync()

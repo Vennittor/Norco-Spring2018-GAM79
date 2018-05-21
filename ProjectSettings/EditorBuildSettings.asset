@@ -32,6 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Imported Levels/Scenes/LVL_Catacombs.unity
     guid: 1284a423979dbf242bbe8cffd5a17cc5
-  - enabled: 1
-    path: Assets/GameOverScene.unity
+  - enabled: 0
+    path: 
     guid: 5c3a5d2c2489eef4f83c6972f6b1d638

@@ -59,7 +59,14 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(transitionImage.gameObject); 
+        if(transitionImage != null)
+        {
+            DontDestroyOnLoad(transitionImage);
+        }
+        else
+        {
+            transitionImage = GameObject.Find("Transition Image").GetComponentInChildren<Image>(); 
+        }
 
 		_instance = this;
 
@@ -87,14 +94,14 @@ public class LevelManager : MonoBehaviour
 				Debug.LogError ("Can't find player Party");
 			}
 		}
-			
-		if (partyPos == null)
-		{
-			partyPos = playerParty.transform.position;
-		}
+
+        if (playerParty != null)
+        {
+            partyPos = playerParty.transform.position;
+        }
 
 
-		transitionMan = FindObjectOfType<TransitionManager>();
+        transitionMan = FindObjectOfType<TransitionManager>();
 
 		if (heatWavePrefab != null)
 		{
@@ -115,7 +122,7 @@ public class LevelManager : MonoBehaviour
 		}
 
 		if (combatUI == null)
-		{
+		{ 
 			combatUI = FindObjectOfType<UIManager>().gameObject;
 		}
 		if (combatUI == null) 
@@ -136,13 +143,11 @@ public class LevelManager : MonoBehaviour
 			Debug.LogError ("LevelManager could not find reference to the Canvas Level UI");
 		}
 
-        /*
         if (camDock == null)
         {
             camDock = FindObjectOfType<DopeCamSys>();
          //   Debug.Log("Discovered CamDock" + camDock.ToString());
         }
-        */
 
         SoundManager.instance.Play(levelMusic, "mxL"); //play the level music
         // check if null onload
@@ -154,10 +159,10 @@ public class LevelManager : MonoBehaviour
                 Debug.Log("Hi");
                 swipeImage = LevelUIManager.Instance.swipeImage;
 			}
-			/*else
+			else
 			{
 				swipeImage = GameObject.Find ("Swipe Image").GetComponent<Image>();
-			}*/
+			}
 
 			if (swipeImage == null)
 			{
@@ -238,13 +243,12 @@ public class LevelManager : MonoBehaviour
 			//Perform Enter 'swipe'
 			Vector2 startingAnchorMin = Vector2.zero;
 			float i = 0f;
-            /*
+     
            if(swipeImage == null)
             {
                 Debug.Log("Find Swipe Image"); 
                 swipeImage = GameObject.Find("Swipe Image").GetComponent<Image>();
             }
-            */
 
 			if (swipeImage != null)
 			{
@@ -444,8 +448,30 @@ public class LevelManager : MonoBehaviour
 
    public IEnumerator Transition()
     {
-        DontDestroyOnLoad(transitionImage); 
-        transitionImage.enabled = true;
+        Debug.Log("Fade Out");
+
+        if (transitionImage == null)
+        {
+            transitionImage = GameObject.Find("Transition Image").GetComponentInChildren<Image>();
+        }
+
+        if (transitionImage != null)
+        {
+            transitionImage = GetComponentInChildren<Image>();
+        }
+
+        SetUpNewScene(); 
+
+        DontDestroyOnLoad(transitionImage); // gets destroyed onLoad? 
+      //  DontDestroyOnLoad(transitionMan.gameObject); // says transition manager is destroyed? 
+      /*
+        if(transitionImage == null)
+        {
+            transitionImage.enabled = true;
+        }*/
+
+        transitionMan.StartCoroutine(transitionMan.Out(transitionImage, 1));//TransitionOut(transitionImage, 1));
+        yield return new WaitUntil(() => transitionImage.color.a == 0);
 
         float i = 0;
         transitionImage.GetComponent<Image>().color = Color.black;
@@ -453,8 +479,10 @@ public class LevelManager : MonoBehaviour
         tempColor.a = 1;
          
         i = transitionImage.color.a;
+        transitionImage.enabled = true;
 
-        while (i < transitionImage.color.a + 1)
+        // throwing error here
+        while (i < tempColor.a)
         {
             i += Time.deltaTime * 0.1f;
 
@@ -466,15 +494,22 @@ public class LevelManager : MonoBehaviour
             yield return null;
         }
 
-        if(transitionImage == null)
-        {
-            transitionImage.enabled = false;
-        }
-        else
-        {
-            Debug.Log("I am en");  
-        }
-      
+        transitionImage.enabled = false; 
+
+        yield return new WaitForSeconds(5.0f);
+        transitionMan.StartCoroutine("In");
+
+        /*  if(transitionImage == null)
+          {
+              transitionImage = GameObject.Find("Transition Image").GetComponentInChildren<Image>();
+              transitionImage.enabled = false;
+          }
+          else
+          {
+              Debug.Log("I am en"); // when transition is enabled
+          }*/
+
+        yield return null;
     }
 
     
@@ -493,10 +528,10 @@ public class LevelManager : MonoBehaviour
     {
         if (transitionMan != null)
         {
-            // transitionMan.Out();
-          //  transitionMan.TransitionOpen(); 
-            SoundManager sound = GetComponent<SoundManager>();
-            DontDestroyOnLoad(sound.audioItemMXlevel);
+            transitionMan.StartCoroutine(transitionMan.Out(transitionImage, 1)); 
+          // transitionMan.TransitionOpen(); 
+         //   SoundManager sound = GetComponent<SoundManager>();
+         //   DontDestroyOnLoad(sound.audioItemMXlevel);
 
             SetEntrancePosition(playerParty);
         }
@@ -525,6 +560,18 @@ public class LevelManager : MonoBehaviour
         if (levelUI == null)
         {
             levelUI = GameObject.Find("Canvas Level UI");
+        }
+
+        if (transitionImage == null)
+        {
+            transitionImage = GameObject.Find("Transition Image").GetComponentInChildren<Image>();
+        }
+
+        if(_instance == null)
+        {
+            _instance = Instance;
+            _instance = FindObjectOfType<LevelManager>(); 
+            DontDestroyOnLoad(this); 
         }
     }
 

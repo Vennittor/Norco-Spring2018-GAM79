@@ -179,11 +179,20 @@ public class Party : MonoBehaviour
     {
         if(col.gameObject.tag == "Exit")
         {
-            //transitionMan.TransitionOpen();
-            transitionMan.TransitionOut(); 
+          // transitionMan.StartCoroutine(transitionMan.FadeOut());
+            Debug.Log("Fading Out?"); // fade out
+            transitionMan.StartCoroutine(transitionMan.Out(transitionMan.transitionImage, 1)); // fade out?? 
+           // transitionMan.StartCoroutine(transitionMan.TransitionOut(transitionMan.transitionImage, 1)); 
+            //transitionMan.TransitionOpen(); // transition to loading screen 
+         levelMan.StartCoroutine(levelMan.Transition());
+         levelMan.LoadSceneAsync();
+        }
+
+        if(col.gameObject.tag == "ExitToMainMenu")
+        {
             levelMan.StartCoroutine(levelMan.Transition());
-            levelMan.LoadSceneAsync();
-            transitionMan.TransitionOpen(); 
+            Debug.Log("Loading Back to Main Menu"); 
+            levelMan.LoadScene(0); 
         }
     }
 

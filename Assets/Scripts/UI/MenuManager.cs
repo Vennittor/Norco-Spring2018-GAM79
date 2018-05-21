@@ -16,31 +16,18 @@ public class MenuManager : MonoBehaviour
         fMan = FindObjectOfType<FadeManager>(); 
     }
 
-    private void Start()
-    {
-       // DontDestroyOnLoad(gameObject); 
-    }
-
     public void PlayGame()
     {
-        Debug.Log("enable transition", this); 
-        fMan.StartCoroutine(fMan.FadeIn());
-        // Does this > <^^
-        Debug.Log("fading in", this);
-      //Does this >  fMan.StartCoroutine(fMan.TransitionOutFromMenu()); 
-        Debug.Log("fading out", this); 
-       // Then > 
-        TransitionToScene();
-       
-        // lvlMan.BeginTransitionSequence(); 
-        //  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        TransitionToScene();   
     }
 
     public void TransitionToScene()
     { 
         fMan.StartCoroutine(fMan.DoneWithTransition());
         fMan.StartCoroutine(fMan.LoadSceneAsync());
-        Debug.Log("Done"); 
+        // fadeIn to next scene
+        Debug.Log("Done");
+        fMan.StartCoroutine(fMan.FadeIn()); 
     }
 
     public void QuitGame()
