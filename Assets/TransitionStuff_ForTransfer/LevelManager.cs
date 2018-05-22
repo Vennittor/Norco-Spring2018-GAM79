@@ -62,7 +62,7 @@ public class LevelManager : MonoBehaviour
         if(transitionImage != null)
         {
             transitionImage.transform.SetParent(null);
-            DontDestroyOnLoad(transitionImage);
+           // DontDestroyOnLoad(transitionImage);
         }
         else
         {
@@ -462,8 +462,8 @@ public class LevelManager : MonoBehaviour
         }
 
         SetUpNewScene();
-        transitionImage.transform.SetParent(null);
-        DontDestroyOnLoad(transitionImage); // gets destroyed onLoad? 
+      //  transitionImage.transform.SetParent(null);
+       // DontDestroyOnLoad(transitionImage); // gets destroyed onLoad? 
       //  DontDestroyOnLoad(transitionMan.gameObject); // says transition manager is destroyed? 
     
         if(transitionImage == null)
@@ -573,7 +573,7 @@ public class LevelManager : MonoBehaviour
         {
             _instance = Instance;
             _instance = FindObjectOfType<LevelManager>(); 
-            DontDestroyOnLoad(this); 
+          //  DontDestroyOnLoad(this); 
         }
     }
 

@@ -88,10 +88,10 @@ public class TransitionManager : MonoBehaviour
     {
         state = AnimationState.neutral;
         animState = 0;
-        TransitionManager.FindObjectOfType<TransitionManager>().gameObject.transform.SetParent(null); 
-        DontDestroyOnLoad(TransitionManager.FindObjectOfType<TransitionManager>().gameObject);
-        Party.FindObjectOfType<Party>().transform.SetParent(null); 
-        DontDestroyOnLoad(playerParty);
+      //  TransitionManager.FindObjectOfType<TransitionManager>().gameObject.transform.SetParent(null); 
+      //  DontDestroyOnLoad(TransitionManager.FindObjectOfType<TransitionManager>().gameObject);
+          Party.FindObjectOfType<Party>().transform.SetParent(null); 
+      //  DontDestroyOnLoad(playerParty);
 
         if (fadeOutObj == null)
         {
@@ -213,39 +213,40 @@ public class TransitionManager : MonoBehaviour
                 c.a -= Time.deltaTime * .1f;
                 yield return null;
             }
-            if (c.a <= 0)
+            if (c.a <= 0) 
             {
                 c.a = 0;
                 //  Debug.Log("Completed cycle?"); completes cycle
             }
 
+            yield return null; 
+        }
+
+        if (state == AnimationState.fadein)
+        {
+            iAnim.enabled = true;
+            transitionImage.enabled = true;
+            iAnim.GetComponentInChildren<Animator>().SetBool("FadeIn", true);
+        }
+        else if (state == AnimationState.neutral)
+        {
+            iAnim.enabled = false;
+            transitionImage.enabled = false;
+            iAnim.GetComponentInChildren<Animator>().SetBool("FadeIn", false);
+           // StopCoroutine(In());
+        }
+
+        if (state != AnimationState.fadein || state != AnimationState.fadeout)
+        {
             state = AnimationState.neutral;
-
-            if (state == AnimationState.neutral)
-            {
-                iAnim.GetComponentInChildren<Animator>().SetBool("FadeIn", false);
-                iAnim.enabled = false;
-                transitionImage.enabled = false;
-                StopCoroutine(In());
-            }
-            else if (state == AnimationState.fadein)
-            {
-                iAnim.enabled = true;
-                transitionImage.enabled = true;
-                iAnim.GetComponentInChildren<Animator>().SetBool("FadeIn", true);
-
-                yield return null;
-            }
-
-            if (state != AnimationState.fadein || state != AnimationState.fadeout)
-            {
-                state = AnimationState.neutral;
-            }
         }
     }
+
     public IEnumerator Out(Image transitionImage, float transparency)
     {
-        if(transitionImage == null)
+        iAnim.SetBool("Fade", false);
+
+        if (transitionImage == null)
         {
             transitionImage = GameObject.Find("Transition Image").GetComponentInChildren<Image>(); 
         }
