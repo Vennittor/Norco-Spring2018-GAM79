@@ -8,6 +8,11 @@ public class NewFadeManager : MonoBehaviour
     /// <summary>
     /// Ways to Transition through scenes with multiple approaches; 
     /// </summary>
+    /// 
+
+        ///
+            /// Completed from Youtube Source >> 
+        ///
 
     // First way 
     public static NewFadeManager Instance { set; get; }

@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour
 
         if(transitionImage != null)
         {
-            transitionImage.transform.SetParent(null);
+          //  transitionImage.transform.SetParent(null);
            // DontDestroyOnLoad(transitionImage);
         }
         else

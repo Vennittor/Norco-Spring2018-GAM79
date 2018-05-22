@@ -181,11 +181,11 @@ public class Party : MonoBehaviour
         {
           // transitionMan.StartCoroutine(transitionMan.FadeOut());
             Debug.Log("Fading Out?"); // fade out
-            transitionMan.StartCoroutine(transitionMan.Out(transitionMan.transitionImage, 1)); // fade out?? 
+            transitionMan.StartCoroutine(transitionMan.Out(transitionMan.transitionImage, 1)); // fade out 
            // transitionMan.StartCoroutine(transitionMan.TransitionOut(transitionMan.transitionImage, 1)); 
-            //transitionMan.TransitionOpen(); // transition to loading screen 
-         levelMan.StartCoroutine(levelMan.Transition());
-         levelMan.LoadSceneAsync();
+           //  transitionMan.StartCoroutine(transitionMan.TransitionOpen()); // transition to loading screen 
+             levelMan.StartCoroutine(levelMan.Transition());
+             levelMan.LoadSceneAsync();
         }
 
         if(col.gameObject.tag == "ExitToMainMenu")
@@ -193,7 +193,7 @@ public class Party : MonoBehaviour
             levelMan.StartCoroutine(levelMan.Transition());
             Debug.Log("Loading Back to Main Menu");
             levelMan.LoadScene(0);
-            Destroy(transitionMan.gameObject);
+           // Destroy(transitionMan.gameObject);
         }
     }
 

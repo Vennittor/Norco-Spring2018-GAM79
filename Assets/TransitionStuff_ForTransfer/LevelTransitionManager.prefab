@@ -55,16 +55,16 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224142972220772494}
-  - component: {fileID: 111103020181328410}
   - component: {fileID: 222349129918448266}
   - component: {fileID: 114205719394990742}
-  m_Layer: 0
+  - component: {fileID: 95761889915582028}
+  m_Layer: 5
   m_Name: FadeOutObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1400259494137908
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,21 +409,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!111 &111103020181328410
-Animation:
+--- !u!95 &95761889915582028
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1353815203079706}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 935c17a8e3248de4aba7384b0fdb4633, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 935c17a8e3248de4aba7384b0fdb4633, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 1
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 56950212cf4856b4a8bac0af7d2f2ee1, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!111 &111186299489990548
 Animation:
   m_ObjectHideFlags: 1
@@ -509,7 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -557,7 +559,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1400259494137908}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 140e105e98131c94a8ad63e9ef109523, type: 3}
   m_Name: 
@@ -687,7 +689,7 @@ MonoBehaviour:
   levelMan: {fileID: 0}
   state: 0
   animState: 2
-  fadeOutAnim: {fileID: 111103020181328410}
+  fadeOutAnim: {fileID: 0}
   fadeOutObj: {fileID: 1353815203079706}
 --- !u!114 &114975746841681920
 MonoBehaviour:
@@ -809,7 +811,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224600160578153110}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -823,10 +825,10 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1353815203079706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 153.4}
+  m_LocalPosition: {x: 0, y: 0, z: 26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 224162992565256584}
+  m_Father: {fileID: 224600160578153110}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -844,7 +846,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 224142972220772494}
   - {fileID: 224600160578153110}
   m_Father: {fileID: 224620456546407226}
   m_RootOrder: 2
@@ -864,12 +865,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -24.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 224142972220772494}
   - {fileID: 224116174068010766}
   - {fileID: 224844545117611572}
   - {fileID: 224656046993211252}
   - {fileID: 224788567171499764}
   m_Father: {fileID: 224162992565256584}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -909,7 +911,7 @@ RectTransform:
   m_Children:
   - {fileID: 224794649101387730}
   m_Father: {fileID: 224600160578153110}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -946,7 +948,7 @@ RectTransform:
   m_Children:
   - {fileID: 224769831574717188}
   m_Father: {fileID: 224600160578153110}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -982,7 +984,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224600160578153110}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
