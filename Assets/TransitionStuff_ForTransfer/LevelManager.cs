@@ -487,13 +487,13 @@ public class LevelManager : MonoBehaviour
             if (i == 1.0f)
             {
                 transitionImage.CrossFadeColor(Color.black, 1.0f, false, true);
-                transitionImage.enabled = false;
             }
             yield return null;
         }
 
         transitionImage.enabled = false;
 
+        yield return null;
         // yield return new WaitForSeconds(5.0f);
         /*
         transitionMan.StartCoroutine(transitionMan.FadeOut()); 
@@ -504,14 +504,20 @@ public class LevelManager : MonoBehaviour
         if (transitionImage == null)
           {
               transitionImage = GameObject.Find("Transition Image").GetComponentInChildren<Image>();
+            Debug.LogError("Inactive"); 
               transitionImage.enabled = false;
           }
-          else
+          else if(transitionImage != null)
           {
-              Debug.Log("I am en"); // when transition is enabled
+            Debug.Log("I am en"); // when transition is enabled
+            transitionMan.StopCoroutine(transitionMan.Fade());
+            transitionMan.StartCoroutine(transitionMan.Nuetral());
+            transitionImage.enabled = false;
+            yield return new WaitForEndOfFrame();
+            transitionImage.enabled = true;
+            transitionMan.StopCoroutine(transitionMan.In()); 
           }
-
-    //    yield return null;
+        yield return null;
     }
 
     
@@ -530,11 +536,7 @@ public class LevelManager : MonoBehaviour
     {
         if (transitionMan != null)
         {
-            transitionMan.StartCoroutine(transitionMan.Out(transitionImage, 1)); 
-          // transitionMan.TransitionOpen(); 
-         //   SoundManager sound = GetComponent<SoundManager>();
-         //   DontDestroyOnLoad(sound.audioItemMXlevel);
-
+            transitionMan.StartCoroutine(transitionMan.In()); 
             SetEntrancePosition(playerParty);
         }
         else
@@ -586,8 +588,8 @@ public class LevelManager : MonoBehaviour
         {
             yield return null;
         }
-
-        SetUpNewScene();
+        transitionMan.StartCoroutine(transitionMan.In());
+        SetUpNewScene(); 
     } 
 
     // End Transition Levels 

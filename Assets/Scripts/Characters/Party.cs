@@ -179,13 +179,9 @@ public class Party : MonoBehaviour
     {
         if(col.gameObject.tag == "Exit")
         {
-          // transitionMan.StartCoroutine(transitionMan.FadeOut());
             Debug.Log("Fading Out?"); // fade out
-            transitionMan.StartCoroutine(transitionMan.Out(transitionMan.transitionImage, 1)); // fade out 
-           // transitionMan.StartCoroutine(transitionMan.TransitionOut(transitionMan.transitionImage, 1)); 
-           //  transitionMan.StartCoroutine(transitionMan.TransitionOpen()); // transition to loading screen 
-             levelMan.StartCoroutine(levelMan.Transition());
-             levelMan.LoadSceneAsync();
+            levelMan.StartCoroutine(levelMan.Transition());
+            levelMan.LoadSceneAsync();
         }
 
         if(col.gameObject.tag == "ExitToMainMenu")
@@ -193,7 +189,23 @@ public class Party : MonoBehaviour
             levelMan.StartCoroutine(levelMan.Transition());
             Debug.Log("Loading Back to Main Menu");
             levelMan.LoadScene(0);
-           // Destroy(transitionMan.gameObject);
+            transitionMan.StopCoroutine(transitionMan.In());
+            transitionMan.transitionImage.enabled = false;
+            transitionMan.iAnim.enabled = false; 
+            Destroy(transitionMan.gameObject);
+        }
+    }
+
+    private void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.tag == "Exit")
+        {
+            transitionMan.StartCoroutine(transitionMan.Nuetral());
+        }
+
+        if(col.gameObject.tag == "Entrance")
+        {
+            transitionMan.StartCoroutine(transitionMan.Nuetral());
         }
     }
 
@@ -201,7 +213,16 @@ public class Party : MonoBehaviour
     {
         if(col.gameObject.tag == "Exit")
         {
+            transitionMan.StartCoroutine(transitionMan.In());
             levelMan.StartCoroutine(levelMan.DoneWithTransition(playerParty));
         }
+
+        if (col.gameObject.tag == "Entrance")
+        {
+            transitionMan.StopCoroutine(transitionMan.In());
+            transitionMan.transitionImage.enabled = false;
+            Debug.LogError("Exited"); 
+        }
     }
+
 }

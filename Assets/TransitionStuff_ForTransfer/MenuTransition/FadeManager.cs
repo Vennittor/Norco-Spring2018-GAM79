@@ -168,7 +168,6 @@ public class FadeManager : AnimationEvents
         }
 
         SetUpGameScenes();
-        TransitionOpen(); 
 
         if (this != null)
         {

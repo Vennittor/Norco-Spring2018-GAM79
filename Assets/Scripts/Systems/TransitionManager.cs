@@ -28,9 +28,9 @@ public class TransitionManager : MonoBehaviour
 
     public enum AnimationState 
     {
-        neutral, 
-        fadein,
-        fadeout
+        neutral = 0, 
+        fadein = 1,
+        fadeout = 2
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -87,7 +87,7 @@ public class TransitionManager : MonoBehaviour
     void Awake()
     {
         state = AnimationState.fadein;
-        animState = 0;
+        animState = 1;
 
         TransitionManager.FindObjectOfType<TransitionManager>().gameObject.transform.SetParent(null); 
         DontDestroyOnLoad(TransitionManager.FindObjectOfType<TransitionManager>().gameObject);
@@ -190,7 +190,7 @@ public class TransitionManager : MonoBehaviour
 
         switch (animState)
         {
-            case 0:
+            case 1:
                 {
                     state = AnimationState.fadein;
                 }
@@ -220,16 +220,15 @@ public class TransitionManager : MonoBehaviour
             yield return null; 
         }
 
+        /*
         switch(animState)
         {
-            case 1:
+            case 0:
                 {
                     state = AnimationState.neutral;
                 }
                 break;
         }
-
-        state = AnimationState.neutral;
 
         if (state == AnimationState.neutral)
         {
@@ -238,31 +237,45 @@ public class TransitionManager : MonoBehaviour
             Debug.Log("In Neutral State");
         }
 
+        yield return null; 
+        */
+        StartCoroutine(Nuetral()); 
+    }
+
+    public IEnumerator Nuetral()
+    {
+        switch(animState)
+        {
+            case 0:
+                {
+                    state = AnimationState.neutral; 
+                }
+                break;
+        }
+
+        if (state == AnimationState.neutral)
+        {
+            // iAnim.enabled = true;
+            // transitionImage.enabled = true;
+            StopCoroutine(In());
+            StopCoroutine(Fade()); 
+            iAnim.GetComponentInChildren<Animator>().SetBool("Fade", false);
+            iAnim.GetComponentInChildren<Animator>().SetBool("FadeOut", false);
+        }
+
         if (state == AnimationState.fadein)
         {
             iAnim.enabled = true;
             transitionImage.enabled = true;
             iAnim.GetComponentInChildren<Animator>().SetBool("Fade", true);
         }
-        else if (state == AnimationState.neutral)
-        {
-            iAnim.enabled = true;
-            transitionImage.enabled = true;
-            iAnim.GetComponentInChildren<Animator>().SetBool("Fade", false);
-            iAnim.GetComponentInChildren<Animator>().SetBool("FadeOut", false);
-        }
-
-        if (state != AnimationState.fadein || state != AnimationState.fadeout)
-        {
-            state = AnimationState.neutral;
-            StopCoroutine(In());
-            // Stop Out(); 
-        }
 
         yield return null; 
     }
 
-    public IEnumerator Out(Image transitionImage, float transparency)
+    /*
+
+    public IEnumerator Out()
     {
         iAnim.SetBool("Fade", false);
         iAnim.SetBool("FadeOut", true); 
@@ -302,15 +315,18 @@ public class TransitionManager : MonoBehaviour
         {
             if (transitionImage != null)
             {
+                SetTransparency(transitionImage, 0); 
+                /*
                 UnityEngine.Color __alpha = transitionImage.color;
                 transparency = 0.2f;
-                __alpha.a += transparency * Time.deltaTime;
+                __alpha.a -= transparency * Time.deltaTime;
                 transitionImage.color = __alpha;
+                
             }
 
             yield return null; 
-        }
-
+       }
+        
         Color c = transitionImage.color;
         c.a = 0;
 
@@ -342,12 +358,12 @@ public class TransitionManager : MonoBehaviour
         }
 
         yield return null; 
-    }
+    }*/
      
     public IEnumerator TransitionComplete()
     {
         // Fade Out();
-        StartCoroutine(Out(transitionImage, 1)); // was TransitionOut
+      //  StartCoroutine(Out1()); // was TransitionOut
         yield return null; 
     }
 
