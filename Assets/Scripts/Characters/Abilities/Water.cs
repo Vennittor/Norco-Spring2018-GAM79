@@ -7,7 +7,6 @@ public class Water : Ability
 {
     [SerializeField] private uint usesLeft = 3;
     [SerializeField] private uint maxUses = 3;
-
     uint amount = 100;
 
     public void RefillWater(uint uses)
@@ -17,13 +16,14 @@ public class Water : Ability
 
     public new void UseAbility()
     {
+        Debug.Log("kill me please");
         if (usesLeft > 0)
         {
 			characterUser.ApplyDamage(amount, ElementType.WATER);
-
             usesLeft--;
+            Debug.Log(usesLeft + " this much water is left");
         }
-
+        
         EndAbility();
     }
 }
