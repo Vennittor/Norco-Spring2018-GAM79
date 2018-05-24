@@ -7,7 +7,6 @@ public class PlayerCharacter : Character
 	[SerializeField] private Water water;
     [SerializeField] private int waterUses = 3;
     public bool isLeader;
-    [SerializeField] private List<Ability> leaderAbilities;
 
     private new void Awake()
     {
@@ -19,19 +18,18 @@ public class PlayerCharacter : Character
     protected override void Start()
 	{
         base.Start();
-        leaderAbilities = new List<Ability>();
 
         if (baseStats == null)
         {
             Debug.LogError("No Base Stats on " + name);
         }
-        else if (baseStats.leaderAbilities.Count > 0)
+        else if (baseStats.leaderAbilities.Count == 0)
         {
-            leaderAbilities.AddRange(baseStats.leaderAbilities);
+            Debug.LogError("No LeaderAbilities on " + name + ". Assign them through the inspector in their BaseStats");
         }
-        else
+        else if (baseStats.leaderAbilities.Count != 3)
         {
-            Debug.LogWarning("No LeaderAbilities on " + name);
+            Debug.LogWarning("There are " + baseStats.leaderAbilities.Count + " LeaderAbilities on " + name);
         }
     }
 
@@ -40,7 +38,7 @@ public class PlayerCharacter : Character
         if (isLeader)
         {
             abilities.Clear();
-            abilities.AddRange(leaderAbilities);
+            abilities.AddRange(baseStats.leaderAbilities);
         }
         else
         {
