@@ -23,9 +23,10 @@ public class UIManager : MonoBehaviour
     public EventSystemManager eventSystemManager;
     private Character character;
 
-    public Image healthBar;
+    public List<Image> healthBars;
+    public List<GameObject> partyMembers;
 
-	public bool disableUIOnStart = true;
+    public bool disableUIOnStart = true;
 
 	public GameObject splashMessagePanel;
 	public Text splashMessageText;
@@ -114,10 +115,16 @@ public class UIManager : MonoBehaviour
         {
 			CancelInput ();
         }
-    }
-	#endregion
 
-	public void SplashAnnouncement(string splashMessage, Text destination)
+    }
+
+    public void LateUpdate()
+    {
+        UpdateHealthBar(healthBars);
+    }
+    #endregion
+
+    public void SplashAnnouncement(string splashMessage, Text destination)
 	{
 		splashMessagePanel.SetActive (true);
 
@@ -302,16 +309,24 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpdateHealthBar()
+    public void UpdateHealthBar(List<Image> healthBars)
     {
-		if (healthBar != null)
+
+		if (healthBars != null)
 		{
-			healthBar.fillAmount = character.currentHealth / character.maxhealth;
-		}
+            foreach(Image healthBar in healthBars)
+            {
+                //healthBar.fillAmount = combatManager.activeCharacter.GetComponent<PlayerCharacter>().currentHealth / combatManager.activeCharacter.GetComponent<PlayerCharacter>().maxhealth;
+
+                //healthBar.fillAmount = healthBar.gameObject.GetComponent<PlayerCharacter>().currentHealth / healthBar.gameObject.GetComponent<PlayerCharacter>().maxhealth;
+            }
+
+        }
 		else
 		{
-			Debug.LogError ("No refrence to Health Bar");
+			Debug.LogError ("No reference to health bar(s) and or party member(s)");
 		}
+
     }
 
     #region HighlightTargets

@@ -360,8 +360,6 @@ public abstract class Character : MonoBehaviour
             DealPoisonDamage(damage);
         }
 
-        uiManager.UpdateHealthBar();
-
     }
 
 	void DealPhysicalDamage(uint physicalDamage = 0)
