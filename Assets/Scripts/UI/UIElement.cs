@@ -5,5 +5,17 @@ using UnityEngine.UI;
 
 public class UIElement : MonoBehaviour
 {
+    public Image healthBar;
+    public PlayerCharacter character;  
 
+    public void Update()
+    {
+        UpdateHealthBar();
+    }
+    
+    public void UpdateHealthBar()
+    {
+        if(healthBar != null && character != null)
+        healthBar.fillAmount = (float)character.currentHealth / (float)character.maxhealth;
+    }
 }
