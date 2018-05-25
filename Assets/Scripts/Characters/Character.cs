@@ -213,7 +213,7 @@ public abstract class Character : MonoBehaviour
 
 	}
 
-	public void UseAbility(List<Character> targets, float modifier = 0.0f)
+	public void UseAbility(List<Character> targets, float modifier = 1.0f)
 	{
 		if (selectedAbilityIndex < 0 || selectedAbilityIndex >= abilities.Count) 
 		{

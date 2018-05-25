@@ -474,7 +474,7 @@ public class CombatManager : MonoBehaviour
 		UseCharacterAbility (modifiedEffect);
 	}
 
-	void UseCharacterAbility(float modifier = 0.0f)
+	void UseCharacterAbility(float modifier = 1.0f)
 	{
 		activeCharacter.UseAbility (finalizedTargets, modifier);
 

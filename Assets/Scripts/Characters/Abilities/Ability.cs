@@ -107,7 +107,7 @@ public class Ability : ScriptableObject
 		//TODO Ready an special effects that may happen when a Character is preparing to use the Ability
     }
 
-	public void UseAbility(float modifier = 0.0f)
+	public void UseAbility(float modifier = 1.0f)
 	{
         float randAccuracy;
         if (targets.Count == 0)
