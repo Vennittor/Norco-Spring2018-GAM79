@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
     public Image transitionImage; 
 
     public GameObject playerParty;
-	private Party pParty;
+	public Party pParty;
 	private Party eParty;
     public uint partyHeatIntensity;
 

@@ -169,6 +169,10 @@ public class UIManager : MonoBehaviour
 				if (abilityIndex >= 0 && abilityIndex < combatManager.activeCharacter.abilityCount)
 				{
 					ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility (abilityIndex);
+                    if (combatManager.activeCharacter.name == "Crusader" && ability.abilityName == "Battle Cry")
+                    {
+                        combatManager.BattlecrySwapLeader();
+                    }
 
 					if (ability == null)
 					{
@@ -204,6 +208,11 @@ public class UIManager : MonoBehaviour
                 }
 			}
 		}
+    }
+
+    public void InputLeader()
+    {
+        combatManager.UpdateLeader();
     }
 		
     public void OutputWaterUse()
