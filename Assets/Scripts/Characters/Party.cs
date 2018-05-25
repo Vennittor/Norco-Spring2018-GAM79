@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement; 
 using UnityEngine;
 
 public class Party : MonoBehaviour
@@ -179,20 +180,27 @@ public class Party : MonoBehaviour
     {
         if(col.gameObject.tag == "Exit")
         {
+            transitionMan.fadeOutObj.SetActive(true);
+            transitionMan.transitionImage.enabled = true;
+            transitionMan.StartCoroutine(transitionMan.TransitionOut());
             Debug.Log("Fading Out?"); // fade out
-            levelMan.StartCoroutine(levelMan.Transition());
-            levelMan.LoadSceneAsync();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
+          //  levelMan.LoadSceneAsync();
+        //    levelMan.StartCoroutine(levelMan.Transition());
+            Debug.LogError("Destroyed"); 
+          //  Destroy(col.gameObject); 
         }
 
         if(col.gameObject.tag == "ExitToMainMenu")
         {
             levelMan.StartCoroutine(levelMan.Transition());
+            transitionMan.fadeOutAnim.enabled = true;
             Debug.Log("Loading Back to Main Menu");
             levelMan.LoadScene(0);
             transitionMan.StopCoroutine(transitionMan.In());
             transitionMan.transitionImage.enabled = false;
             transitionMan.iAnim.enabled = false; 
-            Destroy(transitionMan.gameObject);
+          //  Destroy(transitionMan.gameObject);
         }
     }
 
@@ -200,8 +208,11 @@ public class Party : MonoBehaviour
     {
         if (col.gameObject.tag == "Exit")
         {
-            transitionMan.StartCoroutine(transitionMan.Nuetral());
-            transitionMan.exitTransform.gameObject.SetActive(false); 
+            transitionMan.transitionImage.enabled = true;
+          //  transitionMan.StartCoroutine(transitionMan.TransitionOut());
+          //  transitionMan.fadeOutAnim.Play("FadeOutFinal");
+           // Debug.LogError("Mot fading out"); 
+           transitionMan.StartCoroutine(transitionMan.Nuetral());
         }
 
         if(col.gameObject.tag == "Entrance")
@@ -215,8 +226,9 @@ public class Party : MonoBehaviour
     {
         if(col.gameObject.tag == "Exit")
         {
-            transitionMan.StartCoroutine(transitionMan.In());
-            levelMan.StartCoroutine(levelMan.DoneWithTransition(playerParty));
+
+           transitionMan.StartCoroutine(transitionMan.In());
+           // levelMan.StartCoroutine(levelMan.DoneWithTransition(playerParty));
         }
 
         if (col.gameObject.tag == "Entrance")

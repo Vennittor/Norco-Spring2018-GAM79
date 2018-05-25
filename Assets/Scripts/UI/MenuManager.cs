@@ -45,7 +45,7 @@ public class MenuManager : MonoBehaviour
     public void PlayGame()
     {
         Go(); 
-        levelMan.StartCoroutine(levelMan.Transition());  
+       // levelMan.StartCoroutine(levelMan.Transition());  
     }
 
     public void Go()

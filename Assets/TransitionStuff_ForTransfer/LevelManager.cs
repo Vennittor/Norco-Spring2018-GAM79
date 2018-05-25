@@ -460,7 +460,12 @@ public class LevelManager : MonoBehaviour
 
    public IEnumerator Transition()
     {
-        Debug.Log("Fade Out");
+        //   transitionMan.StartCoroutine(transitionMan.TransitionOut());
+        //  yield return new WaitForSeconds(3.0f); 
+       // Debug.LogError("Out?");
+
+        transitionMan.StartCoroutine(transitionMan.TransitionOut());
+      //  Debug.LogError("Out?");
 
         if (transitionImage == null)
         {
@@ -482,6 +487,10 @@ public class LevelManager : MonoBehaviour
             transitionImage.enabled = true;
         }
 
+        transitionMan.StartCoroutine(transitionMan.TransitionOut());
+
+        Debug.Log("Fade Out");
+
         float i = 0;
         transitionImage.GetComponent<Image>().color = Color.black;
         var tempColor = transitionImage.color;
@@ -490,19 +499,18 @@ public class LevelManager : MonoBehaviour
         i = transitionImage.color.a;
         transitionImage.enabled = true;
 
-        // throwing error here
         while (i < tempColor.a)
         {
             i += Time.deltaTime * 0.1f;
 
             if (i == 1.0f)
             {
-                transitionImage.CrossFadeColor(Color.black, 1.0f, false, true);
+                transitionImage.CrossFadeColor(Color.red, 1.0f, false, true);
             }
             yield return null;
         }
 
-        transitionImage.enabled = false;
+      //  transitionImage.enabled = false;
 
         yield return null;
         // yield return new WaitForSeconds(5.0f);
@@ -516,7 +524,7 @@ public class LevelManager : MonoBehaviour
           {
               transitionImage = GameObject.Find("Transition Image").GetComponentInChildren<Image>();
               Debug.LogError("Inactive"); 
-              transitionImage.enabled = false;
+              transitionImage.enabled = true;
           }
           else if(transitionImage != null)
           {
@@ -539,6 +547,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadSceneAsync()
     {
+        Debug.Log("wHAT DA FUCK"); 
         StartCoroutine(LoadYourAsyncScene());
     }
 
@@ -591,6 +600,12 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator LoadYourAsyncScene()
     {
+        yield return new WaitUntil(() => transitionMan.transitionImage.color.a == 1);
+        Debug.LogError("Loading"); 
+        if(transitionMan.transitionImage.color.a == 1)
+        {
+            LoadSceneAsync(); 
+        }
         AsyncOperation target = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
        // AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1); 
 
@@ -598,6 +613,7 @@ public class LevelManager : MonoBehaviour
         {
             yield return null;
         }
+ 
         transitionMan.StartCoroutine(transitionMan.In());
         SetUpNewScene(); 
     } 

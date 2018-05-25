@@ -22,11 +22,11 @@ public class TransitionManager : MonoBehaviour
     public int animState = 2;
     private Color c;
     public Animation fadeOutAnimA;
-    public GameObject fadeOutObj; 
-  //  public Animation anim;
-  //  public Animation animOut;
-   // public GameObject Load;
-   // public GameObject transitionOpen;
+    public GameObject fadeOutObj;
+    private bool isintransition;
+    private float transition;
+    private bool isdisplaying;
+    private float duration;
 
     public static TransitionManager Instance
     {
@@ -189,10 +189,37 @@ public class TransitionManager : MonoBehaviour
     {
         iAnim.SetBool("Fade", false);
         iAnim.SetBool("FadeOut", true);
-        yield return new WaitUntil(() => transitionImage.color.a == 1);
-      //  Debug.Log("Fade is false"); fade is set to false
-      //  StartCoroutine(TransitionComplete()); 
+
+        fadeOutObj.GetComponentInChildren<Image>().color = Color.red;
+
+        Color c = transitionImage.color;
+        c.a = 0;
+        while (c.a <=0)
+        {
+            SetTransparencyOut(fadeOutObj.GetComponentInChildren<Image>(), 0);
+            c.a += Time.deltaTime * .1f;
+            yield return null;
+        }
+
+        if (c.a >= 1)
+        {
+            c.a = 1;
+            yield return new WaitUntil(() => fadeOutObj.GetComponentInChildren<Image>().color.a == 1);
+
+            fadeOutObj.gameObject.SetActive(false);
+            iAnim.enabled = false;
+        }
+        //  Debug.Log("Fade is false"); fade is set to false
+        //  StartCoroutine(TransitionComplete()); 
         yield return null;
+    }
+
+    public void FadeOut(bool displayed, float duration)
+    {
+        isdisplaying = displayed;
+        isintransition = true;
+        this.duration = duration;
+        transition = (isdisplaying) ? 0 : 1;
     }
 
     public static void SetTransparency(Image transitionImage, float transparency)
@@ -206,6 +233,18 @@ public class TransitionManager : MonoBehaviour
         }
     }
 
+
+    public static void SetTransparencyOut(Image fadeOutObj, float transparency)
+    {
+        if (fadeOutObj != null)
+        {
+            UnityEngine.Color __alpha = fadeOutObj.color;
+            transparency = 0.01f;
+            __alpha.a += transparency * Time.deltaTime;
+            fadeOutObj.color = __alpha;
+        }
+    }
+
     /* // inactive
     public void TransitionOpen()
     {
@@ -213,14 +252,48 @@ public class TransitionManager : MonoBehaviour
         transitionOpen.gameObject.SetActive(true);  
     }*/
 
-    public void TransitionIn()
+    public IEnumerator TransitionIn()
     {
-        StartCoroutine(In()); 
+        StartCoroutine(In());
+        yield return null;
+    }
+
+    public IEnumerator TransitionOut()
+    {
+        FadeOut(true
+            , 5.0f);
+
+        fadeOutAnim.GetComponentInChildren<Animator>().SetBool("FadeOut", true); 
+  
+       /* if (!isintransition)
+        {
+            yield return null;
+        }*/
+        while(true)
+        {
+            transition += (isdisplaying) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
+            transitionImage.color = Color.Lerp(new Color(1, 1, 1, 0), Color.black, transition);
+
+            yield return null; 
+        }
+
+        /*
+        if (transition >= 1 || transition <= 0)
+        {
+            isintransition = false;
+        }*/
+
+      //  fadeOutAnim.GetComponentInChildren<Animator>().enabled = true;
+     //   fadeOutAnim.CrossFade("FadeOutFinal", 5, 0); 
+
+       // StartCoroutine(Out());
+      //  yield return null; 
     }
 
     public IEnumerator In()
     {
-        Debug.Log(state); 
+        Debug.Log(state);
+        animState = 1; 
 
         switch (animState)
         {
@@ -232,10 +305,12 @@ public class TransitionManager : MonoBehaviour
         }
         while (state == AnimationState.fadein)
         {
-            if(iAnim.gameObject.activeSelf)
+            if (iAnim.gameObject.activeSelf)
             {
                 transitionImage.GetComponentInChildren<Image>().GetComponentInChildren<Animator>().Play("FadeIn");
             }
+            yield return null; 
+        }
             transitionImage.GetComponentInChildren<Image>().color = Color.black;
 
             Color c = transitionImage.color;
@@ -246,21 +321,27 @@ public class TransitionManager : MonoBehaviour
                 c.a -= Time.deltaTime * .2f;
                 yield return null;
             }
+
             if (c.a <= 0) 
             {
                 c.a = 0;
-                transitionImage.gameObject.SetActive(false);
-                iAnim.enabled = false; 
+                transitionImage.gameObject.SetActive(true);
+                iAnim.enabled = true; 
+            }
+            else
+            {
+                transitionImage.enabled = true; 
             }
 
             yield return null; 
-        }
 
         StartCoroutine(Nuetral()); 
     }
 
     public IEnumerator Nuetral()
     {
+        animState = 0; 
+
         switch(animState)
         {
             case 0:
@@ -284,7 +365,16 @@ public class TransitionManager : MonoBehaviour
             transitionImage.enabled = false;
             iAnim.GetComponentInChildren<Animator>().SetBool("Fade", false);
         }
-        else if (state == AnimationState.fadein && state != AnimationState.neutral && transitionImage != null)
+
+        else if(state == AnimationState.fadeout)
+        {
+            iAnim.enabled = true;
+            transitionImage.enabled = true;
+            iAnim.GetComponentInChildren<Animator>().SetBool("Fade", false);
+            iAnim.GetComponentInChildren<Animator>().SetBool("FadeOut", true);
+        }
+
+        else if (state == AnimationState.fadein && state != AnimationState.neutral && transitionImage == null)
         {
             iAnim.enabled = true;
             transitionImage.enabled = true;
@@ -295,7 +385,45 @@ public class TransitionManager : MonoBehaviour
 
         yield return null; 
     }
+    /*
 
+    public IEnumerator Out()
+    {
+        animState = 2;
+        state = AnimationState.fadeout;
+
+        transitionImage.gameObject.SetActive(true);
+        iAnim.enabled = true;
+
+        while (state == AnimationState.fadeout)
+        {
+            if (iAnim.gameObject.activeSelf)
+            {
+                transitionImage.GetComponentInChildren<Image>().GetComponentInChildren<Animator>().Play("FadeOut");
+            }
+            yield return null;
+        }
+        transitionImage.GetComponentInChildren<Image>().color = Color.black;
+
+        Color c = transitionImage.color;
+        c.a = 1;
+        while (c.a >= 1)
+        {
+            c.a += Time.deltaTime * .2f;
+            SetTransparencyOut(transitionImage, 1);
+
+            yield return null;
+        }
+        if (c.a >= 1)
+        {
+            c.a = 1;
+            iAnim.enabled = true;
+            transitionImage.gameObject.SetActive(true);
+        }
+
+        yield return null;
+    }
+    */ 
     public void BeginTransitionSequence()
     {
         fadeMan.TransitionOutFromMenu(); 
