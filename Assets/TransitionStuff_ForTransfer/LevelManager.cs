@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour
 
         if(transitionImage != null)
         {
-          //  transitionImage.transform.SetParent(null);
+           // transitionImage.transform.SetParent(null);
            // DontDestroyOnLoad(transitionImage);
         }
         else
@@ -225,6 +225,17 @@ public class LevelManager : MonoBehaviour
 
     public void SetCombatPoint(Party enemyParty, Party playerParty)
     {
+        if(playerParty == null)
+        {
+            playerParty = FindObjectOfType<Party>();
+            playerParty.GetComponent<Party>();
+            ReferenceEquals(playerParty, null);  
+        }
+        else
+        {
+            return; 
+        }
+
         camDock.Reposition(); 
         Transform partyPos = playerParty.transform.GetComponent<Transform>();
         enemyParty.transform.position = new Vector3(eParty.transform.position.x + 5, eParty.transform.position.y, eParty.transform.position.z); 
@@ -504,7 +515,7 @@ public class LevelManager : MonoBehaviour
         if (transitionImage == null)
           {
               transitionImage = GameObject.Find("Transition Image").GetComponentInChildren<Image>();
-            Debug.LogError("Inactive"); 
+              Debug.LogError("Inactive"); 
               transitionImage.enabled = false;
           }
           else if(transitionImage != null)
@@ -512,7 +523,6 @@ public class LevelManager : MonoBehaviour
             Debug.Log("I am en"); // when transition is enabled
             transitionMan.StopCoroutine(transitionMan.Fade());
             transitionMan.StartCoroutine(transitionMan.Nuetral());
-            transitionImage.enabled = false;
             yield return new WaitForEndOfFrame();
             transitionImage.enabled = true;
             transitionMan.StopCoroutine(transitionMan.In()); 

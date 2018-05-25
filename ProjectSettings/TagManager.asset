@@ -21,9 +21,9 @@ TagManager:
   - Targeting
   - Transition
   - Video
-  - 
-  - 
-  - 
+  - Effects
+  - Backgroud
+  - Foredgroud
   - 
   - 
   - 
@@ -51,4 +51,13 @@ TagManager:
     locked: 0
   - name: Layer_02
     uniqueID: 591113631
+    locked: 0
+  - name: Effects
+    uniqueID: 2611990483
+    locked: 0
+  - name: Backgroud
+    uniqueID: 2546042891
+    locked: 0
+  - name: Foregroud
+    uniqueID: 3307817131
     locked: 0

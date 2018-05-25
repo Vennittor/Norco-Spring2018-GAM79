@@ -50,6 +50,13 @@ public class DopeCamSys : MonoBehaviour
 
     public void Reposition()
     {
+        if(cameraDock == null)
+        {
+            target = GameObject.FindGameObjectWithTag("CamDock"); 
+        }
+
+        // maybe ^^ ? 
+
 		//TODO change camera positoin to encompass all characters in within frustum
         if(camera != null)
         {
@@ -60,8 +67,15 @@ public class DopeCamSys : MonoBehaviour
 
     public void RepositionCameraToOriginalPosition()
     {
-		//TODO set to default position
-        if(camera != null)
+        if (cameraDock == null)
+        {
+            target = GameObject.FindGameObjectWithTag("CamDock");
+        }
+
+        // maybe ^^ ? 
+
+        //TODO set to default position
+        if (camera != null)
         {
             camera.fieldOfView = 70;
             cameraDock = target.transform.Find("CamDock");

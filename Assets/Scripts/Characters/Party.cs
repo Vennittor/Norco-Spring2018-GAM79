@@ -201,11 +201,13 @@ public class Party : MonoBehaviour
         if (col.gameObject.tag == "Exit")
         {
             transitionMan.StartCoroutine(transitionMan.Nuetral());
+            transitionMan.exitTransform.gameObject.SetActive(false); 
         }
 
         if(col.gameObject.tag == "Entrance")
         {
             transitionMan.StartCoroutine(transitionMan.Nuetral());
+            transitionMan.entranceTransform.gameObject.SetActive(false);
         }
     }
 
@@ -221,7 +223,6 @@ public class Party : MonoBehaviour
         {
             transitionMan.StopCoroutine(transitionMan.In());
             transitionMan.transitionImage.enabled = false;
-            Debug.LogError("Exited"); 
         }
     }
 
