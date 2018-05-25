@@ -33,6 +33,7 @@ public class Damage
 			}
 		}
         //calc total from the rand number and the modifier
+        totalDamage = totalDamage * (int)modifier;
 		return totalDamage;
 	}
 

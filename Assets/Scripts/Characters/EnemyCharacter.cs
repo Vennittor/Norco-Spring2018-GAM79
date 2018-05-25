@@ -51,7 +51,7 @@ public class EnemyCharacter : Character
 	#region AI Functions.		//TODO These FUnctions should be externalized for more robust and customizable AI's
 	void GetTargets(Ability ability)
 	{	Debug.Log ("Enemy GetTargets");
-		combatManager.AssignTargets(RandPlayerTarget() as Character);
+		combatManager.AssignTargets(RandPlayerTarget() as Character, ability);
 	}
 
     private PlayerCharacter RandPlayerTarget()
