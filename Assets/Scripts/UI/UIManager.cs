@@ -23,8 +23,6 @@ public class UIManager : MonoBehaviour
     public EventSystemManager eventSystemManager;
     private Character character;
 
-    public Image healthBar;
-
 	public bool disableUIOnStart = true;
 
 	public GameObject splashMessagePanel;
@@ -301,19 +299,6 @@ public class UIManager : MonoBehaviour
 
 		searchingTargetType = null;
 
-    }
-
-    public void UpdateHealthBar()
-    {
-		if (healthBar != null)
-		{
-            Debug.Log("i have a health bar i guess");
-			//healthBar.fillAmount = character.currentHealth / character.maxhealth;
-		}
-		else
-		{
-			Debug.LogError ("No refrence to Health Bar");
-		}
     }
 
     #region HighlightTargets
