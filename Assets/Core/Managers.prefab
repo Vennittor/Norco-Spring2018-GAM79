@@ -192,14 +192,16 @@ MonoBehaviour:
   combatUI: {fileID: 0}
   levelUI: {fileID: 0}
   swipeImage: {fileID: 0}
+  transitionImage: {fileID: 0}
   playerParty: {fileID: 0}
   partyHeatIntensity: 0
   cameraTarget: {fileID: 0}
-  playerStartTransform: {fileID: 0}
-  playerCombatTransform: {fileID: 0}
-  enemyCombatTransform: {fileID: 0}
   heatWavePrefab: {fileID: 0}
+  partyPos: {x: 0, y: 0, z: 0}
+  transitionMan: {fileID: 0}
   camDock: {fileID: 0}
+  entrance: {fileID: 0}
+  exit: {fileID: 0}
 --- !u!114 &114576668493167548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,6 +277,8 @@ MonoBehaviour:
   currentRoundCharacters: []
   roundCounter: 0
   partyHeatLevel: 0
+  t1Statuses: 0100000004000000
+  t2Statuses: 05000000
   actionSlider: {fileID: 0}
   slider: {fileID: 0}
   completionArea: {fileID: 0}

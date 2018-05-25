@@ -14,13 +14,17 @@ MonoBehaviour:
   abilityName: Rattle
   description: targeted player -2def
   callOutText: 
+  heatCost: 0
   targetType:
     _who: 2
     _formation: 0
     _numberOfTargets: 1
   damage: []
-  statuses: []
+  statuses: 
+  statusChance: 0
+  stunDuration: 0
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 2
   characterUser: {fileID: 0}
+  abilitySound: {fileID: 8300000, guid: 90bd26c44e2d4174ba15db2ae86a0de2, type: 3}

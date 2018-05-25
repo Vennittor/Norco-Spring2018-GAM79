@@ -1,0 +1,1432 @@
+fileFormatVersion: 2
+guid: 607b2213201636e4e8ab458c003d5fd4
+timeCreated: 1526062460
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SPRITE_Sphinx_0
+    21300002: SPRITE_Sphinx_1
+    21300004: SPRITE_Sphinx_2
+    21300006: SPRITE_Sphinx_3
+    21300008: SPRITE_Sphinx_4
+    21300010: SPRITE_Sphinx_5
+    21300012: SPRITE_Sphinx_6
+    21300014: SPRITE_Sphinx_7
+    21300016: SPRITE_Sphinx_8
+    21300018: SPRITE_Sphinx_9
+    21300020: SPRITE_Sphinx_10
+    21300022: SPRITE_Sphinx_11
+    21300024: SPRITE_Sphinx_12
+    21300026: SPRITE_Sphinx_13
+    21300028: SPRITE_Sphinx_14
+    21300030: SPRITE_Sphinx_15
+    21300032: SPRITE_Sphinx_16
+    21300034: SPRITE_Sphinx_17
+    21300036: SPRITE_Sphinx_18
+    21300038: SPRITE_Sphinx_19
+    21300040: SPRITE_Sphinx_20
+    21300042: SPRITE_Sphinx_21
+    21300044: SPRITE_Sphinx_22
+    21300046: SPRITE_Sphinx_23
+    21300048: SPRITE_Sphinx_24
+    21300050: SPRITE_Sphinx_25
+    21300052: SPRITE_Sphinx_26
+    21300054: SPRITE_Sphinx_27
+    21300056: SPRITE_Sphinx_28
+    21300058: SPRITE_Sphinx_29
+    21300060: SPRITE_Sphinx_30
+    21300062: SPRITE_Sphinx_31
+    21300064: SPRITE_Sphinx_32
+    21300066: SPRITE_Sphinx_33
+    21300068: SPRITE_Sphinx_34
+    21300070: SPRITE_Sphinx_35
+    21300072: SPRITE_Sphinx_36
+    21300074: SPRITE_Sphinx_37
+    21300076: SPRITE_Sphinx_38
+    21300078: SPRITE_Sphinx_39
+    21300080: SPRITE_Sphinx_40
+    21300082: SPRITE_Sphinx_41
+    21300084: SPRITE_Sphinx_42
+    21300086: SPRITE_Sphinx_43
+    21300088: SPRITE_Sphinx_44
+    21300090: SPRITE_Sphinx_45
+    21300092: SPRITE_Sphinx_46
+    21300094: SPRITE_Sphinx_47
+    21300096: SPRITE_Sphinx_48
+    21300098: SPRITE_Sphinx_49
+    21300100: SPRITE_Sphinx_50
+    21300102: SPRITE_Sphinx_51
+    21300104: SPRITE_Sphinx_52
+    21300106: SPRITE_Sphinx_53
+    21300108: SPRITE_Sphinx_54
+    21300110: SPRITE_Sphinx_55
+    21300112: SPRITE_Sphinx_56
+    21300114: SPRITE_Sphinx_57
+    21300116: SPRITE_Sphinx_58
+    21300118: SPRITE_Sphinx_59
+    21300120: SPRITE_Sphinx_60
+    21300122: SPRITE_Sphinx_61
+    21300124: SPRITE_Sphinx_62
+    21300126: SPRITE_Sphinx_63
+    21300128: SPRITE_Sphinx_64
+    21300130: SPRITE_Sphinx_65
+    21300132: SPRITE_Sphinx_66
+    21300134: SPRITE_Sphinx_67
+    21300136: SPRITE_Sphinx_68
+    21300138: SPRITE_Sphinx_69
+    21300140: SPRITE_Sphinx_70
+    21300142: SPRITE_Sphinx_71
+    21300144: SPRITE_Sphinx_72
+    21300146: SPRITE_Sphinx_73
+    21300148: SPRITE_Sphinx_74
+    21300150: SPRITE_Sphinx_75
+    21300152: SPRITE_Sphinx_76
+    21300154: SPRITE_Sphinx_77
+    21300156: SPRITE_Sphinx_78
+    21300158: SPRITE_Sphinx_79
+    21300160: SPRITE_Sphinx_80
+    21300162: SPRITE_Sphinx_81
+    21300164: SPRITE_Sphinx_82
+    21300166: SPRITE_Sphinx_83
+    21300168: SPRITE_Sphinx_84
+    21300170: SPRITE_Sphinx_85
+    21300172: SPRITE_Sphinx_86
+    21300174: SPRITE_Sphinx_87
+    21300176: SPRITE_Sphinx_88
+    21300178: SPRITE_Sphinx_89
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 2
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: -1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 8192
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6640
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_1
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 6640
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_2
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 6640
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_3
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 6640
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_4
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 6640
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_5
+      rect:
+        serializedVersion: 2
+        x: 3760
+        y: 6640
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_6
+      rect:
+        serializedVersion: 2
+        x: 4512
+        y: 6640
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_7
+      rect:
+        serializedVersion: 2
+        x: 5264
+        y: 6640
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_8
+      rect:
+        serializedVersion: 2
+        x: 6016
+        y: 6640
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_9
+      rect:
+        serializedVersion: 2
+        x: 6768
+        y: 6640
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5810
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_11
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 5810
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_12
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 5810
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_13
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 5810
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_14
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 5810
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_15
+      rect:
+        serializedVersion: 2
+        x: 3760
+        y: 5810
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_16
+      rect:
+        serializedVersion: 2
+        x: 4512
+        y: 5810
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_17
+      rect:
+        serializedVersion: 2
+        x: 5264
+        y: 5810
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_18
+      rect:
+        serializedVersion: 2
+        x: 6016
+        y: 5810
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_19
+      rect:
+        serializedVersion: 2
+        x: 6768
+        y: 5810
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4980
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_21
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 4980
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_22
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 4980
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_23
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 4980
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_24
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 4980
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_25
+      rect:
+        serializedVersion: 2
+        x: 3760
+        y: 4980
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_26
+      rect:
+        serializedVersion: 2
+        x: 4512
+        y: 4980
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_27
+      rect:
+        serializedVersion: 2
+        x: 5264
+        y: 4980
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_28
+      rect:
+        serializedVersion: 2
+        x: 6016
+        y: 4980
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_29
+      rect:
+        serializedVersion: 2
+        x: 6768
+        y: 4980
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4150
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_31
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 4150
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_32
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 4150
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_33
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 4150
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_34
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 4150
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_35
+      rect:
+        serializedVersion: 2
+        x: 3760
+        y: 4150
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_36
+      rect:
+        serializedVersion: 2
+        x: 4512
+        y: 4150
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_37
+      rect:
+        serializedVersion: 2
+        x: 5264
+        y: 4150
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_38
+      rect:
+        serializedVersion: 2
+        x: 6016
+        y: 4150
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_39
+      rect:
+        serializedVersion: 2
+        x: 6768
+        y: 4150
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3320
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_41
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 3320
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_42
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 3320
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_43
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 3320
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_44
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 3320
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_45
+      rect:
+        serializedVersion: 2
+        x: 3760
+        y: 3320
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_46
+      rect:
+        serializedVersion: 2
+        x: 4512
+        y: 3320
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_47
+      rect:
+        serializedVersion: 2
+        x: 5264
+        y: 3320
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_48
+      rect:
+        serializedVersion: 2
+        x: 6016
+        y: 3320
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_49
+      rect:
+        serializedVersion: 2
+        x: 6768
+        y: 3320
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2490
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_51
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 2490
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_52
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 2490
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_53
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 2490
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_54
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 2490
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_55
+      rect:
+        serializedVersion: 2
+        x: 3760
+        y: 2490
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_56
+      rect:
+        serializedVersion: 2
+        x: 4512
+        y: 2490
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_57
+      rect:
+        serializedVersion: 2
+        x: 5264
+        y: 2490
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_58
+      rect:
+        serializedVersion: 2
+        x: 6016
+        y: 2490
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_59
+      rect:
+        serializedVersion: 2
+        x: 6768
+        y: 2490
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1660
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_61
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 1660
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_62
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 1660
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_63
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 1660
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_64
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 1660
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_65
+      rect:
+        serializedVersion: 2
+        x: 3760
+        y: 1660
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_66
+      rect:
+        serializedVersion: 2
+        x: 4512
+        y: 1660
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_67
+      rect:
+        serializedVersion: 2
+        x: 5264
+        y: 1660
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_68
+      rect:
+        serializedVersion: 2
+        x: 6016
+        y: 1660
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_69
+      rect:
+        serializedVersion: 2
+        x: 6768
+        y: 1660
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 830
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_71
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 830
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_72
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 830
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_73
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 830
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_74
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 830
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_75
+      rect:
+        serializedVersion: 2
+        x: 3760
+        y: 830
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_76
+      rect:
+        serializedVersion: 2
+        x: 4512
+        y: 830
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_77
+      rect:
+        serializedVersion: 2
+        x: 5264
+        y: 830
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_78
+      rect:
+        serializedVersion: 2
+        x: 6016
+        y: 830
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_79
+      rect:
+        serializedVersion: 2
+        x: 6768
+        y: 830
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_81
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 0
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_82
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 0
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_83
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 0
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_84
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 0
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_85
+      rect:
+        serializedVersion: 2
+        x: 3760
+        y: 0
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_86
+      rect:
+        serializedVersion: 2
+        x: 4512
+        y: 0
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_87
+      rect:
+        serializedVersion: 2
+        x: 5264
+        y: 0
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_88
+      rect:
+        serializedVersion: 2
+        x: 6016
+        y: 0
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SPRITE_Sphinx_89
+      rect:
+        serializedVersion: 2
+        x: 6768
+        y: 0
+        width: 752
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

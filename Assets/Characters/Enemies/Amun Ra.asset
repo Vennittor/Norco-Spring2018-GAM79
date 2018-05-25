@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628256c8b66cd4c42987ce0e51d5f0d8, type: 3}
+  m_Name: Amun Ra
+  m_EditorClassIdentifier: 
+  _characterName: Amun Ra
+  _characterImage: {fileID: 2100000, guid: 5eaed017dea735048a47a1fd2b8774bc, type: 2}
+  _animatorController: {fileID: 9100000, guid: 2ac9166a535164442a4f7ff139c1da37, type: 2}
+  _maxHealth: 100
+  _maxHeat: 0
+  _abilities:
+  - {fileID: 11400000, guid: c3a99c5b4a2280548b70a07f78a253d3, type: 2}
+  - {fileID: 11400000, guid: fad9404f9d05e2a478661320af31d84b, type: 2}
+  - {fileID: 11400000, guid: 47c9f5c115d564b4ca910fdd22317202, type: 2}
+  _attack: 5
+  _accuracy: 95
+  _evade: 10
+  _speed: 0
+  _defense: 10
+  _queueImage: {fileID: 0}
+  _externalAI: {fileID: 0}

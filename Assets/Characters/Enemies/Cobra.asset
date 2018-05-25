@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterName: Cobra
   _characterImage: {fileID: 0}
-  _animatorController: {fileID: 9100000, guid: bc571a505eba7a947bea3bd3ca313b2c, type: 2}
+  _animatorController: {fileID: 9100000, guid: 77634d158fac9b64cb3b34398e8a2478, type: 2}
   _maxHealth: 45
   _maxHeat: 0
   _abilities:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterName: Scarab
   _characterImage: {fileID: 0}
-  _animatorController: {fileID: 9100000, guid: d5cadefe2f93df64f8ad7a7f42ace6d4, type: 2}
+  _animatorController: {fileID: 9100000, guid: f88476c9d44f78e49bde4177039d14ab, type: 2}
   _maxHealth: 25
   _maxHeat: 0
   _abilities:
