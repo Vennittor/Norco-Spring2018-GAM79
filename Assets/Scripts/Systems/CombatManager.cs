@@ -382,6 +382,10 @@ public class CombatManager : MonoBehaviour
                 {
                     UseCharacterAbility();
                 }
+                if(ability.type == ActionType.SPAM)
+                {
+                    uiManager.spamBar.SetActive(true);
+                }
                 
 			}
 			else
@@ -474,7 +478,7 @@ public class CombatManager : MonoBehaviour
 		UseCharacterAbility (modifiedEffect);
 	}
 
-	void UseCharacterAbility(float modifier = 0.0f)
+	public void UseCharacterAbility(float modifier = 0.0f)
 	{
 		activeCharacter.UseAbility (finalizedTargets, modifier);
 

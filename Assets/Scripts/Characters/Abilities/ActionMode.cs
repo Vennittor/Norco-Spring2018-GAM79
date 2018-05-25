@@ -5,7 +5,7 @@ using UnityEngine;
     public enum ActionType 
     {
         NORMAL,
-        CIRCLE,
+        SPAM,
         TARGET,
         MULTI,
         SLIDER

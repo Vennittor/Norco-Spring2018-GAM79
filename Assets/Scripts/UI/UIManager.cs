@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour
 
     public float infoDelayTime = 0.5f;
 
+    public GameObject spamBar;
+
     public enum InputMode { NORMAL, ABILITYSELECT, TARGETING, BLOCKED }
     public InputMode inputMode;
     #endregion
