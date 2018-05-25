@@ -23,11 +23,13 @@ public class UIManager : MonoBehaviour
     public EventSystemManager eventSystemManager;
     private Character character;
 
-    public bool disableUIOnStart = true;
+    public Image healthBar;
+
+	public bool disableUIOnStart = true;
 
 	public GameObject splashMessagePanel;
 	public Text splashMessageText;
-	public float splashLifeTime = 2.0f;
+	public float splashLifeTime = 1.0f;
 
 	public GameObject actionSlider;
 
@@ -112,12 +114,10 @@ public class UIManager : MonoBehaviour
         {
 			CancelInput ();
         }
-
     }
+	#endregion
 
-    #endregion
-
-    public void SplashAnnouncement(string splashMessage, Text destination)
+	public void SplashAnnouncement(string splashMessage, Text destination)
 	{
 		splashMessagePanel.SetActive (true);
 
@@ -302,7 +302,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-<<<<<<< HEAD
     public void UpdateHealthBar()
     {
 		if (healthBar != null)
@@ -316,8 +315,6 @@ public class UIManager : MonoBehaviour
 		}
     }
 
-=======
->>>>>>> UI
     #region HighlightTargets
     public void TurnRed(List<Character> targets) 			// highlight in Red on Mouse-over
     {
