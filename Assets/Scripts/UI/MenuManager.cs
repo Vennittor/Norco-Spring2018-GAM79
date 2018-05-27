@@ -50,7 +50,7 @@ public class MenuManager : MonoBehaviour
 
     public void Go()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadSceneAsync(2);
         tMAn.StartCoroutine(tMAn.Fade()); 
     }
 

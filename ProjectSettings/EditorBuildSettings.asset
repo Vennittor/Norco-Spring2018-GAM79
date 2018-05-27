@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: 
     guid: 4903ad852dfc2e64faae13c23b956629
   - enabled: 1
+    path: Assets/IntroText.unity
+    guid: 976b749f37208554ea4a2596b35dff9a
+  - enabled: 1
     path: Assets/TESTING FOLDER/Test Scenes/MainMenu.unity
     guid: efe7a7be52b0009499de11424b6d62d6
   - enabled: 1

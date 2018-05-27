@@ -218,6 +218,11 @@ public class TransitionManager : MonoBehaviour
         StartCoroutine(In()); 
     }
 
+    public void TransitionOut()
+    {
+        StartCoroutine(Out()); 
+    }
+
     public IEnumerator In()
     {
         Debug.Log(state); 
@@ -252,11 +257,56 @@ public class TransitionManager : MonoBehaviour
                 transitionImage.gameObject.SetActive(false);
                 iAnim.enabled = false; 
             }
+            else
+            {
+                transitionImage.gameObject.SetActive(true);
+                iAnim.enabled = true;
+            }
 
             yield return null; 
         }
 
-        StartCoroutine(Nuetral()); 
+        yield return null;
+        StartCoroutine(Nuetral()); // ....
+    }
+
+    public IEnumerator Out()
+    {
+        switch (animState)
+        {
+            case 2:
+                {
+                    state = AnimationState.fadeout;
+                }
+                break;
+        }
+        while (state == AnimationState.fadeout)
+        {
+            if (iAnim.gameObject.activeSelf)
+            {
+                transitionImage.GetComponentInChildren<Image>().GetComponentInChildren<Animator>().Play("FadeOut");
+            }
+            transitionImage.GetComponentInChildren<Image>().color = Color.black;
+
+            Color c = transitionImage.color;
+            c.a = 0;
+            while (c.a <= 0)
+            {
+                SetTransparency(transitionImage, 0);
+                c.a += Time.deltaTime * .2f;
+                yield return null;
+            }
+            if (c.a > 0)
+            {
+                c.a = 1;
+                transitionImage.gameObject.SetActive(true);
+                iAnim.enabled = true;
+            }
+        }
+
+        yield return null;
+
+        StartCoroutine(Nuetral()); // 
     }
 
     public IEnumerator Nuetral()
