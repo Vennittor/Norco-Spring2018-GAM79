@@ -16,15 +16,14 @@ MonoBehaviour:
   _animatorController: {fileID: 9100000, guid: bd5e0137f6de0694d853d25a20609ce2, type: 2}
   _maxHealth: 50
   _maxHeat: 300
-  _abilities:
+  _baseAbilities:
   - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
   - {fileID: 11400000, guid: a04b570ddc5a93040ad129b7d1cf8541, type: 2}
   - {fileID: 11400000, guid: bd6287438c74e4c4783c3a0b6374f0c7, type: 2}
-  - {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
-  _attack: 0
+  _leaderAbilities: []
   _accuracy: 84.5
   _evade: 10
-  _speed: 8
+  _speed: 2
   _defense: 1
   _queueImage: {fileID: 0}
   _externalAI: {fileID: 0}
