@@ -14,7 +14,7 @@ public class Water : Ability
         usesLeft = (uint)Mathf.Clamp((float)uses, 0, (float)maxUses);
     }
 
-    public new void UseAbility()
+    public void UseAbility()
     {
         Debug.Log("kill me please");
         if (usesLeft > 0)

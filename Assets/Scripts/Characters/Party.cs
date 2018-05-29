@@ -5,7 +5,7 @@ using UnityEngine;
 public class Party : MonoBehaviour
 {
     public LevelManager levelMan;
-    private TransitionManager transitionMan; 
+    private TransitionManager transitionMan;
 
     public HeatZone heatState;
     public List<Character> partyMembers;

@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
     public Image transitionImage; 
 
     public GameObject playerParty;
-	private Party pParty;
+	public Party pParty;
 	private Party eParty;
     public uint partyHeatIntensity;
 
@@ -86,10 +86,7 @@ public class LevelManager : MonoBehaviour
 			}
 		}
 			
-		if (partyPos == null)
-		{
-			partyPos = playerParty.transform.position;
-		}
+		partyPos = playerParty.transform.position;
 
 
 		transitionMan = FindObjectOfType<TransitionManager>();
@@ -140,6 +137,7 @@ public class LevelManager : MonoBehaviour
             camDock = FindObjectOfType<DopeCamSys>();
          //   Debug.Log("Discovered CamDock" + camDock.ToString());
         }
+        
 
 
         SoundManager.instance.Play(levelMusic, "mxL"); //play the level music
@@ -166,53 +164,53 @@ public class LevelManager : MonoBehaviour
 		{
 			swipeImage.enabled = true;
 		}
-    
-        if(transitionImage == null)
-        {
-            if(levelUI != null)
-			{
-				Transform transitionTransform = levelUI.transform.Find ("Transition Image");
 
-				if (transitionTransform != null)
-				{
-					transitionImage = transitionTransform.GetComponent<Image> ();
-				}
-				else
-				{
-					Debug.LogWarning ("Could not find transition object on levelUI");
-				}
+        if (transitionImage == null)
+        {
+            if (levelUI != null)
+            {
+                Transform transitionTransform = levelUI.transform.Find("Transition Image");
+
+                if (transitionTransform != null)
+                {
+                    transitionImage = transitionTransform.GetComponent<Image>();
+                }
+                else
+                {
+                    Debug.LogWarning("Could not find transition object on levelUI");
+                }
             }
             else
             {
-				GameObject transitionObject = GameObject.Find ("Transition Image");
+                GameObject transitionObject = GameObject.Find("Transition Image");
 
-				if (transitionObject != null)
-				{
-					transitionImage = transitionObject.GetComponent<Image> ();
+                if (transitionObject != null)
+                {
+                    transitionImage = transitionObject.GetComponent<Image>();
 
-					if (transitionImage == null)
-					{
-						Debug.Log ("Transition Object does have have an Image component");
-					}
-				}
-				else
-				{
-					Debug.Log ("Cannot find 'Transstion Image' Gameobject");
-				}
+                    if (transitionImage == null)
+                    {
+                        Debug.Log("Transition Object does have have an Image component");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Cannot find 'Transstion Image' Gameobject");
+                }
             }
 
-            if(levelUI == null)
+            if (levelUI == null)
             {
-                Debug.LogError("Level UI is null"); 
+                Debug.LogError("Level UI is null");
             }
 
-			if (transitionImage == null)
-			{
-				Debug.LogError ("Cannot find Transition Image");
-			}
+            if (transitionImage == null)
+            {
+                Debug.LogError("Cannot find Transition Image");
+            }
         }
-     
-        if(transitionImage != null && levelUI != null)
+
+        if (transitionImage != null && levelUI != null)
         {
             transitionImage.enabled = true;
         }
@@ -235,9 +233,8 @@ public class LevelManager : MonoBehaviour
     public void SetCombatPoint(Party enemyParty, Party playerParty)
     {
         camDock.Reposition(); 
-        Transform partyPos = playerParty.transform.GetComponent<Transform>();
         enemyParty.transform.position = new Vector3(eParty.transform.position.x + 5, eParty.transform.position.y, eParty.transform.position.z);
-        enemyParty.GetComponent<Transform>().position = eParty.transform.position; 
+        enemyParty.transform.position = eParty.transform.position; 
     }
 
 	public IEnumerator InitiateCombat(Party player, Party enemy)
@@ -432,19 +429,16 @@ public class LevelManager : MonoBehaviour
     // Transition Levels
 
     public void SetEntrancePosition(Party playerParty)
-    { 
-        if (partyPos != null)
+    {
+        partyPos = transitionMan.entranceTransform.position;
+
+		playerParty.transform.position = partyPos;
+
+        if(entrance.gameObject == null)
         {
             partyPos = transitionMan.entranceTransform.position;
-
-			playerParty.transform.position = partyPos;
-
-           if(entrance.gameObject == null)
-            {
-                partyPos = transitionMan.entranceTransform.position;
-                Instantiate(entrance.gameObject, entrance.transform.position, entrance.transform.rotation);
-                entrance.transform.position = partyPos; 
-            }
+            Instantiate(entrance.gameObject, entrance.transform.position, entrance.transform.rotation);
+            entrance.transform.position = partyPos; 
         }
     }
 

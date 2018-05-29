@@ -109,18 +109,12 @@ public abstract class Character : MonoBehaviour
 			animator = GetComponent<Animator> ();
 		}
 
-		SetDefaultStats ();
-
         if(baseStats == null)
         {
             baseStats = FindObjectOfType<CharacterBaseStats>();
         }
+        SetDefaultStats();
 
-      //  cooldownTimers = new List<uint>();									//enfore size of cooldownTimers to abilities and set the timer to 0
-		/*foreach(Ability ability in abilities)
-		{
-			cooldownTimers.Add(0);
-		}*/
         selectedAbilityIndex = -1;
     }
 
@@ -213,7 +207,7 @@ public abstract class Character : MonoBehaviour
 
 	}
 
-	public void UseAbility(List<Character> targets, float modifier = 0.0f)
+	public void UseAbility(List<Character> targets, float modifier = 1.0f)
 	{
 		if (selectedAbilityIndex < 0 || selectedAbilityIndex >= abilities.Count) 
 		{
@@ -365,7 +359,7 @@ public abstract class Character : MonoBehaviour
             DealPoisonDamage(damage);
         }
 
-        uiManager.UpdateHealthBar();
+        //uiManager.UpdateHealthBar(this);
 
     }
 
@@ -564,14 +558,15 @@ public abstract class Character : MonoBehaviour
 			queueImage = baseStats.queueImage;
 
 			maxhealth = baseStats.maxHealth;
+            currentHealth = baseStats.maxHealth;
 			maxHeat = baseStats.maxHeat;
 
-			if (baseStats.abilities.Count > 0)
+			if (baseStats.baseAbilities.Count > 0)
 			{
-				abilities.AddRange (baseStats.abilities);
+                abilities.Clear();
+				abilities.AddRange (baseStats.baseAbilities);
 			}
 
-			attack = baseStats.attack;
 			accuracy = baseStats.accuracy;
 			evade = baseStats.evade;
 			speed = baseStats.speed;

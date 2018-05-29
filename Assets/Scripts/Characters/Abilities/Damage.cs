@@ -17,7 +17,7 @@ public class Damage
 		}
 	}
 
-	public int RollDamage(float modifier = 0.0f)
+	public int RollDamage(float modifier = 1.0f)
 	{
 		int totalDamage = 0;
 
@@ -33,6 +33,7 @@ public class Damage
 			}
 		}
         //calc total from the rand number and the modifier
+        totalDamage = totalDamage * (int)modifier;
 		return totalDamage;
 	}
 

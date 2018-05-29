@@ -23,6 +23,7 @@ MonoBehaviour:
   - damageRanges:
     - {x: 5, y: 10}
     elementType: 0
+  actionType: 0
   statuses: 
   statusChance: 0
   stunDuration: 0
