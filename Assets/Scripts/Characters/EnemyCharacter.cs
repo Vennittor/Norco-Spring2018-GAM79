@@ -51,21 +51,68 @@ public class EnemyCharacter : Character
 	#region AI Functions.		//TODO These FUnctions should be externalized for more robust and customizable AI's
 	void GetTargets(Ability ability)
 	{	Debug.Log ("Enemy GetTargets");
-		combatManager.AssignTargets(combatManager.activeLeader);
-	}
+        if (ability.targetType.who == TargetType.Who.OPPONENT && ability.targetType.formation == TargetType.Formation.SINGLE)
+        {
+            combatManager.AssignTargets(combatManager.activeLeader);
+        }
+        else if (ability.targetType.who == TargetType.Who.OPPONENT && ability.targetType.formation == TargetType.Formation.GROUP)
+        {
+            List<Character> characters = new List<Character>();
+            foreach (Character character in combatManager.activePlayers)
+            {
+                if (character.combatState != CombatState.EXHAUSTED)
+                {
+                    characters.Add(character);
+                }
+            }
+            combatManager.AssignTargets(characters);
+        }
+        else if (ability.targetType.who == TargetType.Who.SELF)
+        {
+            combatManager.AssignTargets(this);
+        }
+        else if (ability.targetType.who == TargetType.Who.ALLY && ability.targetType.formation == TargetType.Formation.SINGLE)
+        {
+            combatManager.AssignTargets(RandEnemyTarget());
+        }
+        else if (ability.targetType.who == TargetType.Who.ALLY && ability.targetType.formation == TargetType.Formation.GROUP)
+        {
+            List<Character> characters = new List<Character>();
+            foreach (Character character in combatManager.activeEnemies)
+            {
+                if (character.combatState != CombatState.EXHAUSTED)
+                {
+                    characters.Add(character);
+                }
+            }
+            combatManager.AssignTargets(characters);
+        }
+        else if (ability.targetType.who == TargetType.Who.EVERYONE)
+        {
+            List<Character> characters = new List<Character>();
+            foreach (Character character in combatManager.charactersInCombat)
+            {
+                if (character.combatState != CombatState.EXHAUSTED)
+                {
+                    characters.Add(character);
+                }
+            }
+            combatManager.AssignTargets(characters);
+        }
+    }
 
-    //private PlayerCharacter RandPlayerTarget()
-    //{
-    //    List<PlayerCharacter> players = new List<PlayerCharacter>();
-    //    foreach (Character character in combatManager.charactersInCombat)
-    //    {
-    //        if (character is PlayerCharacter)
-    //        {
-    //            players.Add(character as PlayerCharacter);
-    //        }
-    //    }
-    //    PlayerCharacter playerCharacter = players[Random.Range(0, players.Count)];
-    //    return playerCharacter;
-    //}
-	#endregion
+    private EnemyCharacter RandEnemyTarget()
+    {
+        List<EnemyCharacter> players = new List<EnemyCharacter>();
+        foreach (Character character in combatManager.charactersInCombat)
+        {
+            if (character is EnemyCharacter)
+            {
+                players.Add(character as EnemyCharacter);
+            }
+        }
+        EnemyCharacter enemyCharacter = players[Random.Range(0, players.Count)];
+        return enemyCharacter;
+    }
+    #endregion
 }

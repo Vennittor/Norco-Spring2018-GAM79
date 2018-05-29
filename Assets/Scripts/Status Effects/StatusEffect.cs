@@ -160,11 +160,11 @@ public class StatusEffect
 
     private void BattlecryStatus(Character character)
     {
-        // increase attack bonus
+        character.defenseMod += 1;
     }
     private void RemoveBattlecry(Character character)
     {
-        // remove attack bonus
+        character.defenseMod -= 1;
     }
     private EffectClass ApplyBattlecry()
     {
@@ -192,7 +192,7 @@ public class StatusEffect
 
     private void BleedStatus(Character character)
     {
-        uint dot = 1;
+        uint dot = 2;
         character.ApplyDamage(dot, ElementType.BLEED);
     }
     private EffectClass ApplyBleed()
@@ -227,7 +227,7 @@ public class StatusEffect
 
     private void DizzyStatus(Character character, EffectClass status)
     {
-        uint dot = 1;
+        uint dot = 2;
         character.ApplyDamage(dot, ElementType.BLEED);
         if (!status.buffTicked)
         {
@@ -251,7 +251,7 @@ public class StatusEffect
 
     private void HobbledStatus(Character character, EffectClass status)
     {
-        uint dot = 1;
+        uint dot = 2;
         character.ApplyDamage(dot, ElementType.BLEED);
         if (!status.buffTicked)
         {
@@ -312,11 +312,11 @@ public class StatusEffect
 
     private void LegalizeGayWeed(Character character)
     {
-        character.evadeBonus += 1000;
+        character.evadeMod += .7f;
     }
     private void Rehab(Character character)
     {
-        character.evadeBonus -= 1000;
+        character.evadeMod -= -.7f;
     }
     private EffectClass InjectDank()
     {
