@@ -12,14 +12,12 @@ public class TransitionManager : MonoBehaviour
     public Transform exitTransform;
     [SerializeField]
     private LevelManager levelMan;
-    private Party playerParty;
     public GameObject Load;
     public GameObject transitionOpen;
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(playerParty);
         transitionImage.enabled = true;
         if(transitionOpen != null)
         {

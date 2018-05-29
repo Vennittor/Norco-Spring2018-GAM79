@@ -14,9 +14,9 @@ public class CharacterBaseStats : ScriptableObject
 	[SerializeField] private uint _maxHealth = 0;
 	[SerializeField] private uint _maxHeat = 0;
 
-	[SerializeField] private List<Ability> _abilities = new List<Ability>();
+	[SerializeField] private List<Ability> _baseAbilities = new List<Ability>();
+    [SerializeField] private List<Ability> _leaderAbilities = new List<Ability>();
 
-	[SerializeField] private uint _attack = 0;
 	[SerializeField] private float _accuracy = 0f;
 	[SerializeField] private float _evade = 0f;
 	[SerializeField] private uint _speed = 0;
@@ -50,15 +50,14 @@ public class CharacterBaseStats : ScriptableObject
 		get { return _maxHeat; }
 	}
 
-	public List<Ability> abilities
+	public List<Ability> baseAbilities
 	{
-		get { return _abilities; }
+		get { return _baseAbilities; }
 	}
-
-	public uint attack
-	{
-		get { return _attack; }
-	}
+    public List<Ability> leaderAbilities
+    {
+        get { return _leaderAbilities; }
+    }
 	public float accuracy
 	{
 		get { return _accuracy; }

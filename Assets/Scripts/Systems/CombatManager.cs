@@ -18,12 +18,15 @@ public class CombatManager : MonoBehaviour
 	[SerializeField] private List<Character> characters;
 
     public Character activeCharacter;
+    public PlayerCharacter activeLeader;
 	public List<PlayerCharacter> activePlayers;
 	public List<EnemyCharacter> activeEnemies;
 
     public List<Character> currentRoundCharacters;
 
-	public uint roundCounter = 0;
+	public uint roundCounter;
+    public uint leaderInitCooldown;
+    public uint leaderCurrentCooldown;
 
     public uint partyHeatLevel;
     public List<StatusEffectType> t1Statuses;
@@ -94,6 +97,8 @@ public class CombatManager : MonoBehaviour
         activeEnemies = new List<EnemyCharacter>();
 
         partyHeatLevel = 0;
+        roundCounter = 0;
+        leaderCurrentCooldown = 0;
 
 		if (actionSlider == null)
 		{
@@ -117,8 +122,7 @@ public class CombatManager : MonoBehaviour
 		}
     }
 
-
-	public void AddCharactersToCombat(List<Character> charactersToAdd)
+    public void AddCharactersToCombat(List<Character> charactersToAdd)
 	{
 		foreach(Character characterToAdd in charactersToAdd)
 		{
@@ -135,6 +139,13 @@ public class CombatManager : MonoBehaviour
 		if(!inCombat) 
 		{
 			inCombat = true;
+            foreach (PlayerCharacter player in levelManager.pParty.partyMembers)
+            {
+                if (player.isLeader)
+                {
+                    activeLeader = player;
+                }
+            }
             SoundManager.instance.Play(battleSong, "mxC");
 
 			roundCounter = 0;
@@ -153,6 +164,10 @@ public class CombatManager : MonoBehaviour
 	{
         Debug.Log ("New Round!");
 		roundCounter++;
+        if (leaderCurrentCooldown != 0)
+        {
+            leaderCurrentCooldown--;
+        }
 		SortRoundQueue();
 
 		activeCharacter.BeginTurn ();
@@ -189,7 +204,40 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-	public void NextTurn() // active player finishing their turn calls this
+    public void UpdateLeader()
+    {
+        if (activeLeader == activeCharacter)
+        {
+            Debug.Log("Current character is the leader, no swap required");
+        }
+        else if (leaderCurrentCooldown == 0)
+        {
+            if (activeCharacter is PlayerCharacter)
+            {
+                leaderCurrentCooldown = leaderInitCooldown;
+                activeLeader.isLeader = false;
+                (activeCharacter as PlayerCharacter).isLeader = true;
+                activeLeader = (activeCharacter as PlayerCharacter);
+                levelManager.playerParty.GetComponent<PartySort>().SortParty();
+                NextTurn(); // TODO announcer calls first
+            }
+        }
+        else
+        {
+            Debug.Log("Leader button is still on cooldown. Wait " + leaderCurrentCooldown + " more " + (leaderCurrentCooldown == 1 ? "turn." : "turns."));
+        }
+    }
+
+    public void BattlecrySwapLeader()
+    {
+        activeLeader.isLeader = false;
+        (activeCharacter as PlayerCharacter).isLeader = true;
+        activeLeader = (activeCharacter as PlayerCharacter);
+        levelManager.playerParty.GetComponent<PartySort>().SortParty();
+        // TODO announcer calls
+    }
+
+    public void NextTurn() // active player finishing their turn calls this
 	{
 		if (!VictoryCheck())
 		{
@@ -357,6 +405,18 @@ public class CombatManager : MonoBehaviour
         return -char1.CompareTo(char2);
     }
 
+    public void SortLeader()
+    {
+        PartySort sort = levelManager.playerParty.GetComponent<PartySort>();
+        if (sort != null)
+        {
+            sort.SortParty();
+        }
+        else
+        {
+            Debug.LogError("PartySort not found, cannot sort leader");
+        }
+    }
 
 	#region Targeting and Ability Use
 	public void AssignTargets(List<Character> targetsToAssign, Ability ability)
