@@ -207,7 +207,7 @@ public abstract class Character : MonoBehaviour
 
 	}
 
-	public void UseAbility(List<Character> targets, float modifier = 0.0f)
+	public void UseAbility(List<Character> targets, float modifier = 1.0f)
 	{
 		if (selectedAbilityIndex < 0 || selectedAbilityIndex >= abilities.Count) 
 		{
@@ -221,7 +221,7 @@ public abstract class Character : MonoBehaviour
 			}
 			Debug.Log (this.gameObject.name + " is using " + abilities [selectedAbilityIndex].abilityName);
 			abilities [selectedAbilityIndex].SetTargets (targets);
-			abilities [selectedAbilityIndex].UseAbility ();
+			abilities [selectedAbilityIndex].UseAbility (modifier);
 		}
 	}
 
@@ -368,6 +368,7 @@ public abstract class Character : MonoBehaviour
 		physicalDamage -= defense;
 		if (physicalDamage >= 1)
 		{
+            //play sound for taking damage
 			currentHealth -= (uint)Mathf.Clamp(physicalDamage, 0, currentHealth);          
 			if (currentHealth <= 0)
 			{
@@ -378,17 +379,20 @@ public abstract class Character : MonoBehaviour
 
 	void Heal(uint healing = 0)
 	{
+        //replenish health sound
 		currentHealth = (currentHealth + healing) > maxhealth ? maxhealth : (currentHealth + healing);
 	}
 
     public void ReduceHeat(uint amount = 0)
     {
+        Debug.Log(amount + " amount of water used");
         currentHeat -= (uint)Mathf.Clamp(amount, 0, currentHeat);
         HeatReduceThreshold();
     }
 
     public void DealHeatDamage(int heatDamage)
     {
+        //increase heat sound
         currentHeat += (uint)Mathf.Clamp(heatDamage, 0, (maxHeat - currentHeat));		//Clamps the amount of heat damage so that it does not go above the maximumn.
         Debug.Log(name + " current heat is " + currentHeat);
         CheckHeatThreshold();
@@ -455,6 +459,7 @@ public abstract class Character : MonoBehaviour
 	{
         if (poisonDamage >= 1)
         {
+            //poison sound
             currentHealth -= (uint)Mathf.Clamp(poisonDamage, 0, currentHealth);
             if (currentHealth <= 0)
             {
@@ -467,6 +472,7 @@ public abstract class Character : MonoBehaviour
     {
         if (bleedDamage >= 1)
         {
+            //bleeding sound
             currentHealth -= (uint)Mathf.Clamp(bleedDamage, 0, currentHealth);
             if (currentHealth <= 0)
             {
@@ -514,7 +520,7 @@ public abstract class Character : MonoBehaviour
     {
 		Debug.Log(this.gameObject.name + " died!");
         combatState = CombatState.EXHAUSTED;
-
+        //fainting sound
 		if (this is EnemyCharacter)
 		{
 			this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;

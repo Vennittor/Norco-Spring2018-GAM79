@@ -23,8 +23,6 @@ public class UIManager : MonoBehaviour
     public EventSystemManager eventSystemManager;
     //private Character character;
 
-    public Image healthBar;
-
 	public bool disableUIOnStart = true;
 
 	public GameObject splashMessagePanel;
@@ -153,6 +151,7 @@ public class UIManager : MonoBehaviour
 
 	public void InputAbility(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
 	{
+        
 		if (inputMode == InputMode.ABILITYSELECT)
 		{
 			bool stopAbility = false;
@@ -301,7 +300,7 @@ public class UIManager : MonoBehaviour
 
 	public void SendTargets()        						//Assign Targets back to activeCharacter.
 	{
-		combatManager.AssignTargets(collectedTargets);
+		combatManager.AssignTargets(collectedTargets, ability);
 
 		TurnWhite ();
 

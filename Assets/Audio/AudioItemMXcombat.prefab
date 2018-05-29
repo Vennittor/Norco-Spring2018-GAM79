@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 82168261680304160}
   m_Layer: 0
   m_Name: AudioItemMXcombat
-  m_TagString: Untagged
+  m_TagString: CombatMX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

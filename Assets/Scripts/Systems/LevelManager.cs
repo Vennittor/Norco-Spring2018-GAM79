@@ -142,6 +142,7 @@ public class LevelManager : MonoBehaviour
         }
         
 
+
         SoundManager.instance.Play(levelMusic, "mxL"); //play the level music
         // check if null onload
 
@@ -149,13 +150,12 @@ public class LevelManager : MonoBehaviour
 		{
 			if (levelUI != null)
 			{
-                Debug.Log("Hi");
                 swipeImage = LevelUIManager.Instance.swipeImage;
 			}
-			/*else
+			else
 			{
 				swipeImage = GameObject.Find ("Swipe Image").GetComponent<Image>();
-			}*/
+			}
 
 			if (swipeImage == null)
 			{
@@ -217,13 +217,8 @@ public class LevelManager : MonoBehaviour
         {
             transitionImage.enabled = true;
         }
-
-        if (transitionImage != null && levelUI != null)
-        {
-            transitionImage.enabled = true;
-        }
     }
-
+		
     public void GetHeat(uint heat)
     {
         partyHeatIntensity = heat;
@@ -259,13 +254,13 @@ public class LevelManager : MonoBehaviour
 			//Perform Enter 'swipe'
 			Vector2 startingAnchorMin = Vector2.zero;
 			float i = 0f;
-            /*
+            
            if(swipeImage == null)
             {
                 Debug.Log("Find Swipe Image"); 
                 swipeImage = GameObject.Find("Swipe Image").GetComponent<Image>();
             }
-            */
+            
 
 			if (swipeImage != null)
 			{
@@ -465,6 +460,12 @@ public class LevelManager : MonoBehaviour
 
    public IEnumerator Transition()
     {
+		if (transitionImage == null)
+		{
+			Debug.Log ("There is no TransitionImage");
+			yield break;
+		}
+
         transitionImage.enabled = true;
 
         float i = 0;

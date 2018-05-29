@@ -17,7 +17,7 @@ public class Damage
 		}
 	}
 
-	public int RollDamage()
+	public int RollDamage(float modifier = 1.0f)
 	{
 		int totalDamage = 0;
 
@@ -32,7 +32,8 @@ public class Damage
 				totalDamage += Random.Range ((int)damageRange.x, (int)damageRange.y + 1);
 			}
 		}
-
+        //calc total from the rand number and the modifier
+        totalDamage = totalDamage * (int)modifier;
 		return totalDamage;
 	}
 

@@ -24,7 +24,10 @@ MonoBehaviour:
     - {x: 1, y: 2}
     elementType: 0
   statuses: 
+  statusChance: 0
+  stunDuration: 0
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 3
   characterUser: {fileID: 0}
+  abilitySound: {fileID: 8300000, guid: 8be8f34bafc6dec4d8fee0ba62aeeb54, type: 3}

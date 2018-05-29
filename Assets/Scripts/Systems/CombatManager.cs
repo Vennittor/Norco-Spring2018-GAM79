@@ -415,7 +415,7 @@ public class CombatManager : MonoBehaviour
     }
 
 	#region Targeting and Ability Use
-	public void AssignTargets(List<Character> targetsToAssign)
+	public void AssignTargets(List<Character> targetsToAssign, Ability ability)
 	{
 		//check if the character using the Ability (most likely activeCharacter) has any effect that would cause them to change targets, like StatusEffect confusion.
 		//check if the intended targets have any re-direction effects, (like Cover, or Reflect)
@@ -430,7 +430,15 @@ public class CombatManager : MonoBehaviour
 		{
 			if (!actionBarRunning)
 			{
-				StartCoroutine (ActionSlider ());
+                if(ability.type == ActionType.SLIDER)
+                {
+                    StartCoroutine(ActionSlider());
+                }
+                if(ability.type == ActionType.NORMAL)
+                {
+                    UseCharacterAbility();
+                }
+                
 			}
 			else
 			{
@@ -452,7 +460,7 @@ public class CombatManager : MonoBehaviour
         uiManager.GetComponentInChildren<CanvasGroup>().interactable = false;
         actionSlider.SetActive(true);
 
-		float modifiedEffect = 0f;
+		float modifiedEffect = 1f;
         float midMin = 25;
         float midMax = 85;
 
@@ -492,10 +500,12 @@ public class CombatManager : MonoBehaviour
                 if (val >= minVal && val <= maxVal)
                 {
                     print("you hit it!" + val);
+                    modifiedEffect = 5f;
                 }
                 else
                 {
                     print("ya bum!" + val);
+                    modifiedEffect = 1f;
                 }
 
                 going = false;
@@ -520,20 +530,20 @@ public class CombatManager : MonoBehaviour
 		UseCharacterAbility (modifiedEffect);
 	}
 
-	void UseCharacterAbility(float modifier = 0.0f)
+	void UseCharacterAbility(float modifier = 1.0f)
 	{
 		activeCharacter.UseAbility (finalizedTargets, modifier);
 
 		finalizedTargets.Clear ();
 	}
 
-	public void AssignTargets(Character targetToAssign)			//Overload to take in a single Character as opposed to a List
+	public void AssignTargets(Character targetToAssign, Ability ability)			//Overload to take in a single Character as opposed to a List
 	{
 		List<Character> target = new List<Character> ();
 
 		target.Add (targetToAssign);
 
-		AssignTargets (target);
+		AssignTargets (target, ability);
 	}
 
 	//TODO
