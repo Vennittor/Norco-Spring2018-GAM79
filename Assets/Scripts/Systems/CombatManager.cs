@@ -206,7 +206,11 @@ public class CombatManager : MonoBehaviour
 
     public void UpdateLeader()
     {
-        if (leaderCurrentCooldown == 0)
+        if (activeLeader == activeCharacter)
+        {
+            Debug.Log("Current character is the leader, no swap required");
+        }
+        else if (leaderCurrentCooldown == 0)
         {
             if (activeCharacter is PlayerCharacter)
             {

@@ -212,7 +212,10 @@ public class UIManager : MonoBehaviour
 
     public void InputLeader()
     {
-        combatManager.UpdateLeader();
+        if (inputMode == InputMode.ABILITYSELECT)
+        {
+            combatManager.UpdateLeader();
+        }
     }
 		
     public void OutputWaterUse()
