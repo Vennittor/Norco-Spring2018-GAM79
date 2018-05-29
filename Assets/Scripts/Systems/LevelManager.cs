@@ -86,10 +86,7 @@ public class LevelManager : MonoBehaviour
 			}
 		}
 			
-		if (partyPos == null)
-		{
-			partyPos = playerParty.transform.position;
-		}
+		partyPos = playerParty.transform.position;
 
 
 		transitionMan = FindObjectOfType<TransitionManager>();
@@ -236,9 +233,8 @@ public class LevelManager : MonoBehaviour
     public void SetCombatPoint(Party enemyParty, Party playerParty)
     {
         camDock.Reposition(); 
-        Transform partyPos = playerParty.transform.GetComponent<Transform>();
         enemyParty.transform.position = new Vector3(eParty.transform.position.x + 5, eParty.transform.position.y, eParty.transform.position.z);
-        enemyParty.GetComponent<Transform>().position = eParty.transform.position; 
+        enemyParty.transform.position = eParty.transform.position; 
     }
 
 	public IEnumerator InitiateCombat(Party player, Party enemy)
@@ -433,19 +429,16 @@ public class LevelManager : MonoBehaviour
     // Transition Levels
 
     public void SetEntrancePosition(Party playerParty)
-    { 
-        if (partyPos != null)
+    {
+        partyPos = transitionMan.entranceTransform.position;
+
+		playerParty.transform.position = partyPos;
+
+        if(entrance.gameObject == null)
         {
             partyPos = transitionMan.entranceTransform.position;
-
-			playerParty.transform.position = partyPos;
-
-           if(entrance.gameObject == null)
-            {
-                partyPos = transitionMan.entranceTransform.position;
-                Instantiate(entrance.gameObject, entrance.transform.position, entrance.transform.rotation);
-                entrance.transform.position = partyPos; 
-            }
+            Instantiate(entrance.gameObject, entrance.transform.position, entrance.transform.rotation);
+            entrance.transform.position = partyPos; 
         }
     }
 

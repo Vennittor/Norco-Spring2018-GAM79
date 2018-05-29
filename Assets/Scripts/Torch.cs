@@ -12,7 +12,7 @@ public class Torch : MonoBehaviour
     public Color color1 = Color.white;
     public Color color2 = Color.white;
 
-    private Light light = null;
+    private new Light light;
 
 	// Use this for initialization
 	void Start ()

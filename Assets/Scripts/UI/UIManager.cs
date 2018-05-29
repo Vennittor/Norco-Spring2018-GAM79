@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
 	public float splashLifeTime = 1.0f;
 
 	public GameObject actionSlider;
+    //public Image healthBar;
 
 	public List<Button> skillButtons = new List<Button> ();
 
@@ -310,18 +311,18 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpdateHealthBar(Character character)
-    {
-		if (healthBar != null)
-		{
-            // healthBar is a Dias, but doesn't seem to be attached to anyone or doing anything?
-            healthBar.fillAmount = character.currentHealth / character.maxhealth;
-        }
-		else
-		{
-			Debug.LogError ("No refrence to Health Bar");
-		}
-    }
+  //  public void UpdateHealthBar(Character character)
+  //  {
+		//if (healthBar != null)
+		//{
+  //          // healthBar is a Dias, but doesn't seem to be attached to anyone or doing anything?
+  //          healthBar.fillAmount = character.currentHealth / character.maxhealth;
+  //      }
+		//else
+		//{
+		//	Debug.LogError ("No refrence to Health Bar");
+		//}
+  //  }
 
     #region HighlightTargets
     public void TurnRed(List<Character> targets) 			// highlight in Red on Mouse-over

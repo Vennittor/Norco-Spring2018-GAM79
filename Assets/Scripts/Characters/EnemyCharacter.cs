@@ -53,7 +53,7 @@ public class EnemyCharacter : Character
 	{	Debug.Log ("Enemy GetTargets");
         if (ability.targetType.who == TargetType.Who.OPPONENT && ability.targetType.formation == TargetType.Formation.SINGLE)
         {
-            combatManager.AssignTargets(combatManager.activeLeader);
+            combatManager.AssignTargets(combatManager.activeLeader, ability);
         }
         else if (ability.targetType.who == TargetType.Who.OPPONENT && ability.targetType.formation == TargetType.Formation.GROUP)
         {
@@ -65,15 +65,15 @@ public class EnemyCharacter : Character
                     characters.Add(character);
                 }
             }
-            combatManager.AssignTargets(characters);
+            combatManager.AssignTargets(characters, ability);
         }
         else if (ability.targetType.who == TargetType.Who.SELF)
         {
-            combatManager.AssignTargets(this);
+            combatManager.AssignTargets(this, ability);
         }
         else if (ability.targetType.who == TargetType.Who.ALLY && ability.targetType.formation == TargetType.Formation.SINGLE)
         {
-            combatManager.AssignTargets(RandEnemyTarget());
+            combatManager.AssignTargets(RandEnemyTarget(), ability);
         }
         else if (ability.targetType.who == TargetType.Who.ALLY && ability.targetType.formation == TargetType.Formation.GROUP)
         {
@@ -85,7 +85,7 @@ public class EnemyCharacter : Character
                     characters.Add(character);
                 }
             }
-            combatManager.AssignTargets(characters);
+            combatManager.AssignTargets(characters, ability);
         }
         else if (ability.targetType.who == TargetType.Who.EVERYONE)
         {
@@ -97,7 +97,7 @@ public class EnemyCharacter : Character
                     characters.Add(character);
                 }
             }
-            combatManager.AssignTargets(characters);
+            combatManager.AssignTargets(characters, ability);
         }
     }
 
