@@ -194,6 +194,7 @@ MonoBehaviour:
   swipeImage: {fileID: 0}
   transitionImage: {fileID: 0}
   playerParty: {fileID: 0}
+  pParty: {fileID: 0}
   partyHeatIntensity: 0
   cameraTarget: {fileID: 0}
   heatWavePrefab: {fileID: 0}
@@ -272,10 +273,13 @@ MonoBehaviour:
   inCombat: 0
   characters: []
   activeCharacter: {fileID: 0}
+  activeLeader: {fileID: 0}
   activePlayers: []
   activeEnemies: []
   currentRoundCharacters: []
   roundCounter: 0
+  leaderInitCooldown: 2
+  leaderCurrentCooldown: 0
   partyHeatLevel: 0
   t1Statuses: 0100000004000000
   t2Statuses: 05000000
