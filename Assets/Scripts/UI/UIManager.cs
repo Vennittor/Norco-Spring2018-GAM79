@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
 
     public CombatManager combatManager;
     public EventSystemManager eventSystemManager;
+    //private Character character;
 
 	public bool disableUIOnStart = true;
 
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
 	public float splashLifeTime = 1.0f;
 
 	public GameObject actionSlider;
+    //public Image healthBar;
 
 	public List<Button> skillButtons = new List<Button> ();
 
@@ -51,7 +53,7 @@ public class UIManager : MonoBehaviour
     {
         if (uIInstance != null && uIInstance != this)
         {
-			Debug.LogError ("more than one UIManager in scene.  Removing this one");
+			//Debug.LogError ("more than one UIManager in scene.  Removing this one");
             Destroy(gameObject);
             return;
         }
@@ -92,20 +94,20 @@ public class UIManager : MonoBehaviour
 		}
 
 		HighlightTargets ();
-
-        if (Input.GetMouseButtonDown (0)) 						//when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
-		{
-			if (inputMode == InputMode.TARGETING) 
-			{
-				if (collectedTargets.Count > 0)
-				{
-					SendTargets ();
-				}
-				else
-				{
-					Debug.Log("No targets were collected, continuing to target");
-				}
-			}
+        
+        if (Input.GetMouseButtonDown (0))                //when left click is performed, set tat abilites targets dna use the ability, then go back into Ability Select
+		{            
+            if (inputMode == InputMode.TARGETING)
+            {
+                if (collectedTargets.Count > 0)
+                {
+                    SendTargets();
+                }
+                else
+                {
+                    Debug.Log("No targets were collected, continuing to target");
+                }
+            }            
 		}
 		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
         {
@@ -150,10 +152,11 @@ public class UIManager : MonoBehaviour
 
 	public void InputAbility(int abilityIndex) 					//This should be called by a button or other user input.  the index of the Ability to be called in the related Character class should be used
 	{
+        
 		if (inputMode == InputMode.ABILITYSELECT)
 		{
 			bool stopAbility = false;
-			foreach(Character.EffectClass effect in combatManager.activeCharacter.effectClassList)
+			foreach(EffectClass effect in combatManager.activeCharacter.effectClassList)
 			{
 				if(effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
 				{
@@ -166,6 +169,10 @@ public class UIManager : MonoBehaviour
 				if (abilityIndex >= 0 && abilityIndex < combatManager.activeCharacter.abilityCount)
 				{
 					ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility (abilityIndex);
+                    if (combatManager.activeCharacter.name == "Crusader" && ability.abilityName == "Battle Cry")
+                    {
+                        combatManager.BattlecrySwapLeader();
+                    }
 
 					if (ability == null)
 					{
@@ -183,9 +190,32 @@ public class UIManager : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log("Active Character ability use is blocked. ");
+                if (abilityIndex == 0 || abilityIndex == 3)
+                {
+                    ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility(abilityIndex);
+                    if (ability == null)
+                    {
+                        Debug.LogWarning("Mad cuz bad");
+                    }
+                    else
+                    {
+                        GetTargets(ability.targetType);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Still mad, try another ability");
+                }
 			}
 		}
+    }
+
+    public void InputLeader()
+    {
+        if (inputMode == InputMode.ABILITYSELECT)
+        {
+            combatManager.UpdateLeader();
+        }
     }
 		
     public void OutputWaterUse()
@@ -274,7 +304,7 @@ public class UIManager : MonoBehaviour
 
 	public void SendTargets()        						//Assign Targets back to activeCharacter.
 	{
-		combatManager.AssignTargets(collectedTargets);
+		combatManager.AssignTargets(collectedTargets, ability);
 
 		TurnWhite ();
 
@@ -284,8 +314,20 @@ public class UIManager : MonoBehaviour
 
     }
 
+  //  public void UpdateHealthBar(Character character)
+  //  {
+		//if (healthBar != null)
+		//{
+  //          // healthBar is a Dias, but doesn't seem to be attached to anyone or doing anything?
+  //          healthBar.fillAmount = character.currentHealth / character.maxhealth;
+  //      }
+		//else
+		//{
+		//	Debug.LogError ("No refrence to Health Bar");
+		//}
+  //  }
 
-	#region HighlightTargets
+    #region HighlightTargets
     public void TurnRed(List<Character> targets) 			// highlight in Red on Mouse-over
     {
         foreach(Character target in targets)

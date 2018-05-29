@@ -6,21 +6,52 @@ public class PlayerCharacter : Character
 {
 	[SerializeField] private Water water;
     [SerializeField] private int waterUses = 3;
+    public bool isLeader;
 
-    void Awake()
+    private new void Awake()
     {
+		base.Awake ();
+
         animator = gameObject.GetComponent<Animator>();
     }
 
-    private new void Start()
-    {
+    protected override void Start()
+	{
         base.Start();
+
+        if (baseStats == null)
+        {
+            Debug.LogError("No Base Stats on " + name);
+        }
+        else if (baseStats.leaderAbilities.Count == 0)
+        {
+            Debug.LogError("No LeaderAbilities on " + name + ". Assign them through the inspector in their BaseStats");
+        }
+        else if (baseStats.leaderAbilities.Count != 3)
+        {
+            Debug.LogWarning("There are " + baseStats.leaderAbilities.Count + " LeaderAbilities on " + name);
+        }
+    }
+
+    private void UpdateAbilities()
+    {
+        if (isLeader)
+        {
+            abilities.Clear();
+            abilities.AddRange(baseStats.leaderAbilities);
+        }
+        else
+        {
+            abilities.Clear();
+            abilities.AddRange(baseStats.baseAbilities);
+        }
     }
 
     public override void BeginTurn()
     {
         base.BeginTurn();
 
+        UpdateAbilities();
         if (canAct)
         {
             combatManager.uiManager.UpdateAbilityButtons(abilities);
@@ -43,6 +74,7 @@ public class PlayerCharacter : Character
     //call to water class   
     public Ability ReadyUseWater()
     {
+        Debug.Log("buttface");
 		if (water == null) 
 		{
 			Debug.Log ("There is no Water Ability for " + this.characterName);

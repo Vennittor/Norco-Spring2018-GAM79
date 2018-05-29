@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628256c8b66cd4c42987ce0e51d5f0d8, type: 3}
+  m_Name: Crusader
+  m_EditorClassIdentifier: 
+  _characterName: Crusader
+  _characterImage: {fileID: 2100000, guid: a2afce8baca3c804191432df4d7357c3, type: 2}
+  _animatorController: {fileID: 9100000, guid: bd5e0137f6de0694d853d25a20609ce2, type: 2}
+  _maxHealth: 50
+  _maxHeat: 300
+  _baseAbilities:
+  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
+  - {fileID: 11400000, guid: a04b570ddc5a93040ad129b7d1cf8541, type: 2}
+  - {fileID: 11400000, guid: bd6287438c74e4c4783c3a0b6374f0c7, type: 2}
+  _leaderAbilities:
+  - {fileID: 11400000, guid: f1d5092c67dcbb04fb0cf80956dfdb77, type: 2}
+  _accuracy: 84.5
+  _evade: 10
+  _speed: 2
+  _defense: 1
+  _queueImage: {fileID: 0}
+  _externalAI: {fileID: 0}

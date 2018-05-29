@@ -4,11 +4,15 @@ using UnityEngine;
 
 public enum StatusEffectType
 {
-    Lethargy,
+    Anemia,
+    Battlecry,
     Berserk,
-    Stun,
-    Smoke,
+    Bleed,
+    Crippled,
+    Dizzy,
+    Hobbled,
+    Poison,
     Scared,
-    Blind,
-    Bleed
+    Smoke,
+    Stun
 }

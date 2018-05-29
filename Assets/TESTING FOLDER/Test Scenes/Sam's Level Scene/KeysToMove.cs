@@ -6,8 +6,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class KeysToMove : MonoBehaviour
 {
-	CombatManager combatManager;
-
 	public Animator myAnimator;
 
     NavMeshAgent agent;
@@ -31,7 +29,6 @@ public class KeysToMove : MonoBehaviour
         //TEST
         LevelManager levMan = LevelManager.Instance;
         levMan.playerParty = this.gameObject;
-        combatManager = CombatManager.Instance;
 
 		if (myAnimator == null) 
 		{
@@ -45,7 +42,7 @@ public class KeysToMove : MonoBehaviour
     {
 		if (movementAllowed)
         {
-            Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            Vector3 input = Vector3.right;
 
 			if (input != Vector3.zero) 
 			{
@@ -75,10 +72,10 @@ public class KeysToMove : MonoBehaviour
                 agent.destination = transform.position;
             }
 
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                Instantiate(interactionPrefab, transform.position + Vector3.right * (facingRight ? 1 : -1), Quaternion.identity);
-            }
+            //if (Input.GetKeyDown(KeyCode.Z))
+            //{
+            //    Instantiate(interactionPrefab, transform.position + Vector3.right * (facingRight ? 1 : -1), Quaternion.identity);
+            //}
 
             if (agent.velocity.x > 0)
             {

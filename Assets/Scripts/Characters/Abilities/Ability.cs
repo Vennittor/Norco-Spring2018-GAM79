@@ -14,7 +14,10 @@ public class Ability : ScriptableObject
 	[SerializeField] private int heatCost = 0;  //TODO impement heat damage to user on Ability use.
 	public TargetType targetType;
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
+    [SerializeField] protected ActionType actionType = ActionType.NORMAL;
 	[SerializeField] protected List<StatusEffectType> statuses = new List<StatusEffectType>();
+    [SerializeField] private float statusChance;
+    [SerializeField] private uint stunDuration;
 
 	[SerializeField] protected uint numberOfActions = 1;			//When the Ability is done, instead of telling the player AbilityHasCompleted, it can accept another targeting input
 	protected uint actionsUsed = 0;
@@ -26,19 +29,18 @@ public class Ability : ScriptableObject
 
     protected List<Character> targets = new List<Character>();
 
+    public AudioClip abilitySound;
+
+    public ActionType type
+    {
+        get
+        {
+            return actionType;
+        }
+    }
     // EFFECTS DATA
     //public Sprite image; // for effects
     //Animators & Parameters
-
-    
-
-	/*public uint Cooldown 
-	{
-		get
-		{
-			return _cooldown;
-		}
-	}*/
 
 	public string targetName 
 	{
@@ -105,9 +107,10 @@ public class Ability : ScriptableObject
 		//TODO Ready an special effects that may happen when a Character is preparing to use the Ability
     }
 
-	public void UseAbility()
+	public void UseAbility(float modifier = 1.0f)
 	{
-		if (targets.Count == 0)
+        float randAccuracy;
+        if (targets.Count == 0)
 		{
 			Debug.LogWarning ("There are no targets for Abiility " + name);
 		} 
@@ -115,9 +118,9 @@ public class Ability : ScriptableObject
 		{
 			if (characterUser.animator != null) 
 			{
-				characterUser.animator.SetTrigger ("Strike");		//Tells animator to go into the Strike animation
-				characterUser.animator.SetBool ("Ready", false);	//When the Strike animation goes to REcover, with "Ready" being false, it should transition back to Idle
-				characterUser.animator.SetBool("Idle", true);
+				characterUser.animator.SetTrigger ("Attack");		//Tells animator to go into the Strike animation
+//				characterUser.animator.SetBool ("Ready", false);	//When the Strike animation goes to REcover, with "Ready" being false, it should transition back to Idle
+//				characterUser.animator.SetBool("Idle", true);
 			}
 			else 
 			{
@@ -126,23 +129,46 @@ public class Ability : ScriptableObject
 			}
 
             AnnounceAbility();
+            SoundCaller();
+            for (int hitsDone = 0; hitsDone < hitsPerAction; hitsDone++)
+            {
+                foreach (Character target in targets)                   // Target all applicable targets
+                {
+                    if(target.evade >= characterUser.accuracy)
+                    {
+                        Debug.Log("you suck");
+                    }
+                    else
+                    {
+                        randAccuracy = Random.Range(0, 100);
+                        if (randAccuracy <= characterUser.accuracy - target.evade)
+                        {
+                            foreach (Damage range in damage)                    // Deal all types of Damage in List
+                            {
+                                target.ApplyDamage((uint)range.RollDamage(modifier), range.element);
+                            }
 
-			for(int hitsDone = 0; hitsDone < hitsPerAction; hitsDone++)
-			{
-				foreach (Character target in targets)					// Target all applicable targets
-				{ 
-					foreach (Damage range in damage)					// Deal all types of Damage in List
-					{
-						target.ApplyDamage ( (uint)range.RollDamage(), range.element);
-					} 
-
-					foreach (StatusEffectType status in statuses)					// Apply all Status affects
-					{ 
-						target.ApplyStatus(status);
-					} 
-				}
-				//TODO Wait Between hits
-			}
+					        foreach (StatusEffectType status in statuses)					// Apply all Status affects
+					        {
+                                float rand = Random.Range(0f, 100f);
+                                if (rand < statusChance)
+                                {
+                                    target.ApplyStatus(status, stunDuration);
+                                }
+                                else
+                                {
+                                    Debug.Log("Status missed");
+                                }
+                            } 
+				        }
+                        else
+                        {
+                            Debug.Log("they could dodge a wrench");
+                        }
+                    }
+                }
+                //TODO Wait Between hits
+            }
 		}
 
 		actionsUsed++;
@@ -163,8 +189,8 @@ public class Ability : ScriptableObject
 
 			if (characterUser.animator != null)
 			{
-				characterUser.animator.SetBool ("Idle", true);
-				characterUser.animator.SetBool ("Ready", false);
+//				characterUser.animator.SetBool ("Idle", true);
+//				characterUser.animator.SetBool ("Ready", false);
 			}
 			else
 			{
@@ -199,4 +225,8 @@ public class Ability : ScriptableObject
         }
     }
 
+    public void SoundCaller()
+    {
+        SoundManager.instance.Play(abilitySound, "sfx");
+    }
 }

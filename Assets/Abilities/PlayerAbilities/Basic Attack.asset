@@ -23,8 +23,12 @@ MonoBehaviour:
   - damageRanges:
     - {x: 5, y: 10}
     elementType: 0
+  actionType: 0
   statuses: 
+  statusChance: 0
+  stunDuration: 0
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 0
   characterUser: {fileID: 0}
+  abilitySound: {fileID: 8300000, guid: 542fd4c42735b3c4bba8a1fd21bdef7f, type: 3}

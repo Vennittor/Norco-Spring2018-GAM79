@@ -18,29 +18,35 @@ public class CombatManager : MonoBehaviour
 	[SerializeField] private List<Character> characters;
 
     public Character activeCharacter;
+    public PlayerCharacter activeLeader;
 	public List<PlayerCharacter> activePlayers;
 	public List<EnemyCharacter> activeEnemies;
 
     public List<Character> currentRoundCharacters;
 
-	public uint roundCounter = 0;
+	public uint roundCounter;
+    public uint leaderInitCooldown;
+    public uint leaderCurrentCooldown;
 
     public uint partyHeatLevel;
+    public List<StatusEffectType> t1Statuses;
+    public List<StatusEffectType> t2Statuses;
+
 
     //for the action slider start
-	public GameObject actionSlider;
+    public GameObject actionSlider;
     public Slider slider;
     public Image completionArea;
 
     public float fillTime = 1;
 
     [Range(0, 100)]
-    public float midPoint;
+    private float midPoint;
     public float distanceBetweenInPoints;
 
     public float startDelay = 0.5f;
 
-    bool started = false;
+    bool actionBarRunning = false;
     //for the action slider end
 
     private List<Character> finalizedTargets = new List<Character> ();
@@ -81,6 +87,7 @@ public class CombatManager : MonoBehaviour
 
     void Start()
     {
+        
 		levelManager = LevelManager.Instance;
 		uiManager = UIManager.Instance;
 
@@ -90,6 +97,8 @@ public class CombatManager : MonoBehaviour
         activeEnemies = new List<EnemyCharacter>();
 
         partyHeatLevel = 0;
+        roundCounter = 0;
+        leaderCurrentCooldown = 0;
 
 		if (actionSlider == null)
 		{
@@ -111,11 +120,9 @@ public class CombatManager : MonoBehaviour
 		{
 			Debug.LogError ("CombatManager cannot find Action Slider gamObject");
 		}
-
     }
 
-
-	public void AddCharactersToCombat(List<Character> charactersToAdd)
+    public void AddCharactersToCombat(List<Character> charactersToAdd)
 	{
 		foreach(Character characterToAdd in charactersToAdd)
 		{
@@ -132,6 +139,13 @@ public class CombatManager : MonoBehaviour
 		if(!inCombat) 
 		{
 			inCombat = true;
+            foreach (PlayerCharacter player in levelManager.pParty.partyMembers)
+            {
+                if (player.isLeader)
+                {
+                    activeLeader = player;
+                }
+            }
             SoundManager.instance.Play(battleSong, "mxC");
 
 			roundCounter = 0;
@@ -150,6 +164,10 @@ public class CombatManager : MonoBehaviour
 	{
         Debug.Log ("New Round!");
 		roundCounter++;
+        if (leaderCurrentCooldown != 0)
+        {
+            leaderCurrentCooldown--;
+        }
 		SortRoundQueue();
 
 		activeCharacter.BeginTurn ();
@@ -186,7 +204,40 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-	public void NextTurn() // active player finishing their turn calls this
+    public void UpdateLeader()
+    {
+        if (activeLeader == activeCharacter)
+        {
+            Debug.Log("Current character is the leader, no swap required");
+        }
+        else if (leaderCurrentCooldown == 0)
+        {
+            if (activeCharacter is PlayerCharacter)
+            {
+                leaderCurrentCooldown = leaderInitCooldown;
+                activeLeader.isLeader = false;
+                (activeCharacter as PlayerCharacter).isLeader = true;
+                activeLeader = (activeCharacter as PlayerCharacter);
+                levelManager.playerParty.GetComponent<PartySort>().SortParty();
+                NextTurn(); // TODO announcer calls first
+            }
+        }
+        else
+        {
+            Debug.Log("Leader button is still on cooldown. Wait " + leaderCurrentCooldown + " more " + (leaderCurrentCooldown == 1 ? "turn." : "turns."));
+        }
+    }
+
+    public void BattlecrySwapLeader()
+    {
+        activeLeader.isLeader = false;
+        (activeCharacter as PlayerCharacter).isLeader = true;
+        activeLeader = (activeCharacter as PlayerCharacter);
+        levelManager.playerParty.GetComponent<PartySort>().SortParty();
+        // TODO announcer calls
+    }
+
+    public void NextTurn() // active player finishing their turn calls this
 	{
 		if (!VictoryCheck())
 		{
@@ -202,7 +253,7 @@ public class CombatManager : MonoBehaviour
 				Debug.Log (activeCharacter.gameObject.name + " is now the activeCharacter");
 				//TEST
 				StartCoroutine( "DelayNextTurn" );
-			}
+			}            
 		}
 	}
 
@@ -354,9 +405,21 @@ public class CombatManager : MonoBehaviour
         return -char1.CompareTo(char2);
     }
 
+    public void SortLeader()
+    {
+        PartySort sort = levelManager.playerParty.GetComponent<PartySort>();
+        if (sort != null)
+        {
+            sort.SortParty();
+        }
+        else
+        {
+            Debug.LogError("PartySort not found, cannot sort leader");
+        }
+    }
 
 	#region Targeting and Ability Use
-	public void AssignTargets(List<Character> targetsToAssign)
+	public void AssignTargets(List<Character> targetsToAssign, Ability ability)
 	{
 		//check if the character using the Ability (most likely activeCharacter) has any effect that would cause them to change targets, like StatusEffect confusion.
 		//check if the intended targets have any re-direction effects, (like Cover, or Reflect)
@@ -364,14 +427,27 @@ public class CombatManager : MonoBehaviour
 
 		finalizedTargets.AddRange (targetsToAssign);
 
-		//TODO  Handle the SLIDER here.  Once it's input is gotten (in the form of a multiplier/modifier) run the next and pass it the multiplier
-
 		//IF we should use the SLider,  (Check activeCharacter.selectedAbility and see if it should.  (this needs to be added to the Ability class
 			//enable slider.
 
 		if (activeCharacter is PlayerCharacter)
 		{
-			StartCoroutine(ActionSlider());
+			if (!actionBarRunning)
+			{
+                if(ability.type == ActionType.SLIDER)
+                {
+                    StartCoroutine(ActionSlider());
+                }
+                if(ability.type == ActionType.NORMAL)
+                {
+                    UseCharacterAbility();
+                }
+                
+			}
+			else
+			{
+				Debug.LogError ("ActionSlider is currently running and has been attempted to start again");
+			}
 		}
 		else
 		{
@@ -382,35 +458,39 @@ public class CombatManager : MonoBehaviour
 
 	private IEnumerator ActionSlider()
 	{
-		actionSlider.SetActive(true);
+        UIManager.InputMode oldMode = uiManager.inputMode;
+		actionBarRunning = true;
+        uiManager.inputMode = UIManager.InputMode.BLOCKED;
+        uiManager.GetComponentInChildren<CanvasGroup>().interactable = false;
+        actionSlider.SetActive(true);
 
-		float modifiedEffect = 0f;
+		float modifiedEffect = 1f;
         float midMin = 25;
         float midMax = 85;
 
         //Start
 		slider.value = 0;
 		slider.maxValue = fillTime;
-
+        midPoint = Random.Range(midMin, midMax);
         //Create the visual for the stopping area
-		float sliderSize = slider.GetComponent<RectTransform>().sizeDelta.y;
+        float sliderSize = slider.GetComponent<RectTransform>().sizeDelta.y;
         sliderSize *= midPoint * 0.01f;
 		sliderSize -= slider.GetComponent<RectTransform>().sizeDelta.y / 2;
         completionArea.GetComponent<RectTransform>().localPosition = Vector3.zero + (Vector3.up * sliderSize);
 
         completionArea.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, distanceBetweenInPoints * 2 * (actionSlider.GetComponent<RectTransform>().sizeDelta.y * 0.01f));
-        midPoint = Random.Range(midMin, midMax);
+        
         yield return new WaitForSeconds(startDelay);
 
         //Do the thing
         bool going = true;
         while (going)
         {
-			slider.value += Time.deltaTime * fillTime;
+            
+            slider.value += Time.deltaTime * fillTime;
 
-			if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+			if (Input.GetKeyDown(KeyCode.Space) /*|| Input.GetMouseButtonDown(0)*/)
             {
-                StartCoroutine("TestingThe1337m0dz");
 
                 float width = distanceBetweenInPoints * 2;
 
@@ -424,10 +504,12 @@ public class CombatManager : MonoBehaviour
                 if (val >= minVal && val <= maxVal)
                 {
                     print("you hit it!" + val);
+                    modifiedEffect = 5f;
                 }
                 else
                 {
                     print("ya bum!" + val);
+                    modifiedEffect = 1f;
                 }
 
                 going = false;
@@ -440,30 +522,32 @@ public class CombatManager : MonoBehaviour
                 going = false;
             }
         }
-
-        started = false;
+        uiManager.inputMode = oldMode;
+        uiManager.GetComponentInChildren<CanvasGroup>().interactable = true;
         Debug.Log("ACTION");
 
 		yield return null;
+
+		actionBarRunning = false;
 
 		uiManager.actionSlider.SetActive(false);
 		UseCharacterAbility (modifiedEffect);
 	}
 
-	void UseCharacterAbility(float modifier = 0.0f)
+	void UseCharacterAbility(float modifier = 1.0f)
 	{
 		activeCharacter.UseAbility (finalizedTargets, modifier);
 
 		finalizedTargets.Clear ();
 	}
 
-	public void AssignTargets(Character targetToAssign)			//Overload to take in a single Character as opposed to a List
+	public void AssignTargets(Character targetToAssign, Ability ability)			//Overload to take in a single Character as opposed to a List
 	{
 		List<Character> target = new List<Character> ();
 
 		target.Add (targetToAssign);
 
-		AssignTargets (target);
+		AssignTargets (target, ability);
 	}
 
 	//TODO
@@ -471,9 +555,4 @@ public class CombatManager : MonoBehaviour
 	//Function Redirect Target
 
 	#endregion
-     public IEnumerator TestingThe1337m0dz()
-    {
-        //robert is working here to test the modifier for the action slider
-        yield return null;
-    }
 }

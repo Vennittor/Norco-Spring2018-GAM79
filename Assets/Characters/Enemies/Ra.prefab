@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229315284464546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.12, y: 6.7042303, z: 10.507839}
+  m_LocalPosition: {x: -25.12, y: 4.99, z: 10.507839}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,26 +83,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: 
-  animator: {fileID: 0}
+  uiManager: {fileID: 0}
+  characterName: Amun Ra
+  baseStats: {fileID: 11400000, guid: c8386a835a17fc14d98a0626d85a28e0, type: 2}
   maxhealth: 0
   currentHealth: 0
   maxHeat: 0
   currentHeat: 0
+  abilities: []
   attack: 0
+  attackBonus: 0
   attackMod: 0
   accuracy: 84.5
+  accuracyBonus: 0
   accuracyMod: 0
   evade: 10
+  evadeBonus: 0
   evadeMod: 0
   speed: 0
+  speedBonus: 0
   speedMod: 0
   defense: 0
+  defenseBonus: 0
   defenseMod: 0
   combatState: 0
   selectedAbilityIndex: -1
-  abilities: []
-  cooldownTimers: 
+  effectClassList: []
+  statuses: 
+  removeStatus: []
+  hasT1Status: 0
+  hasT2Status: 0
+  externalAI: {fileID: 0}
 --- !u!212 &212302600392560356
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -135,7 +146,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 99c911a361ae197449cc0b1b1a35d080, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d64a6142380bc074ab10e9f4929d2ec8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

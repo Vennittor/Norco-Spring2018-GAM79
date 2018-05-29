@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628256c8b66cd4c42987ce0e51d5f0d8, type: 3}
+  m_Name: Cobra
+  m_EditorClassIdentifier: 
+  _characterName: Cobra
+  _characterImage: {fileID: 0}
+  _animatorController: {fileID: 9100000, guid: 77634d158fac9b64cb3b34398e8a2478, type: 2}
+  _maxHealth: 45
+  _maxHeat: 0
+  _baseAbilities:
+  - {fileID: 11400000, guid: ed6314696bf62e340841bec148e58213, type: 2}
+  - {fileID: 11400000, guid: 1c1060b5783de6343b01cfacb88f4171, type: 2}
+  _leaderAbilities: []
+  _attack: 0
+  _accuracy: 85
+  _evade: 10
+  _speed: 10
+  _defense: 1
+  _queueImage: {fileID: 0}
+  _externalAI: {fileID: 0}

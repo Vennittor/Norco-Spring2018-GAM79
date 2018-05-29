@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class EnemyCharacter : Character
 {
-    void Awake()
+	public MonoBehaviour externalAI = null;
+
+    private new void Awake()
     {
-        animator = gameObject.GetComponent<Animator>();
+		base.Awake ();
     }
 
-    private new void Start()
+    protected override void Start()
     {
         base.Start();
+
+		if (baseStats.externalAI != null)
+		{
+			externalAI = baseStats.externalAI;
+		}
     }
 
 	protected override void ChooseAbility()
@@ -44,21 +51,68 @@ public class EnemyCharacter : Character
 	#region AI Functions.		//TODO These FUnctions should be externalized for more robust and customizable AI's
 	void GetTargets(Ability ability)
 	{	Debug.Log ("Enemy GetTargets");
-		combatManager.AssignTargets(RandPlayerTarget() as Character);
-	}
+        if (ability.targetType.who == TargetType.Who.OPPONENT && ability.targetType.formation == TargetType.Formation.SINGLE)
+        {
+            combatManager.AssignTargets(combatManager.activeLeader, ability);
+        }
+        else if (ability.targetType.who == TargetType.Who.OPPONENT && ability.targetType.formation == TargetType.Formation.GROUP)
+        {
+            List<Character> characters = new List<Character>();
+            foreach (Character character in combatManager.activePlayers)
+            {
+                if (character.combatState != CombatState.EXHAUSTED)
+                {
+                    characters.Add(character);
+                }
+            }
+            combatManager.AssignTargets(characters, ability);
+        }
+        else if (ability.targetType.who == TargetType.Who.SELF)
+        {
+            combatManager.AssignTargets(this, ability);
+        }
+        else if (ability.targetType.who == TargetType.Who.ALLY && ability.targetType.formation == TargetType.Formation.SINGLE)
+        {
+            combatManager.AssignTargets(RandEnemyTarget(), ability);
+        }
+        else if (ability.targetType.who == TargetType.Who.ALLY && ability.targetType.formation == TargetType.Formation.GROUP)
+        {
+            List<Character> characters = new List<Character>();
+            foreach (Character character in combatManager.activeEnemies)
+            {
+                if (character.combatState != CombatState.EXHAUSTED)
+                {
+                    characters.Add(character);
+                }
+            }
+            combatManager.AssignTargets(characters, ability);
+        }
+        else if (ability.targetType.who == TargetType.Who.EVERYONE)
+        {
+            List<Character> characters = new List<Character>();
+            foreach (Character character in combatManager.charactersInCombat)
+            {
+                if (character.combatState != CombatState.EXHAUSTED)
+                {
+                    characters.Add(character);
+                }
+            }
+            combatManager.AssignTargets(characters, ability);
+        }
+    }
 
-    private PlayerCharacter RandPlayerTarget()
+    private EnemyCharacter RandEnemyTarget()
     {
-        List<PlayerCharacter> players = new List<PlayerCharacter>();
+        List<EnemyCharacter> players = new List<EnemyCharacter>();
         foreach (Character character in combatManager.charactersInCombat)
         {
-            if (character is PlayerCharacter)
+            if (character is EnemyCharacter)
             {
-                players.Add(character as PlayerCharacter);
+                players.Add(character as EnemyCharacter);
             }
         }
-        PlayerCharacter playerCharacter = players[Random.Range(0, players.Count)];
-        return playerCharacter;
+        EnemyCharacter enemyCharacter = players[Random.Range(0, players.Count)];
+        return enemyCharacter;
     }
-	#endregion
+    #endregion
 }

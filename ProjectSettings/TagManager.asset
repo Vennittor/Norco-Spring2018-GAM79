@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Button
   - Enemy
+  - Entrance
+  - Exit
+  - CombatMX
   layers:
   - Default
   - TransparentFX
@@ -16,8 +19,8 @@ TagManager:
   - 
   - 
   - Targeting
-  - 
-  - 
+  - Transition
+  - Player
   - 
   - 
   - 
@@ -42,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Layer_01
+    uniqueID: 988169311
+    locked: 0
+  - name: Layer_02
+    uniqueID: 591113631
     locked: 0

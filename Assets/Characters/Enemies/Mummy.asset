@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628256c8b66cd4c42987ce0e51d5f0d8, type: 3}
+  m_Name: Mummy
+  m_EditorClassIdentifier: 
+  _characterName: Mummy
+  _characterImage: {fileID: 0}
+  _animatorController: {fileID: 9100000, guid: 3ca3c046be2d77246b7411772aba417a, type: 2}
+  _maxHealth: 0
+  _maxHeat: 0
+  _abilities:
+  - {fileID: 11400000, guid: 0933f772d2760bf47894a075e12d6e2e, type: 2}
+  - {fileID: 11400000, guid: 43a9bfaba6a9da84a91bfb87a702bc5c, type: 2}
+  _attack: 0
+  _accuracy: 0
+  _evade: 0
+  _speed: 0
+  _defense: 0
+  _queueImage: {fileID: 0}
+  _externalAI: {fileID: 0}
