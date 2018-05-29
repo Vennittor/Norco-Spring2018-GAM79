@@ -281,8 +281,8 @@ MonoBehaviour:
   leaderInitCooldown: 2
   leaderCurrentCooldown: 0
   partyHeatLevel: 0
-  t1Statuses: 0100000004000000
-  t2Statuses: 05000000
+  t1Statuses: 
+  t2Statuses: 
   actionSlider: {fileID: 0}
   slider: {fileID: 0}
   completionArea: {fileID: 0}
