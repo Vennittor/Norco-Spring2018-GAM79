@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 65200964925320454}
   - component: {fileID: 95649564933839284}
   - component: {fileID: 212376585001280044}
+  - component: {fileID: 114271693516492972}
   m_Layer: 8
   m_Name: OldMan
   m_TagString: Untagged
@@ -94,6 +95,7 @@ GameObject:
   - component: {fileID: 65973163623362570}
   - component: {fileID: 95016072947047236}
   - component: {fileID: 212745153449636494}
+  - component: {fileID: 114245977983832098}
   m_Layer: 8
   m_Name: Female
   m_TagString: Untagged
@@ -113,6 +115,7 @@ GameObject:
   - component: {fileID: 65289608248838786}
   - component: {fileID: 95371604585159180}
   - component: {fileID: 212804638140227594}
+  - component: {fileID: 114659811675742230}
   m_Layer: 8
   m_Name: Crusader
   m_TagString: Untagged
@@ -381,6 +384,34 @@ MonoBehaviour:
   hasT2Status: 0
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
+--- !u!114 &114245977983832098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620286995922844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81abfaa479ce39541bbae8231db4aa95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  character: {fileID: 0}
+  instance: {fileID: 0}
+--- !u!114 &114271693516492972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614851838758744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81abfaa479ce39541bbae8231db4aa95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  character: {fileID: 0}
+  instance: {fileID: 0}
 --- !u!114 &114327966433383426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -428,6 +459,20 @@ MonoBehaviour:
   hasT2Status: 0
   water: {fileID: 11400000, guid: d04bb239f8237c644a526ac4aa049ef1, type: 2}
   waterUses: 3
+--- !u!114 &114659811675742230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1637437295010486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81abfaa479ce39541bbae8231db4aa95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  character: {fileID: 0}
+  instance: {fileID: 0}
 --- !u!114 &114695205217747764
 MonoBehaviour:
   m_ObjectHideFlags: 1

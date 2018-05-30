@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 224567737897977304}
   - component: {fileID: 222004163784433526}
   m_Layer: 5
-  m_Name: Portrait_Woman
+  m_Name: Portrait_Hunter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 224286718198212574}
   - component: {fileID: 222739147132088712}
   m_Layer: 5
-  m_Name: Portrait_OldMan
+  m_Name: Portrait_Alchemist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1619,7 +1619,6 @@ GameObject:
   - component: {fileID: 224182379870434736}
   - component: {fileID: 222157006402956010}
   - component: {fileID: 114388679788673060}
-  - component: {fileID: 114264181203446794}
   m_Layer: 5
   m_Name: Portrait_LifeBar
   m_TagString: Untagged
@@ -1670,7 +1669,6 @@ GameObject:
   - component: {fileID: 224983232735094048}
   - component: {fileID: 222000058386521524}
   - component: {fileID: 114239121021020376}
-  - component: {fileID: 114804619264298684}
   m_Layer: 5
   m_Name: Portrait_LifeBar
   m_TagString: Untagged
@@ -1774,7 +1772,6 @@ GameObject:
   - component: {fileID: 224360758793334106}
   - component: {fileID: 222951304001853982}
   - component: {fileID: 114734217204658326}
-  - component: {fileID: 114194607989338700}
   m_Layer: 5
   m_Name: Portrait_LifeBar
   m_TagString: Untagged
@@ -2634,19 +2631,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114194607989338700
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1959616339266970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81abfaa479ce39541bbae8231db4aa95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 114734217204658326}
-  character: {fileID: 0}
 --- !u!114 &114200094430342978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2851,19 +2835,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114264181203446794
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1883700501896866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81abfaa479ce39541bbae8231db4aa95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 114388679788673060}
-  character: {fileID: 0}
 --- !u!114 &114266855634060878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4046,6 +4017,9 @@ MonoBehaviour:
   splashMessageText: {fileID: 114329499611013138}
   splashLifeTime: 1
   actionSlider: {fileID: 1529916558906148}
+  alchemistHealth: {fileID: 114734217204658326}
+  hunterHealth: {fileID: 114388679788673060}
+  crusaderHealth: {fileID: 114239121021020376}
   skillButtons:
   - {fileID: 114342985184283708}
   - {fileID: 114314275479045752}
@@ -5207,19 +5181,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114804619264298684
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1915861762534354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81abfaa479ce39541bbae8231db4aa95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 114239121021020376}
-  character: {fileID: 0}
 --- !u!114 &114805022628350728
 MonoBehaviour:
   m_ObjectHideFlags: 1
