@@ -5,17 +5,46 @@ using UnityEngine.UI;
 
 public class UIElement : MonoBehaviour
 {
-    public Image healthBar;
-    public PlayerCharacter character;  
+    #region Variables
+    public Image[] healthBars;
+    public PlayerCharacter[] characters;
+    #endregion
 
-    public void Update()
+    #region Unity Functions
+    void Awake()
+    {
+        Initialize();
+    }
+
+    void Update()
     {
         UpdateHealthBar();
     }
-    
-    public void UpdateHealthBar()
+    #endregion
+
+    #region Functions   
+
+    void Initialize()
     {
-        if(healthBar != null && character != null)
-        healthBar.fillAmount = (float)character.currentHealth / (float)character.maxhealth;
+        /*healthBar = FindObjectOfType<Image>();
+      
+        character = FindObjectOfType<PlayerCharacter>();
+
+        if (character)
+        {
+            print("Character found: " + character.characterName);
+        }*/
+
+        foreach(Image healthBar in healthBars)
+        {
+                
+        }
     }
+
+    void UpdateHealthBar()
+    {
+        //if (healthBars != null && characters != null)
+            //healthBar.fillAmount = (float)character.currentHealth / (float)character.maxhealth;
+    }
+    #endregion
 }
