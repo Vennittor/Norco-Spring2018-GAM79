@@ -169,7 +169,7 @@ public class Party : MonoBehaviour
 				Party enemyParty = collision.gameObject.GetComponent<Party>();
 				collision.gameObject.GetComponent<Collider>().enabled = false;
 
-				StartCoroutine( levelMan.InitiateCombat(this, enemyParty) );
+				StartCoroutine(levelMan.InitiateCombat(this, enemyParty));
 			}
 		}
 
@@ -179,16 +179,17 @@ public class Party : MonoBehaviour
     {
         if(col.gameObject.tag == "Exit")
         {
-            Debug.Log("Fading Out?"); // fade out
+            testTransitionEffect p = FindObjectOfType<testTransitionEffect>();
+            p.StartEmit();
+            p.TransitionImageOut(2); 
             transitionMan.StartCoroutine(transitionMan.Out()); 
-          //  levelMan.StartCoroutine(levelMan.Transition());
-            levelMan.LoadSceneAsync();
+            levelMan.StartCoroutine(levelMan.LoadSceneAsync());
         }
 
         if(col.gameObject.tag == "ExitToMainMenu")
         {
             Debug.Log("Loading Back to Main Menu");
-            levelMan.LoadScene(0);
+            levelMan.LoadScene(1);
             transitionMan.StopCoroutine(transitionMan.In());
             transitionMan.transitionImage.enabled = false;
             transitionMan.iAnim.enabled = false; 
@@ -227,5 +228,4 @@ public class Party : MonoBehaviour
             transitionMan.transitionImage.enabled = false;
         }
     }
-
 }

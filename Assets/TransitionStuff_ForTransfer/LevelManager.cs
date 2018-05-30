@@ -537,9 +537,14 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(sceneANumber);
     }
 
-    public void LoadSceneAsync()
+    public IEnumerator LoadSceneAsync()
     {
+        testTransitionEffect p = FindObjectOfType<testTransitionEffect>();
+        p.StartEmit();
+
         StartCoroutine(LoadYourAsyncScene());
+
+        yield return null; 
     }
 
     public IEnumerator DoneWithTransition(Party playerParty)
@@ -591,6 +596,8 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator LoadYourAsyncScene()
     {
+        yield return new WaitForSeconds(0.5f);
+
         AsyncOperation target = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
        // AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1); 
 
@@ -598,7 +605,7 @@ public class LevelManager : MonoBehaviour
         {
             yield return null;
         }
-        transitionMan.StartCoroutine(transitionMan.In());
+
         SetUpNewScene(); 
     } 
 

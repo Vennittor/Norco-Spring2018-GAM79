@@ -7,7 +7,7 @@ using UnityEngine;
 public class TransitionManager : MonoBehaviour
 {
     private static TransitionManager instance; 
-    public Image transitionImage; // transitionImage 
+    public Image transitionImage; 
     public Animator iAnim;
     public Animator fadeOutAnim; 
 
@@ -23,10 +23,6 @@ public class TransitionManager : MonoBehaviour
     private Color c;
     public Animation fadeOutAnimA;
     public GameObject fadeOutObj; 
-  //  public Animation anim;
-  //  public Animation animOut;
-   // public GameObject Load;
-   // public GameObject transitionOpen;
 
     public static TransitionManager Instance
     {
@@ -129,7 +125,7 @@ public class TransitionManager : MonoBehaviour
 
         fadeOutAnimA = FindObjectOfType<Animation>();
 
-        transitionImage.enabled = true; // was true
+        transitionImage.enabled = true; 
         c = Color.black;
 
         // test transitionOpen     // inactive
@@ -267,7 +263,7 @@ public class TransitionManager : MonoBehaviour
         }
 
         yield return null;
-        StartCoroutine(Nuetral()); // ....
+        StartCoroutine(Nuetral()); 
     }
 
     public IEnumerator Out()
@@ -306,7 +302,7 @@ public class TransitionManager : MonoBehaviour
 
         yield return null;
 
-        StartCoroutine(Nuetral()); // 
+        StartCoroutine(Nuetral()); 
     }
 
     public IEnumerator Nuetral()
