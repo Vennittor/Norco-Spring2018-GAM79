@@ -118,7 +118,7 @@ public class Ability : ScriptableObject
 		{
 			if (characterUser.animator != null) 
 			{
-				characterUser.animator.SetTrigger ("Attack");		//Tells animator to go into the Strike animation
+				characterUser.animator.SetTrigger ("Strike");		//Tells animator to go into the Strike animation
 //				characterUser.animator.SetBool ("Ready", false);	//When the Strike animation goes to REcover, with "Ready" being false, it should transition back to Idle
 //				characterUser.animator.SetBool("Idle", true);
 			}

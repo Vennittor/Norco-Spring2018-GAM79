@@ -381,6 +381,10 @@ public abstract class Character : MonoBehaviour
 	{
         //replenish health sound
 		currentHealth = (currentHealth + healing) > maxHealth ? maxHealth : (currentHealth + healing);
+        if (characterName == "Amun-Ra" && statuses.Contains(StatusEffectType.Superior))
+        {
+            statusEffect.RemoveStatus(this, StatusEffectType.Superior);
+        }
 	}
 
     public void ReduceHeat(uint amount = 0)
@@ -541,7 +545,7 @@ public abstract class Character : MonoBehaviour
     }
 
 	private void SetDefaultStats()
-	{
+	{	
 		if (baseStats == null)
 		{
 			Debug.LogError (this.gameObject.name + " does not have a CharacterBaseStats attached.  Assign one through the Inspector.");

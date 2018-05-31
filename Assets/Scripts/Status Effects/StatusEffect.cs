@@ -446,7 +446,7 @@ public class StatusEffect
     private EffectClass ApplyWarriorSpirit()
     {
         statusEffectType = StatusEffectType.WarriorSpirit;
-        isBuff = false;
+        isBuff = true;
         duration = 1;
         applyImmediately = true;
         checkAtStart = false;

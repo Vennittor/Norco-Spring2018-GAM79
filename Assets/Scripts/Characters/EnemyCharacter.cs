@@ -30,11 +30,11 @@ public class EnemyCharacter : Character
         float selection;
         if (characterName == "Croc")
         {
-            selection = Random.Range(0, currentHealth >= maxHealth / 10 ? abilities.Count - 2 : abilities.Count);
+            selection = Random.Range(0, currentHealth <= maxHealth / 10 ? abilities.Count - 2 : abilities.Count);
         }
         if (characterName == "Amun-Ra")
         {
-            selection = Random.Range(0, currentHealth >= maxHealth / 25 ? abilities.Count - 2 : abilities.Count);
+            selection = Random.Range(0, currentHealth <= maxHealth / 25 ? abilities.Count - 2 : abilities.Count);
         }
         else
         {
