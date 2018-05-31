@@ -541,7 +541,7 @@ public abstract class Character : MonoBehaviour
     }
 
 	private void SetDefaultStats()
-	{
+	{	Debug.Log ("HERE");
 		if (baseStats == null)
 		{
 			Debug.LogError (this.gameObject.name + " does not have a CharacterBaseStats attached.  Assign one through the Inspector.");
