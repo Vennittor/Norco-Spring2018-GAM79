@@ -107,8 +107,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1714910973632844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -181.1124, y: 1.08, z: -58.62}
-  m_LocalScale: {x: 0.53171587, y: 0.53171587, z: 0.53171587}
+  m_LocalPosition: {x: -792.0972, y: 0.95, z: -29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4207230089771016}
   m_Father: {fileID: 0}
@@ -121,7 +121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1444874117457104}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.26, y: 0, z: 0}
+  m_LocalPosition: {x: 4.57, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4207230089771016}
@@ -150,7 +150,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1519500352636238}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.81, y: 0, z: 0}
+  m_LocalPosition: {x: 9.24, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4207230089771016}
@@ -194,7 +194,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 4, z: 10}
+  m_Size: {x: 10, y: 4.27, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65290833578839432
 BoxCollider:
@@ -263,28 +263,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   characterName: 
-  animator: {fileID: 0}
+  baseStats: {fileID: 11400000, guid: 728e1d198e911cc4d8cef94066324070, type: 2}
   maxhealth: 25
   currentHealth: 25
   maxHeat: 0
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 4
-  speedMod: 0
-  defense: 0
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: 069d305244086f24ea00e53a5bf5d364, type: 2}
   - {fileID: 11400000, guid: 563c7c84c92e9904395fff25d5892131, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 4
+  speedBonus: 0
+  speedMod: 0
+  defense: 0
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
+  effectClassList: []
+  statuses: 
+  removeStatus: []
+  hasT1Status: 0
+  hasT2Status: 0
+  externalAI: {fileID: 0}
 --- !u!114 &114922007562896438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,28 +307,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   characterName: 
-  animator: {fileID: 0}
+  baseStats: {fileID: 11400000, guid: 728e1d198e911cc4d8cef94066324070, type: 2}
   maxhealth: 25
   currentHealth: 25
   maxHeat: 0
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 4
-  speedMod: 0
-  defense: 0
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: 069d305244086f24ea00e53a5bf5d364, type: 2}
   - {fileID: 11400000, guid: 563c7c84c92e9904395fff25d5892131, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 4
+  speedBonus: 0
+  speedMod: 0
+  defense: 0
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
+  effectClassList: []
+  statuses: 
+  removeStatus: []
+  hasT1Status: 0
+  hasT2Status: 0
+  externalAI: {fileID: 0}
 --- !u!114 &114978566135768638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,28 +351,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45d042b4a4f212409d6f8306d796a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   characterName: 
-  animator: {fileID: 0}
+  baseStats: {fileID: 11400000, guid: 728e1d198e911cc4d8cef94066324070, type: 2}
   maxhealth: 25
   currentHealth: 25
   maxHeat: 0
   currentHeat: 0
-  attack: 0
-  attackMod: 0
-  accuracy: 84.5
-  accuracyMod: 0
-  evade: 10
-  evadeMod: 0
-  speed: 4
-  speedMod: 0
-  defense: 0
-  defenseMod: 0
-  combatState: 0
-  selectedAbilityIndex: -1
   abilities:
   - {fileID: 11400000, guid: 069d305244086f24ea00e53a5bf5d364, type: 2}
   - {fileID: 11400000, guid: 563c7c84c92e9904395fff25d5892131, type: 2}
-  cooldownTimers: 
+  attack: 0
+  attackBonus: 0
+  attackMod: 0
+  accuracy: 84.5
+  accuracyBonus: 0
+  accuracyMod: 0
+  evade: 10
+  evadeBonus: 0
+  evadeMod: 0
+  speed: 4
+  speedBonus: 0
+  speedMod: 0
+  defense: 0
+  defenseBonus: 0
+  defenseMod: 0
+  combatState: 0
+  selectedAbilityIndex: -1
+  effectClassList: []
+  statuses: 
+  removeStatus: []
+  hasT1Status: 0
+  hasT2Status: 0
+  externalAI: {fileID: 0}
 --- !u!195 &195257259066113972
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -369,7 +402,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 2
+  m_BaseOffset: 0.96
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!212 &212476542401798424
@@ -404,12 +437,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 708190b08e140a443956e9fac8fab6b6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb2548f67f8b0ee4295f01f59275d880, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 11.16, y: 7.85}
+  m_Size: {x: 3.9885714, y: 3.0457144}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -446,12 +479,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 708190b08e140a443956e9fac8fab6b6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb2548f67f8b0ee4295f01f59275d880, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 11.16, y: 7.85}
+  m_Size: {x: 3.9885714, y: 3.0457144}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -488,12 +521,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 708190b08e140a443956e9fac8fab6b6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb2548f67f8b0ee4295f01f59275d880, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 11.16, y: 7.85}
+  m_Size: {x: 3.9885714, y: 3.0457144}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -530,12 +563,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 708190b08e140a443956e9fac8fab6b6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb2548f67f8b0ee4295f01f59275d880, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 11.16, y: 7.85}
+  m_Size: {x: 3.9885714, y: 3.0457144}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
