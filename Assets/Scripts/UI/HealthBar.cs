@@ -48,7 +48,7 @@ public class HealthBar : MonoBehaviour
             healthBar = instance.alchemistHealth;
         }
 
-        if (gameObject.GetComponent<PlayerCharacter>().characterName == ("Hunter"))
+        if (gameObject.GetComponent<PlayerCharacter>().characterName == ("Female"))
         {
             healthBar = instance.hunterHealth;
         }
@@ -58,7 +58,9 @@ public class HealthBar : MonoBehaviour
     void UpdateHealthBar()
     {
         if (healthBar != null && character != null)
-            healthBar.fillAmount = (float)character.currentHealth / (float)character.maxHealth;
+        {
+            healthBar.fillAmount = (float)character.currentHealth / (float)character.maxhealth;
+        }
     }
     #endregion
 
