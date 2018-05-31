@@ -30,9 +30,10 @@ public class UIManager : MonoBehaviour
 	public float splashLifeTime = 1.0f;
 
 	public GameObject actionSlider;
-    //public Image healthBar;
 
-	public List<Button> skillButtons = new List<Button> ();
+    public Image alchemistHealth, hunterHealth, crusaderHealth;
+
+    public List<Button> skillButtons = new List<Button> ();
 
     public LayerMask targetable;
 	public List<Character> collectedTargets;
