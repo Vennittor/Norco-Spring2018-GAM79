@@ -228,8 +228,9 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void BattlecrySwapLeader()
+    public void WarriorSwapLeader()
     {
+        leaderCurrentCooldown = leaderInitCooldown;
         activeLeader.isLeader = false;
         (activeCharacter as PlayerCharacter).isLeader = true;
         activeLeader = (activeCharacter as PlayerCharacter);

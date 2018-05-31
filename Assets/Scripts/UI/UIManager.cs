@@ -169,9 +169,9 @@ public class UIManager : MonoBehaviour
 				if (abilityIndex >= 0 && abilityIndex < combatManager.activeCharacter.abilityCount)
 				{
 					ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility (abilityIndex);
-                    if (combatManager.activeCharacter.name == "Crusader" && ability.abilityName == "Battle Cry")
+                    if (combatManager.activeCharacter.name == "Crusader" && ability.abilityName == "Warrior Spirit")
                     {
-                        combatManager.BattlecrySwapLeader();
+                        combatManager.WarriorSwapLeader();
                     }
 
 					if (ability == null)

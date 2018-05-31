@@ -481,7 +481,7 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    public void ApplyStatus(StatusEffectType status, uint duration = 0)
+    public void ApplyStatus(StatusEffectType status, uint duration = 0, uint dotDamage = 0)
     {                                               // Tandy: added this to work with Ability
         if (!statuses.Contains(status) || status == StatusEffectType.Poison)         // if not already affected by Status
         {
