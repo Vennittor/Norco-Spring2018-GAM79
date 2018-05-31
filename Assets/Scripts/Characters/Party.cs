@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Party : MonoBehaviour
 {
-    public LevelManager levelMan;
-    private TransitionManager transitionMan;
+    public NewLevelManager levelMan;
+    private NewTransitionManager transitionMan;
 
     public HeatZone heatState;
     public List<Character> partyMembers;
@@ -31,8 +31,8 @@ public class Party : MonoBehaviour
 
     void Start()
     {
-        transitionMan = FindObjectOfType<TransitionManager>(); 
-        levelMan = LevelManager.Instance;
+        transitionMan = FindObjectOfType<NewTransitionManager>(); 
+        levelMan = NewLevelManager.Instance;
         
 
 		if (levelMan == null)
@@ -177,19 +177,55 @@ public class Party : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Exit")
+        if (col.gameObject.tag == "Exit")
         {
-            transitionMan.TransitionOpen();
+            testTransitionEffect p = FindObjectOfType<testTransitionEffect>();
+            p.StartEmit();
+            p.TransitionImageOut(2);
+            transitionMan.StartCoroutine(transitionMan.Out());
+            levelMan.StartCoroutine(levelMan.LoadSceneAsync());
+        }
+
+        if (col.gameObject.tag == "ExitToMainMenu")
+        {
+            Debug.Log("Loading Back to Main Menu");
+            levelMan.LoadScene(1);
+            transitionMan.StopCoroutine(transitionMan.In());
+            transitionMan.transitionImage.enabled = false;
+            transitionMan.iAnim.enabled = false;
+            Destroy(transitionMan.gameObject);
+        }
+    }
+
+    private void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.tag == "Exit")
+        {
+            transitionMan.StartCoroutine(transitionMan.Out());
             levelMan.StartCoroutine(levelMan.Transition());
-            levelMan.LoadSceneAsync();
+            transitionMan.StartCoroutine(transitionMan.Nuetral());
+            transitionMan.exitTransform.gameObject.SetActive(false);
+        }
+
+        if (col.gameObject.tag == "Entrance")
+        {
+            transitionMan.StartCoroutine(transitionMan.Nuetral());
+            transitionMan.entranceTransform.gameObject.SetActive(false);
         }
     }
 
     private void OnTriggerExit(Collider col)
     {
-        if(col.gameObject.tag == "Exit")
+        if (col.gameObject.tag == "Exit")
         {
+            transitionMan.StartCoroutine(transitionMan.In());
             levelMan.StartCoroutine(levelMan.DoneWithTransition(playerParty));
         }
-    }
+
+        if (col.gameObject.tag == "Entrance")
+        {
+            transitionMan.StopCoroutine(transitionMan.In());
+            transitionMan.transitionImage.enabled = false;
+        }
+    }
 }
