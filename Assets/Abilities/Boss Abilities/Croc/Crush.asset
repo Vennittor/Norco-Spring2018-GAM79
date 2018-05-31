@@ -9,23 +9,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa4c18fc4b5b743408b8eb69d212b657, type: 3}
-  m_Name: Battlecry
+  m_Name: Crush
   m_EditorClassIdentifier: 
-  abilityName: Battlecry
-  description: Heals and bolsters allies.
+  abilityName: Crush
+  description: 
   callOutText: 
   heatCost: 0
   targetType:
-    _who: 1
-    _formation: 1
+    _who: 2
+    _formation: 0
     _numberOfTargets: 1
   damage:
   - damageRanges:
-    - {x: 3, y: 5}
-    elementType: 2
-    statusChance: 100
+    - {x: 5, y: 5}
+    elementType: 0
+    statusChance: 60
   actionType: 0
-  statuses: 00000000
+  statuses: 07000000
   stunDuration: 0
   dotDamage: 0
   numberOfActions: 1

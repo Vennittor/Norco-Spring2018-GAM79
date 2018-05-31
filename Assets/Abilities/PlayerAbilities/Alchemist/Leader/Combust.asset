@@ -24,18 +24,12 @@ MonoBehaviour:
     - {x: 10, y: 10}
     elementType: 0
     statusChance: 0
-  - damageRanges:
-    - {x: 0, y: 0}
-    elementType: 5
-    statusChance: 100
   actionType: 0
-  statuses: 00000000000000000000000000000000
+  statuses: 02000000
   stunDuration: 0
   dotDamage: 3
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 0
-  _currentCooldown: 0
-  _initCooldown: 0
   characterUser: {fileID: 0}
   abilitySound: {fileID: 0}

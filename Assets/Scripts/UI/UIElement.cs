@@ -16,6 +16,6 @@ public class UIElement : MonoBehaviour
     public void UpdateHealthBar()
     {
         if(healthBar != null && character != null)
-        healthBar.fillAmount = (float)character.currentHealth / (float)character.maxhealth;
+        healthBar.fillAmount = (float)character.currentHealth / (float)character.maxHealth;
     }
 }

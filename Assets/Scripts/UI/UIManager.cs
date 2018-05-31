@@ -157,12 +157,6 @@ public class UIManager : MonoBehaviour
 		{
 			bool stopAbility = false;
 			foreach(EffectClass effect in combatManager.activeCharacter.effectClassList)
-			{
-				if(effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
-				{
-					stopAbility = true;                
-				}
-			}
 
 			if (!stopAbility)
 			{	

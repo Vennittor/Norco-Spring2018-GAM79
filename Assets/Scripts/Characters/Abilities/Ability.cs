@@ -145,19 +145,63 @@ public class Ability : ScriptableObject
                         {
                             foreach (Damage range in damage)                    // Deal all types of Damage in List
                             {
-                                target.ApplyDamage((uint)range.RollDamage(modifier), range.element);
-                                //}
+                                uint totalDamage = (uint)range.RollDamage(modifier);
+                                if (abilityName == "Combust")
+                                {
+                                    foreach (EffectClass status in characterUser.effectClassList)
+                                    {
+                                        if (status.isBuff)
+                                        {
+                                            totalDamage++;
+                                            characterUser.removeStatus.Add(status);
+                                        }
+                                    }
+                                }
+                                else if (abilityName == "Bop")
+                                {
+                                    bool getem = false;
+                                    foreach (EffectClass status in target.effectClassList)
+                                    {
+                                        if (status.isBuff)
+                                        {
+                                            getem = true;
+                                        }
+                                    }
+                                    if (getem)
+                                    {
+                                        target.ApplyStatus(StatusEffectType.Stun, 4);
+                                    }
+                                }
+                                else if (abilityName == "Stand Alone")
+                                {
+                                    characterUser.ApplyStatus(StatusEffectType.Stun, 1);
+                                    characterUser.ApplyStatus(StatusEffectType.Fear);
+                                }
+                                else if (abilityName == "Bloodthirsty")
+                                {
+                                    characterUser.ApplyStatus(StatusEffectType.Bloodthirst);
+                                }
+                                else if (abilityName == "Smoke Bomb")
+                                {
+                                    characterUser.ApplyStatus(StatusEffectType.Stun, 1);
+                                }
+
+                                target.ApplyDamage(totalDamage, range.element);
+                                
 
                                 foreach (StatusEffectType status in statuses)                   // Apply all Status affects
                                 {
-                                    float rand = Random.Range(0f, 100f);
-                                    if (rand < range.statusChance)
+                                    if (abilityName == "Exoskeleton" && target.characterName != "Scarab")
                                     {
-                                        target.ApplyStatus(status, stunDuration, dotDamage);
-                                    }
-                                    else
-                                    {
-                                        Debug.Log("Status missed");
+                                        float rand = Random.Range(0f, 100f);
+                                        if (rand < range.statusChance)
+                                        {
+                                            target.ApplyStatus(status, stunDuration, dotDamage);
+                                        }
+                                        else
+                                        {
+                                            Debug.Log("Status missed");
+                                        }
                                     }
                                 }
                             }
@@ -168,7 +212,10 @@ public class Ability : ScriptableObject
                         }
                     }
                 }
-                //TODO Wait Between hits
+                if (abilityName == "Superior")
+                {
+                    (characterUser as EnemyCharacter).RemoveAbility(this);
+                }
             }
 		}
 
@@ -228,6 +275,13 @@ public class Ability : ScriptableObject
 
     public void SoundCaller()
     {
-        SoundManager.instance.Play(abilitySound, "sfx");
+        if (abilitySound != null)
+        {
+            SoundManager.instance.Play(abilitySound, "sfx");
+        }
+        else
+        {
+            Debug.LogWarning("No sound attached to ability " + abilityName);
+        }
     }
 }

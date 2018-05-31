@@ -25,13 +25,11 @@ MonoBehaviour:
     elementType: 0
     statusChance: 80
   actionType: 0
-  statuses: 03000000
+  statuses: 02000000
   stunDuration: 0
   dotDamage: 2
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 0
-  _currentCooldown: 0
-  _initCooldown: 0
   characterUser: {fileID: 0}
   abilitySound: {fileID: 0}

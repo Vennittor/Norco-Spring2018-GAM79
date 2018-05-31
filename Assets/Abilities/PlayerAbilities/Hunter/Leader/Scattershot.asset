@@ -9,27 +9,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa4c18fc4b5b743408b8eb69d212b657, type: 3}
-  m_Name: Battlecry
+  m_Name: Scattershot
   m_EditorClassIdentifier: 
-  abilityName: Battlecry
-  description: Heals and bolsters allies.
-  callOutText: 
+  abilityName: Scattershot
+  description: Fire a spread of arrows against all targets.
+  callOutText: Fire everything!
   heatCost: 0
   targetType:
-    _who: 1
+    _who: 2
     _formation: 1
     _numberOfTargets: 1
   damage:
   - damageRanges:
-    - {x: 3, y: 5}
-    elementType: 2
-    statusChance: 100
-  actionType: 0
-  statuses: 00000000
+    - {x: 3, y: 3}
+    elementType: 0
+    statusChance: 0
+  actionType: 3
+  statuses: 
   stunDuration: 0
   dotDamage: 0
   numberOfActions: 1
-  hitsPerAction: 1
-  _cooldown: 0
+  hitsPerAction: 4
+  _cooldown: 2
   characterUser: {fileID: 0}
   abilitySound: {fileID: 0}
