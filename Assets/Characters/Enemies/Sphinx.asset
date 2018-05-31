@@ -9,16 +9,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 628256c8b66cd4c42987ce0e51d5f0d8, type: 3}
-  m_Name: Mummy
+  m_Name: Sphinx
   m_EditorClassIdentifier: 
-  _characterName: Mummy
+  _characterName: Sphinx
   _characterImage: {fileID: 0}
-  _animatorController: {fileID: 9100000, guid: 64cfbf78ec826d345b847b6bbf23e37d, type: 2}
+  _animatorController: {fileID: 9100000, guid: ca76cf8ca58af3c46b0c33134887c99d, type: 2}
   _maxHealth: 0
   _maxHeat: 0
   _baseAbilities:
-  - {fileID: 11400000, guid: 0933f772d2760bf47894a075e12d6e2e, type: 2}
-  - {fileID: 11400000, guid: 43a9bfaba6a9da84a91bfb87a702bc5c, type: 2}
+  - {fileID: 11400000, guid: cee8e73ab52137c479c6a8a80f7940db, type: 2}
+  - {fileID: 11400000, guid: fbfde6ffacf8e4f4c97f17dfdfa509db, type: 2}
+  - {fileID: 11400000, guid: 00e0fecde41c14347b2f38e2e6e3f46c, type: 2}
   _leaderAbilities: []
   _accuracy: 0
   _evade: 0
