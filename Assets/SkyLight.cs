@@ -11,8 +11,8 @@ public class SkyLight : MonoBehaviour
     private void Start()
     {
         dirLight = GetComponent<Light>();
-        playerObj = GameObject.Find("Player Party");
-        enemyObj = GameObject.Find("Ra"); 
+        playerObj = GameObject.Find("Player Party"); 
+        enemyObj = GameObject.Find("Amun Ra"); 
     }
 
     private void FixedUpdate()

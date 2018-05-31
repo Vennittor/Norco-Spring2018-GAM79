@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Party : MonoBehaviour
 {
-    public NewLevelManager levelMan;
+    public LevelManager levelMan;
     private NewTransitionManager transitionMan;
 
     public HeatZone heatState;
@@ -32,7 +32,7 @@ public class Party : MonoBehaviour
     void Start()
     {
         transitionMan = FindObjectOfType<NewTransitionManager>(); 
-        levelMan = NewLevelManager.Instance;
+        levelMan = LevelManager.Instance;
         
 
 		if (levelMan == null)
@@ -227,5 +227,5 @@ public class Party : MonoBehaviour
             transitionMan.StopCoroutine(transitionMan.In());
             transitionMan.transitionImage.enabled = false;
         }
-    }
+    }
 }

@@ -86,8 +86,7 @@ public class CombatManager : MonoBehaviour
     }
 
     void Start()
-    {
-        
+    {   
 		levelManager = LevelManager.Instance;
 		uiManager = UIManager.Instance;
 
@@ -139,7 +138,7 @@ public class CombatManager : MonoBehaviour
 		if(!inCombat) 
 		{
 			inCombat = true;
-            foreach (PlayerCharacter player in levelManager.pParty.partyMembers)
+            foreach (PlayerCharacter player in LevelManager.Instance.pParty.partyMembers)
             {
                 if (player.isLeader)
                 {
@@ -160,7 +159,7 @@ public class CombatManager : MonoBehaviour
 		}
 	}
 		
-    void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
+    void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function. 
 	{
         Debug.Log ("New Round!");
 		roundCounter++;
@@ -279,14 +278,14 @@ public class CombatManager : MonoBehaviour
 			Debug.Log ("Party Wins");
             
             //Combat rewards?
-            LevelManager.Instance.ReturnFromCombat();
+            NewLevelManager.Instance.ReturnFromCombat();
 		}
 		else if (playerVictory == false) // party loses
 		{
 			Debug.Log ("Party Loses");
 
             //Goto Defeat or Gameover GameState
-            LevelManager.Instance.ReturnFromCombat(false);
+            NewLevelManager.Instance.ReturnFromCombat(false);
 		}
 	}
 

@@ -20,7 +20,7 @@ public class NewLevelManager : MonoBehaviour
     public Image transitionImage; 
 
     public GameObject playerParty;
-	private Party pParty;
+	public Party pParty;
 	private Party eParty;
     public uint partyHeatIntensity;
 
@@ -197,16 +197,6 @@ public class NewLevelManager : MonoBehaviour
         {
             transitionImage.enabled = true;
         }
-    }
-
-	void LateStart()
-	{
-
-    }
-
-    void Update()
-    {
-
     }
 
     public void GetHeat(uint heat)
