@@ -14,7 +14,7 @@ MonoBehaviour:
   _characterName: Sphinx
   _characterImage: {fileID: 0}
   _animatorController: {fileID: 9100000, guid: ca76cf8ca58af3c46b0c33134887c99d, type: 2}
-  _maxHealth: 0
+  _maxHealth: 50
   _maxHeat: 0
   _baseAbilities:
   - {fileID: 11400000, guid: cee8e73ab52137c479c6a8a80f7940db, type: 2}
@@ -23,7 +23,7 @@ MonoBehaviour:
   _leaderAbilities: []
   _accuracy: 0
   _evade: 0
-  _speed: 0
+  _speed: 6
   _defense: 0
   _queueImage: {fileID: 0}
   _externalAI: {fileID: 0}

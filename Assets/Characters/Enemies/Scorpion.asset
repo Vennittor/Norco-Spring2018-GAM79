@@ -14,15 +14,13 @@ MonoBehaviour:
   _characterName: Scorpion
   _characterImage: {fileID: 0}
   _animatorController: {fileID: 9100000, guid: c2355e8bcd8e5f346ad69335d5e714c5, type: 2}
-  _maxHealth: 35
+  _maxHealth: 13
   _maxHeat: 0
-  _abilities:
-  - {fileID: 11400000, guid: 0d563aff4bbddda4cb68f09fa503abfe, type: 2}
-  - {fileID: 11400000, guid: 21b52951fc411b44b8c180732029d8c3, type: 2}
-  _attack: 0
+  _baseAbilities: []
+  _leaderAbilities: []
   _accuracy: 85
   _evade: 10
-  _speed: 0
+  _speed: 4
   _defense: 0
   _queueImage: {fileID: 0}
   _externalAI: {fileID: 0}

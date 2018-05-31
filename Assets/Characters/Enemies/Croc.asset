@@ -14,7 +14,7 @@ MonoBehaviour:
   _characterName: Croc
   _characterImage: {fileID: 0}
   _animatorController: {fileID: 9100000, guid: e2ffc83d36ef6c54c972ecac40e095c9, type: 2}
-  _maxHealth: 0
+  _maxHealth: 42
   _maxHeat: 0
   _baseAbilities:
   - {fileID: 11400000, guid: 2e54d963fa1b29344b0f9367a7bdb582, type: 2}
@@ -23,7 +23,7 @@ MonoBehaviour:
   _leaderAbilities: []
   _accuracy: 0
   _evade: 0
-  _speed: 0
+  _speed: 3
   _defense: 0
   _queueImage: {fileID: 0}
   _externalAI: {fileID: 0}
