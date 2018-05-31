@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 431255150}
   - component: {fileID: 431255149}
   m_Layer: 5
-  m_Name: Desert
+  m_Name: DesertButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,7 +259,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 431255150}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 851238179}
+        m_MethodName: LoadDesert
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &431255150
@@ -437,7 +448,7 @@ GameObject:
   - component: {fileID: 672276081}
   - component: {fileID: 672276080}
   m_Layer: 5
-  m_Name: BossArena
+  m_Name: BossArenaButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,7 +470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.40277, y: 0.2941882}
   m_AnchorMax: {x: 0.6, y: 0.36642453}
-  m_AnchoredPosition: {x: -1, y: -0.037490845}
+  m_AnchoredPosition: {x: -1, y: -0.037475586}
   m_SizeDelta: {x: 0, y: -1.9749985}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &672276080
@@ -500,7 +511,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 672276081}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 851238179}
+        m_MethodName: LoadBossArena
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &672276081
@@ -647,10 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fcfa1857244eb42b3491ca568a69f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desert: {fileID: 431255149}
-  oasis: {fileID: 1857182311}
-  catacombs: {fileID: 1332645505}
-  bossArena: {fileID: 672276080}
+  LoadButton: {fileID: 431255149}
 --- !u!1 &1114733713
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +760,7 @@ GameObject:
   - component: {fileID: 1144763633}
   - component: {fileID: 1144763632}
   m_Layer: 5
-  m_Name: CataText
+  m_Name: BossText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -818,7 +837,7 @@ GameObject:
   - component: {fileID: 1332645506}
   - component: {fileID: 1332645505}
   m_Layer: 5
-  m_Name: Catacombs
+  m_Name: CatacombsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1173,7 +1192,7 @@ GameObject:
   - component: {fileID: 1857182312}
   - component: {fileID: 1857182311}
   m_Layer: 5
-  m_Name: Oasis
+  m_Name: OasisButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

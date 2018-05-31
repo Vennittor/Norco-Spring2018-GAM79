@@ -6,60 +6,36 @@ using UnityEngine;
 
 public class LevelSelectManager : MonoBehaviour
 {
-    public Button desert;
-    public Button oasis;
-    public Button catacombs;
-    public Button bossArena; 
+    public Button LoadButton; 
 
     void Start()
     {
-        desert = GetComponentInChildren<Button>(); 
-        oasis = GetComponentInChildren<Button>(); 
-        catacombs = GetComponentInChildren<Button>();
-        bossArena = GetComponentInChildren<Button>(); 
+        transform.FindChild("DesertButton").GetComponent<Button>();
+        LoadButton.onClick.RemoveAllListeners();
     }
 
-    void Update()
+    private void OnClick()
     {
-        if (Input.GetButtonDown("Desert"))
-        {
-            LoadDesert(); 
-        }
-
-        if (Input.GetButtonDown("Oasis"))
-        {
-            LoadOasis(); 
-        }
-
-        if (Input.GetButtonDown("Catacombs"))
-        {
-            LoadCatacombs();
-        }
-
-        if (Input.GetButtonDown("BossArena"))
-        {
-            LoadBossArena();
-        }
+        LoadButton.enabled.ToString();
     }
 
     public void LoadDesert()
     {
-        SceneManager.LoadScene(""); 
+        SceneManager.LoadScene(0); 
     }
 
     public void LoadOasis()
-    {   
-        Debug.Log("I am pressed"); 
-        SceneManager.LoadScene(0);
-    }
-
-    public void LoadCatacombs()
     {
         SceneManager.LoadScene(1);
     }
 
+    public void LoadCatacombs()
+    {
+        SceneManager.LoadScene(2);
+    }
+
     public void LoadBossArena()
     {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene(3); 
     }
 }
