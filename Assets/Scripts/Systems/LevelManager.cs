@@ -322,6 +322,7 @@ public class LevelManager : MonoBehaviour
 				player.GetComponent<SpriteRenderer>().enabled = false;
 			}
 			player.GetComponent<Collider>().enabled = false;
+            player.GetComponent<Animator>().enabled = false;
 
 			if (enemy.GetComponent<MeshRenderer> () != null)
 			{
@@ -409,6 +410,7 @@ public class LevelManager : MonoBehaviour
 			playerParty.GetComponent<SpriteRenderer>().enabled = true;
 		}
 		playerParty.GetComponent<Collider>().enabled = true;
+        playerParty.GetComponent<Animator>().enabled = true;
 
 		Destroy (eParty.gameObject);												//remove the Enemy Party
 
