@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114695205217747764}
   - component: {fileID: 212373121419091354}
   - component: {fileID: 95429566619419478}
+  - component: {fileID: 114471417864486056}
   m_Layer: 12
   m_Name: Player Party
   m_TagString: Player
@@ -643,6 +644,20 @@ MonoBehaviour:
   crusader: {fileID: 114327966433383426}
   alchemist: {fileID: 114088530641808946}
   hunter: {fileID: 114793818753576468}
+--- !u!114 &114471417864486056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242139476785792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f7f1af03fe9ba4c85dd51454ed5d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkParticle: {fileID: 198411979745601868, guid: 18d25dad34d756a4dbc72064475434b8,
+    type: 2}
+  duration: 1
 --- !u!114 &114478991893322828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -776,7 +791,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 3
-  m_BaseOffset: 2.82
+  m_BaseOffset: 2.92
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!212 &212373121419091354
