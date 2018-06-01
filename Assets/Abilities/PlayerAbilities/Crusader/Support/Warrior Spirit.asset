@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Warrior Spirit
   m_EditorClassIdentifier: 
   abilityName: Warrior Spirit
-  description: Raises defense and becomes the Leader
-  callOutText: 
+  description: Raises defense and move to Leader position.
+  callOutText: Raises defense and move to Leader position.
   heatCost: 0
   targetType:
     _who: 0

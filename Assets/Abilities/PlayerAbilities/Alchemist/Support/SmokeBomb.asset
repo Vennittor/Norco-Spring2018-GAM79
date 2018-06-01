@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: SmokeBomb
   m_EditorClassIdentifier: 
   abilityName: Smoke Bomb
-  description: The best defense is hiding in a lot of smoke...
-  callOutText: Smokin'...
+  description: Blind your enemies but lose a turn.
+  callOutText: Blind your enemies but lose a turn.
   heatCost: 0
   targetType:
     _who: 2

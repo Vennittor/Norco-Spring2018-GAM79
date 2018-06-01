@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Deadeye
   m_EditorClassIdentifier: 
   abilityName: Deadeye
-  description: Fire a precision shot to remove enemy accuracy.
-  callOutText: Snipe!
+  description: Fire a precision shot to lower enemy accuracy.
+  callOutText: Fire a precision shot to lower enemy accuracy.
   heatCost: 0
   targetType:
     _who: 2

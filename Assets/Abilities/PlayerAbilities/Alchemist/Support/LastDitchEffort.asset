@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: LastDitchEffort
   m_EditorClassIdentifier: 
   abilityName: Last Ditch Effort
-  description: Best not to ask...
-  callOutText: They asked.
+  description: Apply poison and lower enemy evasion.
+  callOutText: Apply poison and lower enemy evasion.
   heatCost: 0
   targetType:
     _who: 2
