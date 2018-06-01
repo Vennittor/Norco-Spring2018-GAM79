@@ -451,6 +451,16 @@ public class CombatManager : MonoBehaviour
                 {
                     StartCoroutine(ActionSlider());
                 }
+                if (ability.type == ActionType.SPAM)
+                {
+                    uiManager.spammyGame.SetActive(true);
+                    uiManager.spammyGame.GetComponent<SpamGame>().BeginTheSpam();
+                }
+                if (ability.type == ActionType.BACKFORTH)
+                {
+                    uiManager.backAndForth.SetActive(true);
+                    uiManager.backAndForth.GetComponent<BackForthController>().LetsBegin();
+                }
                 if(ability.type == ActionType.NORMAL)
                 {
                     UseCharacterAbility();
@@ -547,7 +557,7 @@ public class CombatManager : MonoBehaviour
 		UseCharacterAbility (modifiedEffect);
 	}
 
-	void UseCharacterAbility(float modifier = 1.0f)
+	public void UseCharacterAbility(float modifier = 1.0f)
 	{
 		activeCharacter.UseAbility (finalizedTargets, modifier);
 
