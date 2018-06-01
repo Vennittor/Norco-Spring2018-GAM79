@@ -215,6 +215,12 @@ public class CombatManager : MonoBehaviour
             if (activeCharacter is PlayerCharacter)
             {
                 leaderCurrentCooldown = leaderInitCooldown;
+                if (activeLeader.statuses.Contains(StatusEffectType.Fear))
+                {
+                    StatusEffect statusEffect = new StatusEffect();
+                    statusEffect.RemoveStatus(activeLeader, StatusEffectType.Fear);
+                    activeLeader.ApplyDamage(4);
+                }
                 activeLeader.isLeader = false;
                 (activeCharacter as PlayerCharacter).isLeader = true;
                 activeLeader = (activeCharacter as PlayerCharacter);
@@ -228,8 +234,15 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void BattlecrySwapLeader()
+    public void WarriorSwapLeader()
     {
+        leaderCurrentCooldown = leaderInitCooldown;
+        if (activeLeader.statuses.Contains(StatusEffectType.Fear))
+        {
+            StatusEffect statusEffect = new StatusEffect();
+            statusEffect.RemoveStatus(activeLeader, StatusEffectType.Fear);
+            activeLeader.ApplyDamage(4);
+        }
         activeLeader.isLeader = false;
         (activeCharacter as PlayerCharacter).isLeader = true;
         activeLeader = (activeCharacter as PlayerCharacter);

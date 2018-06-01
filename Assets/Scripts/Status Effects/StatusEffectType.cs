@@ -4,15 +4,19 @@ using UnityEngine;
 
 public enum StatusEffectType
 {
-    Anemia,
     Battlecry,
     Berserk,
     Bleed,
-    Crippled,
-    Dizzy,
-    Hobbled,
+    Blind,
+    Bloodthirst,
+    Exoskeleton,
+    Fear,
+    Hamstring,
+    Mash,
     Poison,
-    Scared,
+    Slow,
     Smoke,
-    Stun
+    Stun,
+    Superior,
+    WarriorSpirit
 }

@@ -158,21 +158,15 @@ public class UIManager : MonoBehaviour
 		{
 			bool stopAbility = false;
 			foreach(EffectClass effect in combatManager.activeCharacter.effectClassList)
-			{
-				if(effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
-				{
-					stopAbility = true;                
-				}
-			}
 
 			if (!stopAbility)
 			{	
 				if (abilityIndex >= 0 && abilityIndex < combatManager.activeCharacter.abilityCount)
 				{
 					ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility (abilityIndex);
-                    if (combatManager.activeCharacter.name == "Crusader" && ability.abilityName == "Battle Cry")
+                    if (combatManager.activeCharacter.name == "Crusader" && ability.abilityName == "Warrior Spirit")
                     {
-                        combatManager.BattlecrySwapLeader();
+                        combatManager.WarriorSwapLeader();
                     }
 
 					if (ability == null)

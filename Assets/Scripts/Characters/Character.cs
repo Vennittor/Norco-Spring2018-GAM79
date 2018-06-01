@@ -20,7 +20,7 @@ public abstract class Character : MonoBehaviour
 	[SerializeField] protected CharacterBaseStats baseStats = null;
 	private Image _currentQueueImage = null;
 
-	public uint maxhealth;
+	public uint maxHealth;
 	public uint currentHealth;
 
 	public uint maxHeat;
@@ -365,7 +365,7 @@ public abstract class Character : MonoBehaviour
 
 	void DealPhysicalDamage(uint physicalDamage = 0)
 	{
-		physicalDamage -= defense;
+		physicalDamage -= defense > physicalDamage ? physicalDamage : defense;
 		if (physicalDamage >= 1)
 		{
             //play sound for taking damage
@@ -380,7 +380,11 @@ public abstract class Character : MonoBehaviour
 	void Heal(uint healing = 0)
 	{
         //replenish health sound
-		currentHealth = (currentHealth + healing) > maxhealth ? maxhealth : (currentHealth + healing);
+		currentHealth = (currentHealth + healing) > maxHealth ? maxHealth : (currentHealth + healing);
+        if (characterName == "Amun-Ra" && statuses.Contains(StatusEffectType.Superior))
+        {
+            statusEffect.RemoveStatus(this, StatusEffectType.Superior);
+        }
 	}
 
     public void ReduceHeat(uint amount = 0)
@@ -481,7 +485,7 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    public void ApplyStatus(StatusEffectType status, uint duration = 0)
+    public void ApplyStatus(StatusEffectType status, uint duration = 0, uint dotDamage = 0)
     {                                               // Tandy: added this to work with Ability
         if (!statuses.Contains(status) || status == StatusEffectType.Poison)         // if not already affected by Status
         {
@@ -557,7 +561,7 @@ public abstract class Character : MonoBehaviour
 
 			queueImage = baseStats.queueImage;
 
-			maxhealth = baseStats.maxHealth;
+			maxHealth = baseStats.maxHealth;
             currentHealth = baseStats.maxHealth;
 			maxHeat = baseStats.maxHeat;
 

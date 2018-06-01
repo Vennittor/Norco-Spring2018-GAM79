@@ -16,8 +16,8 @@ public class Ability : ScriptableObject
 	[SerializeField] protected List<Damage> damage = new List<Damage>();
     [SerializeField] protected ActionType actionType = ActionType.NORMAL;
 	[SerializeField] protected List<StatusEffectType> statuses = new List<StatusEffectType>();
-    [SerializeField] private float statusChance;
     [SerializeField] private uint stunDuration;
+    [SerializeField] private uint dotDamage;
 
 	[SerializeField] protected uint numberOfActions = 1;			//When the Ability is done, instead of telling the player AbilityHasCompleted, it can accept another targeting input
 	protected uint actionsUsed = 0;
@@ -145,21 +145,66 @@ public class Ability : ScriptableObject
                         {
                             foreach (Damage range in damage)                    // Deal all types of Damage in List
                             {
-                                target.ApplyDamage((uint)range.RollDamage(modifier), range.element);
-                            }
+                                uint totalDamage = (uint)range.RollDamage(modifier);
+                                if (abilityName == "Combust")
+                                {
+                                    foreach (EffectClass status in characterUser.effectClassList)
+                                    {
+                                        if (status.isBuff)
+                                        {
+                                            totalDamage++;
+                                            characterUser.removeStatus.Add(status);
+                                        }
+                                    }
+                                }
+                                else if (abilityName == "Bop")
+                                {
+                                    bool getem = false;
+                                    foreach (EffectClass status in target.effectClassList)
+                                    {
+                                        if (status.isBuff)
+                                        {
+                                            getem = true;
+                                        }
+                                    }
+                                    if (getem)
+                                    {
+                                        target.ApplyStatus(StatusEffectType.Stun, 4);
+                                    }
+                                }
+                                else if (abilityName == "Stand Alone")
+                                {
+                                    characterUser.ApplyStatus(StatusEffectType.Stun, 1);
+                                    characterUser.ApplyStatus(StatusEffectType.Fear);
+                                }
+                                else if (abilityName == "Bloodthirsty")
+                                {
+                                    characterUser.ApplyStatus(StatusEffectType.Bloodthirst);
+                                }
+                                else if (abilityName == "Smoke Bomb")
+                                {
+                                    characterUser.ApplyStatus(StatusEffectType.Stun, 1);
+                                }
 
-					        foreach (StatusEffectType status in statuses)					// Apply all Status affects
-					        {
-                                float rand = Random.Range(0f, 100f);
-                                if (rand < statusChance)
+                                target.ApplyDamage(totalDamage, range.element);
+                                
+
+                                foreach (StatusEffectType status in statuses)                   // Apply all Status affects
                                 {
-                                    target.ApplyStatus(status, stunDuration);
+                                    if (abilityName == "Exoskeleton" && target.characterName != "Scarab")
+                                    {
+                                        float rand = Random.Range(0f, 100f);
+                                        if (rand < range.statusChance)
+                                        {
+                                            target.ApplyStatus(status, stunDuration, dotDamage);
+                                        }
+                                        else
+                                        {
+                                            Debug.Log("Status missed");
+                                        }
+                                    }
                                 }
-                                else
-                                {
-                                    Debug.Log("Status missed");
-                                }
-                            } 
+                            }
 				        }
                         else
                         {
@@ -167,7 +212,10 @@ public class Ability : ScriptableObject
                         }
                     }
                 }
-                //TODO Wait Between hits
+                if (abilityName == "Superior")
+                {
+                    (characterUser as EnemyCharacter).RemoveAbility(this);
+                }
             }
 		}
 
@@ -227,6 +275,13 @@ public class Ability : ScriptableObject
 
     public void SoundCaller()
     {
-        SoundManager.instance.Play(abilitySound, "sfx");
+        if (abilitySound != null)
+        {
+            SoundManager.instance.Play(abilitySound, "sfx");
+        }
+        else
+        {
+            Debug.LogWarning("No sound attached to ability " + abilityName);
+        }
     }
 }
