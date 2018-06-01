@@ -32,6 +32,6 @@ public class LevelUIManager : MonoBehaviour
         _instance = this;
 
         // swipeImage = GetComponent<Image>();
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
      }
 }

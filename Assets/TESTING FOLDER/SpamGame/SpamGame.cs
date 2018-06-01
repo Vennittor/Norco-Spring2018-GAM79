@@ -32,7 +32,7 @@ public class SpamGame : MonoBehaviour
 
     public IEnumerator SpammyGame()
     {
-        Debug.Log("p");
+        Debug.Log("Start Spam Game");
         while (begun)
         {
             gameTimer -= Time.deltaTime;

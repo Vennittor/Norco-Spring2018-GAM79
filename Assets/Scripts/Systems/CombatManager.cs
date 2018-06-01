@@ -82,12 +82,11 @@ public class CombatManager : MonoBehaviour
 
 		this.gameObject.transform.SetParent(null);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     void Start()
-    {
-        
+    {   
 		levelManager = LevelManager.Instance;
 		uiManager = UIManager.Instance;
 
@@ -140,7 +139,7 @@ public class CombatManager : MonoBehaviour
 		if(!inCombat) 
 		{
 			inCombat = true;
-            foreach (PlayerCharacter player in levelManager.pParty.partyMembers)
+            foreach (PlayerCharacter player in LevelManager.Instance.pParty.partyMembers)
             {
                 if (player.isLeader)
                 {
@@ -161,7 +160,7 @@ public class CombatManager : MonoBehaviour
 		}
 	}
 		
-    void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
+    void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function. 
 	{
         Debug.Log ("New Round!");
 		roundCounter++;
