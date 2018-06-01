@@ -12,12 +12,20 @@ public class SkyLight : MonoBehaviour
     {
         dirLight = GetComponent<Light>();
         playerObj = GameObject.Find("Player Party"); 
-        enemyObj = GameObject.Find("Amun Ra"); 
+        enemyObj = GameObject.Find("Ra"); 
     }
 
     private void FixedUpdate()
     {
-        ChangeLightSetting();
+        if (enemyObj != null)
+        {
+            ChangeLightSetting();
+
+            if (enemyObj.transform.gameObject == null)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void ChangeLightSetting()

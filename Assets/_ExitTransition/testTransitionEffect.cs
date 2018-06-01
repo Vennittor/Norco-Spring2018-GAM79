@@ -11,7 +11,7 @@ public class testTransitionEffect : MonoBehaviour
     private void Start()
     {
         pS = GetComponentInChildren<ParticleSystem>();
-        an = FindObjectOfType<Animation>(); 
+        an = GetComponentInChildren<Animation>(); 
     }
 
     public void StartEmit()
@@ -24,20 +24,20 @@ public class testTransitionEffect : MonoBehaviour
         yield return new WaitForSeconds(time);
     }
 
-    public void TransitionImageOut(float time)
+   /* public void TransitionImageOut(float time)
     {
-        time = 5; 
+        time = 3; 
         StartCoroutine(ExecuteAfterTime(time));       
-        if(time >= 5.0f)
+        if(time >= 3.0f)
         {
             an.Play();
         }
-        else if(time < 5 && an == null)
+        else if(time < 3 && an == null)
         {
             Debug.LogError(an);
             Debug.Log("not playing? ");
         }
-    }
+    }*/
 
     public void Emitting()
     {

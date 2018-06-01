@@ -496,12 +496,6 @@ public class LevelManager : MonoBehaviour
         transitionImage.enabled = false;
 
         yield return null;
-        // yield return new WaitForSeconds(5.0f);
-        /*
-        transitionMan.StartCoroutine(transitionMan.FadeOut()); 
-
-        transitionMan.StartCoroutine(transitionMan.Out(transitionImage, 0));//TransitionOut(transitionImage, 1));
-        yield return new WaitUntil(() => transitionImage.color.a == 0);*/
 
         if (transitionImage == null)
         {
@@ -511,16 +505,15 @@ public class LevelManager : MonoBehaviour
         }
         else if (transitionImage != null)
         {
-            Debug.Log("I am en"); // when transition is enabled
             transitionMan.StopCoroutine(transitionMan.Fade());
             transitionMan.StartCoroutine(transitionMan.Nuetral());
             yield return new WaitForEndOfFrame();
             transitionImage.enabled = true;
             transitionMan.StopCoroutine(transitionMan.In());
         }
+
         yield return null;
     }
-
 
     public void LoadScene(int sceneANumber)
     {
@@ -532,6 +525,7 @@ public class LevelManager : MonoBehaviour
     {
         testTransitionEffect p = FindObjectOfType<testTransitionEffect>();
         p.StartEmit();
+      //  p.TransitionImageOut(0);
 
         StartCoroutine(LoadYourAsyncScene());
 
@@ -587,7 +581,7 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator LoadYourAsyncScene()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(3.0f); 
 
         AsyncOperation target = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
         // AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1); 

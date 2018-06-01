@@ -179,9 +179,6 @@ public class Party : MonoBehaviour
     {
         if (col.gameObject.tag == "Exit")
         {
-            testTransitionEffect p = FindObjectOfType<testTransitionEffect>();
-            p.StartEmit();
-            p.TransitionImageOut(2);
             transitionMan.StartCoroutine(transitionMan.Out());
             levelMan.StartCoroutine(levelMan.LoadSceneAsync());
         }
@@ -189,6 +186,7 @@ public class Party : MonoBehaviour
         if (col.gameObject.tag == "ExitToMainMenu")
         {
             Debug.Log("Loading Back to Main Menu");
+            transitionMan.StartCoroutine(transitionMan.Out());
             levelMan.LoadScene(1);
             transitionMan.StopCoroutine(transitionMan.In());
             transitionMan.transitionImage.enabled = false;
@@ -201,8 +199,6 @@ public class Party : MonoBehaviour
     {
         if (col.gameObject.tag == "Exit")
         {
-            transitionMan.StartCoroutine(transitionMan.Out());
-            levelMan.StartCoroutine(levelMan.Transition());
             transitionMan.StartCoroutine(transitionMan.Nuetral());
             transitionMan.exitTransform.gameObject.SetActive(false);
         }

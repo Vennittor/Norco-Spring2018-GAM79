@@ -278,14 +278,14 @@ public class CombatManager : MonoBehaviour
 			Debug.Log ("Party Wins");
             
             //Combat rewards?
-            NewLevelManager.Instance.ReturnFromCombat();
+            LevelManager.Instance.ReturnFromCombat();
 		}
 		else if (playerVictory == false) // party loses
 		{
 			Debug.Log ("Party Loses");
 
             //Goto Defeat or Gameover GameState
-            NewLevelManager.Instance.ReturnFromCombat(false);
+            LevelManager.Instance.ReturnFromCombat(false);
 		}
 	}
 
