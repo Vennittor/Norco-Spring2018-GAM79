@@ -14,8 +14,6 @@ public class NewTransitionManager : MonoBehaviour
     public Transform entranceTransform;
     public Transform exitTransform;
     [SerializeField]
-    private LevelManager levelMan;
-    [SerializeField]
     private Party playerParty;
     public AnimationState state = AnimationState.neutral;
     public int animState = 2;
@@ -134,11 +132,6 @@ public class NewTransitionManager : MonoBehaviour
            iAnim = GameObject.Find("Transition Image").GetComponentInChildren<Animator>();
         }
 
-        if (levelMan == null)
-        {
-            levelMan = GameObject.FindObjectOfType<LevelManager>();
-        }
-
         if(fadeOutAnim != null)
         {
             fadeOutAnimA = GetComponentInChildren<Animation>(); 
@@ -167,7 +160,7 @@ public class NewTransitionManager : MonoBehaviour
         iAnim.SetBool("Fade", true);
      //    Debug.Log("Fade is true"); fade is true
         yield return new WaitUntil(() => transitionImage.color.a == 0);
-       // levelMan.Transition(); // enter transition/ loading sequence
+		//LevelManager.Instance.Transition ();
         yield return null;
     }
 
