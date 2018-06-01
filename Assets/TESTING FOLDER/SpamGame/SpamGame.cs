@@ -60,7 +60,7 @@ public class SpamGame : MonoBehaviour
         CombatManager.Instance.UseCharacterAbility(abilityModifier);
         Debug.Log("Winner");
         progress = 0;
-        gameTimer = gameTime;
+        gameTimer = 10;
         this.gameObject.SetActive(false);
         
         Debug.Log(abilityModifier);
