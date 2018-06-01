@@ -35,6 +35,9 @@ public class UIManager : MonoBehaviour
 
     public Image alchemistHealth, hunterHealth, crusaderHealth;
 
+    public GameObject targetArrow;
+    public List<GameObject> arrowTargets;
+
     public List<Button> skillButtons = new List<Button> ();
 
 	public Text leaderCooldownText;
@@ -74,6 +77,7 @@ public class UIManager : MonoBehaviour
 	{
 		SetMode_Normal ();
 		collectedTargets = new List<Character>();
+        arrowTargets = new List<GameObject>();
 
 		Announcer.combatUIManager = UIManager.Instance;
 		Announcer.announcementDestination = splashMessageText;
@@ -170,10 +174,6 @@ public class UIManager : MonoBehaviour
 				if (abilityIndex >= 0 && abilityIndex < combatManager.activeCharacter.abilityCount)
 				{
 					ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility (abilityIndex);
-                    if (combatManager.activeCharacter.name == "Crusader" && ability.abilityName == "Warrior Spirit")
-                    {
-                        combatManager.WarriorSwapLeader();
-                    }
 
 					if (ability == null)
 					{
@@ -328,22 +328,18 @@ public class UIManager : MonoBehaviour
     {
         foreach(Character target in targets)
         {
-			if (target.transform.GetComponentInChildren<SpriteRenderer> () != null) 
-			{
-				target.transform.GetComponentInChildren<SpriteRenderer> ().material.color = Color.red;
-			}
+            GameObject thing = Instantiate(targetArrow, target.transform.position + (Vector3.up * 4), target.transform.rotation);
+            arrowTargets.Add(thing);
         }
     }
 
     public void TurnWhite() // de-highlight red, return to white after not moused-over
     {
-        foreach (Character character in combatManager.charactersInCombat)
+        for (int i = arrowTargets.Count - 1; i >= 0; i--)
         {
-			if (character.transform.GetComponentInChildren<SpriteRenderer> () != null) 
-			{
-				character.transform.GetComponentInChildren<SpriteRenderer> ().material.color = Color.white;
-			}
+            Destroy(arrowTargets[i].gameObject);
         }
+        arrowTargets.Clear();
     }
 		
 	void HighlightTargets()

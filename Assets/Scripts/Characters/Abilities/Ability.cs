@@ -222,6 +222,10 @@ public class Ability : ScriptableObject
                 {
                     (characterUser as EnemyCharacter).RemoveAbility(this);
                 }
+                if (CombatManager.Instance.activeCharacter.name == "Crusader" && abilityName == "Warrior Spirit")
+                {
+                    CombatManager.Instance.WarriorSwapLeader();
+                }
             }
 		}
 
