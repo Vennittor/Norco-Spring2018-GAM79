@@ -365,7 +365,7 @@ public abstract class Character : MonoBehaviour
 
 	void DealPhysicalDamage(uint physicalDamage = 0)
 	{
-		physicalDamage -= defense > physicalDamage ? physicalDamage : defense;
+		physicalDamage -= ((defense + defenseBonus) * (1 + defenseMod)) > physicalDamage ? physicalDamage : (uint)((defense + defenseBonus) * (1 + defenseMod));
 		if (physicalDamage >= 1)
 		{
             //play sound for taking damage

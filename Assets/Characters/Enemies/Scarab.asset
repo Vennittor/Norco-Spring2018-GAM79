@@ -16,7 +16,10 @@ MonoBehaviour:
   _animatorController: {fileID: 9100000, guid: f88476c9d44f78e49bde4177039d14ab, type: 2}
   _maxHealth: 18
   _maxHeat: 0
-  _baseAbilities: []
+  _baseAbilities:
+  - {fileID: 11400000, guid: da81eea4ff093354e80bc4bca1eab5ab, type: 2}
+  - {fileID: 11400000, guid: 6321c0175e15d604aa98b2a94b7824cc, type: 2}
+  - {fileID: 11400000, guid: a6a9c6711b2fcca459522e235ec280e1, type: 2}
   _leaderAbilities: []
   _accuracy: 85
   _evade: 10

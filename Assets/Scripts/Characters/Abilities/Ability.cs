@@ -134,18 +134,19 @@ public class Ability : ScriptableObject
             {
                 foreach (Character target in targets)                   // Target all applicable targets
                 {
-                    if(target.evade >= characterUser.accuracy)
+                    if (target.evade >= (characterUser.accuracy + characterUser.accuracyBonus) * (1 + characterUser.accuracyMod))
                     {
                         Debug.Log("you suck");
                     }
                     else
                     {
                         randAccuracy = Random.Range(0, 100);
-                        if (randAccuracy <= characterUser.accuracy - target.evade)
+                        if (randAccuracy <= ((characterUser.accuracy + characterUser.accuracyBonus) * (1 + characterUser.accuracyMod)) - (target.evade + target.evadeBonus) * (1 + target.evadeMod))
                         {
                             foreach (Damage range in damage)                    // Deal all types of Damage in List
                             {
                                 uint totalDamage = (uint)range.RollDamage(modifier);
+                                totalDamage = (uint)((totalDamage + characterUser.attackBonus) * (1 + (characterUser.attackMod)));
                                 if (abilityName == "Combust")
                                 {
                                     foreach (EffectClass status in characterUser.effectClassList)
@@ -185,6 +186,10 @@ public class Ability : ScriptableObject
                                 {
                                     characterUser.ApplyStatus(StatusEffectType.Stun, 1);
                                 }
+                                else if (abilityName == "Cat's Eye")
+                                {
+                                    characterUser.ApplyStatus(StatusEffectType.Stun, 1);
+                                }
 
                                 target.ApplyDamage(totalDamage, range.element);
                                 
@@ -212,6 +217,7 @@ public class Ability : ScriptableObject
                         }
                     }
                 }
+                characterUser.RemoveStatuses();
                 if (abilityName == "Superior")
                 {
                     (characterUser as EnemyCharacter).RemoveAbility(this);
