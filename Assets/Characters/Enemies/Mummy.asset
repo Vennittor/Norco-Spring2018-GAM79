@@ -13,16 +13,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterName: Mummy
   _characterImage: {fileID: 0}
-  _animatorController: {fileID: 9100000, guid: 3ca3c046be2d77246b7411772aba417a, type: 2}
-  _maxHealth: 0
+  _animatorController: {fileID: 9100000, guid: 64cfbf78ec826d345b847b6bbf23e37d, type: 2}
+  _maxHealth: 23
   _maxHeat: 0
-  _abilities:
-  - {fileID: 11400000, guid: 0933f772d2760bf47894a075e12d6e2e, type: 2}
-  - {fileID: 11400000, guid: 43a9bfaba6a9da84a91bfb87a702bc5c, type: 2}
-  _attack: 0
+  _baseAbilities:
+  - {fileID: 11400000, guid: f27388e817e0db344b289aa55e9850e2, type: 2}
+  - {fileID: 11400000, guid: f4fc7a39aa2187944866545a8857d4b1, type: 2}
+  - {fileID: 11400000, guid: 23283986205ee50479ea8bd8d0f47cd9, type: 2}
+  _leaderAbilities: []
   _accuracy: 0
   _evade: 0
-  _speed: 0
+  _speed: 2
   _defense: 0
   _queueImage: {fileID: 0}
   _externalAI: {fileID: 0}

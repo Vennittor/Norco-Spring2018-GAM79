@@ -27,9 +27,21 @@ public class EnemyCharacter : Character
 
 		Ability abilityToUse = null;
 
-		float selection = Random.Range(0, abilities.Count);
+        float selection;
+        if (characterName == "Croc")
+        {
+            selection = Random.Range(0, currentHealth <= maxHealth / 10 ? abilities.Count - 2 : abilities.Count);
+        }
+        if (characterName == "Amun-Ra")
+        {
+            selection = Random.Range(0, currentHealth <= maxHealth / 25 ? abilities.Count - 2 : abilities.Count);
+        }
+        else
+        {
+            selection = abilities.Count;
+        }
 
-		selection = selection >= (float)abilities.Count ? abilities.Count - 1f : selection;	// if the selecton is equal to 
+        selection = selection >= (float)abilities.Count ? abilities.Count - 1f : selection;	// if the selecton is equal to 
         Debug.LogError("Enemy chooses ability" + selection);
 
 		abilityToUse = ReadyAbility ((int)selection);		//Readies the selected Ability
@@ -46,6 +58,11 @@ public class EnemyCharacter : Character
 
 		this.GetTargets (abilityToUseAgain);										//Then get Targets for it
 	}
+
+    public void RemoveAbility(Ability bye)
+    {
+        abilities.Remove(bye);
+    }
 
 
 	#region AI Functions.		//TODO These FUnctions should be externalized for more robust and customizable AI's

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628256c8b66cd4c42987ce0e51d5f0d8, type: 3}
+  m_Name: Croc
+  m_EditorClassIdentifier: 
+  _characterName: Croc
+  _characterImage: {fileID: 0}
+  _animatorController: {fileID: 9100000, guid: e2ffc83d36ef6c54c972ecac40e095c9, type: 2}
+  _maxHealth: 42
+  _maxHeat: 0
+  _baseAbilities:
+  - {fileID: 11400000, guid: 07698d2e7488b04488af41c09a85757e, type: 2}
+  - {fileID: 11400000, guid: d4bb970888fac094c87e54639aa1fdf6, type: 2}
+  - {fileID: 11400000, guid: f395b452f2b0fec46aef240b2d314242, type: 2}
+  _leaderAbilities: []
+  _accuracy: 0
+  _evade: 0
+  _speed: 3
+  _defense: 0
+  _queueImage: {fileID: 0}
+  _externalAI: {fileID: 0}

@@ -9,6 +9,8 @@ public class Damage
 
 	[SerializeField] private ElementType elementType = ElementType.PHYSICAL;
 
+    public float statusChance;
+
 	public ElementType element
 	{
 		get 

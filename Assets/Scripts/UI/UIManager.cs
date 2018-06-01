@@ -30,9 +30,10 @@ public class UIManager : MonoBehaviour
 	public float splashLifeTime = 1.0f;
 
 	public GameObject actionSlider;
-    //public Image healthBar;
 
-	public List<Button> skillButtons = new List<Button> ();
+    public Image alchemistHealth, hunterHealth, crusaderHealth;
+
+    public List<Button> skillButtons = new List<Button> ();
 
     public LayerMask targetable;
 	public List<Character> collectedTargets;
@@ -156,22 +157,15 @@ public class UIManager : MonoBehaviour
 		if (inputMode == InputMode.ABILITYSELECT)
 		{
 			bool stopAbility = false;
-			foreach(EffectClass effect in combatManager.activeCharacter.effectClassList)
-			{
-				if(effect.statusEffectType == StatusEffectType.Berserk) //TODO move out of this level
-				{
-					stopAbility = true;                
-				}
-			}
 
 			if (!stopAbility)
 			{	
 				if (abilityIndex >= 0 && abilityIndex < combatManager.activeCharacter.abilityCount)
 				{
 					ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility (abilityIndex);
-                    if (combatManager.activeCharacter.name == "Crusader" && ability.abilityName == "Battle Cry")
+                    if (combatManager.activeCharacter.name == "Crusader" && ability.abilityName == "Warrior Spirit")
                     {
-                        combatManager.BattlecrySwapLeader();
+                        combatManager.WarriorSwapLeader();
                     }
 
 					if (ability == null)

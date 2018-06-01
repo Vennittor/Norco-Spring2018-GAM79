@@ -17,11 +17,11 @@ MonoBehaviour:
   _maxHealth: 50
   _maxHeat: 300
   _baseAbilities:
-  - {fileID: 11400000, guid: d4998cf7870c00d4c83d01be114bd3ef, type: 2}
-  - {fileID: 11400000, guid: b43badaefcb4377408de247f9062ce8e, type: 2}
-  - {fileID: 11400000, guid: 77b8dc76e800dad479da8130990b2e3a, type: 2}
+  - {fileID: 11400000, guid: 1d6f6d831643be1418993daa184cb7b5, type: 2}
+  - {fileID: 11400000, guid: bab206f33e427c2448fac6a127cbddf2, type: 2}
   _leaderAbilities:
-  - {fileID: 11400000, guid: f1d5092c67dcbb04fb0cf80956dfdb77, type: 2}
+  - {fileID: 11400000, guid: 4db417b2ddb705342a504c8b9ec71c58, type: 2}
+  - {fileID: 11400000, guid: da3811ce551aca24c9ef7dbfc425d0a5, type: 2}
   _accuracy: 84
   _evade: 10
   _speed: 4

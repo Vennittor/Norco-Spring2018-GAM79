@@ -13,7 +13,7 @@ public class EquipmentManager : MonoBehaviour {
     [Header("Dungeon Settings")]
     public int currentGold;
 
-    public IntRange goldDropValues;
+    public Vector2 goldDropValues;
     public int ringDropChance;
     public List<Ring> ringDropList;
 
@@ -45,7 +45,7 @@ public class EquipmentManager : MonoBehaviour {
 
     public void CalcDrops()
     {
-        int goldDropped = goldDropValues.Random;
+		int goldDropped =  (int)Random.Range( goldDropValues.x, goldDropValues.y);
 
         currentGold += goldDropped;
         currentGoldText.text = "" + currentGold;
