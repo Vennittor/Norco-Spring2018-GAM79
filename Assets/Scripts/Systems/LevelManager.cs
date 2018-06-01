@@ -101,7 +101,6 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("CamDockLoadsStart?");
         combatManager = CombatManager.Instance;
 
 		if (combatManager == null)

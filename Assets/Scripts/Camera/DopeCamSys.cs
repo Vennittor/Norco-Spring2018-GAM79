@@ -41,8 +41,6 @@ public class DopeCamSys : MonoBehaviour
 			cameraDock = target.transform.Find ("CamDock");
 		}
 
-        Debug.Log(cameraDock); 
-
 		transform.rotation = Quaternion.Euler(Vector3.zero);
         transform.position = cameraDock.transform.position;
         transform.LookAt(target.transform.position);

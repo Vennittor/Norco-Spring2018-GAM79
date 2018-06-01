@@ -99,6 +99,7 @@ public class CombatManager : MonoBehaviour
         partyHeatLevel = 0;
         roundCounter = 0;
         leaderCurrentCooldown = 0;
+		DisplayLeaderCooldown ();
 
 		if (actionSlider == null)
 		{
@@ -167,6 +168,7 @@ public class CombatManager : MonoBehaviour
         if (leaderCurrentCooldown != 0)
         {
             leaderCurrentCooldown--;
+			DisplayLeaderCooldown ();
         }
 		SortRoundQueue();
 
@@ -215,6 +217,7 @@ public class CombatManager : MonoBehaviour
             if (activeCharacter is PlayerCharacter)
             {
                 leaderCurrentCooldown = leaderInitCooldown;
+				DisplayLeaderCooldown ();
                 if (activeLeader.statuses.Contains(StatusEffectType.Fear))
                 {
                     StatusEffect statusEffect = new StatusEffect();
@@ -237,6 +240,7 @@ public class CombatManager : MonoBehaviour
     public void WarriorSwapLeader()
     {
         leaderCurrentCooldown = leaderInitCooldown;
+		DisplayLeaderCooldown ();
         if (activeLeader.statuses.Contains(StatusEffectType.Fear))
         {
             StatusEffect statusEffect = new StatusEffect();
@@ -573,9 +577,13 @@ public class CombatManager : MonoBehaviour
 		AssignTargets (target, ability);
 	}
 
-	//TODO
-	//Function Get RandomTarget
-	//Function Redirect Target
+	#endregion
 
+
+	#region UI Displays
+	private void DisplayLeaderCooldown()
+	{
+		UIManager.Instance.DisplayLeaderCooldown (leaderCurrentCooldown);
+	}
 	#endregion
 }
