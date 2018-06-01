@@ -256,6 +256,11 @@ public class NewTransitionManager : MonoBehaviour
         StartCoroutine(Nuetral()); 
     }
 
+	public void RunCoOut()
+	{
+		StartCoroutine ( Out() );
+	}
+
     public IEnumerator Out()
     {
         switch (animState)

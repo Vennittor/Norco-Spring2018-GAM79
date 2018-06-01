@@ -232,6 +232,11 @@ public class LevelManager : MonoBehaviour
         enemyParty.GetComponent<Transform>().position = eParty.transform.position;
     }
 
+	public void StartCoInitiateCombat(Party party, Party enemy)
+	{
+		StartCoroutine (InitiateCombat (party, enemy));
+	}
+
     public IEnumerator InitiateCombat(Party player, Party enemy)
     {
         if (!combatManager.inCombat)
@@ -522,6 +527,11 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(sceneANumber);
     }
 
+	public void StartCoLoadSceneAsync()
+	{
+		StartCoroutine (LoadSceneAsync ());
+	}
+
     public IEnumerator LoadSceneAsync()
     {
         testTransitionEffect p = FindObjectOfType<testTransitionEffect>();
@@ -532,6 +542,11 @@ public class LevelManager : MonoBehaviour
 
         yield return null;
     }
+
+	public void StartCoDoneWithTransition(Party playerParty)
+	{
+		StartCoroutine (DoneWithTransition (playerParty));
+	}
 
     public IEnumerator DoneWithTransition(Party playerParty)
     {

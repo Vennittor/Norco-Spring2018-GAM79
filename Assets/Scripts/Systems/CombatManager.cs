@@ -82,7 +82,7 @@ public class CombatManager : MonoBehaviour
 
 		this.gameObject.transform.SetParent(null);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     void Start()
