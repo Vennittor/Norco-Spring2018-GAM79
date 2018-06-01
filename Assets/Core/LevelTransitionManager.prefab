@@ -500,10 +500,6 @@ MonoBehaviour:
   iAnim: {fileID: 0}
   entranceTransform: {fileID: 4413911563104254}
   exitTransform: {fileID: 4714272245362310}
-  levelMan: {fileID: 0}
-  InT: 0
-  OutT: 0
-  anim: {fileID: 111262613660324012}
   Load: {fileID: 1248539732640004}
   transitionOpen: {fileID: 1367864055573910}
 --- !u!114 &114679240097285656

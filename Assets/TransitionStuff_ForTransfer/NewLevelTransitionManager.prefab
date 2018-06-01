@@ -304,7 +304,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1430402817468820}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -293.5, y: -66.7, z: -89.4}
+  m_LocalPosition: {x: -885.7, y: -247.4, z: -185.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224620456546407226}
@@ -316,14 +316,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892016693810730}
-  m_LocalRotation: {x: -0, y: -0.10975673, z: -0, w: 0.99395853}
-  m_LocalPosition: {x: 409.19556, y: -66.7, z: -89.051956}
+  m_LocalRotation: {x: -0, y: -0.077673726, z: -0, w: 0.9969789}
+  m_LocalPosition: {x: 75.67, y: -247.4, z: -187.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4716133616956948}
   m_Father: {fileID: 224620456546407226}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -12.603001, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -8.910001, z: 0}
 --- !u!23 &23247643531106324
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -550,15 +550,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionImage: {fileID: 114913811671820396}
   iAnim: {fileID: 95721095774628846}
-  fadeOutAnim: {fileID: 0}
+  fadeOutAnim: {fileID: 95761889915582028}
   entranceTransform: {fileID: 4900845920827302}
   exitTransform: {fileID: 4913812567609476}
-  levelMan: {fileID: 0}
   playerParty: {fileID: 0}
   state: 0
   animState: 2
-  fadeOutAnimA: {fileID: 0}
-  fadeOutObj: {fileID: 0}
+  fadeOutAnimA: {fileID: 111186299489990548}
+  fadeOutObj: {fileID: 1353815203079706}
 --- !u!114 &114269851378899716
 MonoBehaviour:
   m_ObjectHideFlags: 1
