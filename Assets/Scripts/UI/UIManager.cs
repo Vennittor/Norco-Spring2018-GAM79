@@ -30,10 +30,14 @@ public class UIManager : MonoBehaviour
 	public float splashLifeTime = 1.0f;
 
 	public GameObject actionSlider;
+    public GameObject spammyGame;
+    public GameObject backAndForth;
 
     public Image alchemistHealth, hunterHealth, crusaderHealth;
 
     public List<Button> skillButtons = new List<Button> ();
+
+	public Text leaderCooldownText;
 
     public LayerMask targetable;
 	public List<Character> collectedTargets;
@@ -64,8 +68,6 @@ public class UIManager : MonoBehaviour
 		this.gameObject.transform.SetParent(null);
 
         DontDestroyOnLoad(gameObject);
-
-		Debug.Log ("UIManager Awake");
     }
 
 	public void Start()
@@ -79,6 +81,11 @@ public class UIManager : MonoBehaviour
 		eventSystemManager = EventSystemManager.Instance;
 
 		actionSlider = this.gameObject.transform.Find ("Action Slider").gameObject;
+
+		if (leaderCooldownText == null)
+		{
+			Debug.LogError ("UIManager: no reference to leader Cooldown Text");
+		}
 
 		if (disableUIOnStart)
 		{
@@ -134,7 +141,7 @@ public class UIManager : MonoBehaviour
 	}
 
 	public void UpdateAbilityButtons(List<Ability> activeAbilities)
-	{
+	{	
 		for (int i = 0; i < activeAbilities.Count; i++) 
 		{
 			if (i >= skillButtons.Count) 
@@ -308,18 +315,13 @@ public class UIManager : MonoBehaviour
 
     }
 
-  //  public void UpdateHealthBar(Character character)
-  //  {
-		//if (healthBar != null)
-		//{
-  //          // healthBar is a Dias, but doesn't seem to be attached to anyone or doing anything?
-  //          healthBar.fillAmount = character.currentHealth / character.maxhealth;
-  //      }
-		//else
-		//{
-		//	Debug.LogError ("No refrence to Health Bar");
-		//}
-  //  }
+	public void DisplayLeaderCooldown(uint cooldown)
+	{
+		if (leaderCooldownText != null)
+		{
+			leaderCooldownText.text = cooldown.ToString ();
+		}
+	}
 
     #region HighlightTargets
     public void TurnRed(List<Character> targets) 			// highlight in Red on Mouse-over
