@@ -157,7 +157,6 @@ public class UIManager : MonoBehaviour
 		if (inputMode == InputMode.ABILITYSELECT)
 		{
 			bool stopAbility = false;
-			foreach(EffectClass effect in combatManager.activeCharacter.effectClassList)
 
 			if (!stopAbility)
 			{	

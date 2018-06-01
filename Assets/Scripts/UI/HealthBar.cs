@@ -59,7 +59,7 @@ public class HealthBar : MonoBehaviour
     {
         if (healthBar != null && character != null)
         {
-            healthBar.fillAmount = (float)character.currentHealth / (float)character.maxhealth;
+            healthBar.fillAmount = (float)character.currentHealth / (float)character.maxHealth;
         }
     }
     #endregion
