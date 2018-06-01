@@ -43,13 +43,6 @@ public class NewTransitionManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void OnBeforeSceneLoadRuntimeMethod()
     {
-        Debug.Log("Before scene loaded");
-
-
-        ReferenceEquals(null, true);
-        NewTransitionManager.Instance.enabled = false;
-        Debug.LogError("Transition Manager is not enabled. "); 
-
         NewTransitionManager.Instance.state = AnimationState.neutral;
     }
 
