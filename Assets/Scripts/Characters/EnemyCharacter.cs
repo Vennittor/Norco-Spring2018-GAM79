@@ -38,7 +38,7 @@ public class EnemyCharacter : Character
         }
         else
         {
-            selection = abilities.Count;
+            selection = Random.Range(0, abilities.Count);
         }
 
         selection = selection >= (float)abilities.Count ? abilities.Count - 1f : selection;	// if the selecton is equal to 

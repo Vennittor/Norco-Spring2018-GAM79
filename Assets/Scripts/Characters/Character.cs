@@ -333,7 +333,6 @@ public abstract class Character : MonoBehaviour
 
     public void ApplyDamage(uint damage = 0, ElementType damageType = ElementType.PHYSICAL)
 	{
-        Debug.Log (this.gameObject.name + " takes " + damage.ToString () + " of " + damageType.ToString() + " damage!");
         if (damageType == ElementType.PHYSICAL)
         {
             DealPhysicalDamage(damage);
@@ -366,7 +365,8 @@ public abstract class Character : MonoBehaviour
 	void DealPhysicalDamage(uint physicalDamage = 0)
 	{
 		physicalDamage -= ((defense + defenseBonus) * (1 + defenseMod)) > physicalDamage ? physicalDamage : (uint)((defense + defenseBonus) * (1 + defenseMod));
-		if (physicalDamage >= 1)
+        Debug.Log(this.gameObject.name + " takes " + physicalDamage.ToString() + " of " + ElementType.PHYSICAL.ToString() + " damage!");
+        if (physicalDamage >= 1)
 		{
             //play sound for taking damage
 			currentHealth -= (uint)Mathf.Clamp(physicalDamage, 0, currentHealth);          
