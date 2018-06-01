@@ -1117,6 +1117,11 @@ Prefab:
       propertyPath: m_TagString
       value: ExitToMainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 23340532812928754, guid: cb006def3ee6c1c468d393d5cfe73a7e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb006def3ee6c1c468d393d5cfe73a7e, type: 2}
   m_IsPrefabParent: 0
