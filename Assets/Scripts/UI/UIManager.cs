@@ -30,6 +30,8 @@ public class UIManager : MonoBehaviour
 	public float splashLifeTime = 1.0f;
 
 	public GameObject actionSlider;
+    public GameObject spammyGame;
+    public GameObject backAndForth;
 
     public Image alchemistHealth, hunterHealth, crusaderHealth;
 

@@ -751,7 +751,7 @@ MonoBehaviour:
   uiManager: {fileID: 0}
   characterName: Hunter
   baseStats: {fileID: 11400000, guid: ca197f66a86c09d4ca5ecaa6ba1532d3, type: 2}
-  maxhealth: 50
+  maxHealth: 0
   currentHealth: 50
   maxHeat: 300
   currentHeat: 0
@@ -1561,7 +1561,7 @@ MonoBehaviour:
   uiManager: {fileID: 0}
   characterName: Alchemist
   baseStats: {fileID: 11400000, guid: 981bd179054471042a37f34d83caf34b, type: 2}
-  maxhealth: 50
+  maxHealth: 0
   currentHealth: 50
   maxHeat: 300
   currentHeat: 0
@@ -1858,7 +1858,7 @@ MonoBehaviour:
   uiManager: {fileID: 0}
   characterName: Crusader
   baseStats: {fileID: 11400000, guid: f85d9673a64a61f4797d00d2cf7e863c, type: 2}
-  maxhealth: 0
+  maxHealth: 0
   currentHealth: 0
   maxHeat: 0
   currentHeat: 0
