@@ -21,8 +21,8 @@ MonoBehaviour:
     _numberOfTargets: 1
   damage:
   - damageRanges:
-    - {x: 15, y: 15}
-    elementType: 2
+    - {x: 0, y: 0}
+    elementType: 0
     statusChance: 100
   actionType: 0
   statuses: 0600000008000000

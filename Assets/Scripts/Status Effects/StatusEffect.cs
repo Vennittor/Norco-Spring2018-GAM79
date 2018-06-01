@@ -303,7 +303,7 @@ public class StatusEffect
     {
         statusEffectType = StatusEffectType.Fear;
         isBuff = true;
-        duration = 2;
+        duration = 3;
         applyImmediately = true;
         checkAtStart = true;
         return new EffectClass(statusEffectType, isBuff, duration, duration, applyImmediately, checkAtStart);
