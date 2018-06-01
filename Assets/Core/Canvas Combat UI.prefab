@@ -4245,7 +4245,7 @@ MonoBehaviour:
   disableUIOnStart: 1
   splashMessagePanel: {fileID: 1367261415709302}
   splashMessageText: {fileID: 114329499611013138}
-  splashLifeTime: 1
+  splashLifeTime: 1.7
   actionSlider: {fileID: 1529916558906148}
   spammyGame: {fileID: 1793679135485750}
   backAndForth: {fileID: 1014248517847684}

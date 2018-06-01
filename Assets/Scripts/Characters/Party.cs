@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Party : MonoBehaviour
 {
-    public LevelManager levelMan;
-    private TransitionManager transitionMan;
-
     public HeatZone heatState;
     public List<Character> partyMembers;
     public PartyType type = PartyType.ENEMY;
@@ -31,17 +28,6 @@ public class Party : MonoBehaviour
 
     void Start()
     {
-        transitionMan = FindObjectOfType<TransitionManager>(); 
-        levelMan = LevelManager.Instance;
-        
-
-		if (levelMan == null)
-		{
-			Debug.LogError (this.gameObject.name + " could not find reference to LevelManager");
-		}
-
-        DontDestroyOnLoad(levelMan);
-
 		for (int i = partyMembers.Count - 1; i >= 0; i--) 
 		{
 			if (partyMembers [i] == null)
@@ -99,26 +85,24 @@ public class Party : MonoBehaviour
 
     public void Update()
     {
-		if (levelMan != null)
+		if (lastHeat != myCurrentHeatIntensity)
 		{
-			if (lastHeat != myCurrentHeatIntensity)
-			{
-				levelMan.GetHeat(myCurrentHeatIntensity);
-				lastHeat = myCurrentHeatIntensity;
-			}
+			LevelManager.Instance.GetHeat(myCurrentHeatIntensity);
+			lastHeat = myCurrentHeatIntensity;
+		}
 				
-			if (levelMan.combatManager.inCombat == false)
+		if (CombatManager.Instance.inCombat == false)
+		{
+			if (NextTickAt <= Time.time)
 			{
-				if (NextTickAt <= Time.time)
+				if (heatState == HeatZone.InHeat)
 				{
-					if (heatState == HeatZone.InHeat)
-					{
-						LevelHeatApplication();
-						NextTickAt = Time.time + heatInterval;
-					}
+					LevelHeatApplication();
+					NextTickAt = Time.time + heatInterval;
 				}
 			}
 		}
+		
     }
 
     public void IncreaseHeatRate(uint heatZoneIntensity)
@@ -169,7 +153,7 @@ public class Party : MonoBehaviour
 				Party enemyParty = collision.gameObject.GetComponent<Party>();
 				collision.gameObject.GetComponent<Collider>().enabled = false;
 
-				StartCoroutine( levelMan.InitiateCombat(this, enemyParty) );
+				LevelManager.Instance.StartCoInitiateCombat (this, enemyParty);
 			}
 		}
 
@@ -177,19 +161,51 @@ public class Party : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Exit")
+        if (col.gameObject.tag == "Exit")
         {
-            transitionMan.TransitionOpen();
-            levelMan.StartCoroutine(levelMan.Transition());
-            levelMan.LoadSceneAsync();
+			NewTransitionManager.Instance.RunCoOut ();
+			LevelManager.Instance.StartCoLoadSceneAsync();
+        }
+
+        if (col.gameObject.tag == "ExitToMainMenu")
+        {
+            Debug.Log("Loading Back to Main Menu");
+            NewTransitionManager.Instance.StartCoroutine(NewTransitionManager.Instance.Out());
+			LevelManager.Instance.LoadScene(1);
+            NewTransitionManager.Instance.StopCoroutine(NewTransitionManager.Instance.In());
+            NewTransitionManager.Instance.transitionImage.enabled = false;
+            NewTransitionManager.Instance.iAnim.enabled = false;
+            Destroy(NewTransitionManager.Instance.gameObject);
+        }
+    }
+
+    private void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.tag == "Exit")
+        {
+			NewTransitionManager.Instance.StartCoroutine(NewTransitionManager.Instance.Nuetral());
+			NewTransitionManager.Instance.exitTransform.gameObject.SetActive(false);
+        }
+
+        if (col.gameObject.tag == "Entrance")
+        {
+			NewTransitionManager.Instance.StartCoroutine(NewTransitionManager.Instance.Nuetral());
+			NewTransitionManager.Instance.entranceTransform.gameObject.SetActive(false);
         }
     }
 
     private void OnTriggerExit(Collider col)
     {
-        if(col.gameObject.tag == "Exit")
+        if (col.gameObject.tag == "Exit")
         {
-            levelMan.StartCoroutine(levelMan.DoneWithTransition(playerParty));
+			NewTransitionManager.Instance.StartCoroutine(NewTransitionManager.Instance.In());
+			LevelManager.Instance.StartCoDoneWithTransition( playerParty);
+        }
+
+        if (col.gameObject.tag == "Entrance")
+        {
+			NewTransitionManager.Instance.StopCoroutine(NewTransitionManager.Instance.In());
+			NewTransitionManager.Instance.transitionImage.enabled = false;
         }
     }
 }

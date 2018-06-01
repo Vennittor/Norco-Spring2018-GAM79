@@ -31,7 +31,7 @@ public class SoundManager : MonoBehaviour
 
 		this.gameObject.transform.SetParent(null);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     public void Play(AudioClip clip, string bus)
@@ -58,7 +58,7 @@ public class SoundManager : MonoBehaviour
         src.clip = clip;
         src.Play();
 
-        DontDestroyOnLoad(go); 
+        //DontDestroyOnLoad(go); 
 
         if (go.gameObject.GetComponent<AudioSource>().loop == false)
         {

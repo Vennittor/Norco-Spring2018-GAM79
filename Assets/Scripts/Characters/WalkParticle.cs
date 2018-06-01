@@ -17,6 +17,6 @@ public class WalkParticle : MonoBehaviour
     public IEnumerator KillMe(ParticleSystem toDie, float duration)
     {
         yield return new WaitForSeconds(duration);
-        Destroy(toDie);
+        Destroy(toDie.gameObject);
     }
 }

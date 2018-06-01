@@ -9,6 +9,7 @@ TagManager:
   - Entrance
   - Exit
   - CombatMX
+  - ExitToMainMenu
   layers:
   - Default
   - TransparentFX
