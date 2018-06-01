@@ -530,7 +530,7 @@ public class CombatManager : MonoBehaviour
                 if (val >= minVal && val <= maxVal)
                 {
                     print("you hit it!" + val);
-                    modifiedEffect = 5f;
+                    modifiedEffect = 1.2f;
                 }
                 else
                 {

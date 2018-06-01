@@ -47,7 +47,7 @@ public class SpamGame : MonoBehaviour
             if (progress >= 1)
             {
                 begun = false;
-                abilityModifier = 5;
+                abilityModifier = 1.2f;
             }
             else if(gameTimer == 0 && progress < 1)
             {
