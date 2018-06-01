@@ -12,8 +12,8 @@ public class KeysToMove : MonoBehaviour
     //Set the agent's angular speed in the inspector to zero
 	public float walkingSpeed = 12;
 
-    private bool walking;
-    private bool facingRight = true;
+//    private bool walking;
+    //private bool facingRight = true;
     public GameObject interactionPrefab;
 
 	public bool movementAllowed = true;
@@ -46,7 +46,7 @@ public class KeysToMove : MonoBehaviour
 
 			if (input != Vector3.zero) 
 			{
-				walking = true;
+				//walking = true;
 				if (myAnimator != null) 
 				{
 					myAnimator.SetBool ("Walk", true);
@@ -55,7 +55,7 @@ public class KeysToMove : MonoBehaviour
 			}
 			else 
 			{
-				walking = false;
+				//walking = false;
 				if (myAnimator != null) 
 				{
 					myAnimator.SetBool("Walk", false);
@@ -79,12 +79,12 @@ public class KeysToMove : MonoBehaviour
 
             if (agent.velocity.x > 0)
             {
-                facingRight = true;
+                //facingRight = true;
 				this.gameObject.GetComponent<SpriteRenderer> ().flipX = false;
             }
             else if (agent.velocity.x < 0)
             {
-                facingRight = false;
+                //facingRight = false;
 				this.gameObject.GetComponent<SpriteRenderer> ().flipX = true;
             }
         }

@@ -431,18 +431,15 @@ public class LevelManager : MonoBehaviour
 
     public void SetEntrancePosition(Party playerParty)
     {
-        if (partyPos != null)
+        partyPos = transitionMan.entranceTransform.position;
+
+        playerParty.transform.position = partyPos;
+
+        if (entrance.gameObject == null)
         {
             partyPos = transitionMan.entranceTransform.position;
-
-            playerParty.transform.position = partyPos;
-
-            if (entrance.gameObject == null)
-            {
-                partyPos = transitionMan.entranceTransform.position;
-                Instantiate(entrance.gameObject, entrance.transform.position, entrance.transform.rotation);
-                entrance.transform.position = partyPos;
-            }
+            Instantiate(entrance.gameObject, entrance.transform.position, entrance.transform.rotation);
+            entrance.transform.position = partyPos;
         }
     }
 
