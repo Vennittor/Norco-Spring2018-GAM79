@@ -4252,6 +4252,9 @@ MonoBehaviour:
   alchemistHealth: {fileID: 114734217204658326}
   hunterHealth: {fileID: 114388679788673060}
   crusaderHealth: {fileID: 114239121021020376}
+  targetArrow: {fileID: 1493275980833050, guid: d13444f32fad25c4fbf1a10ebbfbdaf2,
+    type: 2}
+  arrowTargets: []
   skillButtons:
   - {fileID: 114333271618336412}
   - {fileID: 114147449467279760}
