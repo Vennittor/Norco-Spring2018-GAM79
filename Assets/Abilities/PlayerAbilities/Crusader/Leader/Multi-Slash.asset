@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Multi-Slash
   description: Slashes target enemy twice.
-  callOutText: 
+  callOutText: Slashes target enemy twice.
   heatCost: 0
   targetType:
     _who: 2

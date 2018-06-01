@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Lascerate
   m_EditorClassIdentifier: 
   abilityName: Lascerate
-  description: Stabs target enemy. Inflicts bleed.
-  callOutText: 
+  description: Slashes target enemy and inflicts bleeding.
+  callOutText: Slashes target enemy and inflicts bleeding.
   heatCost: 0
   targetType:
     _who: 2

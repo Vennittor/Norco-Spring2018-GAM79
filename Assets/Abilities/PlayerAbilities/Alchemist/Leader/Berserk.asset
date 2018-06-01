@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Berserk
   m_EditorClassIdentifier: 
   abilityName: Berserk
-  description: Overclock your pack.
-  callOutText: 
+  description: Raise offense but can't switch leader for 3 turns.
+  callOutText: Raise offense but can't switch leader for 3 turns.
   heatCost: 0
   targetType:
     _who: 2

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Achilles Heel
   m_EditorClassIdentifier: 
   abilityName: Achilles Heel
-  description: I used to be an adventurer like you...
-  callOutText: BUT THEN I TOOK AN ARROW TO THE KNEEEEEEE!!!
+  description: Temporarily cripple enemy speed.
+  callOutText: Temporarily cripple enemy speed.
   heatCost: 0
   targetType:
     _who: 2

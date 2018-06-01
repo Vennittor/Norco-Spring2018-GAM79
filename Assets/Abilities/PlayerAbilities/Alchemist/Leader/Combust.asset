@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Combust
   m_EditorClassIdentifier: 
   abilityName: Combust
-  description: Massive damage, at a cost...
-  callOutText: 
+  description: Throws a large explosive but stuns self for 2 turns.
+  callOutText: Throws a large explosive but stuns self for 2 turns.
   heatCost: 0
   targetType:
     _who: 2

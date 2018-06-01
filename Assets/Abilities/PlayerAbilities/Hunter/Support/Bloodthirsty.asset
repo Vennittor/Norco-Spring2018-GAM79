@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Bloodthirsty
   m_EditorClassIdentifier: 
   abilityName: Bloodthirsty
-  description: Cry havoc and let loose the blood...
-  callOutText: RAAAAA!!!
+  description: Bleed the enemy and steel your damage.
+  callOutText: Bleed the enemy and steel your damage.
   heatCost: 0
   targetType:
     _who: 2

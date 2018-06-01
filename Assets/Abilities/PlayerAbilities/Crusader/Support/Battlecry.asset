@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Battlecry
   description: Heals and bolsters allies.
-  callOutText: 
+  callOutText: Heals and bolsters allies.
   heatCost: 0
   targetType:
     _who: 1
