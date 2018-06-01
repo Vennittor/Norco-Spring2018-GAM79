@@ -45,41 +45,31 @@ public class NewTransitionManager : MonoBehaviour
     {
         Debug.Log("Before scene loaded");
 
-        if(NewTransitionManager.FindObjectOfType<NewTransitionManager>() == null)
-        {
-            ReferenceEquals(null, true);
-            NewTransitionManager.FindObjectOfType<NewTransitionManager>().enabled = false;
-            Debug.LogError("Transition Manager is not enabled. "); 
-        }
 
-        else if (NewTransitionManager.FindObjectOfType<NewTransitionManager>() != null)
-        {
-            NewTransitionManager.FindObjectOfType<NewTransitionManager>().state = AnimationState.neutral;
-        }
+        ReferenceEquals(null, true);
+        NewTransitionManager.Instance.enabled = false;
+        Debug.LogError("Transition Manager is not enabled. "); 
+
+        NewTransitionManager.Instance.state = AnimationState.neutral;
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void OnAfterSceneLoadRuntimeMethod()
     {
         Debug.Log("After first scene loaded");
-        if (NewTransitionManager.FindObjectOfType<NewTransitionManager>() != null)
-        {
-            NewTransitionManager.FindObjectOfType<NewTransitionManager>().state = AnimationState.fadein;
-        }
+
+		NewTransitionManager.Instance.state = AnimationState.fadein;
+
 
         Debug.Log("RuntimeMethodLoad: After first scene loaded");
 
-        if (NewTransitionManager.FindObjectOfType<NewTransitionManager>() != null)
-        {
-            NewTransitionManager.FindObjectOfType<NewTransitionManager>().StartCoroutine("Fade");
-            NewTransitionManager.FindObjectOfType<NewTransitionManager>().StartCoroutine("In");
-        }
+		NewTransitionManager.Instance.StartCoroutine("Fade");
+		NewTransitionManager.Instance.StartCoroutine("In");
 
-        NewTransitionManager.FindObjectOfType<NewTransitionManager>().state = AnimationState.neutral;
-        if (NewTransitionManager.FindObjectOfType<NewTransitionManager>().state == AnimationState.neutral)
-        {
-            NewTransitionManager.FindObjectOfType<NewTransitionManager>().StopCoroutine(NewTransitionManager.FindObjectOfType<NewTransitionManager>().In());
-        }
+
+        NewTransitionManager.Instance.state = AnimationState.neutral;
+		NewTransitionManager.Instance.StopCoroutine(NewTransitionManager.Instance.In());
+
     }
 
     void Awake()
@@ -102,7 +92,7 @@ public class NewTransitionManager : MonoBehaviour
         {
             Debug.Log("Player party does not exhist");
         }
-        NewTransitionManager.FindObjectOfType<NewTransitionManager>().enabled = true;
+        NewTransitionManager.Instance.enabled = true;
        // Party.FindObjectOfType<Party>().transform.SetParent(null); 
        // DontDestroyOnLoad(playerParty);
 
@@ -142,17 +132,14 @@ public class NewTransitionManager : MonoBehaviour
             GameObject.Find("FadeOutObj").GetComponentInChildren<GameObject>().SetActive(false); 
         }
 
-        if (NewTransitionManager.FindObjectOfType<NewTransitionManager>() != null)
-        {
-            NewTransitionManager.FindObjectOfType<NewTransitionManager>().StartCoroutine("Fade");
-        }
+		NewTransitionManager.Instance.StartCoroutine("Fade");
     }
 
     private void OnLevelWasLoaded()
     {
-        NewTransitionManager.FindObjectOfType<NewTransitionManager>().state = AnimationState.fadein;
-        NewTransitionManager.FindObjectOfType<NewTransitionManager>().StartCoroutine("Fade");
-        NewTransitionManager.FindObjectOfType<NewTransitionManager>().StartCoroutine("In");
+		NewTransitionManager.Instance.state = AnimationState.fadein;
+		NewTransitionManager.Instance.StartCoroutine("Fade");
+		NewTransitionManager.instance.StartCoroutine("In");
     }
 
     public IEnumerator Fade()
