@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Scattershot
   m_EditorClassIdentifier: 
   abilityName: Scattershot
-  description: Fire a spread of arrows against all targets.
-  callOutText: Fire everything!
+  description: Fire a barrage against all targets.
+  callOutText: Fire a barrage against all targets.
   heatCost: 0
   targetType:
     _who: 2
@@ -32,4 +32,4 @@ MonoBehaviour:
   hitsPerAction: 4
   _cooldown: 2
   characterUser: {fileID: 0}
-  abilitySound: {fileID: 0}
+  abilitySound: {fileID: 8300000, guid: 8be8f34bafc6dec4d8fee0ba62aeeb54, type: 3}

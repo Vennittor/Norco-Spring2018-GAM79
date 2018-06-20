@@ -11,24 +11,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4c18fc4b5b743408b8eb69d212b657, type: 3}
   m_Name: SmokeBomb
   m_EditorClassIdentifier: 
-  abilityName: Smoke Out
-  description: The best defense is hiding in a lot of smoke...
-  callOutText: Smokin'...
+  abilityName: Smoke Bomb
+  description: Blind your enemies but lose a turn.
+  callOutText: Blind your enemies but lose a turn.
   heatCost: 0
   targetType:
     _who: 2
     _formation: 1
-    _numberOfTargets: 4
+    _numberOfTargets: 1
   damage:
   - damageRanges: []
     elementType: 0
     statusChance: 100
-  actionType: 2
-  statuses: 08000000
+  actionType: 0
+  statuses: 0b000000
   stunDuration: 0
   dotDamage: 0
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 0
   characterUser: {fileID: 0}
-  abilitySound: {fileID: 0}
+  abilitySound: {fileID: 8300000, guid: 9b7c917e936a2fa478f3da8be05f4aac, type: 3}

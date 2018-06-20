@@ -10,8 +10,6 @@ public class TransitionManager : MonoBehaviour
     public Animator iAnim;
     public Transform entranceTransform;
     public Transform exitTransform;
-    [SerializeField]
-    private LevelManager levelMan;
     public GameObject Load;
     public GameObject transitionOpen;
 
@@ -30,11 +28,6 @@ public class TransitionManager : MonoBehaviour
         if(iAnim == null)
         {
            // iAnim = GameObject.Find("Transition Image").GetComponentInChildren<Animator>();
-        }
-
-        if(levelMan == null)
-        {
-            levelMan = GameObject.FindObjectOfType<LevelManager>(); 
         }
 
         if(transitionOpen.gameObject == null)
@@ -56,7 +49,7 @@ public class TransitionManager : MonoBehaviour
 
     public void TransitionTo(int sceneIndex)
     {
-        levelMan.LoadScene(sceneIndex);
+		LevelManager.Instance.LoadScene(sceneIndex);
     }
 
     public IEnumerator In()

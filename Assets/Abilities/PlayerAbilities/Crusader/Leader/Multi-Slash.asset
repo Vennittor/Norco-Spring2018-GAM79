@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Multi-Slash
   description: Slashes target enemy twice.
-  callOutText: 
+  callOutText: Slashes target enemy twice.
   heatCost: 0
   targetType:
     _who: 2
@@ -28,14 +28,12 @@ MonoBehaviour:
     - {x: 2, y: 4}
     elementType: 0
     statusChance: 0
-  actionType: 0
+  actionType: 2
   statuses: 
   stunDuration: 0
   dotDamage: 0
   numberOfActions: 1
   hitsPerAction: 1
   _cooldown: 3
-  _currentCooldown: 0
-  _initCooldown: 0
   characterUser: {fileID: 0}
-  abilitySound: {fileID: 0}
+  abilitySound: {fileID: 8300000, guid: 56714ec8ef257fe4a829f249ebbf8c96, type: 3}

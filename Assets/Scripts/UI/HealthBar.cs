@@ -48,7 +48,7 @@ public class HealthBar : MonoBehaviour
             healthBar = instance.alchemistHealth;
         }
 
-        if (gameObject.GetComponent<PlayerCharacter>().characterName == ("Female"))
+        if (gameObject.GetComponent<PlayerCharacter>().characterName == ("Archer"))
         {
             healthBar = instance.hunterHealth;
         }

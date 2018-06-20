@@ -30,10 +30,17 @@ public class UIManager : MonoBehaviour
 	public float splashLifeTime = 1.0f;
 
 	public GameObject actionSlider;
+    public GameObject spammyGame;
+    public GameObject backAndForth;
 
     public Image alchemistHealth, hunterHealth, crusaderHealth;
 
+    public GameObject targetArrow;
+    public List<GameObject> arrowTargets;
+
     public List<Button> skillButtons = new List<Button> ();
+
+	public Text leaderCooldownText;
 
     public LayerMask targetable;
 	public List<Character> collectedTargets;
@@ -63,15 +70,14 @@ public class UIManager : MonoBehaviour
 
 		this.gameObject.transform.SetParent(null);
 
-        DontDestroyOnLoad(gameObject);
-
-		Debug.Log ("UIManager Awake");
+        //DontDestroyOnLoad(gameObject);
     }
 
 	public void Start()
 	{
 		SetMode_Normal ();
 		collectedTargets = new List<Character>();
+        arrowTargets = new List<GameObject>();
 
 		Announcer.combatUIManager = UIManager.Instance;
 		Announcer.announcementDestination = splashMessageText;
@@ -79,6 +85,11 @@ public class UIManager : MonoBehaviour
 		eventSystemManager = EventSystemManager.Instance;
 
 		actionSlider = this.gameObject.transform.Find ("Action Slider").gameObject;
+
+		if (leaderCooldownText == null)
+		{
+			Debug.LogError ("UIManager: no reference to leader Cooldown Text");
+		}
 
 		if (disableUIOnStart)
 		{
@@ -134,7 +145,7 @@ public class UIManager : MonoBehaviour
 	}
 
 	public void UpdateAbilityButtons(List<Ability> activeAbilities)
-	{
+	{	
 		for (int i = 0; i < activeAbilities.Count; i++) 
 		{
 			if (i >= skillButtons.Count) 
@@ -163,10 +174,6 @@ public class UIManager : MonoBehaviour
 				if (abilityIndex >= 0 && abilityIndex < combatManager.activeCharacter.abilityCount)
 				{
 					ability = (combatManager.activeCharacter as PlayerCharacter).ReadyAbility (abilityIndex);
-                    if (combatManager.activeCharacter.name == "Crusader" && ability.abilityName == "Warrior Spirit")
-                    {
-                        combatManager.WarriorSwapLeader();
-                    }
 
 					if (ability == null)
 					{
@@ -308,40 +315,31 @@ public class UIManager : MonoBehaviour
 
     }
 
-  //  public void UpdateHealthBar(Character character)
-  //  {
-		//if (healthBar != null)
-		//{
-  //          // healthBar is a Dias, but doesn't seem to be attached to anyone or doing anything?
-  //          healthBar.fillAmount = character.currentHealth / character.maxhealth;
-  //      }
-		//else
-		//{
-		//	Debug.LogError ("No refrence to Health Bar");
-		//}
-  //  }
+	public void DisplayLeaderCooldown(uint cooldown)
+	{
+		if (leaderCooldownText != null)
+		{
+			leaderCooldownText.text = cooldown.ToString ();
+		}
+	}
 
     #region HighlightTargets
     public void TurnRed(List<Character> targets) 			// highlight in Red on Mouse-over
     {
         foreach(Character target in targets)
         {
-			if (target.transform.GetComponentInChildren<SpriteRenderer> () != null) 
-			{
-				target.transform.GetComponentInChildren<SpriteRenderer> ().material.color = Color.red;
-			}
+            GameObject thing = Instantiate(targetArrow, target.transform.position + (Vector3.up * 4), target.transform.rotation);
+            arrowTargets.Add(thing);
         }
     }
 
     public void TurnWhite() // de-highlight red, return to white after not moused-over
     {
-        foreach (Character character in combatManager.charactersInCombat)
+        for (int i = arrowTargets.Count - 1; i >= 0; i--)
         {
-			if (character.transform.GetComponentInChildren<SpriteRenderer> () != null) 
-			{
-				character.transform.GetComponentInChildren<SpriteRenderer> ().material.color = Color.white;
-			}
+            Destroy(arrowTargets[i].gameObject);
         }
+        arrowTargets.Clear();
     }
 		
 	void HighlightTargets()

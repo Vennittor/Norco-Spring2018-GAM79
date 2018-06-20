@@ -82,12 +82,11 @@ public class CombatManager : MonoBehaviour
 
 		this.gameObject.transform.SetParent(null);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     void Start()
-    {
-        
+    {   
 		levelManager = LevelManager.Instance;
 		uiManager = UIManager.Instance;
 
@@ -99,6 +98,7 @@ public class CombatManager : MonoBehaviour
         partyHeatLevel = 0;
         roundCounter = 0;
         leaderCurrentCooldown = 0;
+		DisplayLeaderCooldown ();
 
 		if (actionSlider == null)
 		{
@@ -139,7 +139,7 @@ public class CombatManager : MonoBehaviour
 		if(!inCombat) 
 		{
 			inCombat = true;
-            foreach (PlayerCharacter player in levelManager.pParty.partyMembers)
+            foreach (PlayerCharacter player in LevelManager.Instance.pParty.partyMembers)
             {
                 if (player.isLeader)
                 {
@@ -160,13 +160,14 @@ public class CombatManager : MonoBehaviour
 		}
 	}
 		
-    void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function.
+    void StartRound()							//Anything that needs to be handled at the start of the round should be placed in this function. 
 	{
         Debug.Log ("New Round!");
 		roundCounter++;
         if (leaderCurrentCooldown != 0)
         {
             leaderCurrentCooldown--;
+			DisplayLeaderCooldown ();
         }
 		SortRoundQueue();
 
@@ -215,6 +216,7 @@ public class CombatManager : MonoBehaviour
             if (activeCharacter is PlayerCharacter)
             {
                 leaderCurrentCooldown = leaderInitCooldown;
+				DisplayLeaderCooldown ();
                 if (activeLeader.statuses.Contains(StatusEffectType.Fear))
                 {
                     StatusEffect statusEffect = new StatusEffect();
@@ -237,6 +239,7 @@ public class CombatManager : MonoBehaviour
     public void WarriorSwapLeader()
     {
         leaderCurrentCooldown = leaderInitCooldown;
+		DisplayLeaderCooldown ();
         if (activeLeader.statuses.Contains(StatusEffectType.Fear))
         {
             StatusEffect statusEffect = new StatusEffect();
@@ -451,6 +454,16 @@ public class CombatManager : MonoBehaviour
                 {
                     StartCoroutine(ActionSlider());
                 }
+                if (ability.type == ActionType.SPAM)
+                {
+                    uiManager.spammyGame.SetActive(true);
+                    uiManager.spammyGame.GetComponent<SpamGame>().BeginTheSpam();
+                }
+                if (ability.type == ActionType.BACKFORTH)
+                {
+                    uiManager.backAndForth.SetActive(true);
+                    uiManager.backAndForth.GetComponent<BackForthController>().LetsBegin();
+                }
                 if(ability.type == ActionType.NORMAL)
                 {
                     UseCharacterAbility();
@@ -517,7 +530,7 @@ public class CombatManager : MonoBehaviour
                 if (val >= minVal && val <= maxVal)
                 {
                     print("you hit it!" + val);
-                    modifiedEffect = 5f;
+                    modifiedEffect = 1.2f;
                 }
                 else
                 {
@@ -547,7 +560,7 @@ public class CombatManager : MonoBehaviour
 		UseCharacterAbility (modifiedEffect);
 	}
 
-	void UseCharacterAbility(float modifier = 1.0f)
+	public void UseCharacterAbility(float modifier = 1.0f)
 	{
 		activeCharacter.UseAbility (finalizedTargets, modifier);
 
@@ -563,9 +576,13 @@ public class CombatManager : MonoBehaviour
 		AssignTargets (target, ability);
 	}
 
-	//TODO
-	//Function Get RandomTarget
-	//Function Redirect Target
+	#endregion
 
+
+	#region UI Displays
+	private void DisplayLeaderCooldown()
+	{
+		UIManager.Instance.DisplayLeaderCooldown (leaderCurrentCooldown);
+	}
 	#endregion
 }
